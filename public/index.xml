@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>https://example.org/</link>
+    <description>Recent content from My New Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>sl-si</language>
+    
+    <managingEditor>xxx@example.com (D-Sketon)</managingEditor>
+    <webMaster>xxx@example.com (D-Sketon)</webMaster>
+    
+    <copyright>All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!</copyright>
+    
+    <lastBuildDate>Wed, 15 Mar 2023 11:00:00 -0700</lastBuildDate>
+    
+    
+    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>Hello World</title>
+      <link>https://example.org/post/hello/</link>
+      <pubDate>Wed, 15 Mar 2023 11:00:00 -0700</pubDate>
+      <author>xxx@example.com (D-Sketon)</author>
+      <guid>https://example.org/post/hello/</guid>
+      <description>
+        <![CDATA[<h1>Hello World</h1><p>Author: D-Sketon(xxx@example.com)</p>
+        
+          <p>💘 博麗 霊夢 💘</p>
+        
+        <hr><p>Published on 2023-03-15 at <a href='https://example.org/'>My New Hugo Site</a>, last modified on 2023-03-15</p>]]>
+      </description>
+      
+    </item>
+    
+  </channel>
+</rss>

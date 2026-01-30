@@ -1,0 +1,4 @@
+baseURL = 'https://example.org/'
+languageCode = 'sl-si'
+title = 'My New Hugo Site'
+theme = 'reimu'
