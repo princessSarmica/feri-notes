@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>Feri Notes</title>
     <link>https://example.org/archives/</link>
-    <description>Recent content from My New Hugo Site</description>
+    <description>Recent content from Feri Notes</description>
     <generator>Hugo</generator>
     <language>sl-si</language>
     
-    <managingEditor>xxx@example.com (D-Sketon)</managingEditor>
-    <webMaster>xxx@example.com (D-Sketon)</webMaster>
+    <managingEditor>xxx@example.com (PrincessSarmica)</managingEditor>
+    <webMaster>xxx@example.com (PrincessSarmica)</webMaster>
     
     <copyright>All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!</copyright>
     

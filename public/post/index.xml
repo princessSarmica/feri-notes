@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>Feri Notes</title>
     <link>http://localhost:1313/post/</link>
-    <description>Recent content from My New Hugo Site</description>
+    <description>Recent content from Feri Notes</description>
     <generator>Hugo</generator>
     <language>sl-si</language>
     
-    <managingEditor>xxx@example.com (D-Sketon)</managingEditor>
-    <webMaster>xxx@example.com (D-Sketon)</webMaster>
+    <managingEditor>xxx@example.com (PrincessSarmica)</managingEditor>
+    <webMaster>xxx@example.com (PrincessSarmica)</webMaster>
     
     <copyright>All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!</copyright>
     
@@ -25,14 +25,14 @@
       <title>Hello World</title>
       <link>http://localhost:1313/post/hello/</link>
       <pubDate>Wed, 15 Mar 2023 11:00:00 -0700</pubDate>
-      <author>xxx@example.com (D-Sketon)</author>
+      <author>xxx@example.com (PrincessSarmica)</author>
       <guid>http://localhost:1313/post/hello/</guid>
       <description>
-        <![CDATA[<h1>Hello World</h1><p>Author: D-Sketon(xxx@example.com)</p>
+        <![CDATA[<h1>Hello World</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
         
           <p>💘 博麗 霊夢 💘</p>
         
-        <hr><p>Published on 2023-03-15 at <a href='http://localhost:1313/'>My New Hugo Site</a>, last modified on 2023-03-15</p>]]>
+        <hr><p>Published on 2023-03-15 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2023-03-15</p>]]>
       </description>
       
     </item>

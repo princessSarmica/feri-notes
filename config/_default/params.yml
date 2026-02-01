@@ -7,29 +7,28 @@
 menu:
   - name: home
     url: ""
-    icon: # default use taichi icon, you can use a hexadecimal representation of fontawesome or icon_font, like 'f0c1'
+    icon: e3af # default use taichi icon, you can use a hexadecimal representation of fontawesome or icon_font, like 'f0c1'
   - name: archives
     url: "archives"
-    icon:
+    icon: f187
   - name: about
     url: "about"
-    icon:
+    icon: f05a
   - name: friend
     url: "friend"
-    icon:
+    icon: f500
 
 mainSections: ["post"]
-# 年，月，日及时间的格式化样式
 # Format style for year,month,date & time
 yearFormat: "2006"
 monthFormat: "2006-01"
 dateFormat: "2006-01-02"
 timeFormat: "2006-01-02 15:04:05"
 
-author: D-Sketon
+author: PrincessSarmica
 email: xxx@example.com
-description: "少女祈祷中..."
-subtitle: "少女祈祷中..."
+description: "Notes of a delusional programmer"
+subtitle: "頑張って楽しんでね..."
 
 banner: "images/banner.webp"
 # You can also write it in the form of the following url
@@ -46,7 +45,7 @@ banner_srcset:
     - src: "images/banner.webp"
       media: "(min-width: 800px)"
 
-avatar: "avatar.webp"
+avatar: "../images/avatar/avatar.webp" # this path is relative to the css/main.css, so it needs to go up one level to reach the images folder
 
 # Control the display of the post cover
 # If not set, the banner image will be displayed by default
@@ -96,14 +95,14 @@ footer:
 # Sidebar
 # sidebar: right # deprecated, use sidebar.position instead
 sidebar:
-  position: right
+  position: left
   menu: true  # whether to show the sidebar menu button, ignored on mobile devices
   article:
     show_common: true # whether to show common sidebar, ignored on mobile devices
 
 social:
   # email: mailto:xxx@gmail.com
-  # github: https://github.com/yourname
+  github: https://github.com/princesssarmica
   # google: https://plus.google.com/yourname
   # twitter: https://twitter.com/yourname
   # facebook: https://www.facebook.com/yourname
@@ -193,11 +192,11 @@ anchor_icon: # default use '#' icon, you can use a hexadecimal representation of
 reimu_cursor:
   enable: true
   cursor:
-    default: ../images/cursor/reimu-cursor-default.png  # this path is relative to the css/main.css, so it needs to go up one level to reach the images folder
-    pointer: ../images/cursor/reimu-cursor-pointer.png
-    text: ../images/cursor/reimu-cursor-text.png
+    default: ../images/cursor/feri-cursor-default.png  # this path is relative to the css/main.css, so it needs to go up one level to reach the images folder
+    pointer: ../images/cursor/feri-cursor-pointer.png
+    text: ../images/cursor/feri-cursor-text.png
 
-icon_font: 4552607_4k4bc36ef96
+icon_font: false
 
 # Font loading strategy
 # Custom Font -> Google Fonts -> Local FallBack Font
@@ -268,12 +267,14 @@ code_block:
 clipboard:
   success: 
     en: Copy successfully (*^▽^*)
+    si: Kopiranje uspešno (*^▽^*)
     zh-CN: 复制成功 (*^▽^*)
     zh-TW: 複製成功 (*^▽^*)
     ja: コピー成功 (*^▽^*)
     pt-BR: Copiado com sucesso (*^▽^*)
   fail: 
     en: Copy failed (ﾟ⊿ﾟ)ﾂ
+    si: Kopiranje ni uspelo (ﾟ⊿ﾟ)ﾂ
     zh-CN: 复制失败 (ﾟ⊿ﾟ)ﾂ
     zh-TW: 複製失敗 (ﾟ⊿ﾟ)ﾂ
     ja: コピー失敗 (ﾟ⊿ﾟ)ﾂ
@@ -326,6 +327,7 @@ comment:
   # comment system title
   title:
     en: Leave a comment
+    si: Pustite komentar
     zh-CN: 说些什么吧！
     zh-TW: 說些什麼吧！
     ja: コメントを残す
@@ -439,6 +441,7 @@ preloader:
     zh-CN: 少女祈祷中...
     zh-TW: 少女祈禱中...
     en: Loading...
+    si: Nalaganje...
     ja: 少女祈祷中...
     pt-BR: Carregando...
   icon: # default use inline svg for fast speed, you can use a image url, like '/images/taichi.png'
@@ -477,22 +480,25 @@ firework:
   options:
     excludeElements: ["a", "button"]
     particles:
-      - shape: circle
+      - shape: polygon
         move: ["emit"]
         easing: easeOutExpo
         colors: ["var(--red-1)", "var(--red-2)", "var(--red-3)", "var(--red-4)"]
         number: 20
         duration: [1200, 1800]
         shapeOptions:
+          sides: 3            # 🔺 trikotnik
           radius: [16, 32]
           alpha: [0.3, 0.5]
-      - shape: circle
+
+      - shape: polygon
         move: ["diffuse"]
         easing: easeOutExpo
         colors: ["var(--red-0)"]
         number: 1
         duration: [1200, 1800]
         shapeOptions:
+          sides: 3            # 🔺 trikotnik
           radius: 20
           alpha: [0.2, 0.5]
           lineWidth: 6
@@ -528,6 +534,7 @@ outdate:
   daysAgo: 180 # The number of days after which the article is considered outdated
   message:
     en: This article was last updated on {time}. Please note that the content may no longer be applicable.
+    si: Ta članek je bil nazadnje posodobljen {time}. Upoštevajte, da vsebina morda ni več veljavna.
     zh-CN: 本文最后更新于 {time}，请注意文中内容可能已不适用。
     zh-TW: 本文最後更新於 {time}，請注意文中內容可能已不適用。
     ja: この記事は最終更新日：{time}。記載内容が現在有効でない可能性がありますのでご注意ください。
@@ -550,6 +557,7 @@ sponsor:
     zh-CN: 请作者喝杯咖啡吧
     zh-TW: 請作者喝杯咖啡吧
     en: Buy me a coffee
+    si: Kupite mi kavo
     ja: コーヒーを買ってください
     pt-BR: Compre-me um café
   icon:
@@ -679,58 +687,65 @@ material_theme:
   # more information: https://github.com/2061360308/material-theme
   # notice: when you enable this feature, all the covers will be automatically added "crossorigin" attribute to support the dynamic color scheme
   # so make sure your custom covers will not be blocked by the browser's CORS policy
-  enable: false # enable material_theme to generate dynamic color schemes based on the banner image
+  enable: true # enable material_theme to generate dynamic color schemes based on the banner image
 
 internal_theme:
   light:
-    --red-0: '#ff0000'
-    --red-1: '#ff5252'
-    --red-2: '#ff7c7c'
-    --red-3: '#ffafaf'
-    --red-4: '#ffd0d0'
-    --red-5: '#ffecec'
-    --red-5-5: '#fff3f3'
-    --red-6: '#fff7f7'
-    --color-red-6-shadow: 'rgba(255, 78, 78, 0.6)'
-    --color-red-3-shadow: 'rgba(255, 78, 78, 0.3)'
+    --red-0: "#00bcd4"
+    --red-1: "#26c6da"
+    --red-2: "#4dd0e1"
+    --red-3: "#80deea"
+    --red-4: "#b2ebf2"
+    --red-5: "#e0f7fa"
+    --red-5-5: "#f0fcfd"
+    --red-6: "#f7feff"
 
-    --highlight-nav: "#f5f5f5"
-    --highlight-scrollbar: "#d6d6d6"
-    --highlight-background: "#fdfdfd"
-    --highlight-selection: "#e9e9e988"
-    --highlight-foreground: "#24292e"
-    --highlight-comment: "#7d7d7d"
-    --highlight-red: "#d73a49"
-    --highlight-orange: "#e36209"
-    --highlight-yellow: "#cb911d"
-    --highlight-green: "#22863a"
-    --highlight-aqua: "#005cc5"
-    --highlight-blue: "#032f62"
-    --highlight-purple: "#6f42c1"
-    --highlight-deletion: "#b31d28"
-    --highlight-deletion-bg: "#ffeef0"
-    --highlight-addition: "#22863a"
-    --highlight-addition-bg: "#f0fff4"
+    --color-red-6-shadow: "rgba(0, 188, 212, 0.6)"
+    --color-red-3-shadow: "rgba(0, 188, 212, 0.3)"
+
+    --highlight-nav: "#f4feff"
+    --highlight-scrollbar: "#cbeff4"
+    --highlight-background: "#fbfeff"
+    --highlight-selection: "#b2ebf288"
+    --highlight-foreground: "#0f172a"
+    --highlight-comment: "#475569"
+
+    --highlight-red: "#0891b2"
+    --highlight-orange: "#06b6d4"
+    --highlight-yellow: "#22d3ee"
+    --highlight-green: "#22c55e"
+    --highlight-aqua: "#0ea5e9"
+    --highlight-blue: "#155e75"
+    --highlight-purple: "#6366f1"
+
+    --highlight-deletion: "#0284c7"
+    --highlight-deletion-bg: "#e0f7fa"
+    --highlight-addition: "#22c55e"
+    --highlight-addition-bg: "#f0fdf4"
+
   dark:
-    --red-4: 'rgba(255, 208, 208, 0.5)'
-    --red-5: 'rgba(255,228,228,0.15)'
-    --red-5-5: 'rgba(255,236,236,0.05)'
-    --red-6: 'rgba(255, 243, 243, 0.2)'
+    --red-4: "rgba(128, 222, 234, 0.5)"
+    --red-5: "rgba(178, 235, 242, 0.15)"
+    --red-5-5: "rgba(224, 247, 250, 0.05)"
+    --red-6: "rgba(240, 252, 253, 0.2)"
 
-    --highlight-nav: "#222830"
-    --highlight-scrollbar: "#454d59"
-    --highlight-background: "#1e2027"
-    --highlight-selection: "#51515155"
-    --highlight-foreground: "#c9d1d9"
-    --highlight-comment: "#8b949e"
-    --highlight-red: "#ff7b72"
-    --highlight-orange: "#ffa657"
-    --highlight-yellow: "#ffcc66"
-    --highlight-green: "#7ee787"
-    --highlight-aqua: "#a5d6ff"
-    --highlight-blue: "#79c0ff"
-    --highlight-purple: "#d2a8ff"
-    --highlight-deletion: "#ffa198"
-    --highlight-deletion-bg: "#490202"
-    --highlight-addition: "#7ee787"
-    --highlight-addition-bg: "#04260f"
+    --highlight-nav: "#042f2e"
+    --highlight-scrollbar: "#155e75"
+    --highlight-background: "#020617"
+    --highlight-selection: "#22d3ee55"
+    --highlight-foreground: "#e6fdff"
+    --highlight-comment: "#94a3b8"
+
+    --highlight-red: "#22d3ee"
+    --highlight-orange: "#67e8f9"
+    --highlight-yellow: "#a5f3fc"
+    --highlight-green: "#4ade80"
+    --highlight-aqua: "#67e8f9"
+    --highlight-blue: "#7dd3fc"
+    --highlight-purple: "#a5b4fc"
+
+    --highlight-deletion: "#67e8f9"
+    --highlight-deletion-bg: "#020617"
+    --highlight-addition: "#4ade80"
+    --highlight-addition-bg: "#022c22"
+
