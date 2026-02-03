@@ -12,12 +12,30 @@
     
     <copyright>All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!</copyright>
     
-    <lastBuildDate>Wed, 15 Mar 2023 11:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Tue, 03 Feb 2026 07:07:07 +0100</lastBuildDate>
     
     
     <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
+    
+    
+
+    <item>
+      <title>Uvod v računalniški vid in razpoznavanje vzorcev</title>
+      <link>http://localhost:1313/post/urvrv/</link>
+      <pubDate>Tue, 03 Feb 2026 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>http://localhost:1313/post/urvrv/</guid>
+      <description>
+        <![CDATA[<h1>Uvod v računalniški vid in razpoznavanje vzorcev</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Uvod v računalniški vid in razpoznavanje vzorcev za zimski semester tretjega letnika FERI RIT UNI, ki zajemajo osnovne koncepte računalniškega vida, obdelavo slik, prepoznavanje vzorcev ter uvod v strojno učenje za analizo vizualnih podatkov.
+        
+        <hr><p>Published on 2026-02-03 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2026-02-03</p>]]>
+      </description>
+      
+    </item>
     
     
 

@@ -2,3 +2,8 @@ baseURL = 'https://example.org/'
 languageCode = 'sl-si'
 title = 'Feri Notes'
 theme = 'reimu'
+
+[markup.goldmark.extensions.passthrough]
+enable = true
+delimiters.block = [["\\[", "\\]"], ["$$", "$$"]]
+delimiters.inline = [["\\(", "\\)"], ["$", "$"]]
