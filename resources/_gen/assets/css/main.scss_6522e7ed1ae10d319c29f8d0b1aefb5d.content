@@ -1,8 +1,8 @@
 @charset "UTF-8";
 :root {
-  --footer-icon: url(../images/taichi.png);
-  --top-icon: url(../images/taichi.png);
-  --sponsor-icon: url(../images/taichi.png);
+  --footer-icon: url(../images/programmer-taichi.png);
+  --top-icon: url(../images/programmer-taichi.png);
+  --sponsor-icon: url(../images/programmer-taichi.png);
   --cursor-default: url(../images/cursor/feri-cursor-default.png), auto;
   --cursor-pointer: url(../images/cursor/feri-cursor-pointer.png), pointer;
   --cursor-text: url(../images/cursor/feri-cursor-text.png), text;
