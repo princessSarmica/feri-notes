@@ -27,16 +27,15 @@ y = x(t)
 - **zvezni signal** je definiran **v vsakem časovnem trenutku**
 - vrednost signala se skozi čas **neprekinjeno** spreminja
 
-Da bi zvezni signal lahko obdelovali z računalnikom, izvedemo postopek **vzorčenja**. Pri tem si želimo, da bi v enakomerno razmaknjenih časovnih trenutkih odtipati vrednosti zveznega signala. S tem dobimo zaporedje številskih vrednosti, kar imenujemo **diskreten signal**. Ko imamo diskreten signal (številke v časovnih trenutkih) odtipamo signal na nek določen časovni interval npr. signal odtipamo na 5, 10, 15 milisekund.
+Da bi zvezni signal lahko obdelovali z računalnikom, izvedemo postopek **diskretizacije** (**vzorčenja**). Pri tem si želimo, da bi v enakomerno razmaknjenih časovnih trenutkih odtipati vrednosti zveznega signala. S tem dobimo zaporedje številskih vrednosti, kar imenujemo **diskreten signal**. Ko imamo diskreten signal (številke v časovnih trenutkih) odtipamo signal na nek določen časovni interval npr. signal odtipamo na 5, 10, 15 milisekund.
 
 Kakšna pa je vmes vrednost signala med dvema odčitkoma(npr. med 5 in 10 milisekund)?
 
-Tam signal ni definiran, ker ga na teh mestih nismo odtipali. To je bistvena razlika med zveznim in diskretnim signalom. Za diskreten signal pravimo, da je vrednost funkcije definirana samo v določenih časovnih trenutkih npr. 5, 10, 15 mislisekund, za vrednosti vmes pa rečemo, da signal ni definiran-**TO JE OPIS DISKRETNEGA SINGALA**.
+Tam signal ni definiran, ker ga na teh mestih nismo odtipali. To je ključna razlika med zveznim in diskretnim signalom. Za diskreten signal pravimo, da je vrednost funkcije definirana samo v določenih časovnih trenutkih npr. 5, 10, 15 mislisekund, za vrednosti vmes pa rečemo, da signal ni definiran-**TO JE OPIS DISKRETNEGA SINGALA**.
 
-{{< alertBlockquote type="important" >}}
-Diskreten signal je signal, pri katerem je vrednost funkcije definirana samo v določenih, ločenih časovnih trenutkih (npr. pri 5 ms, 10 ms, 15 ms),
+> [!IMPORTANT]
+> Diskreten signal je signal, pri katerem je vrednost funkcije definirana samo v določenih, ločenih časovnih trenutkih (npr. pri 5 ms, 10 ms, 15 ms),
 medtem ko za vmesne časovne trenutke signal ni definiran, ker ga nismo odtipali (vzorčili).
-{{< /alertBlockquote  >}}
 
 ---
 
@@ -68,9 +67,8 @@ Pri govoru npr. Večja je vrednost, močnejši je glas. Pri sliki pa je odvisno 
 - oddaljenost od opazovalca,
 - …
 
-{{< alertBlockquote type="important" >}}
-Zvezna slika je zvezna funkcija dveh neodvisnih spremenljivk (\(x\) in \(y\)), ki je definirana v vsaki točki ravnine.
-{{< /alertBlockquote  >}}
+> [!IMPORTANT]
+> Zvezna slika je zvezna funkcija dveh neodvisnih spremenljivk (\(x\) in \(y\)), ki je definirana v vsaki točki ravnine.
 
 Kako pa pridemo iz zvezne slike v diskretno sliko?
 
@@ -84,11 +82,10 @@ Podobno pa bomo diskritizirali tudi drugo prostorsko os \(y\) s korakom **\(\Del
 Sedaj smo dobili **prostorske trenutke** (to je na presečiščih korakov **\(\Delta x\)** in **\(\Delta y\)**). Diskretna slika je definirana samo v teh diskretnih prostorskih trenutkih. V teh točkah imamo definirane podatke o vrednosti slikovne funkcije. 
 
 
-{{< alertBlockquote type="important" >}}
-Digitalna oz. diskretna 2D-slika je diskretizirana zvezna 2D-slika. Vrednost slikovne funkcije obstaja samo v diskretnih prostorskih trenutnik oz. lokacijah: \[
+> [!IMPORTANT]
+> Digitalna oz. diskretna 2D-slika je diskretizirana zvezna 2D-slika. Vrednost slikovne funkcije obstaja samo v diskretnih prostorskih trenutnik oz. lokacijah: \[
 I = I(i, j), \quad i, j \in \mathbb{N}
 \]
-{{< /alertBlockquote  >}}
 
 Točka nima ploščine in nimamo naprave, ki bi znala zajeti nekaj iz prostora kar nima ploščine. Tega ne znamo naredit. V nekem malem območju zato ocenimo nek mali prostor za predstavitev izbrane točke.
 
@@ -97,7 +94,7 @@ Diskretna slika se najbolj pogosto definira oz. predstavi s pomočjo **matrike**
 
 
 Vrednosti, ki smo jih prebrali v prostorskih trenutkih vpisujemo v matriko. 
-Osnovni najmanjši gradnik diskretne slike se imenuje **piksel** (picture element oz. slikovni element). Eni programi imenujejo to tudi slikovna točka, kar pa je banalno, ker točk v prostoru ne moremo zajemat, ker točka nima ploščine. Imamo opravka z dimenzijo diskretne slike, podobno kot imamo dimenzije pri matrikah.
+Osnovni najmanjši gradnik diskretne slike se imenuje **piksel** (picture element oz. slikovni element). Eni programi imenujejo to tudi slikovna točka, kar pa je zavajajoče, saj točke v prostoru ne moremo zajemat, ker točka nima ploščine. Imamo opravka z dimenzijo diskretne slike, podobno kot imamo dimenzije pri matrikah.
 Število vrstic in število stolpcev je matrika dimenzije \(M \times N\). 
 
 Štetje oz. indeksiranje je vedno problem (ali začeti z 1 ali z 0)-mi bomo indeksirali z 0. Vsako celico matrike (piksel) bomo označili z indeksom vrstice in stolpca \(p = (x, y)\) oz. \(p = (i, j)\).
@@ -114,9 +111,8 @@ I(p) \text{ oz. } I(i, j)
 
 Ker je naša slika omejena ima \(M\) vrstic in \(N\) stolpcev, za vrednosti, ki so zunaj teh dimenzij pa **NE VEMO**.
 
-{{< alertBlockquote type="note" >}}
-Tu pri tem predmetu lahko dosti krat rečemo kot odgovor **NE VEMO**, pa še prav bo!
-{{< /alertBlockquote  >}}
+> [!INFO]
+> Tu pri tem predmetu lahko dosti krat rečemo kot odgovor **NE VEMO**, pa še prav bo!
 
 Najmanjši gradnik slike je piksel in slika ima vse skupaj \(M \times N\) pikslov. Je pa še alternativa za predstavitev slike v obliki satovja namesto matrike. Ene stvari se dajo s satovjem boljše rešit.
 
@@ -147,10 +143,346 @@ Nekatere medicinske naprave so zmožne piksle odčitat, da vrednost shranimo v 1
 
 Pri delu z slikami in biti je tudi dobro omenit, da bite običajno probamo zbit ali pa zakodirat z manjšo količino-uporabljamo kompresijo, ker so slike prostorsko lahko zelo potratne.
 
+---
+
 ##### Video
 Videoposnetek pa je slika, ki se s časom spreminja.
 
 Videoposnetek bi definirali s tremi neodvisnih spremenljivkami-\(x\) in \(y\) os, ter čas \(t\) skozi katerega se ti 2 komponenti spreminjata. 
 
 Diskretni video je zaporedje diskretnih slik.
+
+---
+
+#### Kontrastna in prostorska ločljivost slike
+
+Nalednja dva pojma sta **prostorska** in **kontrastna ločljivost**. 
+
+---
+
+##### Kontrastna ločljivost
+
+> [!IMPORTANT]
+> **Kontrastna ločljivost** je tesno povezana s številom bitov, ki jih uporabljamo za predstavitev vrednosti piksla. Predstavlja število različnih sivinskih nivojev, ki jih lahko vsebuje slika.
+
+###### Teoretična kontrastna ločljivost
+
+**Teoretična maksimalna kontrastna ločljivost** je določena s številom možnih vrednosti piksla in je enaka:
+
+\[
+Q + 1
+\]
+
+kjer je \(Q\) največja možna vrednost piksla.
+
+Pri 8-bitni sivinski sliki velja:
+\[
+Q = 2^8 - 1 = 255
+\]
+
+kar pomeni, da ima slika 256 različnih sivinskih nivojev.
+
+###### Dejanska kontrastna ločljivost
+
+**Dejanska kontrastna ločljivost** pomeni število sivinskih nivojev, ki so dejansko prisotni v sliki. Določimo jo tako, da v sliki preštejemo različne sivinske vrednosti.
+
+- višja kontrastna ločljivost → več sivinskih nivojev  
+- nižja kontrastna ločljivost → manj sivinskih nivojev  
+
+Višja kontrastna ločljivost omogoča ohranitev več podrobnosti v sceni.  
+Z več sivinskimi nivoji lahko natančneje predstavimo prehode med svetlimi in temnimi območji slike.
+
+Manjša kontrastna ločljivost pomeni, da se bližnji sivinski nivoji zlijejo med seboj, kar povzroči izgubo informacij –  
+podrobnosti se združijo z večjimi, enotnimi območji slike.
+
+###### Vpliv kontrastne ločljivosti na analizo slike
+
+Če želimo biti pri analizi slike natančni, kontrastne ločljivosti ne smemo zmanjševati, saj bi s tem izgubili pomembne podrobnosti.
+
+Kadar pa nas zanimajo predvsem večje oblike oziroma večji objekti na sliki, je zmanjšanje kontrastne ločljivosti smiselno.  
+Pri realno-časovnih aplikacijah, kjer je čas obdelave omejen, lahko z zmanjšanjem kontrastne ločljivosti:
+- zmanjšamo količino podatkov,
+- pospešimo obdelavo,
+- prihranimo prostor za shranjevanje in prenos.
+
+###### Kdaj uporabiti zmanjšano kontrastno ločljivost
+
+- ko nas zanimajo predvsem velike oblike in objekti na sliki  
+- ko želimo prihraniti čas obdelave in prostor za shranjevanje  
+
+###### Kdaj zmanjšane kontrastne ločljivosti ne uporabiti
+
+- ko je potrebna visoka natančnost  
+- ko so pomembne podrobnosti in detajli na sliki  
+
+---
+
+##### Prostorska ločljivost
+
+> [!IMPORTANT]
+> **Prostorska ločljivost** je določena kot število pikslov na določeno mersko enoto. Omogoča povezavo med svetom pikslov (meritve v slikah) in realnim svetom, kjer uporabljamo merske enote, kot so mm, cm ali m.
+
+Izražena je kot:
+- število pikslov na mersko enoto (npr. piksel/mm)
+
+Prostorsko ločljivost lahko definiramo posebej:
+- v smeri osi \(x\),
+- v smeri osi \(y\).
+
+V večini aplikacij predpostavimo, da so piksli **kvadratni**, zato sta ločljivosti v obeh smereh enaki.
+
+> [!WARNING]
+> **Prostorske ločljivosti ne smemo zamenjevati z velikostjo slike. Čeprav sta prostorska ločljivost in velikost slike pogosto povezani med sabo, to NISTA ISTA POJMA!**
+
+> **Primer: A4 list**
+>
+> Dimenzije A4 lista:  
+> – \(y = 297\,\text{mm}\)  
+> – \(x = 210\,\text{mm}\)
+>
+> Če A4 list skeniramo ali fotografiramo pri prostorski ločljivosti **100 pikslov na mm**, dobimo sliko velikosti:  
+> – \(29700 \times 21000\) pikslov
+>
+> Če isti list zajamemo pri prostorski ločljivosti **1 piksel na mm**, dobimo sliko velikosti:  
+> – \(297 \times 210\) pikslov
+>
+> V obeh primerih gre za isti fizični objekt, vendar z različno prostorsko ločljivostjo in posledično različno velikostjo slike.  
+> **Iz primera vidimo, da večja prostorska ločljivost ne pomeni večjega objekta, temveč le natančnejši opis istega objekta.**
+
+###### Prostorska ločljivost z vidika obdelave slik
+
+Višja prostorska ločljivost pomeni:
+- več podrobnosti,
+- več informacij,
+- večjo porabo procesorskega časa,
+- večjo velikost slike.
+
+Če je na sliki objekt, bo pri prostorski ločljivosti **100 pikslov na mm** en milimeter objekta opisan s 100 piksli. Pri prostorski ločljivosti **1 piksel na mm** bo isti milimeter opisan le z enim pikslom.
+
+Če podrobnosti niso pomembne in nas zanimajo le **grobe oblike**, si lahko privoščimo zmanjšanje prostorske ločljivosti. To bo pomenilo, da se bo del informacij iz slike posledično izgubil (detajli se zlijejo z večjimi področji). Manjša prostorska ločljivost pa bo posledično pomenila tudi manjšo velikost slike.
+
+###### Pomen prostorske ločljivosti v praksi
+
+Brez podane prostorske ločljivosti (npr. pri medicinskem slikanju) bi zdravniku lahko povedali le, da je tumor velik **35 pikslov**, kar nima pravega pomena. Ko pa poznamo prostorsko ločljivost, lahko isto informacijo izrazimo v realnih merah, na primer: približno 2 mm. To omogoča smiselno interpretacijo slike v realnem svetu.
+
+---
+
+Pikslu \(p = [i, j]\) lahko v sliki \(I\) definiramo njegove sosede (tj. sosednje piksle) na dva načina:
+
+- **v 4-sosedstvu**
+- **v 8-sosedstvu**
+
+**4 sosedstvo** pomeni da bomo imeli 4 sosede. To so tisti piksli s kateri ima naš piksel skupno stranico.
+Če bi stvar posplošili v 3D-nimamo piksel, ampak imamo voksel(x,y,z). Ima toliko sosedov kolikor ima skupnih ploskev (6 sosedov). 
+
+**8 sosedstvo** pa pomeni, da ima piksel 8 sosedov. 4 piksli so tisti s katerimi si deli stranico, ostale 4 piksli pa so še tisti s katerimi se dotika v kotih. V 3d bi pa imeli prav tako tiste s katerimi se stika na vogalih-skupaj 26 pikslov. (3x3x3-1)-pri tem računamo še -1, da odštejemo ta piksel, ki ga opazujemo oz. od katerega sosede gledamo.
+
+Sosedstvo je pomembno v funkcijah, kjer moramo določiti, v kakšnem okolju naj algoritmi upoštevajo sosede piksle ali voksle.
+
+---
+
+### Uporabljene oznake
+
+- **Konsistentnost uporabljenih oznak** skozi zapiske.  
+- **Vektorji** – majhne ali velike črke, zapisane krepko (odvisno od opazovanega prostora).  
+  *Primer:* vektor **b** = [b₀, b₁, ..., bₙ₋₁], vektor **A**  
+- **Matrike** – velike črke, zapisane v *sans-serif* pisavi.  
+  *Primer:* matrika **A**  
+- **Slika** – I  
+- **Zaporedje 2D-slik** – I  
+- **Velikost slike (št. vrstic in stolpcev)** – M × N  
+- **Piksel** – p = [i, j]  
+- **Točke, premice in ravnine v prostoru** – črke zapisane *kurzivno*.  
+  *Primer:* ravnina Π  
+- **Funkcije** – velike črke, zapisane v *kaligrafski pisavi*.  
+  *Primer:* funkcija F()  
+- **Standardni odklon** – σ  
+- **Povprečje** – \(\bar{p}\)  
+- **Absolutna vrednost** – |p|  
+- **Delta (Δ)** – znak delta, označba za spremembo ali razliko vrednosti (npr. Δx = sprememba v x)
+
+---
+
+### Operacije nad slikami
+
+**Operacije nad slikami** so podobne matričnemu računu in jih opravljamo na nivoju istoležnih pikslov.
+
+- **Seštevanje/odštevanje slik:**  
+  \[
+  C = A \pm B \quad \Rightarrow \quad C(i,j) = A(i,j) \pm B(i,j)
+  \]
+
+  > Seštevanje/odštevanje slik-vzamemo istoležne piksle iz slike A in istoležne piksle iz slike B in jih seštejemo.
+
+- **Množenje/deljenje slik:**  
+  \[
+  C = A \cdot / B \quad \Rightarrow \quad C(i,j) = A(i,j) \cdot / B(i,j)
+  \]
+
+  > Množenje/deljenje slik-vzamemo ij-ti piksel iz prve slike in ij-ti piksel iz druge slike in shranimo rezultat na ij-ti piksel v rezultatu.
+
+- **Množenje s skalarjem:**  
+  \[
+  C = \alpha A \quad \Rightarrow \quad C(i,j) = \alpha A(i,j)
+  \]
+
+- **Kvadriranje slik:**  
+  \[
+  C = A^2 \quad \Rightarrow \quad C(i,j) = (A(i,j))^2
+  \]
+
+## Model kamere in zajemanje slik
+
+### Zajemanje slik s kamerami CCD
+
+#### Proces formiranja slike
+
+Kako pridemo do slike?  
+
+Imamo **fotoaparat** – leče, zaslonko, zadaj imamo film ali danes senzor. Ko pritisnemo gumb za slikanje, se zaslonka odpre, svetloba pride na senzor in slika se shrani na pomnilni medij.
+
+Danes digitalni fotoaparati temeljijo na **senzorju**, občutljivem na svetlost. Temu seznoru pravimo **CCD senzor**. Poleg njega pa je še **CMOS senzor**, ki se pogosto uporablja pri fotoaparatih na telefonih. Ta senzor je cenejši, vendar deluje podobno kot CCD.  
+
+---
+
+##### Senzor CCD
+
+Senzor CCD je običajno pravokotne oblike in razdeljen na posamezne elemente, ki so zloženi v matriki po vrsticah in stolpcih. Vsak elementek CCD je občutljiv na svetlost in iz njega nastane **en piksel**. Elementke CCD si lahko predstavljamo kot kvadratne "koše", ki zbirajo svetlobo. Vsako polje lahko meri količino svetlobne energije, ki pade nanjo, pri čemer se količina svetlobna energije, ki pade na dano polje meri skozi neko določeno časovno obdobje.
+
+---
+
+##### Svetloba in fotoni
+
+Svetloba sestoji iz **fotonov**, ki jih lahko predstavljamo kot žogice. Ko pritisnemo sprožilec, svetloba pride skozi lečo in zaslonko do senzorja. V kvadratne "koše" se ujame več fotonov tam, kjer je svetloba močnejša, in manj fotonov tam, kjer je temneje. **Večja svetlost bo pomenila večji naboj v elementku CCD.**
+
+To je bil sedaj opisan prvi korak, kjer smo akumulirali svetlobni naboj. Sedaj sledi pretvorba tega ujetega svetlobnega naboja v sliko.
+
+---
+
+##### Pretvorba svetlobnega naboja v sliko
+
+Akumulirani svetlobni naboj pretvorimo v **zvezni signal** (napetost v odvisnosti od časa). Pretvorba poteka **vrstico po vrstici**, podobno kot igra "4 v vrsto": spodnja vrstica se obdeluje prva. Začnemo s spodnjo linijo našega senzorja (matrike) in naboj pretvorimo v zvezni signal (napetost v odvisnosti od časa). Višji kot je svetlobni naboj notri, višja bo napetost in večja bo amplituda (podobno je obratno-nižji bo naboj notri, manjša bo napetost). Vrstico za vsak element pretvorimo v vrednost svetlobnega signala. Na koncu pride kontrolni signal in se vrstica shrani (posreduje v serijski izhodni register). Nato gre naslednja vrstica po podobnem postopku notri za obdelavo.  
+
+Za tem korakom sledi diskretizacija signala.
+
+---
+
+##### Diskretizacija in AD pretvorba
+
+Register posreduje prejet naboj polja (enega na enkrat) v izhodni **ojačevalnik**, ki zgenerira ustrezen analogni oz. zvezni signal, pri čemerdobimo v signalu večje razlike. Ta signal gre nato v **AD pretvornik**, da pretvorimo analogni signal v digitalni signal (diskretizacija). V fotoaparatih je čas vzorčenja oz. trenutki ko bo signal diskretniziran (\(\Delta T\)) tovarniško zapečeno. Ta vrednost določa koliko vzorcev moremo dobit, da lahko dobimo vsako vrstico.
+
+Če napetost preseže maksimalno vrednost \(U_\text{MAX}\), AD pretvornik odreže višek. AD pretvornik shrani vrednosti v **register**, običajno 8-bitni, ki lahko hrani **256 različnih nivojev** (od 0 do 255). Vsak ta nivo dobi neko številko oz. indeks. Po AD pretvorbi dobimo **matriko**, ki je enake velikosti in ima enako število elementov kot senzor CCD.  
+
+Postopek ponavljamo za vse vrstice senzorja. Za eno vrstico dobimo signal, to damo v AD pretvornik. V posameznem trenutku ne vrnemo napetost, ampak številko nivoja v katerega je svetlobna točka padla. Ko pridemo do kontrolnega signala vzamemo naslednjo vrstico in spet pretvorimo. 
+
+Branje oz. formiranje slike, po tem postopku, se lahko ponovi večkrat na sekundo (npr. 30 fps), lahko pa traja tudi več ur (npr. v astronomiji).
+
+Za korakom diskretizacije sledi shranjevanje slike.
+
+---
+
+##### Shranjevanje slike
+
+Matriko na koncu shranimo v **pomnilnik** – to je slika v surovem formatu. Pri videu se ta postopek zgodi večkrat na sekundo.
+
+---
+
+Zgoraj opisan postopek velja za sivinsko sliko. Pri barvni sliki pa so potrebni za vsako barvo 3 komponente RGB. Kako priti torej do barvnih slik?
+
+Obstajata 2 pristopa:
+- **single-shot** (zaslonka se 1x odpre)
+- **multi-shot** (zaslonka se večkrat odpre)
+
+Dodatno pa glede na ceno obstaja še ločitev na **cenejši** in **dražji način**.
+
+---
+
+##### Single-shot
+
+Eden cenejših pristopov za zajem barvne slike je **single-shot** metoda. Svetloba je sestavljena iz različnih valovnih dolžin, pri čemer nas pri barvnem zajemu zanimajo tri osnovne komponente: **rdeča (R), zelena (G) in modra (B)**.  
+
+Če senzor ni opremljen z nobenim filtrom, se fotoni sicer ujamejo, vendar dobimo le sivinsko sliko brez barvnih informacij. Zato se pri single-shot pristopu uporablja **barvni filter**, najpogosteje **Bayerjev filter**. Z njim se izvede postopek Bayerjevega demoziciranja s čimer dobimo digitalno barvno sliko.
+
+Bayerjev filter je razporejen v matriki:
+- v eni vrstici se izmenjujeta rdeča in zelena barva,
+- v naslednji vrstici pa zelena in modra barva.
+Gre za interpoliranje podatkov na osnovi vrednosti sosednjih pikslov.
+
+Filter mora biti dovolj velik, da prekrije celoten senzor. Če je posamezen CCD element prekrit z rdečim filtrom, bo zaznal le rdeče fotone, medtem ko se zeleni in modri izgubijo. Enako velja za zelene in modre filtre – vsak element zazna le eno barvno komponento.
+
+###### Single-shot – cenejša rešitev
+
+Pri tej rešitvi imamo še vedno **en sam CCD senzor**, pretvorba signala pa poteka podobno kot pri sivinski sliki. Razlika je v tem, da vsak piksel izmeri **le eno barvno komponento**, za popoln RGB zapis pa potrebujemo še preostali dve.
+
+Manjkajoči barvni komponenti se določita **hevristično z interpolacijo** iz sosednjih pikslov. Na primer:  
+če je pri nekem pikslu izmerjena zelena vrednost, se rdeča in modra komponenta izračunata s pomočjo interpolacijskih funkcij in vrednosti bližnjih pikslov.
+
+Na ta način dobimo tri matrike:
+- matriko rdeče barve (R),
+- matriko zelene barve (G),
+- matriko modre barve (B).
+
+To predstavlja osnovni **single-shot pristop**, ki je cenovno ugoden, vendar manj natančen.
+
+###### Single-shot – dražja rešitev
+
+Dražja rešitev predpostavlja uporabo **treh senzorjev**, pri čemer je vsak namenjen določenemu barvnemu spektru (R, G ali B). Najdražji del sistema sta senzor in leča.
+
+Ena izmed izvedb je, da so senzorji zloženi kot nekakšen **sendvič** in izdelani iz posebnih materialov, ki prepuščajo le določeno valovno dolžino svetlobe. Tako vsak senzor neposredno zajame svojo barvno komponento brez potrebe po interpolaciji.
+
+Druga rešitev pa je da imamo 3 senzorje, ki so prostorsko razmaknjeni po fotoaparatu, ki ima na vhodu stekleno prizmo. Sem noter pride svetloba, ki se na tej prizmi nato lomi. Imamo 3 senzorje in svetloba se lomi na enega od treh senzorjev. Fotoni se zgrabijo na pravilen senzor s pomočjo steklene prizme, ki razprši to svetlobo. Za vsaki senzor treba ponoviti to zgodbo enako kot prej-to je natančneje, ampak je zato tudi dražje.
+
+---
+
+##### Multi-shot
+
+###### Multi-shot pristop
+
+Multi-shot metoda ne pomeni, da uporabnik večkrat ročno pritisne sprožilec, temveč da se **zaslonka samodejno odpre večkrat**, običajno trikrat – enkrat za vsako barvno komponento. Senzor se tukaj zaporedoma 3x v zelo kratkem časovnem intervalu izpostavi svetlobi (sceni). Pri tem se ob odpiranju zaslonke pred senzor položi filter, ki prepušča le določeno barvno komponento.
+
+Pri tem uporabljamo različne vrste filtrov. Ti so lahko mehanski ali akustični. Pri mehanskih filtrih je pred senzorjem nameščen filter, ki prepušča določeno barvo:
+1. najprej rdečo – zajame se rdeča komponenta,
+2. nato se filter zamenja in zajame modra komponenta,
+3. na koncu še zelena komponenta.
+
+Vsaka barva se zajame ločeno, nastali signali pa se združijo v končno barvno sliko.
+
+Ta pristop ni primeren za hitro spreminjajoče se scene, saj lahko pride do **zamegljenosti**, zato se uporablja predvsem pri statičnih prizorih.
+
+---
+
+##### Velikost senzorjev
+
+Senzorji so lahko zelo majhni, poznamo pa tudi **full-frame senzorje**, ki so bistveno večji. Velikost senzorja in posameznih elementov močno vpliva na kakovost slike.
+
+Če na zelo majhen senzor pade velika količina fotonov, se kakovost slike poslabša. Zato velja, da so **večji senzorji in večji piksli praviloma boljši**, saj omogočajo boljši zajem svetlobe.
+
+---
+
+### Modeli kamer
+
+V računalniškem vidu je pri določenih aplikacijah nujno razumeti **matematično formiranje slike** – torej kako se slika opiše z matematičnimi modeli.
+
+Obravnavali bomo:
+- matematične modele kamere,
+- načine, kako proces zajema slike opisati z matematičnimi formulami.
+
+Modela, kot sta **kamera obskura** in **kamera s tankimi lečami**, sta pogosto preveč poenostavljena, medtem ko je **kamera z lečami** najbolj realističen model.
+
+---
+
+#### Kamera na luknjico (camera obscura)
+
+**Kamera na luknjico** je eden najstarejših modelov kamere, poznan že v času Aristotla. Gre za zelo preprosto napravo, ki jo sestavljata majhna odprtina (luknjica) in slikovna ravnina. Scena pred kamero se skozi odprtino preslika na notranjo, hrbtno stran kamere, kjer nastane obrnjena slika. Delovanje kamere na luknjico temelji na **perspektivni projekciji**.
+
+Luknjico lahko matematično obravnavamo kot **eno samo točko v prostoru**. Iz vsake točke opazovane scene potuje svetlobni žarek, ki gre skozi luknjico in se projicira na slikovno ravnino. Točka na sliki nastane tam, kjer ta premica seka slikovno ravnino. Na ta način se vsaka točka v prostoru preslika v ustrezno točko na sliki.
+
+Zaradi perspektivne projekcije se velikost objektov na sliki spreminja glede na njihovo oddaljenost od kamere. Če imamo dva enako velika predmeta, ki se nahajata na različnih razdaljah od kamere, bo:
+- bolj oddaljen predmet na sliki videti manjši,
+- bližji predmet pa večji,
+
+čeprav sta v resničnem svetu enake velikosti. Ta opisan perspektivni efekt je ena ključnih lastnosti perspektivne projekcije.
+
+Stari fotoaparati so za zajem slike uporabljali **fotografski film**. Po zajemu je bilo film potrebno razviti v temnici, kjer so ga s posebnimi kemičnimi tekočinami obdelali, da se je slika trajno zapisala.
+
 
