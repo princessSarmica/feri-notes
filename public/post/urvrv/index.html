@@ -166,6 +166,7 @@ This article does not have a corresponding language version
       <ul>
         <li><a href="#zajemanje-slik-s-kamerami-ccd">Zajemanje slik s kamerami CCD</a></li>
         <li><a href="#modeli-kamer">Modeli kamer</a></li>
+        <li><a href="#parametri-kamere">Parametri kamere</a></li>
       </ul>
     </li>
   </ul>
@@ -714,8 +715,461 @@ Kamera na luknjico (camera obscura)
 <li>bolj oddaljen predmet na sliki videti manjši,</li>
 <li>bližji predmet pa večji,</li>
 </ul>
-<p>čeprav sta v resničnem svetu enake velikosti. Ta opisan perspektivni efekt je ena ključnih lastnosti perspektivne projekcije.</p>
+<p>čeprav sta v resničnem svetu enake velikosti. Ta opisan <strong>perspektivni efekt</strong> je ena ključnih lastnosti perspektivne projekcije.</p>
 <p>Stari fotoaparati so za zajem slike uporabljali <strong>fotografski film</strong>. Po zajemu je bilo film potrebno razviti v temnici, kjer so ga s posebnimi kemičnimi tekočinami obdelali, da se je slika trajno zapisala.</p>
+<h5 id="koordinatni-sistem-kamere-na-luknjico">
+<a class="header-anchor" href="#koordinatni-sistem-kamere-na-luknjico"></a>
+Koordinatni sistem kamere na luknjico
+</h5><p>Kameri na luknjico priredimo koordinatni sistem:</p>
+<ul>
+<li>
+<p>$O$ – izhodišče je v luknjici</p>
+</li>
+<li>
+<p>$\Pi'$ – slikovna ravnina</p>
+</li>
+<li>
+<p>$\mathbf{i}$ in $\mathbf{j}$ – bazna vektorja ravnine, ki je paralelna ravnini $\Pi'$</p>
+</li>
+<li>
+<p>$f'$ – oddaljenost ravnine $\Pi'$ od luknjice v smeri vektorja $\mathbf{k}$ (merjeno pozitivno)</p>
+</li>
+<li>
+<p>$C'$ – slikovni center (središče)</p>
+<ul>
+<li>leži na presečišču optične osi in ravnine $\Pi'$</li>
+</ul>
+</li>
+<li>
+<p>Optična os:</p>
+<ul>
+<li>je pravokotna na ravnino $\Pi'$</li>
+<li>poteka skozi luknjico</li>
+</ul>
+</li>
+<li>
+<p>Točko $C'$ lahko uporabimo kot izhodišče slikovne ravnine</p>
+<ul>
+<li>pomembno za kalibracijo kamere</li>
+</ul>
+</li>
+</ul>
+<h5 id="kako-določimo-za-točko-v-sceni-njen-položaj-na-sliki">
+<a class="header-anchor" href="#kako-dolo%c4%8dimo-za-to%c4%8dko-v-sceni-njen-polo%c5%beaj-na-sliki"></a>
+Kako določimo za točko v sceni njen položaj na sliki?
+</h5><p>Glede na definiran koordinatni sistem imamo torej projekcijsko oz. slikovno ravnino, ki jo definiraza bazna vektorja $\mathbf{i}$ in $\mathbf{j}$. Imamo pa še točko $P$, ki se preko perspektivne projekcije preslika v točko $P'$.</p>
+<ul>
+<li>Točka $P$ – točka iz scene</li>
+</ul>
+$$
+P = [x, y, z]
+$$<ul>
+<li>Točka $P'$ – slika točke $P$ na slikovni ravnini</li>
+</ul>
+$$
+P' = [x', y', z']
+$$<ul>
+<li>Točka $P'$ leži na slikovni ravnini, zato velja:</li>
+</ul>
+$$
+z' = f'
+$$<ul>
+<li>Koordinati $x'$ in $y'$ določimo iz opazovanja geometrije (perspektivna projekcija):</li>
+</ul>
+$$
+x' = \frac{f' x}{z}
+$$$$
+y' = \frac{f' y}{z}
+$$<p>Zanima nas določitev koordinat točke $P'$.<br>
+Poznamo koordinate točke $P$:</p>
+$$
+P(x, y, z)
+$$<p>Te koordinate so podane v nekih merskih enotah, npr.:</p>
+$$
+P(100, 200, 450)
+$$<p>kjer vrednosti lahko predstavljajo centimetre (lahko pa tudi dm, m itd.).</p>
+<p>Točka $P$ se preko <strong>perspektivne projekcije</strong> preslika v točko $P'$.</p>
+<p>Točka $P'$ ima koordinate:</p>
+$$
+P'(x', y', z')
+$$<p>Ker točka $P'$ leži na slikovni ravnini, velja:</p>
+$$
+z' = f'
+$$<p>Vprašanje pa je, kako določimo $x'$ in $y'$.<br>
+To določa matematični model perspektivne projekcije:</p>
+$$
+x' = f' \left(\frac{x}{z}\right)
+$$$$
+y' = f' \left(\frac{y}{z}\right)
+$$<p>Ti dve formuli povesta, kako se točka preslika na slikovno ravnino.</p>
+<p>Pomembno:<br>
+$x'$, $y'$ in $z'$ so še vedno izraženi v isti merski enoti kot $x$, $y$, $z$. <strong>Tukaj še ne govorimo o pikslih.</strong><br>
+Če so $x, y, z$ podani v cm, so tudi $x', y', z'$ v cm.</p>
+<blockquote>
+<p>Primer</p>
+<p>Podano imamo točko $P$ s koordinatami ($x, y, z$), ter podatek za oddaljenost ravnine od luknjice ($f'$):</p>
+$$ P(100, 200, 450), \quad f' = 150 $$<p>Zanima nas določitev koordinat točke $P'$. Ker točka $P'$ leži na slikovni ravnini, velja $z' = f'$. V tem primeru to pomeni, da je $z' = 150$. Določiti moramo torej $x'$ in $y'$.</p>
+<p>Izračun:</p>
+$$ x' = f' \cdot \left(\frac{x}{z}\right) = 150 \cdot \left(\frac{100}{450}\right) = 33{,}3 $$$$ y' = f' \cdot \left(\frac{y}{z}\right) = 150 \cdot \left(\frac{200}{450}\right) = 66{,}6 $$</blockquote>
+<h5 id="omejitve-modela-kamere-na-luknjico">
+<a class="header-anchor" href="#omejitve-modela-kamere-na-luknjico"></a>
+Omejitve modela kamere na luknjico
+</h5><p>Model kamere na luknjico je nekoliko <strong>preoptimističen</strong>, saj predpostavlja, da je luknjica idealna točka. V resnici pa ta luknjica ni matematična točka, ampak ima določeno ploščino, predstavlja odprtino (npr. krožno), skozi katero v praksi ne prehaja le en žarek ampak več žarkov. Ker skozi odprtino prehaja več žarkov, se preslikana točka na slikovni ravnini nekoliko <strong>razmaže</strong> (ni popolnoma ostra). Manjša kot je odprtina, manjša je razmazanost.</p>
+<p>Zato v model kamere uvedemo <strong>leče</strong> (običajno pred odprtino). S tem imamo luknjico, pred njo pa zbiralne (konveksne) leče.</p>
+<p>Leče omogočijo:</p>
+<ul>
+<li>boljšo fokusacijo žarkov,</li>
+<li>ostrejšo sliko,</li>
+<li>bolj realističen model kamere.</li>
+</ul>
+<hr>
+<h4 id="model-s-tankimi-lečami">
+<a class="header-anchor" href="#model-s-tankimi-le%c4%8dami"></a>
+Model s tankimi lečami
+</h4><p>Lastnost zbiralne leče katera sestavlja ta model je, da <strong>fokusira oziroma zbira žarke</strong>. Žarki, ki izhajajo iz iste točke, se zaradi leče ne razpršijo, temveč se na koncu zberejo v eni točki na slikovni ravnini. Lastnosti leče določata dve goriščni točki. Ti dve točki sta na razdalji $f$, kjer je $f$ <strong>goriščna razdalja</strong> leče.</p>
+<h5 id="koordinatni-sistem-modela-s-tankimi-lečami">
+<a class="header-anchor" href="#koordinatni-sistem-modela-s-tankimi-le%c4%8dami"></a>
+Koordinatni sistem modela s tankimi lečami
+</h5><p>Koordinatno izhodišče sedaj postavimo v <strong>središče leče</strong>.</p>
+<p>Ponovno imamo točko:</p>
+$$
+P(x, y, z)
+$$<p>Podobno kot pri sistemu modela kamere na luknjico, nas tudi sedaj zanima kam na slikovni ravnini se preslika dana točka $P$. Ker imamo odprtino, skozi lečo potuje več žarkov iz iste točke.</p>
+<p>Pri tem na zbiralni leči obravnavamo tri značilne (mejne) primere (žarke):</p>
+<ul>
+<li>
+<p>Žarek, ki je <strong>vzporeden optični osi</strong>, se po prehodu skozi lečo lomi skozi drugo gorišče in se nato seka s slikovno ravnino.</p>
+</li>
+<li>
+<p>Žarek, ki gre ravno skozi <strong>središče leče</strong>, se ne lomi in potuje naravnost do slikovne ravnine.</p>
+</li>
+<li>
+<p>Žarek, ki gre skozi <strong>prvo goriščno točko</strong>, se po prehodu skozi lečo lomi tako, da postane vzporeden optični osi, nato pa se seka s slikovno ravnino.</p>
+</li>
+</ul>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p>Če je objekt (npr. točka $P$) na ustrezni razdalji, se vsi trije žarki zberejo v isti točki na slikovni ravnini. <strong>VENDAR TO NE VELJA VEDNO!</strong>. Velja samo takrat, ko je objekt (npr. točka $P$ v našem primeru) na primerni razdalji od slikovne ravnine, da se bodo dani žarki zbrali v isti točki. V takem primeru je scena v <strong>ostrem fokusu</strong> in velja relacija oziroma enačba:</p>
+$$\frac{1}{z'} - \frac{1}{z} = \frac{1}{f}$$<p>kjer:</p>
+<ul>
+<li>$z$ predstavlja razdaljo objekta,</li>
+<li>$z'$ predstavlja razdaljo slike,</li>
+<li>$f$ predstavlja goriščno razdaljo.</li>
+</ul>
+<p>Če ta pogoj ni izpolnjen, se žarki ne zberejo v eni točki in slika ni ostra.</p></p>
+  </blockquote>
+
+<p><strong>FOV (Field of View)</strong> predstavlja del scene, ki se projicira na senzor oziroma kamero.</p>
+<p>FOV je odvisen od:</p>
+<ul>
+<li>lastnosti leče,</li>
+<li>velikosti senzorja.</li>
+</ul>
+<p>To je tisti del prostora, ki ga kamera &ldquo;vidi&rdquo;.</p>
+<h5 id="omejitve-modela">
+<a class="header-anchor" href="#omejitve-modela"></a>
+Omejitve modela
+</h5><p>Idealnih tankih leč s popolnimi lastnostmi v praksi ne moremo izdelati. Zato je tudi model &ldquo;kamera na luknjico z lečo&rdquo;, še vedno nekoliko <strong>preoptimističen matematični model</strong> realne kamere.</p>
+<hr>
+<h4 id="model-z-debelimi-lečami">
+<a class="header-anchor" href="#model-z-debelimi-le%c4%8dami"></a>
+Model z debelimi lečami
+</h4><p>Najbolj realističen model je <strong>model kamere z debelimi lečami</strong>. To je najboljši približek dejanskemu fizikalnemu dogajanju v kameri.</p>
+<p>Debela leča je poleg:</p>
+<ul>
+<li>dveh goriščnic,</li>
+<li>goriščne razdalje $f$,</li>
+</ul>
+<p>opisana še z:</p>
+<ul>
+<li><strong>glavnima točkama leče</strong>,</li>
+<li><strong>razdaljo med njima</strong>.</li>
+</ul>
+<p>S temi parametri lahko natančneje opišemo obnašanje debele leče.</p>
+<h5 id="koordinatni-sistem-modela-z-debelimi-lečami">
+<a class="header-anchor" href="#koordinatni-sistem-modela-z-debelimi-le%c4%8dami"></a>
+Koordinatni sistem modela z debelimi lečami
+</h5><p>Ponovno nas zanima:</p>
+<ul>
+<li>kako se točka projicira na slikovno ravnino,</li>
+<li>kako se žarki lomijo oziroma zbirajo.</li>
+</ul>
+<p>Tudi debela leča ima lastnost zbiranja žarkov, vendar je model nekoliko bolj kompleksen kot pri tanki leči.</p>
+<p>Pri modelu debele leče obravnavamo tri značilne primere:</p>
+<ul>
+<li>
+<p>Žarek, ki je <strong>vzporeden optični osi</strong>, se lomi tako, da pri drugi glavni točki spremeni smer in se pod določenim kotom preslika na slikovno ravnino.</p>
+</li>
+<li>
+<p>Žarek, ki gre skozi <strong>prvo gorišče</strong>, se po lomljenju usmeri tako, da postane vzporeden optični osi.</p>
+</li>
+<li>
+<p>Žarek, ki zadene <strong>prvo glavno točko</strong>, se preslika skozi drugo glavno točko in nato seka slikovno ravnino.</p>
+</li>
+</ul>
+<hr>
+<h5 id="omejitve-modela-1">
+<a class="header-anchor" href="#omejitve-modela-1"></a>
+Omejitve modela
+</h5><p>Tudi ta model je še vedno <strong>preoptimističen</strong>, saj popolne leče v praksi ne moremo izdelati.</p>
+<p>V realnih sistemih se pojavljajo:</p>
+<ul>
+<li>geometrijska popačenja,</li>
+<li>optične aberacije,</li>
+<li>druge nepravilnosti.</li>
+</ul>
+<hr>
+<h3 id="parametri-kamere">
+<a class="header-anchor" href="#parametri-kamere"></a>
+Parametri kamere
+</h3><p>Ne glede na to, kateri model uporabimo (luknjica, tanka leča, debela leča), ostajamo pri istem osnovnem principu:</p>
+<p>Imamo točko v prostoru:</p>
+$$
+P(x, y, z)
+$$<p>Ta točka se preslika na slikovno ravnino v koordinatah, ki so še vedno izražene v <strong>merskih enotah</strong> (npr. cm, mm). V praksi pa kamera na koncu ne vrne koordinat v centimetrih, temveč <strong>pikslih</strong>.</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p><strong>Notranji parametri kamere</strong> omogočijo preslikavo iz sveta merskih enot v svet pikslov. Tako dobimo končno digitalno sliko, kjer je vsaka točka predstavljena kot piksel.</p></p>
+  </blockquote>
+
+<p>Če želimo uporabiti matematične enačbe projekcije, pa moramo poznati <strong>koordinatni sistem naše kamere</strong>. Za dosego tega, pa je potrebno točke, ki smo jih dobili iz koordinatnega sistema v naravi pretvorit v koordinatni sistem, kot bi ga zajela naša kamera. Določitev tega nam omogočajo <strong>zunanji parametri kamere</strong>.</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p><strong>Zunanji parametri kamere</strong> so potrebni za merjenje razdalj, ter opis lege in orientacije v prostoru. Zunanji parametri kamere so potrebni, ker ne znamo neposredno meriti lokacije točke glede na koordinatni sistem kamere in moramo svetovni koordinatni sistem pretvoriti v koordinatni sistem kamere.</p></p>
+  </blockquote>
+
+<h4 id="notranji-parametri-kamere">
+<a class="header-anchor" href="#notranji-parametri-kamere"></a>
+Notranji parametri kamere
+</h4><p>Imamo koordinatni sistem kamere in znamo izmeriti lokacijo točke glede nanj. V kamero vstavimo <strong>CCD senzor</strong>. Tudi za senzor lahko vpeljemo koordinatni sistem.</p>
+<ul>
+<li>Izberemo koordinatno izhodišče.</li>
+<li>Glede na izhodišče štejemo piksle.</li>
+</ul>
+<p>Na ta način preslikamo točke iz koordinatnega sistema kamere v koordinatni sistem v pikslovnem sistemu.</p>
+<p>Na senzorju se nahaja <strong>središče slikovne ravnine</strong>, vendar pikslov ne merimo glede na sredino senzorja.</p>
+<p>Piksle začnemo šteti od:</p>
+<ul>
+<li>vrstice: 0, 1, 2, 3, &hellip;</li>
+<li>stolpca: 0, 1, 2, 3, &hellip;</li>
+</ul>
+<p>in <strong>ne uporabljamo negativnih števil</strong>. Zaradi tega koordinatno izhodišče slikovnega sistema ni v središču senzorja, temveč v enem od njegovih vogalov.</p>
+<h5 id="glavna-točka--parametra--in">
+<a class="header-anchor" href="#glavna-to%c4%8dka--parametra--in"></a>
+Glavna točka – parametra \( u_0 \) in \( v_0 \)
+</h5><p>Prva dva notranja parametra sta:</p>
+<ul>
+<li>\( u_0 \) – premik v smeri vrstic</li>
+<li>\( v_0 \) – premik v smeri stolpcev</li>
+</ul>
+<p>Ta dva parametra določata, kje se nahaja <strong>koordinatno izhodišče</strong> glede na pikslovni koordinatni sistem.</p>
+<h5 id="parametra--in">
+<a class="header-anchor" href="#parametra--in"></a>
+Parametra \( \alpha \) in \( \beta \)
+</h5><p>Naslednja dva notranja parametra sta:</p>
+<ul>
+<li>\( \alpha \)</li>
+<li>\( \beta \)</li>
+</ul>
+<p>V teh dveh parametrih je skrita <strong>velikost piksla</strong>.</p>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>\( \alpha \) in \( \beta \) nista neposredno velikosti piksla, temveč predstavljata produkt goriščne razdalje in prostorske ločljivosti. Pri tem je \( \alpha \) prostorska ločljivost v smeri \( x \), \( \beta \) pa prostorska ločljivost v smeri \( y \).</p></p>
+  </blockquote>
+
+<p>Velja:</p>
+<ul>
+<li>\( \alpha = f \cdot s_x \)</li>
+<li>\( \beta = f \cdot s_y \)</li>
+</ul>
+<p>kjer:</p>
+<ul>
+<li>\( f \) – goriščna razdalja,</li>
+<li>\( s_x \) – prostorska ločljivost v smeri \( x \),</li>
+<li>\( s_y \) – prostorska ločljivost v smeri \( y \).</li>
+</ul>
+<p>Ključni namen teh parametrov je:</p>
+<blockquote>
+<p>prehod iz merskih enot (cm, mm) v svet pikslov.</p>
+</blockquote>
+<h5 id="kot-theta">
+<a class="header-anchor" href="#kot-theta"></a>
+Kot theta \( \theta \)
+</h5><p>Mi uvedemo koordinatni sistem, ki je enak velikosti našega senzorja. Kot med baznimi vektorji je \( 90^\circ \) stopinj, ampak v praksi takšnega senzorja ne znamo naredit, da bi imel točno \( 90^\circ \). Zato rečemo, da je kot med osema (osema po vrsticah in stolpcih) kot \( \theta \). To je kot med osjo vrstic in osjo stolpcev.</p>
+<p>Parameter \( \theta \) opisuje napako pri izdelavi senzorja (odstopanje od pravokotnosti).</p>
+<h5 id="pet-notranjih-parametrov-kamere">
+<a class="header-anchor" href="#pet-notranjih-parametrov-kamere"></a>
+Pet notranjih parametrov kamere
+</h5><p>Skupaj imamo torej 5 notranjih parametrov:</p>
+<ol>
+<li>\( u_0 \) – premik kamere v smeri vrstic</li>
+<li>\( v_0 \) – premik kamere v smeri stolpcev</li>
+<li>\( \alpha \) – skaliranje v smeri \( x \)</li>
+<li>\( \beta \) – skaliranje v smeri \( y \)</li>
+<li>\( \theta \) – kot med osema</li>
+</ol>
+<p>Pomen:</p>
+<ul>
+<li>2 parametra za premik koordinatnega sistema,</li>
+<li>2 parametra za pretvorbo iz cm (oz. merskih enot) v piksle,</li>
+<li>1 parameter za napako pri izdelavi senzorja.</li>
+</ul>
+<h5 id="kalibracijska-matrika">
+<a class="header-anchor" href="#kalibracijska-matrika"></a>
+Kalibracijska matrika \( K \)
+</h5><p>Iz teh parametrov lahko sestavimo <strong>kalibracijsko matriko</strong> velikosti \( 3 \times 3 \):</p>
+\[
+K =
+\begin{bmatrix}
+\alpha & -\alpha \cot \theta & u_0 \\
+0 & \dfrac{\beta}{\sin \theta} & v_0 \\
+0 & 0 & 1
+\end{bmatrix}
+\]<p>Ta matrika omogoča prehod iz koordinat kamere v pikslovni sistem. S pomočjo te matrike naredimo projekcijsko matriko $M$ velikosti \( 3 \times 4 \) oz. perspektivno projekcijsko matriko.</p>
+<h5 id="projekcijska-matrika">
+<a class="header-anchor" href="#projekcijska-matrika"></a>
+Projekcijska matrika
+</h5><p>S pomočjo notranjih in zunanjih parametrov dobimo <strong>projekcijsko matriko</strong>:</p>
+\[
+M = K [R , t]
+\]<p>Velikost matrike:</p>
+\[
+3 \times 4
+\]<p>Imenujemo jo tudi <strong>perspektivna projekcijska matrika</strong>.</p>
+<h5 id="model-kamere--matrična-enačba">
+<a class="header-anchor" href="#model-kamere--matri%c4%8dna-ena%c4%8dba"></a>
+Model kamere – matrična enačba
+</h5><p>Model kamere je zapisan kot:</p>
+\[
+p = \frac{1}{z} M P
+\]<h5 id="homogene-koordinate">
+<a class="header-anchor" href="#homogene-koordinate"></a>
+Homogene koordinate
+</h5><p>Točka v prostoru:</p>
+\[
+P = (x, y, z)
+\]<p>v homogenih koordinatah zapišemo kot:</p>
+\[
+P = (x, y, z, 1)
+\]<p>Dodamo pa ji še četrto komponento oziroma dimanzijo z vrednostjo 1, da lahko izvajamo matrični račun.</p>
+<h5 id="projekcija">
+<a class="header-anchor" href="#projekcija"></a>
+Projekcija
+</h5><ul>
+<li>\( P \) – točka v prostoru (v homogenih koordinatah)</li>
+<li>\( p \) – projicirana točka na sliki</li>
+</ul>
+<p>Mala črka \( p \) predstavlja slikovno točko po projekciji.</p>
+<p>To predstavlja celoten matematični model kamere:
+3D točka → projekcija → 2D piksel.</p>
+<hr>
+<h4 id="zunanji-parametri-kamere">
+<a class="header-anchor" href="#zunanji-parametri-kamere"></a>
+Zunanji parametri kamere
+</h4><p>Poleg notranjih parametrov pa potrebujemo tudi <strong>zunanje parametre kamere</strong>.</p>
+<p>Imamo koordinatni sistem kamere, vendar v realnosti ne moremo meriti prostora neposredno glede na središče leče.</p>
+<p>Običajno imamo:</p>
+<ul>
+<li>referenčni realni (world) koordinatni sistem,</li>
+<li>merilni sistem (npr. laser), s katerim izmerimo koordinate točk v prostoru.</li>
+</ul>
+<p>Točke, ki jih izmerimo z laserjem, so podane v <strong>world koordinatnem sistemu</strong>. Za model kamere pa potrebujemo točke v <strong>koordinatnem sistemu kamere</strong>. Zato moramo pretvoriti točke iz realnega (world) koordinatnega sistema v koordinatni sistem kamere. S tem dobimo točke, ki bi jih imeli, če bi laser šel iz kamere.</p>
+<h5 id="povezava-koordinatnih-sistemov">
+<a class="header-anchor" href="#povezava-koordinatnih-sistemov"></a>
+Povezava koordinatnih sistemov
+</h5><p>Imamo torej dva koordinatna sistema:</p>
+<ul>
+<li>svetovni (world) koordinatni sistem</li>
+<li>koordinatni sistem kamere</li>
+</ul>
+<p>Da ju pa povežemo in da lahko izvedemo pretvorbo iz enega koordinatnega sistema v drugega, moramo izvesti:</p>
+<ol>
+<li><strong>Translacijo</strong> (poravnava izhodišč)</li>
+<li><strong>Rotacijo</strong> (poravnava osi)</li>
+</ol>
+<h6 id="translacija">
+<a class="header-anchor" href="#translacija"></a>
+Translacija
+</h6><p>Translacija je podana s tremi parametri:</p>
+<ul>
+<li>premik po osi \( x \)</li>
+<li>premik po osi \( y \)</li>
+<li>premik po osi \( z \)</li>
+</ul>
+<p>To zapišemo kot translacijski vektor:</p>
+\[
+t =
+\begin{bmatrix}
+t_x \\
+t_y \\
+t_z
+\end{bmatrix}
+\]<h6 id="rotacija">
+<a class="header-anchor" href="#rotacija"></a>
+Rotacija
+</h6><p>Rotacijo definiramo s tremi koti:</p>
+<ul>
+<li>rotacija okoli osi \( x \)</li>
+<li>rotacija okoli osi \( y \)</li>
+<li>rotacija okoli osi \( z \)</li>
+</ul>
+<p>Te kote običajno označimo kot:</p>
+\[
+\alpha, \beta, \gamma
+\]<p>Rotacijo izvedemo kot kompozitum rotacij:</p>
+<ol>
+<li>najprej okoli osi \( x \),</li>
+<li>nato okoli osi \( y \),</li>
+<li>nato okoli osi \( z \).</li>
+</ol>
+<p>Rotacijsko matriko zapišemo kot kompozitum rotacij:</p>
+\[
+R = R_x R_y R_z
+\]<p>kjer so</p>
+\[
+R_x =
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos \alpha & \sin \alpha \\
+0 & -\sin \alpha & \cos \alpha
+\end{bmatrix}
+\]\[
+R_y =
+\begin{bmatrix}
+\cos \beta & 0 & -\sin \beta \\
+0 & 1 & 0 \\
+\sin \beta & 0 & \cos \beta
+\end{bmatrix}
+\]\[
+R_z =
+\begin{bmatrix}
+\cos \gamma & \sin \gamma & 0 \\
+-\sin \gamma & \cos \gamma & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\]<p>* Koti so merjeni v protiurni smeri.</p>
+<p>Zunanji parametri so torej:</p>
+<ul>
+<li>3 parametri translacije</li>
+<li>3 parametri rotacije</li>
+</ul>
+<p>Skupaj:</p>
+\[
+6 \text{ zunanjih parametrov}
+\]<p>S temi parametri podamo transformacijo med obema koordinatnima sistemoma.</p>
+<p>S zunanjimi in notranjimi parametri imamo sedaj imamo popoln model kamere. Imamo 5 notranjih in 6 zunanjih parametrov kamere. Te parametre pa moremo nekje dobit-temu pravimo <strong>kalibracija kamere</strong>.</p>
 </div>
     <footer class="article-footer"><ul class="article-category-list"></ul>
 <ul class="article-tag-list" itemprop="keywords"></ul>
@@ -757,10 +1211,10 @@ Kamera na luknjico (camera obscura)
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;3.7k</span
+          >&nbsp;5.9k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:19</span>
+        <span class="icon-coffee">&nbsp;00:29</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -797,6 +1251,7 @@ Kamera na luknjico (camera obscura)
       <ul>
         <li><a href="#zajemanje-slik-s-kamerami-ccd">Zajemanje slik s kamerami CCD</a></li>
         <li><a href="#modeli-kamer">Modeli kamer</a></li>
+        <li><a href="#parametri-kamere">Parametri kamere</a></li>
       </ul>
     </li>
   </ul>
