@@ -167,6 +167,12 @@ This article does not have a corresponding language version
         <li><a href="#zajemanje-slik-s-kamerami-ccd">Zajemanje slik s kamerami CCD</a></li>
         <li><a href="#modeli-kamer">Modeli kamer</a></li>
         <li><a href="#parametri-kamere">Parametri kamere</a></li>
+        <li><a href="#geometrijsko-kalibriranje-kamer">Geometrijsko kalibriranje kamer</a></li>
+      </ul>
+    </li>
+    <li><a href="#predobdelava-slik">Predobdelava slik</a>
+      <ul>
+        <li><a href="#spreminajnje-kontrasta">Spreminajnje kontrasta</a></li>
       </ul>
     </li>
   </ul>
@@ -1044,10 +1050,7 @@ Projekcijska matrika
 </h5><p>S pomočjo notranjih in zunanjih parametrov dobimo <strong>projekcijsko matriko</strong>:</p>
 \[
 M = K [R , t]
-\]<p>Velikost matrike:</p>
-\[
-3 \times 4
-\]<p>Imenujemo jo tudi <strong>perspektivna projekcijska matrika</strong>.</p>
+\]<p>Imenujemo jo tudi <strong>perspektivna projekcijska matrika</strong> in je velikosti \(3 \times 4\).</p>
 <h5 id="model-kamere--matrična-enačba">
 <a class="header-anchor" href="#model-kamere--matri%c4%8dna-ena%c4%8dba"></a>
 Model kamere – matrična enačba
@@ -1165,11 +1168,236 @@ R_z =
 <li>3 parametri translacije</li>
 <li>3 parametri rotacije</li>
 </ul>
-<p>Skupaj:</p>
-\[
-6 \text{ zunanjih parametrov}
-\]<p>S temi parametri podamo transformacijo med obema koordinatnima sistemoma.</p>
+<p>Skupaj 6 \text{ zunanjih parametrov}</p>
+<p>S temi parametri podamo transformacijo med obema koordinatnima sistemoma.</p>
 <p>S zunanjimi in notranjimi parametri imamo sedaj imamo popoln model kamere. Imamo 5 notranjih in 6 zunanjih parametrov kamere. Te parametre pa moremo nekje dobit-temu pravimo <strong>kalibracija kamere</strong>.</p>
+<hr>
+<h3 id="geometrijsko-kalibriranje-kamer">
+<a class="header-anchor" href="#geometrijsko-kalibriranje-kamer"></a>
+Geometrijsko kalibriranje kamer
+</h3><h4 id="parametri-kamere-in-kalibracija">
+<a class="header-anchor" href="#parametri-kamere-in-kalibracija"></a>
+Parametri kamere in kalibracija
+</h4><p>Notranji parametri kamere modelirajo lastnosti kamere. Omogočajo pretvorbo merskega sveta (realnih enot) v svet pikslov, tako da na koncu dobimo sliko v pikslih. Za to so zadolženi <strong>notranji parametri kamere</strong>. Skupaj imamo <strong>5 notranjih parametrov kamere</strong>.</p>
+<p>Drugi nabor parametrov so <strong>zunanji parametri kamere</strong>. Vse točke v sceni bi morali meriti glede na koordinatni sistem kamere, kar je v praksi nemogoče. Zato potrebujemo referenčni (world) koordinatni sistem, katerega v koordinatni sistem kamere pretvorijo zunanji parametri kamere. Skupaj imamo <strong>6 zunanjih parametrov kamere</strong>.</p>
+<p>Ali nam lahko kdo poda vseh 11 parametrov kamere?</p>
+<p><strong>Notranji parametri</strong>
+Nemogoče je izdelati dve popolnoma enaki kameri. Tudi če je leča izdelana strojno, bo druga leča vedno nekoliko drugačna.</p>
+<p><strong>Zunanji parametri</strong>
+Te je še težje podati. Položaj točk v prostoru merimo glede na nek referenčni koordinatni sistem, kar prav tako ni popolnoma natančno oziroma neposredno podano.</p>
+<p>Zato je nemogoče, da bi nam nekdo enostavno &ldquo;serviral&rdquo; vse parametre kamere. Potrebujemo <strong>kalibriranje kamere</strong>. Geometrijsko kalibriranje pomeni, da se naučimo (ocenimo) parametre kamere.</p>
+<p>Potrebujemo <strong>korespondenčne pare</strong>:</p>
+<ul>
+<li>poznano neko točko v prostoru, npr.<br>
+\[
+  P_1 = (x_1, y_1, z_1)
+  \]
+katere koordinate poznamo,</li>
+<li>ter piksel na sliki, v katerega se ta točka preslika.</li>
+</ul>
+<p>Takšne pare zapišemo kot:</p>
+\[
+\{ (P_i, p_i) \}
+\]<p>kjer:</p>
+<ul>
+<li>\(P_i\) predstavlja točko v prostoru,</li>
+<li>\(p_i\) pa njen pripadajoči piksel na sliki.</li>
+</ul>
+<p>Potrebujemo torej točke v prostoru, za katere vemo, v kateri piksel se preslikajo.</p>
+<p>S pomočjo <strong>kalibracijskega objekta</strong> dosežemo, da moramo neposredno izmeriti samo 1 ali 2 točki, nato pa lahko iz njih določimo še vse ostale točke.</p>
+<p>Kalibracijo lahko izvedemo tudi ročno, tako da sami izberemo določene točke. Vendar je tak pristop časovno potraten.</p>
+<p>Vse kalibracijske metode so <strong>optimizacijske metode</strong>.</p>
+<p>Imamo matematični model kamere:</p>
+\[
+p = \frac{1}{z} M P
+\]<p>kjer:</p>
+<ul>
+<li>\( p \) predstavlja <strong>piksel</strong>,</li>
+<li>\( P \) predstavlja točko v prostoru (v homogenih koordinatah),</li>
+<li>\( M \) je projekcijska matrika.</li>
+</ul>
+<p>Neznanka v tej enačbi je <strong>projekcijska matrika \( M \)</strong>.</p>
+<h4 id="linearni-postopek-kalibriranja">
+<a class="header-anchor" href="#linearni-postopek-kalibriranja"></a>
+Linearni postopek kalibriranja
+</h4><p>Problem linearne metode je, da deluje pravilno le, če imamo <strong>perfektno izmerjene korespondenčne pare</strong>.</p>
+<p>V praksi pa vedno pride do napak pri določanju teh točk:</p>
+<ul>
+<li>napaka pri določanju pikslov,</li>
+<li>napaka pri merjenju točk v realnem svetu.</li>
+</ul>
+<p>Bolj kot so podatki nenatančni, slabši je rezultat kalibracije.</p>
+<h5 id="postopek">
+<a class="header-anchor" href="#postopek"></a>
+Postopek
+</h5><p>Začnemo s projekcijsko enačbo.</p>
+<p>Za vsak korespondenčni par \((P_i, p_i)\):</p>
+<ul>
+<li>dobimo <strong>2 enačbi</strong>,</li>
+<li>ki ju zapišemo kot <strong>2 vrstici</strong> v matriki sistema.</li>
+</ul>
+<p>Če imamo \( n \) korespondenčnih parov, ima matrika sistema \(2n \text{ vrstic}\), ker iz vsakega para dobimo dve enačbi.</p>
+<p>Na primer:</p>
+<ul>
+<li>
+<ol>
+<li>in 2. vrstica → prvi korespondenčni par</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>in 4. vrstica → drugi korespondenčni par</li>
+</ol>
+</li>
+<li>itd.</li>
+</ul>
+<p>Za kalibracijo kamere potrebujemo <strong>12 enačb</strong> (ker ima projekcijska matrika \( M \) 12 elementov). Za vsak korespondenčni par pa dobimo 2 enačbi in 2 vrstici v matriki P.</p>
+<p>Ker iz vsakega korespondenčnega para dobimo 2 enačbi:</p>
+\[
+\frac{12}{2} = 6
+\]<p>Potrebujemo <strong>minimalno 6 korespondenčnih parov</strong>.</p>
+<ul>
+<li>Če imamo <strong>točno 6 parov</strong>, dobimo eksaktno rešitev.</li>
+<li>Če imamo <strong>več kot 6 parov</strong>, dobimo sistem s presežkom enačb.</li>
+</ul>
+<p>V primeru, da imamo več kot 6 parov se pojavijo srednje minimizacije oz. napake, vendar je rezultat te kalibracije boljši. Več korespondenčnih parov kot uporabimo, bolj robusten in natančen je rezultat.</p>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Pri izbiri točk za kalibracijo:</p>
+<p><strong>TOČKE NE SMEJO LEŽATI V ISTI RAVNINI!</strong></p>
+<p>Če bi vse točke ležale v isti ravnini:</p>
+<ul>
+<li>bi kalibracija še vedno dala rešitev,</li>
+<li>vendar bi pri reprojekciji (preslikavi iz pikslov nazaj v realni svet) dobili napake.</li>
+</ul>
+<p>Zato morajo biti točke razporejene v prostoru in ne smejo vse ležati na isti ravnini.</p></p>
+  </blockquote>
+
+<h4 id="geometrijsko-kalibriranje-kamere">
+<a class="header-anchor" href="#geometrijsko-kalibriranje-kamere"></a>
+Geometrijsko kalibriranje kamere
+</h4><p>Sistem lahko zapišemo kot:</p>
+$$
+P \times \mathbf{m} = \mathbf{0}
+$$<p>Dimenzije:</p>
+<ul>
+<li>$P \in \mathbb{R}^{2n \times 12}$</li>
+<li>$\mathbf{m} \in \mathbb{R}^{12 \times 1}$</li>
+<li>$\mathbf{0} \in \mathbb{R}^{2n \times 1}$</li>
+</ul>
+<p>(Trivialna rešitev je, da bi $\mathbf{m}$ bil iz samih ničel, to nas ne zanima.)</p>
+<p>Ta metoda (geometrijsko kalibriranje kamere), je precej občutljiva – podatki morajo biti zelo točni. Parametri kamere so v projekcijski matriki $M$.</p>
+<p>Iz piksla lahko pridemo nazaj v prostor, kar pa brez modela</p>
+$$
+\mathbf{p} = \frac{1}{z} M \mathbf{P}
+$$<p>ne moremo.</p>
+<p>Cilj je narediti sistem računalniškega vida – od zajema do končne odločitve.</p>
+<h2 id="predobdelava-slik">
+<a class="header-anchor" href="#predobdelava-slik"></a>
+Predobdelava slik
+</h2><p>Pri predobdelavi slik sta ključna dva cilja:</p>
+<ol>
+<li>Želimo popraviti napake, ki so se zgodile pri zajemu slike.</li>
+<li>V slikah želimo poudariti informacijo, ki nas zanima.</li>
+</ol>
+<p>Če imamo vpliv nad okoljem, kjer zajemamo sliko (npr. svetila), potem lahko, če vidimo, da slika ni ustrezna, poskusimo ponovno zajeti sliko, pri tem pa popravimo dejavnike v okolju (npr. osvetlitev, svetila).</p>
+<p>Če pa delamo s satelitskimi slikami ali medicinskimi napravami, pa je problem, da se ne moremo vrniti nazaj in slike ponovno zajeti<br>
+Podobno velja tudi za slike v naravi, kjer je veliko odvisno od vremena.</p>
+<p>Če se lahko vrnemo, poskusimo sliko popraviti že pri zajemu. Če to ni mogoče, pa moramo problem rešiti programsko.</p>
+<p>Če sami načrtujemo (dizajniramo) sistem, lahko veliko stvari izboljšamo že v fazi zasnove. Lažje pa nam je tudi, če poznamo podatke o degradaciji slike (napakah ob zajemu).</p>
+<p>Pri obdelavi slik velja:</p>
+<ul>
+<li>Če uporabimo pravo metodo za določeno degradacijo, bo rezultat uspešen.</li>
+<li>Če uporabimo metodo, ki ni primerna za dano degradacijo, lahko sliko še poslabšamo.</li>
+</ul>
+<p>Podobno kot pri zdravilih:</p>
+<ul>
+<li>Če vzamemo zdravilo za bolezen, ki je nimamo, nam ne bo koristilo in lahko celo škoduje.</li>
+<li>Enako velja pri obdelavi slik – napačna metoda lahko sliko poslabša.</li>
+</ul>
+<p>Slika obstaja v nekem prostoru, obdelava slike pa jo transformira v nov prostor.</p>
+<p>Te transformacije:</p>
+<ul>
+<li>povzročijo izgubo določenih informacij,</li>
+<li>niso bijektivne.</li>
+</ul>
+<p>Obdelava slik je običajno sestavljena iz več zaporednih transformacij.</p>
+<blockquote>
+<p><strong>Operacije pri obdelavi slik</strong></p>
+<p><strong>1. Točkovne (pixel-to-pixel) operacije</strong></p>
+<p>Pixel-to-pixel operacije delujejo tako, da vzamemo en pixel, ga podamo v neko funkcijo (operacijo) in dobimo nov (spremenjen) pixel. Vsak izhodni pixel je odvisen samo od ustreznega vhodnega pixla.</p>
+<p><strong>2. Lokal­ne operacije (z okolico)</strong></p>
+<p>Pri tej varianti vzamemo pixel, upoštevamo tudi njegove sosednje pixle (okolico), vse skupaj podamo v funkcijo in dobimo ven nov pixel. Izhodna vrednost je torej odvisna od lokalne okolice.</p>
+<p><strong>3. Algoritemske metode</strong></p>
+<p>Gre za kompleksnejše postopke, kjer obdelava temelji na določenem algoritmu, ki lahko vključuje več korakov, pravil ali odločitev.</p>
+<p><strong>4. Globoko učenje</strong></p>
+<p>Sem spadajo globoko učenje (deep learning), nevronske mreže in druge metode umetne inteligence.</p>
+</blockquote>
+<h3 id="spreminajnje-kontrasta">
+<a class="header-anchor" href="#spreminajnje-kontrasta"></a>
+Spreminajnje kontrasta
+</h3><p>Točkovna operacija deluje tako, da imamo neko sliko in nad vsakim pixlom izvedemo isto transformacijo.</p>
+<h4 id="linearizacija-sivin">
+<a class="header-anchor" href="#linearizacija-sivin"></a>
+Linearizacija sivin
+</h4><p>Prvi tak postopek je <strong>linearizacija sivin</strong>.</p>
+<p>Imamo formulo:</p>
+$$
+g' = \frac{Q}{\max - \min} \left( g - \min \right)
+$$<p>Linearizacija se pogosto uporablja za vizualizacijo. Lahko pa se uporablja tudi kot vmesni korak pri nadaljnji obdelavi slike.</p>
+<h4 id="histogram-sivin">
+<a class="header-anchor" href="#histogram-sivin"></a>
+Histogram sivin
+</h4><p>Histogram sivin je vektor (polje), ki ima toliko elementov, kolikor znaša kontrastna ločljivost slike. Posamezen element histograma sivin beleži število pixlov, ki imajo določeno sivinsko vrednost.</p>
+<p>Primer:
+8-bitna sivinska slika ima 256 sivinskih nivojev. Zato ima histogram 256 elementov in kontrastno ločljivost 256.</p>
+<p>Če seštejemo vse elemente histograma, dobimo skupno število vseh pixlov v sliki.</p>
+<p>Histogram sivin običajno vizualiziramo s pomočjo <strong>stolpčnih grafov</strong>.</p>
+<p>Histogram sivin <strong>ne vsebuje prostorske informacije</strong>.</p>
+<p>To pomeni, da v histogramu samo štejemo pixle. Notri v histogramu tako <strong>ni informacije o tem, kje v sliki se posamezni pixli nahajajo</strong>.</p>
+<p>Zato lahko:</p>
+<ul>
+<li>dve sliki enake velikosti</li>
+<li>z enakim histogramom sivin</li>
+</ul>
+<p>vsebujeta popolnoma različne vsebine.</p>
+<p>Pri delu s histogrami sivin poskušamo histogram &ldquo;razpotegniti&rdquo;, da so sivinske vrednosti čim bolj enakomerno porazdeljene in histogram s tem kar se da uravnan. Najbolj ostri vrhovi na histogramu običajno predstavljajo ključne oziroma bistvene elemente slike. Histogram sivin sam po sebi ni metoda za spreminjanje kontrasta, nam pa pomaga pri analizi kontrasta slike.</p>
+<h5 id="metoda-izenačitev-histograma">
+<a class="header-anchor" href="#metoda-izena%c4%8ditev-histograma"></a>
+Metoda: Izenačitev histograma
+</h5><p><strong>Izenačitev histograma</strong> pomeni, da želimo doseči, da so vse sivinske vrednosti približno enako zastopane. V praksi tega popolnoma ne moremo doseči, je pa to cilj metode.</p>
+<p>Z vidika kontrasta:</p>
+<ul>
+<li>Najvišje (ostre) vrhove na histogramu raztegnemo,
+da postanejo bolj kontrastni.</li>
+<li>Kjer so doline (manj zastopane vrednosti),
+sklepamo, da informacija ni tako pomembna,
+zato tam lahko izgubimo nekaj podatkov.</li>
+</ul>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Izenačitev histograma ni isto kot linearizacija!</p></p>
+  </blockquote>
+
+<h5 id="prenosne-funkcije">
+<a class="header-anchor" href="#prenosne-funkcije"></a>
+Prenosne funkcije
+</h5><p><strong>Prenosne funkcije</strong> lahko vizualiziramo v grafu prenosnih funkcij.
+Če gre prenosna funkcija nad identiteto, potem točkovna operacija sliko posvetli. Če pa gre prenosna funkcija pod identiteto, pa točkovna operacija sliko potemni.</p>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Linearizacija ne posvetli slike!</p></p>
+  </blockquote>
+
 </div>
     <footer class="article-footer"><ul class="article-category-list"></ul>
 <ul class="article-tag-list" itemprop="keywords"></ul>
@@ -1211,10 +1439,10 @@ R_z =
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;5.9k</span
+          >&nbsp;7.2k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:29</span>
+        <span class="icon-coffee">&nbsp;00:35</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -1252,6 +1480,12 @@ R_z =
         <li><a href="#zajemanje-slik-s-kamerami-ccd">Zajemanje slik s kamerami CCD</a></li>
         <li><a href="#modeli-kamer">Modeli kamer</a></li>
         <li><a href="#parametri-kamere">Parametri kamere</a></li>
+        <li><a href="#geometrijsko-kalibriranje-kamer">Geometrijsko kalibriranje kamer</a></li>
+      </ul>
+    </li>
+    <li><a href="#predobdelava-slik">Predobdelava slik</a>
+      <ul>
+        <li><a href="#spreminajnje-kontrasta">Spreminajnje kontrasta</a></li>
       </ul>
     </li>
   </ul>

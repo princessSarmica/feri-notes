@@ -822,13 +822,7 @@ S pomočjo notranjih in zunanjih parametrov dobimo **projekcijsko matriko**:
 M = K [R , t]
 \]
 
-Velikost matrike:
-
-\[
-3 \times 4
-\]
-
-Imenujemo jo tudi **perspektivna projekcijska matrika**.
+Imenujemo jo tudi **perspektivna projekcijska matrika** in je velikosti \(3 \times 4\).
 
 ##### Model kamere – matrična enačba
 
@@ -972,12 +966,263 @@ Zunanji parametri so torej:
 - 3 parametri translacije
 - 3 parametri rotacije
 
-Skupaj:
-
-\[
-6 \text{ zunanjih parametrov}
-\]
+Skupaj 6 \text{ zunanjih parametrov}
 
 S temi parametri podamo transformacijo med obema koordinatnima sistemoma.
 
 S zunanjimi in notranjimi parametri imamo sedaj imamo popoln model kamere. Imamo 5 notranjih in 6 zunanjih parametrov kamere. Te parametre pa moremo nekje dobit-temu pravimo **kalibracija kamere**.
+
+---
+
+### Geometrijsko kalibriranje kamer
+
+#### Parametri kamere in kalibracija
+
+Notranji parametri kamere modelirajo lastnosti kamere. Omogočajo pretvorbo merskega sveta (realnih enot) v svet pikslov, tako da na koncu dobimo sliko v pikslih. Za to so zadolženi **notranji parametri kamere**. Skupaj imamo **5 notranjih parametrov kamere**.
+
+Drugi nabor parametrov so **zunanji parametri kamere**. Vse točke v sceni bi morali meriti glede na koordinatni sistem kamere, kar je v praksi nemogoče. Zato potrebujemo referenčni (world) koordinatni sistem, katerega v koordinatni sistem kamere pretvorijo zunanji parametri kamere. Skupaj imamo **6 zunanjih parametrov kamere**.
+
+Ali nam lahko kdo poda vseh 11 parametrov kamere?
+
+**Notranji parametri**
+Nemogoče je izdelati dve popolnoma enaki kameri. Tudi če je leča izdelana strojno, bo druga leča vedno nekoliko drugačna.
+
+**Zunanji parametri**
+Te je še težje podati. Položaj točk v prostoru merimo glede na nek referenčni koordinatni sistem, kar prav tako ni popolnoma natančno oziroma neposredno podano.
+
+Zato je nemogoče, da bi nam nekdo enostavno "serviral" vse parametre kamere. Potrebujemo **kalibriranje kamere**. Geometrijsko kalibriranje pomeni, da se naučimo (ocenimo) parametre kamere.
+
+Potrebujemo **korespondenčne pare**:
+
+- poznano neko točko v prostoru, npr.  
+  \[
+  P_1 = (x_1, y_1, z_1)
+  \]
+  katere koordinate poznamo,
+- ter piksel na sliki, v katerega se ta točka preslika.
+
+Takšne pare zapišemo kot:
+
+\[
+\{ (P_i, p_i) \}
+\]
+
+kjer:
+- \(P_i\) predstavlja točko v prostoru,
+- \(p_i\) pa njen pripadajoči piksel na sliki.
+
+Potrebujemo torej točke v prostoru, za katere vemo, v kateri piksel se preslikajo. 
+
+S pomočjo **kalibracijskega objekta** dosežemo, da moramo neposredno izmeriti samo 1 ali 2 točki, nato pa lahko iz njih določimo še vse ostale točke.
+
+Kalibracijo lahko izvedemo tudi ročno, tako da sami izberemo določene točke. Vendar je tak pristop časovno potraten.
+
+Vse kalibracijske metode so **optimizacijske metode**.
+
+Imamo matematični model kamere:
+
+\[
+p = \frac{1}{z} M P
+\]
+
+kjer:
+- \( p \) predstavlja **piksel**,
+- \( P \) predstavlja točko v prostoru (v homogenih koordinatah),
+- \( M \) je projekcijska matrika.
+
+Neznanka v tej enačbi je **projekcijska matrika \( M \)**.
+
+#### Linearni postopek kalibriranja
+
+Problem linearne metode je, da deluje pravilno le, če imamo **perfektno izmerjene korespondenčne pare**.
+
+V praksi pa vedno pride do napak pri določanju teh točk:
+- napaka pri določanju pikslov,
+- napaka pri merjenju točk v realnem svetu.
+
+Bolj kot so podatki nenatančni, slabši je rezultat kalibracije.
+
+##### Postopek
+
+Začnemo s projekcijsko enačbo.
+
+Za vsak korespondenčni par \((P_i, p_i)\):
+
+- dobimo **2 enačbi**,
+- ki ju zapišemo kot **2 vrstici** v matriki sistema.
+
+Če imamo \( n \) korespondenčnih parov, ima matrika sistema \(2n \text{ vrstic}\), ker iz vsakega para dobimo dve enačbi.
+
+Na primer:
+- 1. in 2. vrstica → prvi korespondenčni par
+- 3. in 4. vrstica → drugi korespondenčni par
+- itd.
+
+Za kalibracijo kamere potrebujemo **12 enačb** (ker ima projekcijska matrika \( M \) 12 elementov). Za vsak korespondenčni par pa dobimo 2 enačbi in 2 vrstici v matriki P. 
+
+Ker iz vsakega korespondenčnega para dobimo 2 enačbi:
+
+\[
+\frac{12}{2} = 6
+\]
+
+Potrebujemo **minimalno 6 korespondenčnih parov**.
+
+- Če imamo **točno 6 parov**, dobimo eksaktno rešitev.
+- Če imamo **več kot 6 parov**, dobimo sistem s presežkom enačb.
+
+V primeru, da imamo več kot 6 parov se pojavijo srednje minimizacije oz. napake, vendar je rezultat te kalibracije boljši. Več korespondenčnih parov kot uporabimo, bolj robusten in natančen je rezultat.
+
+> [!WARNING]
+> Pri izbiri točk za kalibracijo:
+>
+> **TOČKE NE SMEJO LEŽATI V ISTI RAVNINI!**
+>
+> Če bi vse točke ležale v isti ravnini:
+> - bi kalibracija še vedno dala rešitev,
+> - vendar bi pri reprojekciji (preslikavi iz pikslov nazaj v realni svet) dobili napake.
+>
+> Zato morajo biti točke razporejene v prostoru in ne smejo vse ležati na isti ravnini.
+
+#### Geometrijsko kalibriranje kamere
+
+Sistem lahko zapišemo kot:
+
+$$
+P \times \mathbf{m} = \mathbf{0}
+$$
+
+Dimenzije:
+
+- $P \in \mathbb{R}^{2n \times 12}$
+- $\mathbf{m} \in \mathbb{R}^{12 \times 1}$
+- $\mathbf{0} \in \mathbb{R}^{2n \times 1}$
+
+(Trivialna rešitev je, da bi $\mathbf{m}$ bil iz samih ničel, to nas ne zanima.)
+
+Ta metoda (geometrijsko kalibriranje kamere), je precej občutljiva – podatki morajo biti zelo točni. Parametri kamere so v projekcijski matriki $M$.
+
+Iz piksla lahko pridemo nazaj v prostor, kar pa brez modela
+
+$$
+\mathbf{p} = \frac{1}{z} M \mathbf{P}
+$$
+
+ne moremo.
+
+Cilj je narediti sistem računalniškega vida – od zajema do končne odločitve.
+
+## Predobdelava slik
+
+Pri predobdelavi slik sta ključna dva cilja:
+
+1. Želimo popraviti napake, ki so se zgodile pri zajemu slike.
+2. V slikah želimo poudariti informacijo, ki nas zanima.
+
+Če imamo vpliv nad okoljem, kjer zajemamo sliko (npr. svetila), potem lahko, če vidimo, da slika ni ustrezna, poskusimo ponovno zajeti sliko, pri tem pa popravimo dejavnike v okolju (npr. osvetlitev, svetila).
+
+Če pa delamo s satelitskimi slikami ali medicinskimi napravami, pa je problem, da se ne moremo vrniti nazaj in slike ponovno zajeti  
+Podobno velja tudi za slike v naravi, kjer je veliko odvisno od vremena.
+
+Če se lahko vrnemo, poskusimo sliko popraviti že pri zajemu. Če to ni mogoče, pa moramo problem rešiti programsko.
+
+Če sami načrtujemo (dizajniramo) sistem, lahko veliko stvari izboljšamo že v fazi zasnove. Lažje pa nam je tudi, če poznamo podatke o degradaciji slike (napakah ob zajemu).
+
+Pri obdelavi slik velja:
+
+- Če uporabimo pravo metodo za določeno degradacijo, bo rezultat uspešen.
+- Če uporabimo metodo, ki ni primerna za dano degradacijo, lahko sliko še poslabšamo.
+
+Podobno kot pri zdravilih:
+- Če vzamemo zdravilo za bolezen, ki je nimamo, nam ne bo koristilo in lahko celo škoduje.
+- Enako velja pri obdelavi slik – napačna metoda lahko sliko poslabša.
+
+Slika obstaja v nekem prostoru, obdelava slike pa jo transformira v nov prostor.
+
+Te transformacije:
+- povzročijo izgubo določenih informacij,
+- niso bijektivne.
+
+Obdelava slik je običajno sestavljena iz več zaporednih transformacij.
+
+> **Operacije pri obdelavi slik**
+>
+> **1. Točkovne (pixel-to-pixel) operacije**
+>
+> Pixel-to-pixel operacije delujejo tako, da vzamemo en pixel, ga podamo v neko funkcijo (operacijo) in dobimo nov (spremenjen) pixel. Vsak izhodni pixel je odvisen samo od ustreznega vhodnega pixla.
+>
+> **2. Lokal­ne operacije (z okolico)**
+>
+> Pri tej varianti vzamemo pixel, upoštevamo tudi njegove sosednje pixle (okolico), vse skupaj podamo v funkcijo in dobimo ven nov pixel. Izhodna vrednost je torej odvisna od lokalne okolice.
+>
+> **3. Algoritemske metode**
+>
+> Gre za kompleksnejše postopke, kjer obdelava temelji na določenem algoritmu, ki lahko vključuje več korakov, pravil ali odločitev.
+>
+> **4. Globoko učenje**
+>
+> Sem spadajo globoko učenje (deep learning), nevronske mreže in druge metode umetne inteligence.
+>
+
+### Spreminajnje kontrasta
+
+Točkovna operacija deluje tako, da imamo neko sliko in nad vsakim pixlom izvedemo isto transformacijo.
+
+#### Linearizacija sivin
+
+Prvi tak postopek je **linearizacija sivin**.
+
+Imamo formulo:
+
+$$
+g' = \frac{Q}{\max - \min} \left( g - \min \right)
+$$
+
+Linearizacija se pogosto uporablja za vizualizacijo. Lahko pa se uporablja tudi kot vmesni korak pri nadaljnji obdelavi slike.
+
+#### Histogram sivin
+
+Histogram sivin je vektor (polje), ki ima toliko elementov, kolikor znaša kontrastna ločljivost slike. Posamezen element histograma sivin beleži število pixlov, ki imajo določeno sivinsko vrednost.
+
+Primer:
+8-bitna sivinska slika ima 256 sivinskih nivojev. Zato ima histogram 256 elementov in kontrastno ločljivost 256.
+
+Če seštejemo vse elemente histograma, dobimo skupno število vseh pixlov v sliki.
+
+Histogram sivin običajno vizualiziramo s pomočjo **stolpčnih grafov**.
+
+Histogram sivin **ne vsebuje prostorske informacije**.
+
+To pomeni, da v histogramu samo štejemo pixle. Notri v histogramu tako **ni informacije o tem, kje v sliki se posamezni pixli nahajajo**.
+
+Zato lahko:
+- dve sliki enake velikosti
+- z enakim histogramom sivin
+
+vsebujeta popolnoma različne vsebine.
+
+Pri delu s histogrami sivin poskušamo histogram "razpotegniti", da so sivinske vrednosti čim bolj enakomerno porazdeljene in histogram s tem kar se da uravnan. Najbolj ostri vrhovi na histogramu običajno predstavljajo ključne oziroma bistvene elemente slike. Histogram sivin sam po sebi ni metoda za spreminjanje kontrasta, nam pa pomaga pri analizi kontrasta slike.
+
+##### Metoda: Izenačitev histograma
+
+**Izenačitev histograma** pomeni, da želimo doseči, da so vse sivinske vrednosti približno enako zastopane. V praksi tega popolnoma ne moremo doseči, je pa to cilj metode.
+
+Z vidika kontrasta:
+
+- Najvišje (ostre) vrhove na histogramu raztegnemo,
+  da postanejo bolj kontrastni.
+- Kjer so doline (manj zastopane vrednosti),
+  sklepamo, da informacija ni tako pomembna,
+  zato tam lahko izgubimo nekaj podatkov.
+
+> [!WARNING]
+> Izenačitev histograma ni isto kot linearizacija!
+
+##### Prenosne funkcije
+
+**Prenosne funkcije** lahko vizualiziramo v grafu prenosnih funkcij.
+Če gre prenosna funkcija nad identiteto, potem točkovna operacija sliko posvetli. Če pa gre prenosna funkcija pod identiteto, pa točkovna operacija sliko potemni.
+
+> [!WARNING]
+> Linearizacija ne posvetli slike!
+
