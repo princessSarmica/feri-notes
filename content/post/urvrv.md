@@ -1226,3 +1226,626 @@ Z vidika kontrasta:
 > [!WARNING]
 > Linearizacija ne posvetli slike!
 
+---
+
+### Lokalne operacije oz. filtriranje slik
+
+Imamo sliko in izbran pixel.  
+Pri filtriranju slik opazujemo:
+
+- izbran pixel
+- njegovo okolico
+
+Vzeli bomo ta pixel in njegove sosednje pixle, jih podali v funkcijo, in dobili nov rezultat. Pri tem poznamo točkovne operacije in filtriranje.
+
+#### Točkovne operacije
+- Delamo pixel po pixel.
+- Lahko uporabljamo isto matriko oziroma sliko za vhod in izhod.
+- Vsak pixel je obdelan neodvisno od drugih.
+
+#### Filtriranje
+- Uporabljamo pixel in njegovo okolico.
+- Potrebujemo **novo sliko (novo matriko)** za zapis rezultatov.
+- Ne pišemo nazaj na isto lokacijo (zaradi tega temu pravimo filtriranje, saj imamo vhodno in izhodno filtrirano sliko).
+
+Vprašanje pri filtriranju je, kako določiti funkcijo $F$, ki iz vhodnih vrednosti generira novo vrednost pixla.
+
+Filter si lahko predstavljamo kot **črno škatlo**, nekaj damo notri in dobimo nekaj nazaj ven.
+
+Večina filtrov je:
+
+1. **Linearnih**
+2. **Premično neodvisnih**
+
+##### 1. Linearnost
+
+Če imamo dva vhoda $x_1$ in $x_2$:
+
+- Če v sistem podamo $x_1$, dobimo določen rezultat.
+- Če podamo $x_2$, dobimo določen **drugačen** rezultat.
+
+Če pa podamo linearno kombinacijo obeh vhodov:
+
+$$
+a x_1 + b x_2
+$$
+
+potem dobimo na izhodu linearno kombinacijo $x_1$ in $x_2$:
+
+$$
+a F(x_1) + b F(x_2)
+$$
+
+Ne glede na vrstni red podajanja vhodov, ali prvo damo notri kot vhod $x_1$ in potem $x_2$, ali pa obratno. To je lastnost linearnega sistema.
+
+##### 2. Premična neodvisnost
+
+Sistem je premično neodvisen, če:
+
+- posledica ne prehiteva vzroka,
+- odziv sistema ni odvisen od absolutne lokacije, ampak le od relativnega premika.
+
+> Primer:
+> Ne slišimo zvoka, če prej ne potrkamo po tabli.
+
+Obnašanje filtra oziroma črne škatle lahko opišemo s pomočjo **enotinega odziva (impulznega odziva)**. Ta popolnoma določa obnašanje linearnega premično neodvisnega sistema.
+
+#### Definicija filtra
+
+##### Določitev filtra
+
+Najprej je potrebno določiti filter. Učinek filtra mora biti tak, kot si ga želimo. Filter je podan z **enotnim (impulznim) odzivom**. Enotni odziv je matrika, ki vsebuje koeficiente (uteži).
+
+Običajno filter označimo s $H$, kjer je $H$ matrika.
+
+##### Matrika filtra (maska)
+
+Tej matriki določimo:
+
+- velikost (dimenzijo),
+- vrednosti (koeficiente / uteži).
+
+###### Dimenzija filtra
+
+Velikost oziroma dimenzija filtra določa kako veliko okolico pixla bomo opazovali. Filter položimo tako, da pokrije izbran pixel, ter njegovo okolico. S tem definiramo lokalno območje obdelave.
+
+###### Vrednosti uteži (koeficientov)
+
+Števila (uteži) v matriki določajo kako bo funkcija kombinirala vrednosti pixlov, ter kakšen bo učinek filtriranja.
+
+> [!IMPORTANT]
+> Dimenzija maske določa **katero okolico opazujemo**, vrednosti v maski pa določajo **kako jo obdelamo**. To dvoje skupaj določa lastnosti filtra.
+
+##### Implementacija
+
+Implementacijsko je najlažje definirati maske oziroma okolice pikslov kot kvadratno masko (npr. 3×3, 5×5), saj jo lahko preprosto implementiramo s for-zankami.
+
+Če imamo za okolico masko drugačne (ne kvadratne) oblike (npr. krožno ali nepravilno obliko), uporabimo kvadratno matriko, vrednosti, ki jih ne želimo upoštevati, pa nastavimo na 0.
+
+#### filtriranje
+
+Ko imamo enkrat definiran filter, lahko začnemo s filtriranjem. Vsaka maska ima **sredino** (sredinski element maske). Masko navidezno postavimo nad sliko tako, da prekrije del slike. Nato izračunamo **skalarni produkt** med **vrednostmi maske** in **vrednostmi pixlov slike**, ki jih maska prekriva. 
+
+To pomeni:
+
+- vsak pixel množimo z ustrezno vrednostjo v maski,
+- vse zmnožke seštejemo,
+- dobimo novo vrednost za en pixel izhodne slike.
+
+To je izračun za en pixel.
+
+Za implementacijo potrebujemo 4 for-zanke:
+
+1. Zanka čez vse vrstice za vse piksle slike
+2. Zanka čez vse stolpce za vse piksle slike
+3. Zanka čez vrstice za vse piksle maske
+4. Zanka čez stolpce za vse piksle maske
+
+Skupaj torej 4 for-zanke. Temu postopku pravimo **konvolucija**.
+
+$I$ je vhodna slika.
+
+##### Problemi pri konvoluciji
+
+###### Problem robnih pixlov
+
+Kaj narediti z robnimi pixli, ko del maske pade izven slike?
+
+**Možna rešitev 1: Ničelno dopolnjevanje (zero padding)**
+
+Če maska pade izven slike:
+
+- vrednosti izven slike obravnavamo kot 0
+- to pomeni, da vrednosti maske izven slike množimo z 0
+
+Prednost:
+- dimenzije vhodne in izhodne slike ostanejo enake.
+
+**Možna rešitev 2: Ocenjevanje manjkajočih vrednosti**
+
+- Manjkajoče pixle si "izmislimo" oziroma jih ocenimo.
+- (npr. kopiranje robnih vrednosti, zrcaljenje ipd.)
+
+**Možna rešitev 3: Brez filtriranja robov**
+
+- Če pixel nima vseh sosedov okrog sebe, ga ne filtriramo.
+- S tem zmanjšamo dimenzije slike:
+
+  - po vrsticah za $L$
+  - po stolpcih za $K$
+
+Slabost:
+- Kljub temu, da je ta rešitev najbolj točna, spremenimo z njo dimenzije slike, kar običajno ni zaželeno.
+
+###### Problem vrednosti po filtriranju
+
+Po filtriranju dobimo celoštevilčno vrednost, vendar v realnosti dobimo realna (decimalna) števila, ki po vrednosti padejo izven intervala $[0, 255]$. Teoretično to ni problem, problem pa nastane pri vizualizaciji. Takšne slike namreč ne moremo neposredno prikazati.
+
+Za rešitev tega problema se lahko uporabi:
+1. Skaliranje vrednosti nazaj v ustrezen interval
+2. Zaokroževanje na celoštevilske vrednosti
+
+###### Še ena dilema: Kje je sredina maske?
+
+Če je dimenzija filtra **liha** (npr. 3×3, 5×5), sredino ni težko določiti. Če pa je filter **sodih dimenzij** (npr. 2×2), pa ni jasno, kaj je sredina maske. Sredino maske poravnamo s pixlom na sliki, vendar kdo določi, kateri element je sredinski?
+
+**To mora določiti avtor filtra!**
+
+> Primer:
+> - Pri filtru 2×2 lahko določimo, da je sredina zgornji desni pixel.
+
+---
+
+### Odstranjevanje šuma z lokalnimi operatorji
+
+Šum je moteča komponenta v slikah, ki jo lahko odstranimo s filtri.
+
+Filtri za odstranjevanje šuma zmanjšajo šum, vendar pa vnesejo nove probleme.
+
+Glavni problemi:
+- zapacajo (zabrišejo) robove med regijami na sliki.
+- robovi med objekti na sliki lahko po filtriranju niso več jasno definirani.
+
+Zato moramo vedno uravnotežiti med **pacanjem robov** in **odstranjevanjem šuma**.
+
+#### Nizko sito (Low-pass filter)
+
+Nizko sito:
+
+- pusti nizke frekvence pri miru,
+- visoke frekvence odstrani oziroma zaduši.
+
+> [!WARNING]
+> Nizke frekvence NE pomenijo, da imajo piksli nizke vrednosti. Visoke frekvence pa NE pomenijo, da imajo piksli visoke vrednosti. Nizka in visoka frekvenca nista povezani s slikovno funkcijo. Frekvenca ni povezana z absolutno vrednostjo piksla, ampak s hitrostjo spreminjanja slikovne funkcije!
+
+##### Kaj pomeni nizka frekvenca
+
+Opazujemo, kako se vrednosti slikovne funkcije spreminjajo v prostoru.
+
+- Če se vrednosti spreminjajo počasi → nizka frekvenca.
+- Če se vrednosti spreminjajo hitro → visoka frekvenca.
+
+Primer nizkih frekvenc:
+- enakomerno obarvana stena,
+- površina mize (če ni senc ali močnih svetlobnih prehodov),
+- območja skoraj enakega odtenka.
+
+---
+
+##### Kaj pomeni visoka frekvenca?
+
+Visoke frekvence nastopijo:
+
+- pri detajlih,
+- pri drobnih strukturah,
+- na prehodih med različnimi regijami.
+
+Primer:
+- prehod iz svetle stene na temno podlago,
+- rob med dvema objektoma.
+
+Takrat slikovna funkcija močno "skače" po vrednostih.
+
+---
+
+##### Maska nizkega sita
+
+Nizko sito običajno vsebuje:
+
+- masko poljubne dimenzije (npr. 3×3, 5×5, 11×11),
+- vse vrednosti v maski so enake (npr. same enice),
+- pred masko je utež za normalizacijo.
+
+Primer:
+
+Če imamo masko dimenzije 11×11:
+
+- ima 121 elementov,
+- utež pred masko je $\frac{1}{121}$
+
+Tak filter izračuna **povprečno vrednost v okolici pixla**.
+
+---
+
+#### Visoko sito (High-pass filter)
+
+Visoko sito:
+
+- pusti visoke frekvence pri miru,
+- zaduši nizke frekvence.
+
+Deluje torej ravno obratno kot nizko sito.
+
+Takšni filtri delujejo kot:
+
+- detektorji robov,
+- poudarjalci detajlov.
+
+Rezultat visokega sita je pogosto večinoma temna slika, z izrazitimi svetlimi točkami ali linijami na mestih robov. Zato rezultat običajno prištejemo ali "pritisnemo" nazaj na originalno sliko, da poudarimo robove in detajle.
+
+#### Gaussov filter
+
+Gre za filter, ki v sliki odstranjuje **bel šum**.
+
+- **Nizko sito** predpostavlja, da so motnje v sliki visoke frekvence.
+- **Visoko sito** predpostavlja, da so problem nizke frekvence.
+- Pri **gaussovem šumu** pa predpostavimo, da so vse frekvence pokvarjene z nekim deležem.
+
+V tem primeru uporabimo **Gaussov filter**.
+
+Gaussov filter nastane iz **Gaussove krivulje**:
+
+$$
+G(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{x^2}{2\sigma^2}}
+$$
+
+Ta krivulja ima parameter:
+
+- $\sigma$ — standardni odklon
+
+Krivuljo rotiramo okoli osi $y$, s čimer dobimo 2D Gaussovo "kapo". To kapo nato vzorčimo in dobimo matriko filtra.
+
+Parameter $\sigma$ določa:
+
+- kako položna ali strma je krivulja,
+- kako močno bo filter glajenje izvajal.
+
+> Primer dveh Gaussovih filtrov:
+>
+> $$
+ H = \frac{1}{16}
+ \begin{bmatrix}
+ 1 & 2 & 1 \\
+ 2 & 4 & 2 \\
+ 1 & 2 & 1
+ \end{bmatrix}
+ $$
+>
+> in
+>
+> $$
+ H = \frac{1}{10}
+ \begin{bmatrix}
+ 1 & 1 & 1 \\
+ 1 & 2 & 1 \\
+ 1 & 1 & 1
+ \end{bmatrix}
+ $$
+>
+> Gre za dva filtra enakih dimenzij, vendar z različnimi vrednostmi. Razlika je v vrednosti $\sigma$ (standardnega odklona).
+
+Filtrirna moč je odvisna od $\sigma$.
+
+- Manjša kot je $\sigma$:
+  - manj šuma odstranimo,
+  - upoštevamo manjšo okolico,
+  - filter je ožji.
+
+- Večja kot je $\sigma$:
+  - močnejše glajenje,
+  - upoštevamo širšo okolico,
+  - filter postane podoben nizkemu situ.
+
+Če je $\sigma$ zelo majhen:
+
+- skoraj ne upoštevamo sosednjih pixlov,
+- filter postane skoraj nesmiseln,
+- pixel praktično množimo sam s seboj.
+
+#### Mediani filter
+
+Mediani filter sodi med **rank value filtre**. Gre za filtre, ki sortirajo vrednosti v okolici pixla, nato pa izberejo določeno vrednost iz urejenega seznama. Pri teh filtrih je pomembna okolica pixla, uteži (koeficienti) pa niso pomembne oziroma jih ti filtri ne uporabljajo.
+
+Postopek uporabe **rank value filtrov**:
+
+1. Položimo masko nad pixel, ki ga filtriramo.
+2. NE izvajamo konvolucije.
+3. Vzamemo vse pixle iz okolice.
+4. Vrednosti sortiramo (od najmanjše do največje ali obratno).
+5. Iz sortiranega seznama izberemo določeno vrednost.
+
+Primeri rank filtrov
+
+- **Minimalni filter**  
+  → izberemo najmanjšo vrednost iz okolice.
+
+- **Maksimalni filter**  
+  → izberemo največjo vrednost iz okolice.
+
+- **Median filter**  
+  → izberemo srednji element v sortiranem seznamu (mediano).
+
+Median filter je namenjen odstranjevanju **impulznega šuma**. Impulzni šum pomeni, da je posamezen, izoliran pixel pokvarjen, pojavi se kot nenadna motnja (impulz), pogosto kot zelo svetla ali zelo temna točka.
+
+- Če je impulznega šuma malo → uporabimo manjši filter (npr. 3×3).
+- Če je šuma več → potrebujemo večjo masko.
+
+Problem median filtra je, da lahko izbriše tanke črte in odstrani drobne detajle v sliki.
+
+---
+
+### Detektorji robov
+
+Filtre lahko uporabljamo tudi za **poudarjanje robov**. Cilj predobdelave slik je med drugim:
+
+- popravljanje osvetlitve,
+- odstranjevanje šuma,
+- poudarjanje pomembnih struktur (npr. robov).
+
+Kaj je rob v sliki?
+Rob nastane, ko prehajamo iz enega območja slike v drugo, med dvema različnima regijama.
+
+Primer:
+- prehod iz ene barve stene v drugo, kjer je meja med dvema objektoma.
+
+Kako se rob kaže v sliki?
+Če gledamo slikovno funkcijo se sprehodimo po vrstici pixel po pixel in opazujemo, kako se vrednost funkcije spreminja. Robovi se pojavijo tam, kjer pride do nenadnega skoka v vrednosti slikovne funkcije. Pravi robovi so torej tam, kjer funkcija skoči oz. močno spremeni vrednost.
+
+Slikovna funkcija je funkcija dveh prostorskih koordinat:
+
+$$
+f(x, y)
+$$
+
+Za vsak pixel lahko definiramo **lastnost roba**. Rob je opisan z **vektorsko spremenljivko**:
+
+- ena komponenta predstavlja jakost roba,
+- druga komponenta predstavlja smer roba.
+
+Da določimo rob, nas zanima, kako hitro se funkcija spreminja. Za dosego tega izračunamo **gradient funkcije**:
+
+$$
+\nabla f(x,y) =
+\begin{bmatrix}
+\frac{\partial f}{\partial x} \\
+\frac{\partial f}{\partial y}
+\end{bmatrix}
+$$
+
+Gradient dobimo iz dveh parcialnih odvodov:
+
+- odvod po $x$ smeri,
+- odvod po $y$ smeri.
+
+---
+
+#### Jakost roba
+
+Jakost roba določimo s pomočjo **jakosti (velikosti) gradienta**:
+
+$$
+|\nabla f| =
+\sqrt{
+\left( \frac{\partial f}{\partial x} \right)^2 +
+\left( \frac{\partial f}{\partial y} \right)^2
+}
+$$
+
+Večja kot je vrednost, močnejši je rob.
+
+---
+
+#### Smer roba
+
+Smer roba je določena s smerjo gradienta. Gradiantni vektor kaže smer največjega in najmanjšega vektorja.
+
+**Smer gradienta** lahko določimo z:
+
+$$
+\theta = \arctan
+\left(
+\frac{\partial f / \partial y}
+{\partial f / \partial x}
+\right)
+$$
+
+Za vsak pixel izračunamo:
+
+- **jakost roba**
+- **smer roba**
+
+Po izračunu dobimo dve matriki:
+
+1. matriko jakosti robov
+2. matriko smeri robov
+
+Prave robove določimo tako, da preverimo ali je jakost roba dovolj velika. Če je jakost premajhna, pixel ne obravnavamo kot rob.
+
+---
+
+#### Gradient za zvezno slikovno funkcijo
+
+Za zvezno funkcijo $I(x,y)$ je gradient definiran kot:
+
+$$
+\nabla I =
+\begin{bmatrix}
+\frac{\partial I}{\partial x} \\
+\frac{\partial I}{\partial y}
+\end{bmatrix}
+$$
+
+Jakost roba:
+
+$$
+|\nabla I| =
+\sqrt{
+\left(\frac{\partial I}{\partial x}\right)^2 +
+\left(\frac{\partial I}{\partial y}\right)^2
+}
+$$
+
+Smer roba:
+
+$$
+\theta =
+\arctan
+\left(
+\frac{\frac{\partial I}{\partial y}}
+{\frac{\partial I}{\partial x}}
+\right)
+$$
+
+---
+
+#### Aproksimacija parcialnih odvodov v digitalnih slikah
+
+Ker so digitalne slike diskretne, moramo parcialne odvode **aproksimirati z razlikami**.
+
+##### Aproksimacija odvoda po x
+
+Za diskretno sliko $I(i,j)$:
+
+**Razlika nazaj:**
+
+$$
+\frac{\partial I(i,j)}{\partial x}
+\approx
+\frac{I(i,j) - I(i-\Delta x, j)}{\Delta x}
+$$
+
+**Razlika naprej:**
+
+$$
+\frac{\partial I(i,j)}{\partial x}
+\approx
+\frac{I(i+\Delta x, j) - I(i,j)}{\Delta x}
+$$
+
+**Simetrična razlika:**
+
+$$
+\frac{\partial I(i,j)}{\partial x}
+\approx
+\frac{I(i+\Delta x, j) - I(i-\Delta x, j)}{2\Delta x}
+$$
+
+Običajno vzamemo:
+
+$$
+\Delta x = 1
+$$
+
+Podobno velja za odvod po $y$ smeri.
+
+---
+
+#### Laplaceov operator
+
+Laplaceov operator uporabimo za oceno **drugega odvoda** slikovne funkcije.
+
+Za zvezno funkcijo $I(x,y)$ je definiran kot:
+
+$$
+\nabla^2 I =
+\frac{\partial^2 I}{\partial x^2}
++
+\frac{\partial^2 I}{\partial y^2}
+$$
+
+V digitalni sliki ga aproksimiramo z masko (konvolucijskim filtrom), npr.:
+
+$$
+\begin{bmatrix}
+0 & -1 & 0 \\
+-1 & 4 & -1 \\
+0 & -1 & 0
+\end{bmatrix}
+$$
+
+Rezultat je matrika, v kateri je ocenjen približek za **drugi odvod** slike.
+
+---
+
+#### Sobelov operator
+
+Sobelov operator uporabljamo za oceno **prvih parcialnih odvodov** (gradienta).
+
+Uporabimo dve maski:
+
+**Maska $H_x$ (odvod po x)**
+
+$$
+H_x =
+\begin{bmatrix}
+-1 & 0 & 1 \\
+-2 & 0 & 2 \\
+-1 & 0 & 1
+\end{bmatrix}
+$$
+
+Z njo dobimo ocenjen parcialni odvod po $x$:
+
+$$
+G_x = I * H_x
+$$
+
+**Maska $H_y$ (odvod po y)**
+
+Masko dobimo z rotacijo za 90°:
+
+$$
+H_y =
+\begin{bmatrix}
+-1 & -2 & -1 \\
+0 & 0 & 0 \\
+1 & 2 & 1
+\end{bmatrix}
+$$
+
+Z njo dobimo ocenjen parcialni odvod po $y$:
+
+$$
+G_y = I * H_y
+$$
+
+---
+
+##### Jakost in smer gradienta
+
+Jakost gradienta:
+
+$$
+|\nabla I| =
+\sqrt{G_x^2 + G_y^2}
+$$
+
+Smer gradienta:
+
+$$
+\psi =
+\arctan\left(\frac{G_y}{G_x}\right)
+$$
+
+---
+
+Digitalne slike niso samo črno-bele, ampak imajo **sivinske vrednosti**:
+
+- temnejši del slike → manjša vrednost
+- svetlejši del slike → večja vrednost
+- črna → vrednost blizu 0
+- bela → največja vrednost (npr. 255 pri 8-bitni sliki)
+
+
+
+
