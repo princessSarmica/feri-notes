@@ -1844,8 +1844,588 @@ Digitalne slike niso samo črno-bele, ampak imajo **sivinske vrednosti**:
 - temnejši del slike → manjša vrednost
 - svetlejši del slike → večja vrednost
 - črna → vrednost blizu 0
-- bela → največja vrednost (npr. 255 pri 8-bitni sliki)
+- bela → največja vre
 
+--
 
+## Segmentacija slik
 
+### Pragovna operacija
+
+#### Segmentacija
+
+Pri segmentaciji je cilj, da sliko razdelimo na **regije**:
+
+- regija 1
+- regija 2
+- regija 3
+- ...
+
+Te regije tvorijo piksli, ki so si med seboj podobni glede na nek kriterij, ki ga določimo, na primer:
+
+- sivinska vrednost
+- barva
+- gradient
+- tekstura
+- itd.
+
+---
+
+Regija mora biti **sklenjena**. To pomeni, da lahko znotraj regije od enega pixla do drugega pridemo brez "skakanja" izven regije.
+
+Unija vseh regij mora pokriti vse pixle v sliki.
+
+Vedno imamo najmanj **dve regiji**:
+
+1. **Region of Interest (ROI)** – regija, ki nas zanima  
+2. **Background** – regija, ki nas ne zanima  
+
+Pri vsakem problemu imamo torej vsaj eno regijo, ki nas zanima, in eno, ki nas ne zanima.  
+Koliko dodatnih regij imamo, je odvisno od problema, ki ga rešujemo.
+
+> Primer
+> Če bi analizirali študente po obrazu:
+>
+> - obraz študenta → regija, ki nas zanima  
+> - vse ostalo → background  
+
+---
+
+Piksli v regijah imajo **labelo (oznako)**.
+
+- Piksli v isti regiji imajo isto labelo (isto številko).
+- Pikslom, ki nas ne zanimajo (background), nastavimo labelo **0**.
+- Tisto, kar nas zanima, ima vrednost **večjo od 0**.
+
+> [!WARNING]
+> Labele niso nujno zaporedne! Na primer: vsi pixli neke regije imajo lahko vrednost 103.
+
+---
+
+Pri segmentaciji bo naš vhod **sivinska slika**, na izhodu segmentacije pa bomo dobili ven **segmentirano sliko**.
+
+Segmentirana slika je lahko **Binarna slika**. Pri binarni sliki velja:
+
+- vrednost 0 → background (nas ne zanima)
+- vrednost ≠ 0 → objekt/regija, ki nas zanima
+
+---
+
+Sivinska slika pa lahko vsebuje več regij, ki nas zanimajo (npr. več objektov z določeno sivinsko vrednostjo). 
+
+> [!IMPORTANT]
+> Cilj segmentacije je, da dobimo regijo, ki čim bolje ustreza objektu, ki nas zanima.
+
+Poznamo 2 vrsti segmentacij, **popolno segmentacijo** in **delno segmentacijo**.
+
+> [!IMPORTANT]
+> **Popolna segmentacija** pomeni, da natančno dobimo objekt, ki ga iščemo brez dodatnih ali manjkajočih delov.
+
+> [!IMPORTANT]
+> V praksi pa so pogostejše **delne segmentacije**. Pri tej vrsti segmentacij dobimo poleg objekta, ki nas zanima, tudi dodatne neželene dele in regije, kjer se pojavijo napake.
+
+> [!WARNING]
+> NI UNIVERZALNE SEGMENTACIJSKE METODE ZA REŠEVANJE VSAKEGA PROBLEMA! ENE EDINSTSTVENE METODE NI! METODO PRILAGODIMO GLEDE NA NAŠ PROBLEM, KI GA REŠUJEMO.
+
+---
+
+#### Segmentacijske metode
+
+Segmentacijske metode lahko razdelimo v različne skupine. Metode delimo glede na **informacijo**, ki jo uporabljajo za segmentacijo. Ločimo 3 skupine segmentacijskih metod, in sicer glede na dominantno lastnost, ki jo uporabljajo.
+
+Ločimo sledeče 3 skupine segmentacijskih metod:
+- **segmentacija z globalnim znanjem o sliki oz. njenih delih** (npr. pragodvna operacija).
+- **segmentacija na osnovi robov**
+- **segmentacija na osnovi regij** 
+
+(segmentacija na osnovi robov in osnovi regij delata isto stvar na 2 različna načina. Pomenita dualni problem: vsaka regija je namreč lahko predstavljena s sklenjeno konturo in obratno)
+
+- **učeče metode (sodobni pristopi)**
+
+**Učeči pristopi** postajajo v zadnjih letih popularni. Sem sodijo:
+
+- strojno učenje
+- globoko učenje
+- nevronske mreže
+
+Model se nauči segmentacije iz podatkov. Pri tem imamo nek model (npr. obliko ali strukturo)  
+in se vprašamo:
+
+> Ali ta model obstaja v sliki?
+
+Segmentacija temelji na preverjanju ujemanja med modelom in dejansko sliko.
+
+##### Thresholding (Pragovna operacija)
+
+Thresholding je **najhitrejši način segmentacije**. Zaradi svoje enostavnosti in hitrosti je zelo primeren za real-time aplikacije. Imamo en prag $T$. Vsak piksel slike po vrsticah in stolpcih primerjamo s tem pragom. Za vsak piksel $I(i,j)$:
+
+$$
+g(i,j) =
+\begin{cases}
+1, & \text{če } I(i,j) \geq T \\
+0, & \text{sicer}
+\end{cases}
+$$
+
+Najenostavnejše so operacije z enim pragom in da je ta prag konstanten za celotno sliko.
+
+Algoritem:
+- na začetku določimo prag (npr. $T = 87$),
+- z dvema for zankama (po vrsticah in stolpcih) pregledamo vse piksle,
+- vsak piksel primerjamo s pragom,
+- če je vrednost piksla večja ali enaka določenemu pragu (npr. $T = 87$), potem vrnemo vrednost 1, sicer vrnemo vrednost 0
+
+##### Variabilni prag (lokalni thresholding)
+
+Če je prag variabilen se prag prilagaja glede na del slike in metoda postane zahtevnejša. V praksi ne računamo popolnoma neodvisnega praga za vsak pixel, ampak prag določimo na lokalnem območju (npr. v oknu okoli pixla).
+
+Če iščemo svetle objekte na temnem ozadju:
+
+$$
+I(i,j) \geq T
+$$
+
+Če pa iščemo temne objekte na svetlem ozadju, obrnemo neenačaj:
+
+$$
+I(i,j) \leq T
+$$
+
+---
+
+Trashholding je danes zelo pogosto uporabljen. Uporablja se skoraj v vseh industrijskih aplikacijah, kjer:
+
+- imamo nadzor nad osvetlitvijo,
+- so pogoji zajema slike stabilni,
+- je kontrast med objektom in ozadjem dovolj velik.
+
+Če lahko nadzorujemo svetlobo, je thresholding pogosto najboljša izbira.
+
+---
+
+Namesto enega praga pa lahko uporabimo tudi več pragov:
+
+$$
+T_1 < T_2 < T_3 < \dots
+$$
+
+Pixel razvrstimo glede na interval, v katerega pade njegova vrednost.
+
+Primer:
+
+$$
+g(i,j) =
+\begin{cases}
+0, & I < T_1 \\
+1, & T_1 \leq I < T_2 \\
+2, & T_2 \leq I < T_3 \\
+\dots
+\end{cases}
+$$
+
+Rezultat:
+- več-regijska segmentacija
+- ne samo binarna slika
+
+---
+
+##### Kako določiti prag?
+Metoda je zelo preprosta. Glavni problem pa je kako pravilno določiti prag. Izbira praga je namreč ključna za uspešno segmentacijo.
+
+Če imamo 8-bitno sivinsko sliko, imajo pixli vrednosti od:
+
+$$
+0 \text{ do } 255
+$$
+
+To pomeni, da imamo teoretično **256 možnih pragov**.
+
+Vprašanje je:
+> Kateri prag je pravi?
+
+Odgovor ni enoznačen.
+
+Ne obstaja univerzalno najboljša segmentacijska metoda, ki bi vedno vrnila pravi prag.  
+Izbira praga je vedno odvisna od problema, ki ga rešujemo.
+
+- En prag je lahko za en problem perfekten.
+- Za drug problem pa popolnoma neuporaben.
+
+###### 1. Eksperimentalna določitev
+
+Prag določimo ročno. To pomeni, da si prag sami izmislimo. Kontroliramo okolje, mi zajamemo slike, primerjamo in testiramo kateri prag je najboljši in tistega uporabimo. 
+
+---
+
+###### 2. Polovica med minimalno in maksimalno sivino na sliki
+
+Vzememo:
+- najmanjšo sivinsko vrednost v sliki: $I_{min}$
+- največjo sivinsko vrednost v sliki: $I_{max}$
+
+Prag določimo tako, da vzamemo največjo in najmanjšo vrednost na sliki in vzamemo sredino za prag:
+
+$$
+T = \frac{I_{min} + I_{max}}{2}
+$$
+
+Metoda je preprosta, vendar pogosto ni optimalna.
+
+---
+
+Za naprednejše metode potrebujemo določiti nekaj pomožnih izrazov iz slike I:
+
+1. histogram sivin
+2. dve pomožni polji
+
+Naj ima histogram $L$ elementov (pri 8-bitni sliki je $L = 256$).
+
+Označimo:
+
+- $h_k$ → število pikslov s sivinsko vrednostjo $k$
+
+---
+
+**Pomožno polje**
+
+Polje $A$ ima enako število elementov kot histogram.
+
+V njem hranimo kumulativno vsoto števila pikslov do nivoja $k$:
+
+$$
+A_k = \sum_{i=0}^{k} h_i
+$$
+
+To pomeni:
+
+- $A_0 = h_0$
+- $A_1 = h_0 + h_1$
+- $A_2 = h_0 + h_1 + h_2$
+- ...
+- $A_k = \sum_{i=0}^{k} h_i$
+
+Polje $A_k$ nam pove, koliko pixlov ima sivinsko vrednost manjšo ali enako $k$.
+
+---
+
+**Pomožno polje B**
+
+Polje $B$ ima prav tako enako število elementov kot histogram.
+
+V njem hranimo kumulativno vsoto sivinskih vrednosti:
+
+$$
+B_k = \sum_{i=0}^{k} i \cdot h_i
+$$
+
+Primeri:
+
+- $B_0 = 0 \cdot h_0$
+- $B_1 = 0 \cdot h_0 + 1 \cdot h_1$
+- $B_2 = 0 \cdot h_0 + 1 \cdot h_1 + 2 \cdot h_2$
+
+Na splošno:
+
+Vsak element vsebuje vsoto:
+
+> sivina × število pixlov (za vse sivine ≤ k)
+
+- $B_k$ hrani vsoto vseh sivinskih vrednosti, ki so manjše ali enake $k$.
+- Zadnji element $B_{L-1}$ predstavlja vsoto vseh sivinskih vrednosti v celotni sliki.
+
+To sta osnovni pomožni polji, ki ju uporabljamo pri naprednejših metodah določanja praga (npr. optimizacijskih metodah).
+
+---
+
+###### 3.Prag kot povprečje slike
+
+Prag postavimo na **povprečno sivinsko vrednost slike**.
+
+Izračun:
+
+$$
+T = \frac{\text{vsota vseh sivinskih vrednosti}}{\text{število vseh pixlov}}
+$$
+
+Ker že imamo definirani pomožni polji:
+
+- $A_Q$ → skupno število vseh pixlov
+- $B_Q$ → vsota vseh sivinskih vrednosti v sliki
+
+Lahko prag izračunamo kot:
+
+$$
+T = \frac{B_Q}{A_Q}
+$$
+
+Dobimo aritmetično sredino (povprečje) sivinskih vrednosti.
+
+Ta metoda je preprosta, vendar:
+- deluje dobro le, če je histogram približno simetričen,
+- ni nujno optimalna za slike z več vrhovi v histogramu.
+
+---
+
+###### 4. Prag kot mediana
+
+Prag določimo z **mediano histogramov sivin**.
+
+Prag postavimo tako, da:
+
+- približno polovica pixlov ima vrednost manjšo od praga,
+- približno polovica pixlov ima vrednost večjo od praga.
+
+Formalno:
+
+Poiščemo tak $T$, da velja:
+
+$$
+A_T \approx \frac{A_Q}{2}
+$$
+
+kjer je:
+- $A_T$ → kumulativno število pixlov do sivine $T$
+- $A_Q$ → skupno število vseh pixlov
+
+---
+
+1. Izračunamo histogram.
+2. Izračunamo kumulativno polje $A_k$.
+3. S pomočjo zanke (npr. `for`) pregledujemo vse možne pragove.
+4. Ustavimo se pri prvem $T$, kjer:
+
+$$
+A_T \geq \frac{A_Q}{2}
+$$
+
+Ta $T$ je mediana sivinskih vrednosti.
+
+---
+
+###### 5. Optimalni prag (iterativna metoda)
+
+> [!WARNING]
+> Kljub imenu ta metoda **ni matematično optimalna** v splošnem smislu! Deluje dobro le, če so izpolnjene določene predpostavke o porazdelitvi sivinskih vrednosti.
+
+Pri globalnem pragu običajno predpostavimo:
+
+- en del slike predstavlja **ozadje**,
+- drugi del slike predstavlja **objekt (kar nas zanima)**.
+
+V histogramu sivinskih vrednosti imamo torej dve porazdelitvi:
+
+- ena pripada ozadju (npr. zelena krivulja),
+- druga pripada objektu (npr. rdeča krivulja).
+
+V praksi poznamo samo skupni histogram, ki je vsota obeh porazdelitev.
+
+**Cilj metode je najti prag, ki najbolje loči ti dve porazdelitvi.**
+
+---
+
+Metoda je **iterativna**.
+
+Potrebujemo:
+- začetni približek praga $T_0$ (**Začetni prag določimo sami!**)
+
+---
+
+Pri pragu $T_0$:
+
+- vse sivine manjše od $T_0$ obravnavamo kot ozadje,
+- vse sivine večje ali enake $T_0$ obravnavamo kot objekt.
+
+Izračunamo:
+
+- povprečno vrednost ozadja → $\mu_0(T_0)$
+- povprečno vrednost objekta → $\mu_1(T_0)$
+
+---
+
+Nov prag določimo kot sredino med obema povprečjema:
+
+$$
+T_{1} = \frac{\mu_0(T_0) + \mu_1(T_0)}{2}
+$$
+
+---
+
+Postopek ponavljamo:
+
+1. Razdelimo histogram glede na trenutni prag $T_k$.
+2. Izračunamo:
+   - $\mu_0(T_k)$
+   - $\mu_1(T_k)$
+3. Posodobimo prag:
+
+$$
+T_{k+1} = \frac{\mu_0(T_k) + \mu_1(T_k)}{2}
+$$
+
+---
+
+Iteracije izvajamo, dokler se prag bistveno spreminja.
+
+Razliko merimo z majhno konstanto $\varepsilon$:
+
+$$
+|T_{k+1} - T_k| < \varepsilon
+$$
+
+Ker delamo z realnimi števili, se prag običajno vedno nekoliko spremeni, zato potrebujemo toleranco $\varepsilon$.
+
+---
+
+###### 6. Globalni prag določen z entropijo (Kapurjev prag)
+
+Ta metoda določi prag na podlagi **entropije**. Entropija je mera za količino informacije v sistemu.
+
+Slika vsebuje malo informacij, če imajo vsi pixli enako ali zelo podobno sivinsko vrednost in je histogram močno skoncentriran okoli ene vrednosti.
+
+Primer:
+- vsi pixli imajo isto sivino → entropija je minimalna.
+
+---
+
+Slika vsebuje veliko informacij, če so zastopane vse sivinske vrednosti in so vrednosti približno naključno porazdeljene. Takrat je entropija visoka.
+
+---
+
+**Ideja Kapurjeve metode**
+
+Imamo izbran prag $T$, ki sliko razdeli na:
+
+- **ozadje** (sivine ≤ T)
+- **ospredje** (sivine > T)
+
+Cilj:
+
+> Po segmentaciji želimo ohraniti čim več informacij v obeh delih slike.
+
+Postopek:
+
+- izračunamo entropijo ozadja,
+- izračunamo entropijo ospredja,
+- seštejemo obe entropiji.
+
+Naj bo:
+
+- $p_i$ → normaliziran histogram (verjetnost sivine $i$)
+
+**Za izbran prag $T$**:
+
+**Entropija ozadja**:
+$$
+H_0(T)
+$$
+
+**Entropija ospredja**:
+$$
+H_1(T)
+$$
+
+**Skupna entropija**:
+$$
+H(T) = H_0(T) + H_1(T)
+$$
+
+---
+
+**Postopek**:
+
+1. Izračunamo histogram.
+2. Histogram normaliziramo (da dobimo verjetnosti).
+3. Z zanko (`for`) pregledamo vse možne prage:
+   - od 0 do 255 (pri 8-bitni sliki).
+4. Za vsak prag izračunamo:
+   - entropijo ozadja,
+   - entropijo ospredja,
+   - njuno vsoto.
+5. Poiščemo prag, kjer je vrednost:$H(T) \text{ maksimalna}$
+
+Naš prag je tam, kjer dobimo naksimalne vrednosti.
+
+---
+
+### Pragovna operacija na sliki robov
+
+Najenostavnejši pristop:
+
+1. Na sivinski sliki uporabimo **detektor robov**.
+2. Dobimo sliko jakosti robov.
+3. Na tej sliki izvedemo **thresholding (pragovanje)**.
+
+Rezultat:
+
+- piksli, ki predstavljajo rob → vrednost 1
+- ostali piksli → vrednost 0
+
+---
+
+Po thresholdingu dobimo robove objekta. Te robove pa moramo med seboj povezati v smiselne konture. Samo binarna slika robov še ne pomeni, da imamo zaključene meje regij.
+
+Algoritem sledenja meji:
+
+- poveže robne piksle v zaprto konturo,
+- ali pa iz že znane regije poišče njen rob.
+
+Uporabimo ga lahko:
+- ko še nimamo definirane regije (povezujemo robove),
+- ali ko regijo že imamo (iščemo njen obris).
+
+---
+
+#### Notranja in zunanja meja regije
+
+##### Notranja meja
+
+Notranjo mejo tvorijo:
+
+- pixli, ki še pripadajo regiji,
+- in se nahajajo na njenem robu.
+
+Ko govorimo o **obrisu regije**, mislimo na notranjo mejo.
+
+---
+
+##### Zunanja meja
+
+Zunanjo mejo tvorijo:
+
+- pixli, ki so sosedi notranje meje,
+- vendar ne pripadajo regiji,
+- ampak ozadju ali drugi regiji.
+
+> [!WARNING]
+> Regija ne sme biti velika samo 1 pixel. Če dobimo regijo velikosti 1 pixel, smo najverjetneje naredili napako v segmentaciji.
+
+---
+
+##### Kako deluje algoritem sledenja meji?
+
+Ključno vprašanje:
+
+> Kakšno sosedstvo uporabimo?
+
+###### 4-sosedstvo
+
+Pixel ima 4 sosede:
+- gor
+- dol
+- levo
+- desno
+
+###### 8-sosedstvo
+
+Pixel ima 8 možnih smeri gibanja:
+
+- gor
+- dol
+- levo
+- desno
+- štiri diagonalne smeri
+
+Pri 8-sosedstvu se lahko iz posameznega pixla premaknemo v 8 različnih smeri. To omogoča bolj naravno in neprekinjeno sledenje robov.
+
+### Ujemanje šablon
 

@@ -178,6 +178,13 @@ This article does not have a corresponding language version
         <li><a href="#detektorji-robov">Detektorji robov</a></li>
       </ul>
     </li>
+    <li><a href="#segmentacija-slik">Segmentacija slik</a>
+      <ul>
+        <li><a href="#pragovna-operacija">Pragovna operacija</a></li>
+        <li><a href="#pragovna-operacija-na-sliki-robov">Pragovna operacija na sliki robov</a></li>
+        <li><a href="#ujemanje-šablon">Ujemanje šablon</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div></div>
@@ -1963,9 +1970,549 @@ $$<hr>
 <li>temnejši del slike → manjša vrednost</li>
 <li>svetlejši del slike → večja vrednost</li>
 <li>črna → vrednost blizu 0</li>
-<li>bela → največja vrednost (npr. 255 pri 8-bitni sliki)</li>
+<li>bela → največja vre</li>
 </ul>
-</div>
+<p>&ndash;</p>
+<h2 id="segmentacija-slik">
+<a class="header-anchor" href="#segmentacija-slik"></a>
+Segmentacija slik
+</h2><h3 id="pragovna-operacija">
+<a class="header-anchor" href="#pragovna-operacija"></a>
+Pragovna operacija
+</h3><h4 id="segmentacija">
+<a class="header-anchor" href="#segmentacija"></a>
+Segmentacija
+</h4><p>Pri segmentaciji je cilj, da sliko razdelimo na <strong>regije</strong>:</p>
+<ul>
+<li>regija 1</li>
+<li>regija 2</li>
+<li>regija 3</li>
+<li>&hellip;</li>
+</ul>
+<p>Te regije tvorijo piksli, ki so si med seboj podobni glede na nek kriterij, ki ga določimo, na primer:</p>
+<ul>
+<li>sivinska vrednost</li>
+<li>barva</li>
+<li>gradient</li>
+<li>tekstura</li>
+<li>itd.</li>
+</ul>
+<hr>
+<p>Regija mora biti <strong>sklenjena</strong>. To pomeni, da lahko znotraj regije od enega pixla do drugega pridemo brez &ldquo;skakanja&rdquo; izven regije.</p>
+<p>Unija vseh regij mora pokriti vse pixle v sliki.</p>
+<p>Vedno imamo najmanj <strong>dve regiji</strong>:</p>
+<ol>
+<li><strong>Region of Interest (ROI)</strong> – regija, ki nas zanima</li>
+<li><strong>Background</strong> – regija, ki nas ne zanima</li>
+</ol>
+<p>Pri vsakem problemu imamo torej vsaj eno regijo, ki nas zanima, in eno, ki nas ne zanima.<br>
+Koliko dodatnih regij imamo, je odvisno od problema, ki ga rešujemo.</p>
+<blockquote>
+<p>Primer
+Če bi analizirali študente po obrazu:</p>
+<ul>
+<li>obraz študenta → regija, ki nas zanima</li>
+<li>vse ostalo → background</li>
+</ul>
+</blockquote>
+<hr>
+<p>Piksli v regijah imajo <strong>labelo (oznako)</strong>.</p>
+<ul>
+<li>Piksli v isti regiji imajo isto labelo (isto številko).</li>
+<li>Pikslom, ki nas ne zanimajo (background), nastavimo labelo <strong>0</strong>.</li>
+<li>Tisto, kar nas zanima, ima vrednost <strong>večjo od 0</strong>.</li>
+</ul>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Labele niso nujno zaporedne! Na primer: vsi pixli neke regije imajo lahko vrednost 103.</p></p>
+  </blockquote>
+
+<hr>
+<p>Pri segmentaciji bo naš vhod <strong>sivinska slika</strong>, na izhodu segmentacije pa bomo dobili ven <strong>segmentirano sliko</strong>.</p>
+<p>Segmentirana slika je lahko <strong>Binarna slika</strong>. Pri binarni sliki velja:</p>
+<ul>
+<li>vrednost 0 → background (nas ne zanima)</li>
+<li>vrednost ≠ 0 → objekt/regija, ki nas zanima</li>
+</ul>
+<hr>
+<p>Sivinska slika pa lahko vsebuje več regij, ki nas zanimajo (npr. več objektov z določeno sivinsko vrednostjo).</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p>Cilj segmentacije je, da dobimo regijo, ki čim bolje ustreza objektu, ki nas zanima.</p></p>
+  </blockquote>
+
+<p>Poznamo 2 vrsti segmentacij, <strong>popolno segmentacijo</strong> in <strong>delno segmentacijo</strong>.</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p><strong>Popolna segmentacija</strong> pomeni, da natančno dobimo objekt, ki ga iščemo brez dodatnih ali manjkajočih delov.</p></p>
+  </blockquote>
+
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p>V praksi pa so pogostejše <strong>delne segmentacije</strong>. Pri tej vrsti segmentacij dobimo poleg objekta, ki nas zanima, tudi dodatne neželene dele in regije, kjer se pojavijo napake.</p></p>
+  </blockquote>
+
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>NI UNIVERZALNE SEGMENTACIJSKE METODE ZA REŠEVANJE VSAKEGA PROBLEMA! ENE EDINSTSTVENE METODE NI! METODO PRILAGODIMO GLEDE NA NAŠ PROBLEM, KI GA REŠUJEMO.</p></p>
+  </blockquote>
+
+<hr>
+<h4 id="segmentacijske-metode">
+<a class="header-anchor" href="#segmentacijske-metode"></a>
+Segmentacijske metode
+</h4><p>Segmentacijske metode lahko razdelimo v različne skupine. Metode delimo glede na <strong>informacijo</strong>, ki jo uporabljajo za segmentacijo. Ločimo 3 skupine segmentacijskih metod, in sicer glede na dominantno lastnost, ki jo uporabljajo.</p>
+<p>Ločimo sledeče 3 skupine segmentacijskih metod:</p>
+<ul>
+<li><strong>segmentacija z globalnim znanjem o sliki oz. njenih delih</strong> (npr. pragodvna operacija).</li>
+<li><strong>segmentacija na osnovi robov</strong></li>
+<li><strong>segmentacija na osnovi regij</strong></li>
+</ul>
+<p>(segmentacija na osnovi robov in osnovi regij delata isto stvar na 2 različna načina. Pomenita dualni problem: vsaka regija je namreč lahko predstavljena s sklenjeno konturo in obratno)</p>
+<ul>
+<li><strong>učeče metode (sodobni pristopi)</strong></li>
+</ul>
+<p><strong>Učeči pristopi</strong> postajajo v zadnjih letih popularni. Sem sodijo:</p>
+<ul>
+<li>strojno učenje</li>
+<li>globoko učenje</li>
+<li>nevronske mreže</li>
+</ul>
+<p>Model se nauči segmentacije iz podatkov. Pri tem imamo nek model (npr. obliko ali strukturo)<br>
+in se vprašamo:</p>
+<blockquote>
+<p>Ali ta model obstaja v sliki?</p>
+</blockquote>
+<p>Segmentacija temelji na preverjanju ujemanja med modelom in dejansko sliko.</p>
+<h5 id="thresholding-pragovna-operacija">
+<a class="header-anchor" href="#thresholding-pragovna-operacija"></a>
+Thresholding (Pragovna operacija)
+</h5><p>Thresholding je <strong>najhitrejši način segmentacije</strong>. Zaradi svoje enostavnosti in hitrosti je zelo primeren za real-time aplikacije. Imamo en prag $T$. Vsak piksel slike po vrsticah in stolpcih primerjamo s tem pragom. Za vsak piksel $I(i,j)$:</p>
+$$
+g(i,j) =
+\begin{cases}
+1, & \text{če } I(i,j) \geq T \\
+0, & \text{sicer}
+\end{cases}
+$$<p>Najenostavnejše so operacije z enim pragom in da je ta prag konstanten za celotno sliko.</p>
+<p>Algoritem:</p>
+<ul>
+<li>na začetku določimo prag (npr. $T = 87$),</li>
+<li>z dvema for zankama (po vrsticah in stolpcih) pregledamo vse piksle,</li>
+<li>vsak piksel primerjamo s pragom,</li>
+<li>če je vrednost piksla večja ali enaka določenemu pragu (npr. $T = 87$), potem vrnemo vrednost 1, sicer vrnemo vrednost 0</li>
+</ul>
+<h5 id="variabilni-prag-lokalni-thresholding">
+<a class="header-anchor" href="#variabilni-prag-lokalni-thresholding"></a>
+Variabilni prag (lokalni thresholding)
+</h5><p>Če je prag variabilen se prag prilagaja glede na del slike in metoda postane zahtevnejša. V praksi ne računamo popolnoma neodvisnega praga za vsak pixel, ampak prag določimo na lokalnem območju (npr. v oknu okoli pixla).</p>
+<p>Če iščemo svetle objekte na temnem ozadju:</p>
+$$
+I(i,j) \geq T
+$$<p>Če pa iščemo temne objekte na svetlem ozadju, obrnemo neenačaj:</p>
+$$
+I(i,j) \leq T
+$$<hr>
+<p>Trashholding je danes zelo pogosto uporabljen. Uporablja se skoraj v vseh industrijskih aplikacijah, kjer:</p>
+<ul>
+<li>imamo nadzor nad osvetlitvijo,</li>
+<li>so pogoji zajema slike stabilni,</li>
+<li>je kontrast med objektom in ozadjem dovolj velik.</li>
+</ul>
+<p>Če lahko nadzorujemo svetlobo, je thresholding pogosto najboljša izbira.</p>
+<hr>
+<p>Namesto enega praga pa lahko uporabimo tudi več pragov:</p>
+$$
+T_1 < T_2 < T_3 < \dots
+$$<p>Pixel razvrstimo glede na interval, v katerega pade njegova vrednost.</p>
+<p>Primer:</p>
+$$
+g(i,j) =
+\begin{cases}
+0, & I < T_1 \\
+1, & T_1 \leq I < T_2 \\
+2, & T_2 \leq I < T_3 \\
+\dots
+\end{cases}
+$$<p>Rezultat:</p>
+<ul>
+<li>več-regijska segmentacija</li>
+<li>ne samo binarna slika</li>
+</ul>
+<hr>
+<h5 id="kako-določiti-prag">
+<a class="header-anchor" href="#kako-dolo%c4%8diti-prag"></a>
+Kako določiti prag?
+</h5><p>Metoda je zelo preprosta. Glavni problem pa je kako pravilno določiti prag. Izbira praga je namreč ključna za uspešno segmentacijo.</p>
+<p>Če imamo 8-bitno sivinsko sliko, imajo pixli vrednosti od:</p>
+$$
+0 \text{ do } 255
+$$<p>To pomeni, da imamo teoretično <strong>256 možnih pragov</strong>.</p>
+<p>Vprašanje je:</p>
+<blockquote>
+<p>Kateri prag je pravi?</p>
+</blockquote>
+<p>Odgovor ni enoznačen.</p>
+<p>Ne obstaja univerzalno najboljša segmentacijska metoda, ki bi vedno vrnila pravi prag.<br>
+Izbira praga je vedno odvisna od problema, ki ga rešujemo.</p>
+<ul>
+<li>En prag je lahko za en problem perfekten.</li>
+<li>Za drug problem pa popolnoma neuporaben.</li>
+</ul>
+<h6 id="1-eksperimentalna-določitev">
+<a class="header-anchor" href="#1-eksperimentalna-dolo%c4%8ditev"></a>
+1. Eksperimentalna določitev
+</h6><p>Prag določimo ročno. To pomeni, da si prag sami izmislimo. Kontroliramo okolje, mi zajamemo slike, primerjamo in testiramo kateri prag je najboljši in tistega uporabimo.</p>
+<hr>
+<h6 id="2-polovica-med-minimalno-in-maksimalno-sivino-na-sliki">
+<a class="header-anchor" href="#2-polovica-med-minimalno-in-maksimalno-sivino-na-sliki"></a>
+2. Polovica med minimalno in maksimalno sivino na sliki
+</h6><p>Vzememo:</p>
+<ul>
+<li>najmanjšo sivinsko vrednost v sliki: $I_{min}$</li>
+<li>največjo sivinsko vrednost v sliki: $I_{max}$</li>
+</ul>
+<p>Prag določimo tako, da vzamemo največjo in najmanjšo vrednost na sliki in vzamemo sredino za prag:</p>
+$$
+T = \frac{I_{min} + I_{max}}{2}
+$$<p>Metoda je preprosta, vendar pogosto ni optimalna.</p>
+<hr>
+<p>Za naprednejše metode potrebujemo določiti nekaj pomožnih izrazov iz slike I:</p>
+<ol>
+<li>histogram sivin</li>
+<li>dve pomožni polji</li>
+</ol>
+<p>Naj ima histogram $L$ elementov (pri 8-bitni sliki je $L = 256$).</p>
+<p>Označimo:</p>
+<ul>
+<li>$h_k$ → število pikslov s sivinsko vrednostjo $k$</li>
+</ul>
+<hr>
+<p><strong>Pomožno polje</strong></p>
+<p>Polje $A$ ima enako število elementov kot histogram.</p>
+<p>V njem hranimo kumulativno vsoto števila pikslov do nivoja $k$:</p>
+$$
+A_k = \sum_{i=0}^{k} h_i
+$$<p>To pomeni:</p>
+<ul>
+<li>$A_0 = h_0$</li>
+<li>$A_1 = h_0 + h_1$</li>
+<li>$A_2 = h_0 + h_1 + h_2$</li>
+<li>&hellip;</li>
+<li>$A_k = \sum_{i=0}^{k} h_i$</li>
+</ul>
+<p>Polje $A_k$ nam pove, koliko pixlov ima sivinsko vrednost manjšo ali enako $k$.</p>
+<hr>
+<p><strong>Pomožno polje B</strong></p>
+<p>Polje $B$ ima prav tako enako število elementov kot histogram.</p>
+<p>V njem hranimo kumulativno vsoto sivinskih vrednosti:</p>
+$$
+B_k = \sum_{i=0}^{k} i \cdot h_i
+$$<p>Primeri:</p>
+<ul>
+<li>$B_0 = 0 \cdot h_0$</li>
+<li>$B_1 = 0 \cdot h_0 + 1 \cdot h_1$</li>
+<li>$B_2 = 0 \cdot h_0 + 1 \cdot h_1 + 2 \cdot h_2$</li>
+</ul>
+<p>Na splošno:</p>
+<p>Vsak element vsebuje vsoto:</p>
+<blockquote>
+<p>sivina × število pixlov (za vse sivine ≤ k)</p>
+</blockquote>
+<ul>
+<li>$B_k$ hrani vsoto vseh sivinskih vrednosti, ki so manjše ali enake $k$.</li>
+<li>Zadnji element $B_{L-1}$ predstavlja vsoto vseh sivinskih vrednosti v celotni sliki.</li>
+</ul>
+<p>To sta osnovni pomožni polji, ki ju uporabljamo pri naprednejših metodah določanja praga (npr. optimizacijskih metodah).</p>
+<hr>
+<h6 id="3prag-kot-povprečje-slike">
+<a class="header-anchor" href="#3prag-kot-povpre%c4%8dje-slike"></a>
+3.Prag kot povprečje slike
+</h6><p>Prag postavimo na <strong>povprečno sivinsko vrednost slike</strong>.</p>
+<p>Izračun:</p>
+$$
+T = \frac{\text{vsota vseh sivinskih vrednosti}}{\text{število vseh pixlov}}
+$$<p>Ker že imamo definirani pomožni polji:</p>
+<ul>
+<li>$A_Q$ → skupno število vseh pixlov</li>
+<li>$B_Q$ → vsota vseh sivinskih vrednosti v sliki</li>
+</ul>
+<p>Lahko prag izračunamo kot:</p>
+$$
+T = \frac{B_Q}{A_Q}
+$$<p>Dobimo aritmetično sredino (povprečje) sivinskih vrednosti.</p>
+<p>Ta metoda je preprosta, vendar:</p>
+<ul>
+<li>deluje dobro le, če je histogram približno simetričen,</li>
+<li>ni nujno optimalna za slike z več vrhovi v histogramu.</li>
+</ul>
+<hr>
+<h6 id="4-prag-kot-mediana">
+<a class="header-anchor" href="#4-prag-kot-mediana"></a>
+4. Prag kot mediana
+</h6><p>Prag določimo z <strong>mediano histogramov sivin</strong>.</p>
+<p>Prag postavimo tako, da:</p>
+<ul>
+<li>približno polovica pixlov ima vrednost manjšo od praga,</li>
+<li>približno polovica pixlov ima vrednost večjo od praga.</li>
+</ul>
+<p>Formalno:</p>
+<p>Poiščemo tak $T$, da velja:</p>
+$$
+A_T \approx \frac{A_Q}{2}
+$$<p>kjer je:</p>
+<ul>
+<li>$A_T$ → kumulativno število pixlov do sivine $T$</li>
+<li>$A_Q$ → skupno število vseh pixlov</li>
+</ul>
+<hr>
+<ol>
+<li>Izračunamo histogram.</li>
+<li>Izračunamo kumulativno polje $A_k$.</li>
+<li>S pomočjo zanke (npr. <code>for</code>) pregledujemo vse možne pragove.</li>
+<li>Ustavimo se pri prvem $T$, kjer:</li>
+</ol>
+$$
+A_T \geq \frac{A_Q}{2}
+$$<p>Ta $T$ je mediana sivinskih vrednosti.</p>
+<hr>
+<h6 id="5-optimalni-prag-iterativna-metoda">
+<a class="header-anchor" href="#5-optimalni-prag-iterativna-metoda"></a>
+5. Optimalni prag (iterativna metoda)
+</h6>
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Kljub imenu ta metoda <strong>ni matematično optimalna</strong> v splošnem smislu! Deluje dobro le, če so izpolnjene določene predpostavke o porazdelitvi sivinskih vrednosti.</p></p>
+  </blockquote>
+
+<p>Pri globalnem pragu običajno predpostavimo:</p>
+<ul>
+<li>en del slike predstavlja <strong>ozadje</strong>,</li>
+<li>drugi del slike predstavlja <strong>objekt (kar nas zanima)</strong>.</li>
+</ul>
+<p>V histogramu sivinskih vrednosti imamo torej dve porazdelitvi:</p>
+<ul>
+<li>ena pripada ozadju (npr. zelena krivulja),</li>
+<li>druga pripada objektu (npr. rdeča krivulja).</li>
+</ul>
+<p>V praksi poznamo samo skupni histogram, ki je vsota obeh porazdelitev.</p>
+<p><strong>Cilj metode je najti prag, ki najbolje loči ti dve porazdelitvi.</strong></p>
+<hr>
+<p>Metoda je <strong>iterativna</strong>.</p>
+<p>Potrebujemo:</p>
+<ul>
+<li>začetni približek praga $T_0$ (<strong>Začetni prag določimo sami!</strong>)</li>
+</ul>
+<hr>
+<p>Pri pragu $T_0$:</p>
+<ul>
+<li>vse sivine manjše od $T_0$ obravnavamo kot ozadje,</li>
+<li>vse sivine večje ali enake $T_0$ obravnavamo kot objekt.</li>
+</ul>
+<p>Izračunamo:</p>
+<ul>
+<li>povprečno vrednost ozadja → $\mu_0(T_0)$</li>
+<li>povprečno vrednost objekta → $\mu_1(T_0)$</li>
+</ul>
+<hr>
+<p>Nov prag določimo kot sredino med obema povprečjema:</p>
+$$
+T_{1} = \frac{\mu_0(T_0) + \mu_1(T_0)}{2}
+$$<hr>
+<p>Postopek ponavljamo:</p>
+<ol>
+<li>Razdelimo histogram glede na trenutni prag $T_k$.</li>
+<li>Izračunamo:
+<ul>
+<li>$\mu_0(T_k)$</li>
+<li>$\mu_1(T_k)$</li>
+</ul>
+</li>
+<li>Posodobimo prag:</li>
+</ol>
+$$
+T_{k+1} = \frac{\mu_0(T_k) + \mu_1(T_k)}{2}
+$$<hr>
+<p>Iteracije izvajamo, dokler se prag bistveno spreminja.</p>
+<p>Razliko merimo z majhno konstanto $\varepsilon$:</p>
+$$
+|T_{k+1} - T_k| < \varepsilon
+$$<p>Ker delamo z realnimi števili, se prag običajno vedno nekoliko spremeni, zato potrebujemo toleranco $\varepsilon$.</p>
+<hr>
+<h6 id="6-globalni-prag-določen-z-entropijo-kapurjev-prag">
+<a class="header-anchor" href="#6-globalni-prag-dolo%c4%8den-z-entropijo-kapurjev-prag"></a>
+6. Globalni prag določen z entropijo (Kapurjev prag)
+</h6><p>Ta metoda določi prag na podlagi <strong>entropije</strong>. Entropija je mera za količino informacije v sistemu.</p>
+<p>Slika vsebuje malo informacij, če imajo vsi pixli enako ali zelo podobno sivinsko vrednost in je histogram močno skoncentriran okoli ene vrednosti.</p>
+<p>Primer:</p>
+<ul>
+<li>vsi pixli imajo isto sivino → entropija je minimalna.</li>
+</ul>
+<hr>
+<p>Slika vsebuje veliko informacij, če so zastopane vse sivinske vrednosti in so vrednosti približno naključno porazdeljene. Takrat je entropija visoka.</p>
+<hr>
+<p><strong>Ideja Kapurjeve metode</strong></p>
+<p>Imamo izbran prag $T$, ki sliko razdeli na:</p>
+<ul>
+<li><strong>ozadje</strong> (sivine ≤ T)</li>
+<li><strong>ospredje</strong> (sivine &gt; T)</li>
+</ul>
+<p>Cilj:</p>
+<blockquote>
+<p>Po segmentaciji želimo ohraniti čim več informacij v obeh delih slike.</p>
+</blockquote>
+<p>Postopek:</p>
+<ul>
+<li>izračunamo entropijo ozadja,</li>
+<li>izračunamo entropijo ospredja,</li>
+<li>seštejemo obe entropiji.</li>
+</ul>
+<p>Naj bo:</p>
+<ul>
+<li>$p_i$ → normaliziran histogram (verjetnost sivine $i$)</li>
+</ul>
+<p><strong>Za izbran prag $T$</strong>:</p>
+<p><strong>Entropija ozadja</strong>:
+</p>
+$$
+H_0(T)
+$$<p><strong>Entropija ospredja</strong>:
+</p>
+$$
+H_1(T)
+$$<p><strong>Skupna entropija</strong>:
+</p>
+$$
+H(T) = H_0(T) + H_1(T)
+$$<hr>
+<p><strong>Postopek</strong>:</p>
+<ol>
+<li>Izračunamo histogram.</li>
+<li>Histogram normaliziramo (da dobimo verjetnosti).</li>
+<li>Z zanko (<code>for</code>) pregledamo vse možne prage:
+<ul>
+<li>od 0 do 255 (pri 8-bitni sliki).</li>
+</ul>
+</li>
+<li>Za vsak prag izračunamo:
+<ul>
+<li>entropijo ozadja,</li>
+<li>entropijo ospredja,</li>
+<li>njuno vsoto.</li>
+</ul>
+</li>
+<li>Poiščemo prag, kjer je vrednost:$H(T) \text{ maksimalna}$</li>
+</ol>
+<p>Naš prag je tam, kjer dobimo naksimalne vrednosti.</p>
+<hr>
+<h3 id="pragovna-operacija-na-sliki-robov">
+<a class="header-anchor" href="#pragovna-operacija-na-sliki-robov"></a>
+Pragovna operacija na sliki robov
+</h3><p>Najenostavnejši pristop:</p>
+<ol>
+<li>Na sivinski sliki uporabimo <strong>detektor robov</strong>.</li>
+<li>Dobimo sliko jakosti robov.</li>
+<li>Na tej sliki izvedemo <strong>thresholding (pragovanje)</strong>.</li>
+</ol>
+<p>Rezultat:</p>
+<ul>
+<li>piksli, ki predstavljajo rob → vrednost 1</li>
+<li>ostali piksli → vrednost 0</li>
+</ul>
+<hr>
+<p>Po thresholdingu dobimo robove objekta. Te robove pa moramo med seboj povezati v smiselne konture. Samo binarna slika robov še ne pomeni, da imamo zaključene meje regij.</p>
+<p>Algoritem sledenja meji:</p>
+<ul>
+<li>poveže robne piksle v zaprto konturo,</li>
+<li>ali pa iz že znane regije poišče njen rob.</li>
+</ul>
+<p>Uporabimo ga lahko:</p>
+<ul>
+<li>ko še nimamo definirane regije (povezujemo robove),</li>
+<li>ali ko regijo že imamo (iščemo njen obris).</li>
+</ul>
+<hr>
+<h4 id="notranja-in-zunanja-meja-regije">
+<a class="header-anchor" href="#notranja-in-zunanja-meja-regije"></a>
+Notranja in zunanja meja regije
+</h4><h5 id="notranja-meja">
+<a class="header-anchor" href="#notranja-meja"></a>
+Notranja meja
+</h5><p>Notranjo mejo tvorijo:</p>
+<ul>
+<li>pixli, ki še pripadajo regiji,</li>
+<li>in se nahajajo na njenem robu.</li>
+</ul>
+<p>Ko govorimo o <strong>obrisu regije</strong>, mislimo na notranjo mejo.</p>
+<hr>
+<h5 id="zunanja-meja">
+<a class="header-anchor" href="#zunanja-meja"></a>
+Zunanja meja
+</h5><p>Zunanjo mejo tvorijo:</p>
+<ul>
+<li>pixli, ki so sosedi notranje meje,</li>
+<li>vendar ne pripadajo regiji,</li>
+<li>ampak ozadju ali drugi regiji.</li>
+</ul>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Regija ne sme biti velika samo 1 pixel. Če dobimo regijo velikosti 1 pixel, smo najverjetneje naredili napako v segmentaciji.</p></p>
+  </blockquote>
+
+<hr>
+<h5 id="kako-deluje-algoritem-sledenja-meji">
+<a class="header-anchor" href="#kako-deluje-algoritem-sledenja-meji"></a>
+Kako deluje algoritem sledenja meji?
+</h5><p>Ključno vprašanje:</p>
+<blockquote>
+<p>Kakšno sosedstvo uporabimo?</p>
+</blockquote>
+<h6 id="4-sosedstvo">
+<a class="header-anchor" href="#4-sosedstvo"></a>
+4-sosedstvo
+</h6><p>Pixel ima 4 sosede:</p>
+<ul>
+<li>gor</li>
+<li>dol</li>
+<li>levo</li>
+<li>desno</li>
+</ul>
+<h6 id="8-sosedstvo">
+<a class="header-anchor" href="#8-sosedstvo"></a>
+8-sosedstvo
+</h6><p>Pixel ima 8 možnih smeri gibanja:</p>
+<ul>
+<li>gor</li>
+<li>dol</li>
+<li>levo</li>
+<li>desno</li>
+<li>štiri diagonalne smeri</li>
+</ul>
+<p>Pri 8-sosedstvu se lahko iz posameznega pixla premaknemo v 8 različnih smeri. To omogoča bolj naravno in neprekinjeno sledenje robov.</p>
+<h3 id="ujemanje-šablon">
+<a class="header-anchor" href="#ujemanje-%c5%a1ablon"></a>
+Ujemanje šablon
+</h3></div>
     <footer class="article-footer"><ul class="article-category-list"></ul>
 <ul class="article-tag-list" itemprop="keywords"></ul>
 </footer>
@@ -2006,10 +2553,10 @@ $$<hr>
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;9.4k</span
+          >&nbsp;11.3k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:46</span>
+        <span class="icon-coffee">&nbsp;00:55</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -2056,6 +2603,13 @@ $$<hr>
         <li><a href="#lokalne-operacije-oz-filtriranje-slik">Lokalne operacije oz. filtriranje slik</a></li>
         <li><a href="#odstranjevanje-šuma-z-lokalnimi-operatorji">Odstranjevanje šuma z lokalnimi operatorji</a></li>
         <li><a href="#detektorji-robov">Detektorji robov</a></li>
+      </ul>
+    </li>
+    <li><a href="#segmentacija-slik">Segmentacija slik</a>
+      <ul>
+        <li><a href="#pragovna-operacija">Pragovna operacija</a></li>
+        <li><a href="#pragovna-operacija-na-sliki-robov">Pragovna operacija na sliki robov</a></li>
+        <li><a href="#ujemanje-šablon">Ujemanje šablon</a></li>
       </ul>
     </li>
   </ul>
