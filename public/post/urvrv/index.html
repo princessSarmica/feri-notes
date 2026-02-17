@@ -185,6 +185,23 @@ This article does not have a corresponding language version
         <li><a href="#ujemanje-šablon">Ujemanje šablon</a></li>
       </ul>
     </li>
+    <li><a href="#zaporedje-slik-in-sledenje-gibanja">Zaporedje slik in sledenje gibanja</a>
+      <ul>
+        <li><a href="#osnovni-pojmi-1">Osnovni pojmi</a></li>
+        <li><a href="#slike-razlik">Slike razlik</a></li>
+        <li><a href="#statično-ozadje">Statično ozadje</a></li>
+        <li><a href="#optični-pretok">Optični pretok</a></li>
+        <li><a href="#sledenje-objektom">Sledenje objektom</a></li>
+      </ul>
+    </li>
+    <li><a href="#geometrija-več-pogledov">Geometrija več pogledov</a>
+      <ul>
+        <li><a href="#dva-pogleda-splošno">Dva pogleda (splošno)</a></li>
+        <li><a href="#trije-pogledi">Trije pogledi</a></li>
+        <li><a href="#določanje-položaja-točk-v-3d">Določanje položaja točk v 3D</a></li>
+        <li><a href="#stereo-vid">Stereo vid</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div></div>
@@ -2512,6 +2529,619 @@ Kako deluje algoritem sledenja meji?
 <h3 id="ujemanje-šablon">
 <a class="header-anchor" href="#ujemanje-%c5%a1ablon"></a>
 Ujemanje šablon
+</h3><h2 id="zaporedje-slik-in-sledenje-gibanja">
+<a class="header-anchor" href="#zaporedje-slik-in-sledenje-gibanja"></a>
+Zaporedje slik in sledenje gibanja
+</h2><p>Velikokrat je koristno znanje o obdelavi zaporedij slik. Na primer: videoposnetek predstavlja zaporedje več slik iste scene, ki so urejene v časovnem zaporedju. Zaporedje slik lahko obdelujemo na preprost način – tako, da obdelujemo vsako sliko posebej.</p>
+<p>Postopek je naslednji:</p>
+<ul>
+<li>vzamemo prvo sliko iz zaporedja,</li>
+<li>jo obdelamo,</li>
+<li>nato vzamemo naslednjo sliko,</li>
+<li>jo prav tako obdelamo,</li>
+<li>in tako nadaljujemo skozi celotno zaporedje.</li>
+</ul>
+<h3 id="osnovni-pojmi-1">
+<a class="header-anchor" href="#osnovni-pojmi-1"></a>
+Osnovni pojmi
+</h3><h4 id="zaporedje-slik">
+<a class="header-anchor" href="#zaporedje-slik"></a>
+Zaporedje slik
+</h4><p><strong>Zvezno zaporedje slik</strong>-poemni, da se slika spreminja v zveznem času. Takšno sliko lahko opišemo s tremi časovnimi spremenljivkami:</p>
+<ul>
+<li>x-os (prostorska dimenzija),</li>
+<li>y-os (prostorska dimenzija),</li>
+<li>čas (t), skozi katerega se slika spreminja.</li>
+</ul>
+<p>Torej gre za funkcijo treh spremenljivk:</p>
+$$
+I(x, y, t)
+$$<p>Mi bomo delali z diskretnimi slikami in zaporedjem diskretnih slik (npr. video).</p>
+<blockquote>
+<p><strong>Kaj pridobimo z zaporedjem slik?</strong></p>
+<p>Če vsako sliko obdelujemo posebej, ignoriramo časovno povezanost med njimi.</p>
+<p>Zaporedje slik pa nam omogoča dodatne analize.</p>
+<p><strong>Primer: medicinske slike</strong></p>
+<p>Pri medicinskih slikah lahko:</p>
+<ul>
+<li>rekonstruiramo strukture v telesu,</li>
+<li>izvedemo 3D rekonstrukcijo objekta.</li>
+</ul>
+<p><strong>Primer: videoposnetek</strong></p>
+<p>Pri videoposnetkih lahko izvajamo:</p>
+<ul>
+<li>zaznavanje gibanja</li>
+<li>razpoznavanje kje v sceni se izvaja neko gibanje</li>
+<li>analizo parametrov gibanja teh objektov</li>
+</ul>
+<p>Analizo lahko izvajamo neposredno v slikovni matriki (2D), ali v rekonstruirani 3D sceni.</p>
+</blockquote>
+<h3 id="slike-razlik">
+<a class="header-anchor" href="#slike-razlik"></a>
+Slike razlik
+</h3><p>Najenostavnejši pristop pri obdelavi zaporedij slik so <strong>slike razlik</strong>. Gre za približek <strong>odvoda po času</strong>.</p>
+<p>Vzamemo dve sliki in odštejemo istoležne pixle:</p>
+$$
+D(x,y) = I_t(x,y) - I_{t-1}(x,y)
+$$<p>kjer:</p>
+<ul>
+<li>$I_t$ predstavlja trenutno sliko,</li>
+<li>$I_{t-1}$ predstavlja prejšnjo sliko,</li>
+<li>$D(x,y)$ je slika razlik.</li>
+</ul>
+<hr>
+<p>Če je scena statična (nič se ne premika) bodo razlike med zaporednima slikama enake 0, oziroma zelo blizu 0 (zaradi šuma).</p>
+<p>Torej:</p>
+$$
+D(x,y) \approx 0
+$$<hr>
+<p>Če se v sceni pojavi gibanje pa bodo na mestih, kjer se objekt premika, vrednosti različne od 0. Tam zaznamo spremembo. Pri tem pa ni nujno, da odštevamo samo dve zaporedni sliki. Lahko odštejemo dve zaporedni sliki, lahko pa odštejemo sliko, ki je npr. 10 framov nazaj. Ključno je samo, da odštejemo dve sliki in na tak način dobimo sliko razlik.</p>
+<p>Primer:</p>
+$$
+D(x,y) = I_t(x,y) - I_{t-k}(x,y)
+$$<p>kjer je $k$ poljubno število framov.</p>
+<p>Ključno je:</p>
+<blockquote>
+<p>Vedno odštevamo dve sliki in dobimo sliko razlik.</p>
+</blockquote>
+<p>FPS določa kako pogosto zajemamo slike, koliko slik na sekundo dobimo. Večji FPS pomeni manjšo časovno razliko med slikami.</p>
+<hr>
+<p>Sliko razlik lahko obdelamo enako kot navadne slike z uporabo segmentacije. Najenostavnejši pristop je:</p>
+<p><strong>Thresholding (pragovanje)</strong></p>
+<ol>
+<li>Izberemo poljuben prag $T$.</li>
+<li>Na podlagi izbranega praga analiziramo sliko.</li>
+</ol>
+<p>Ker lahko pri odštevanju dobimo tudi negativne vrednosti, uporabimo absolutno vrednost:</p>
+$$
+D'(x,y) = |I_t(x,y) - I_{t-k}(x,y)|
+$$<p>Nato izvedemo pragovanje:</p>
+$$
+g(x,y) =
+\begin{cases}
+gibajoči se, & \text{če } D'(x,y) \geq T \\
+0, & \text{sicer}
+\end{cases}
+$$<h3 id="statično-ozadje">
+<a class="header-anchor" href="#stati%c4%8dno-ozadje"></a>
+Statično ozadje
+</h3><p>Pri uporabi slike razlik je problem, da ni nujno, da bomo uspešno izsegmentirali gibajoči se objekt.</p>
+<p>Uspešnost metode je močno odvisna od:</p>
+<ul>
+<li>hitrosti objekta v slikovni ravnini,</li>
+<li>frekvence zajema slik (FPS),</li>
+<li>količine šuma v sliki.</li>
+</ul>
+<p>Če je objekt zelo počasen ali se premika zelo malo, so razlike med slikami lahko zelo majhne. Ravno za te primere, ki so bolj enostavni, da so scene z majhnimi spremembami, pa je metoda slike razlik ravno najbolj primerna. Gre za preprost postopek, kjer aproksimiramo <strong>odvod po času</strong>.</p>
+<hr>
+<p>Metodo lahko posplošimo. Namesto da odštevamo dve zaporedni sliki, lahko:</p>
+<ul>
+<li>prvo zajamemo sceno (ozadje)</li>
+<li>vzamemo trenutno sliko,</li>
+<li>od nje odštejemo sliko statičnega ozadja.</li>
+</ul>
+$$
+D(x,y) = |I_t(x,y) - B(x,y)|
+$$<p>kjer je:</p>
+<ul>
+<li>$I_t(x,y)$ trenutna slika,</li>
+<li>$B(x,y)$ slika ozadja.</li>
+</ul>
+<p>Na mestih, kjer dobimo vrednosti precej različne od 0:</p>
+<ul>
+<li>je prišlo do spremembe,</li>
+<li>tam se je verjetno pojavil ali premaknil objekt.</li>
+</ul>
+<p>Na mestih, kjer je rezultat blizu 0:</p>
+<ul>
+<li>se scena ni spremenila,</li>
+<li>tam imamo ozadje.</li>
+</ul>
+<hr>
+<p><strong>Kako pa dobimo sliko ozadja?</strong></p>
+<p>Če imamo nadzor nad okoljem (npr. nadzorovan prostor) zajamemo sceno brez gibanja,</p>
+<ul>
+<li>zajamemo sceno brez gibanja,</li>
+<li>nekaj minut opazujemo prostor,</li>
+<li>sistem si zapomni statično ozadje.</li>
+</ul>
+<p>Na primer:</p>
+<ul>
+<li>2–3 minute snemamo prazen prostor,</li>
+<li>sistem iz teh slik izračuna model ozadja,</li>
+<li>kasneje vsako novo sliko primerjamo s tem ozadjem.</li>
+</ul>
+<p>Tak pristop je zelo pogost pri nadzornih sistemih.</p>
+<hr>
+<h4 id="postopki-tvorjenja-statičnega-ozadja">
+<a class="header-anchor" href="#postopki-tvorjenja-stati%c4%8dnega-ozadja"></a>
+Postopki tvorjenja statičnega ozadja
+</h4><p>Obstajajo postopki, kjer iz zaporedja slik poskušamo rekonstruirati <strong>sliko ozadja</strong>, tudi kadar je scena dinamična in vsebuje gibanje. Iz več zaporednih slik poskušamo oceniti, kaj predstavlja statično ozadje.</p>
+<h5 id="1-metoda---povprečenje-celotnega-zaporedja-slik">
+<a class="header-anchor" href="#1-metoda---povpre%c4%8denje-celotnega-zaporedja-slik"></a>
+1. Metoda - Povprečenje celotnega zaporedja slik
+</h5><p><strong>Postopek</strong>
+Za vsak pixel $(i,j)$ spremljamo njegovo vrednost skozi vse slike v zaporedju in izračunamo zanj povprečno vrednost. Ta postopek naredimo za vse pixle slike.</p>
+<p>Matematično:</p>
+$$
+B(i,j) = \frac{1}{N} \sum_{t=1}^{N} I_t(i,j)
+$$<p>kjer je:</p>
+<ul>
+<li>$N$ število slik,</li>
+<li>$I_t(i,j)$ vrednost pixla v času $t$.</li>
+</ul>
+<p>Gre za enostaven postopek. Deluje dobro, če se objekti <strong>relativno hitro premikajo</strong>. Če je gibanje zelo počasno, pa se lahko objekt “skrije” v ozadje (postane del povprečja).</p>
+<hr>
+<h5 id="2-metoda---iskanje-skokov-robov-v-časovni-funkciji-pixla">
+<a class="header-anchor" href="#2-metoda---iskanje-skokov-robov-v-%c4%8dasovni-funkciji-pixla"></a>
+2. Metoda - Iskanje skokov (robov) v časovni funkciji pixla
+</h5><p><strong>Postopek</strong></p>
+<p>Izberemo en pixel $(i,j)$ na prvi sliki. Nato spremljamo njegovo vrednost skozi celotno zaporedje slik in opazujemo, kako se njegova vrednost spreminja skozi čas. Iščemo <strong>skoke (robove)</strong> v časovni funkciji.</p>
+<p>Primer:
+Če se objekt premakne čez pixel, pride do nenadne spremembe vrednosti (skoka).</p>
+<p>Pri slikah, kjer zaznamo pri izbranem pikslu skok, sklepamo, da gre za gibajoči se objekt. Te dele izločimo in ne upoštevamo. Seštejemo del pred skokom in po skoku in izračunamo povprečje. Povprečje izračunamo samo iz stabilnih delov (brez skokov). Na ta način poskušamo dobiti boljšo oceno statičnega ozadja.</p>
+<hr>
+<h5 id="3-metoda---z-drsečim-oknom-skozi-čas">
+<a class="header-anchor" href="#3-metoda---z-drse%c4%8dim-oknom-skozi-%c4%8das"></a>
+3. Metoda - Z drsečim oknom skozi čas
+</h5><p>Pri tej metodi ne opazujemo pixla skozi celotno zaporedje, ampak samo skozi <strong>omejeno določeno število zaporednih slik</strong>.</p>
+<p><strong>Drseče okno</strong>
+Za drseče okno lahko vzamemo npr. okno vleikosti 5. To pomeni, da bomo piksel opazovali na petih zaporednih slikah. V tem oknu bomo opazovali kako bo vrednost funkcije nihala.</p>
+<p><strong>Postopek</strong></p>
+<p>V izbranem oknu opazujemo nihanje vrednosti pixla. Preverimo, če ta vrednost niha v nekem dovoljenem območju. Npr. da med maksimumom in minimumom ni razlika večja od 10 nivojev.</p>
+<p>Če velja:</p>
+$$
+\max - \min \leq \text{dovoljena meja} \quad (\text{npr. 10 nivojev})
+$$<p>Potem izračunamo povprečje v tem oknu in to povprečje prištejemo k skupnemu povprečju. Nato povečamo števec veljavnih oken za 1. Nato okno premaknemo za eno sliko naprej in opazujemo naslednjih 5 slik. Tak postopek nato ponavljamo. Če vrednosti v oknu preveč nihajo od dovoljenega območja npr. da min in max vrednost je večja od 10 nivojev, tega okna ne upoštevamo. Na koncu povprečje vseh oken delimo z vsemi okni in dobimo rezultat.</p>
+$$
+B(i,j) = \frac{\text{vsota povprečij veljavnih oken}}{\text{število veljavnih oken}}
+$$<p>Dobimo oceno ozadja, ki je bolj robustna na gibanje.</p>
+<hr>
+<p>Sliko razlik pogosto uporabljamo kot preprost alarmni sistem. Če zaznamo dovolj veliko spremembo (veliko gibajočih se pixlov) sprožimo alarm in aktiviramo zahtevnejše algoritme. To je smiselno, ker ni učinkovito, da bi kompleksne algoritme izvajali ves čas, ampak jih uporabimo le takrat, ko so res potrebne (npr. ko zaznamo gibanje).</p>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Pomembno je omenit, da je model ozadja potrebno tudi posodabljati, ker se svetloba in vremenski pogoji skozi dan spreminjajo. Zato mora biti model ozadja prilagodljiv (adaptiven).</p></p>
+  </blockquote>
+
+<p>Za samo segmentacijo te zgoraj opisane 3 metode ne najboljše. Za take primere imamo boljše metode.</p>
+<h3 id="optični-pretok">
+<a class="header-anchor" href="#opti%c4%8dni-pretok"></a>
+Optični pretok
+</h3><p>Gre za metodo, ki ocenjuje <strong>polje gibanja</strong> med dvema zaporednima slikama.</p>
+<p>Vzememo $ij$-ti piksel na sliki. Predpostavimo, da zajemamo premikanje objekta (npr. pilota). Med premikanjem se piksel premakne za vektor $\mathbf{u}$:</p>
+<ul>
+<li>premik v smeri $x$: $u_x$</li>
+<li>premik v smeri $y$: $u_y$</li>
+</ul>
+<p>Temu pravimo <strong>vektor gibanja</strong> iz slike 1 v sliko 2.</p>
+<p><strong>Matrika gibanja</strong> $\mathbf{U}$ pa hrani vektorje gibanja za vse piksle slike. Če ima slika dimenzijo $M \times N$, ima tudi matrika $\mathbf{U}$ dimenzijo $M \times N$, saj vsebuje toliko elelmentov kot je pikslov na sliki.</p>
+<p><strong>Postopek implementacije:</strong></p>
+<ul>
+<li>ena matrika vsebuje vrednosti premikov po $x$</li>
+<li>druga matrika vsebuje vrednosti premikov po $y$</li>
+<li>matrika U pa je sestavljena iz dveh matrik, matrike po $x$ in matrike po $y$</li>
+</ul>
+<p>Torej:</p>
+$$
+\mathbf{U} = (U_x, U_y)
+$$<p>kjer:</p>
+<ul>
+<li>$U_x$ vsebuje vse vrednosti $u_x$</li>
+<li>$U_y$ vsebuje vse vrednosti $u_y$</li>
+</ul>
+<p>Tam kjer ni gibanja bo vektor 0:</p>
+$$
+\mathbf{u} = (0,0)
+$$<p>Med:</p>
+<ul>
+<li>sliko 0 in 1 dobimo matriko gibanja $\mathbf{U}_1$</li>
+<li>sliko 1 in 2 dobimo novo matriko gibanja $\mathbf{U}_2$</li>
+<li>itd.</li>
+</ul>
+<hr>
+<p>V praksi pa mi nimamo matrike gibanja — imamo le zaporedje slik. Matriko gibanja ocenimo s pomočjo <strong>optičnega toka</strong>, na podlagi zaporedja slik. Optični tok je tehnika, ki temelji na predpostavki, da svetlost gibajočega se objekta ostane konstantna skozi čas.</p>
+<p>Svetlost gibajočega se objekta ostane konstantna skozi čas:</p>
+$$
+I(x,y,t) = I(x + u_x, y + u_y, t+1)
+$$<p>Iz tega sledi, da je popolni odvod po času enak 0:</p>
+$$
+\frac{dI}{dt} = 0
+$$<p>Imamo tri parcialne odvode:</p>
+<ul>
+<li>po $x$</li>
+<li>po $y$</li>
+<li>po času $t$</li>
+</ul>
+<hr>
+<p>Končna enačba optičnega toka je:</p>
+$$
+I_x u_x + I_y u_y + I_t = 0
+$$<p>kjer:</p>
+<ul>
+<li>$I_x = \frac{\partial I}{\partial x}$</li>
+<li>$I_y = \frac{\partial I}{\partial y}$</li>
+<li>$I_t = \frac{\partial I}{\partial t}$</li>
+</ul>
+<p>Parcialna odvoda $I_x$ in $I_y$ predstavljata robove slike.</p>
+<hr>
+<p>Imamo skupaj:</p>
+<ul>
+<li>1 enačbo</li>
+<li>2 neznanki ($u_x$, $u_y$)</li>
+</ul>
+<p>Problem tega je, da rešitve ne moremo določiti enolično. Dobimo premico rešitev, zato moramo dodati dodatno predpostavko za enolično rešitev. Za namene tega uporabimo metodo Lucas–Kanade.</p>
+<hr>
+<p>Metoda <strong>Lucas–Kanade</strong> temelji na predpostavki optičnega toka, da se svetlost piksla skozi čas ne spreminja. Doda pa še eno pomembno predpostavko:</p>
+<blockquote>
+<p>Piksel in njegova majhna okolica se gibajo z enako hitrostjo (imajo enak vektor gibanja).</p>
+</blockquote>
+<p>To pomeni, da imajo vsi piksli v izbrani okolici enak vektor gibanja:
+</p>
+$$
+\mathbf{u} = (u_x, u_y)
+$$<p>Zaradi tega dobimo več enačb za isti dve neznanki.</p>
+<hr>
+<h4 id="oblikovanje-sistema-enačb">
+<a class="header-anchor" href="#oblikovanje-sistema-ena%c4%8db"></a>
+Oblikovanje sistema enačb
+</h4><h5 id="korak-1-izberemo-okolico">
+<a class="header-anchor" href="#korak-1-izberemo-okolico"></a>
+Korak 1: Izberemo okolico
+</h5><p>Določimo okolico okoli opazovanega piksla (npr. 3×3 ali 5×5). Če imamo okolico 3×3, imamo 9 pikslov → dobimo 9 enačb.</p>
+<hr>
+<h5 id="korak-2-izračun-parcialnih-odvodov">
+<a class="header-anchor" href="#korak-2-izra%c4%8dun-parcialnih-odvodov"></a>
+Korak 2: Izračun parcialnih odvodov
+</h5><p>Za vsak piksel v okolici izračunamo:</p>
+<ul>
+<li>parcialni odvod po $x$</li>
+<li>parcialni odvod po $y$</li>
+<li>parcialni odvod po času $t$</li>
+</ul>
+<hr>
+<h5 id="korak-3-matrika-a">
+<a class="header-anchor" href="#korak-3-matrika-a"></a>
+Korak 3: Matrika A
+</h5><p>Parcialne odvode nato zložimo v matriko:</p>
+$$
+A =
+\begin{bmatrix}
+I_{x1} & I_{y1} \\
+I_{x2} & I_{y2} \\
+\vdots & \vdots \\
+I_{xq} & I_{yq}
+\end{bmatrix}
+$$<p>Če imamo okolico 3×3:</p>
+<ul>
+<li>$q = 9$</li>
+<li>dimenzija matrike je $9 \times 2$</li>
+</ul>
+<p>Prvi stolpec vsebuje odvode po $x$, drugi po $y$.</p>
+<hr>
+<h5 id="korak-4-stolpec-b">
+<a class="header-anchor" href="#korak-4-stolpec-b"></a>
+Korak 4: Stolpec b
+</h5><p>Nato pa formiramo stolpec b. Za vsak piksel iz okolice določimo parcialni odvod po času:</p>
+$$
+b =
+\begin{bmatrix}
+I_{t1} \\
+I_{t2} \\
+\vdots \\
+I_{tq}
+\end{bmatrix}
+$$<p>Od trenutnega piksla odštejemo istoležni piksel na prejšnji sliki — to je ocena parcialnega odvoda za naš piksel.</p>
+<hr>
+<h5 id="korak-5-reševanje-sistema">
+<a class="header-anchor" href="#korak-5-re%c5%a1evanje-sistema"></a>
+Korak 5: Reševanje sistema
+</h5><p>Dobimo sistem:</p>
+$$
+A \mathbf{u} + b = 0
+$$<p>kjer je:</p>
+$$
+\mathbf{u} =
+\begin{bmatrix}
+u_x \\
+u_y
+\end{bmatrix}
+$$<p>Tu imamo problem da imamo inverz matrike, ki obstaja samo za kvadratne matrike. Matrika $A$ ni kvadratna (npr. 9×2), zato ne moremo izračunati klasičnega inverza. Zato uporabimo <strong>psevdoinverz</strong>:</p>
+$$
+\mathbf{u} = (A^T A)^{-1} A^T (-b)
+$$<p>To je rešitev v smislu najmanjših kvadratov.</p>
+<p>Za vsak piksel posebej moramo:</p>
+<ul>
+<li>določiti matriko $A$</li>
+<li>določiti stolpec $b$</li>
+<li>izračunati $\mathbf{u}$</li>
+</ul>
+<p>Računsko je ta metoda precej zahtevna.</p>
+<hr>
+<h4 id="psevdokod-algoritma">
+<a class="header-anchor" href="#psevdokod-algoritma"></a>
+Psevdokod algoritma
+</h4><h5 id="izbira-okolice">
+<a class="header-anchor" href="#izbira-okolice"></a>
+Izbira okolice
+</h5><p>Okolico določimo sami (npr. 5×5).</p>
+<hr>
+<h5 id="opcijska-koraka-predobdelava">
+<a class="header-anchor" href="#opcijska-koraka-predobdelava"></a>
+Opcijska koraka (predobdelava)
+</h5><ol>
+<li>
+<p>Filtriranje slike z Gaussovim filtrom → odstranimo bel šum</p>
+</li>
+<li>
+<p>Časovno glajenje z enodimenzionalnim Gaussovim filtrom → stabilizacija skozi čas</p>
+</li>
+</ol>
+<p>Ta dva koraka nista nujna, povečata pa stabilnost.</p>
+<hr>
+<h5 id="ključni-koraki">
+<a class="header-anchor" href="#klju%c4%8dni-koraki"></a>
+Ključni koraki
+</h5><h6 id="ocenitev-optičnega-toka">
+<a class="header-anchor" href="#ocenitev-opti%c4%8dnega-toka"></a>
+Ocenitev optičnega toka
+</h6><p>Gremo skozi zaporedje slik:</p>
+<ul>
+<li>od druge do zadnje slike
+ali</li>
+<li>od prve do predzadnje</li>
+</ul>
+<p>Ključno je, da vedno imamo eno sliko manj kot je vseh slik.</p>
+<p>Za vsak piksel izračunamo:</p>
+<ol>
+<li>Izračunamo parcialne odvode</li>
+<li>Sestavimo matriko $A$</li>
+<li>Sestavimo stolpec $b$</li>
+<li>Izračunamo psevdoinverz</li>
+<li>Shranimo rezultat v matriko gibanja</li>
+</ol>
+<p>Računsko je to kar pasje.</p>
+<hr>
+<h5 id="kaj-dobimo-z-optičnim-tokom">
+<a class="header-anchor" href="#kaj-dobimo-z-opti%c4%8dnim-tokom"></a>
+Kaj dobimo z optičnim tokom?
+</h5><p>Med vsako zaporedno sliko dobimo ocenjeno matriko gibanja.</p>
+<p>Opazujemo lahko:</p>
+$$
+|\mathbf{u}| = \sqrt{u_x^2 + u_y^2}
+$$<ul>
+<li>če je dolžina majhna → ni gibanja (ali je pod pragom)</li>
+<li>če je dolžina velika → zaznamo gibanje</li>
+</ul>
+<p>Vektor gibanja pove:</p>
+<ul>
+<li>smer gibanja iz slike v sliko</li>
+<li>hitrost gibanja v slikovni ravnini</li>
+</ul>
+<hr>
+<h5 id="primer--optični-pretok">
+<a class="header-anchor" href="#primer--opti%c4%8dni-pretok"></a>
+Primer – Optični pretok
+</h5><p>Imamo pravokotnik, ki se premika.</p>
+<p>Med vsako sliko se premakne:</p>
+<ul>
+<li>3 vrstice navzdol</li>
+<li>4 stolpce desno</li>
+</ul>
+<p>To informacijo poznamo mi, algoritem pa je ne.</p>
+<p>Po prvem koraku (Gauss filtriranje) dobimo zglajeno sliko.</p>
+<p>Nadaljnji izračun temelji na:</p>
+<ul>
+<li>seštevanju</li>
+<li>odštevanju</li>
+<li>računanju parcialnih odvodov</li>
+<li>reševanju sistema najmanjših kvadratov</li>
+</ul>
+<h3 id="sledenje-objektom">
+<a class="header-anchor" href="#sledenje-objektom"></a>
+Sledenje objektom
+</h3><p>Ta pristop je zelo naraven. Pri sledenju objektov <strong>ne obdelujemo vsake slike posebej</strong>, temveč si pomagamo z zgodovino:</p>
+<ul>
+<li>Kje je bil objekt na prejšnji sliki?</li>
+<li>Kako se je gibal?</li>
+</ul>
+<p>Na podlagi zgodovine <strong>predvidimo nov položaj objekta</strong>.</p>
+<hr>
+<p>Postopek poteka v dveh fazah:</p>
+<ol>
+<li><strong>Predikcija</strong> – ocenimo, kje naj bi bil objekt na novi sliki.</li>
+<li><strong>Korekcija</strong> – preverimo in popravimo napako predikcije.</li>
+</ol>
+<p>Predikcija je lahko:</p>
+<ul>
+<li>pravilna</li>
+<li>napačna</li>
+</ul>
+<p>V obeh primerih moramo rezultat preveriti in po potrebi popraviti.</p>
+<hr>
+<blockquote>
+<p><strong>Primer</strong></p>
+<ul>
+<li>Nogometaš teče naprej → predikcija, da bo nadaljeval naprej, je lahko pravilna.</li>
+<li>Nogometaš naredi finto in se obrne → predikcija je napačna.</li>
+</ul>
+<p>V obeh primerih moramo predvideni položaj <strong>korigirati</strong>.</p>
+</blockquote>
+<hr>
+<p>Na začetni sliki moramo:</p>
+<ol>
+<li>Z nekim algoritmom določiti začetno pozicijo (npr. težišče objekta).</li>
+<li>Objekt moramo najprej <strong>segmentirati</strong> (z enim izmed segmentacijskih postopkov).</li>
+</ol>
+<p>Če želimo slediti nogometašu, ga moramo najprej izločiti iz ozadja (s enim od postopkov segmentacije).</p>
+<hr>
+<p>Nato gremo skozi zaporedje slik:</p>
+<ol>
+<li>Na podlagi zgodovine predvidimo položaj.</li>
+<li>Na novi sliki poiščemo objekt v okolici predvidenega položaja.</li>
+</ol>
+<p>Primer:</p>
+<ul>
+<li>Na pretekli sliki je bil nogometaš na določeni poziciji.</li>
+<li>Predvidevamo, da bo na naslednji sliki nekoliko naprej.</li>
+</ul>
+<hr>
+<p>V oknu okoli predvidene lokacije:</p>
+<ul>
+<li>preverimo dejanski položaj objekta</li>
+<li>popravimo napako predikcije</li>
+</ul>
+<p>Če:</p>
+<ul>
+<li>je objekt blizu predvidenega mesta → popravimo položaj</li>
+<li>objekt ni tam (npr. zaradi nenadne spremembe gibanja) → moramo ponovno pregledati širše območje ali celo celotno sliko</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>Primer</strong></p>
+<p>Če nogometaš naredi finto in ostane na istem mestu ali spremeni smer:</p>
+<ul>
+<li>predikcijsko okno je lahko prazno</li>
+<li>potrebno je ponovno iskanje objekta po sliki</li>
+<li>nato nadaljujemo s ciklom:</li>
+</ul>
+<p><strong>predikcija → korekcija → predikcija → korekcija</strong></p>
+</blockquote>
+<h2 id="geometrija-več-pogledov">
+<a class="header-anchor" href="#geometrija-ve%c4%8d-pogledov"></a>
+Geometrija več pogledov
+</h2><h3 id="dva-pogleda-splošno">
+<a class="header-anchor" href="#dva-pogleda-splo%c5%a1no"></a>
+Dva pogleda (splošno)
+</h3><p>Do zdaj smo obravnavali eno sliko ali zaporedje slik skozi čas (premikanje kamere ali objektov)</p>
+<p>Sedaj imamo drugačen primer:</p>
+<blockquote>
+<p>Dve kameri gledata isto sceno oziroma objekt iz različnih položajev.</p>
+</blockquote>
+<p>Do zdaj smo matematično modelirali projekcijo:</p>
+<p>Točka v prostoru $P = (X,Y,Z)$ se preslika v piksel $(x,y)$ na sliki.</p>
+<p>To je bila <strong>projekcija iz 3D v 2D</strong>.</p>
+<p>Sedaj želimo obratni postopek:</p>
+<blockquote>
+<p>Imamo piksel na sliki.<br>
+Zanima pa nas iz katere točke v prostoru je prišel?</p>
+</blockquote>
+<hr>
+<p>Problem pri tem je, da iz ene slike ne moremo enolično rekonstruirati piksle v 3D točke.</p>
+<p>Razlog:</p>
+<ul>
+<li>Vsaka točka na projekcijskem žarku se preslika v isti piksel.</li>
+<li>Imamo neskončno mnogo možnih 3D točk na istem žarku.</li>
+</ul>
+<p>Zato:</p>
+<blockquote>
+<p>Potrebujemo več pogledov (minimalno 2 pogleda).</p>
+</blockquote>
+<hr>
+<h4 id="geometrija-dveh-kamer">
+<a class="header-anchor" href="#geometrija-dveh-kamer"></a>
+Geometrija dveh kamer
+</h4><p>Imamo:</p>
+<ul>
+<li>točko v prostoru $P$</li>
+<li>dve kameri</li>
+<li>projekciji točke na obeh slikah: $p$ in $p'$</li>
+</ul>
+<hr>
+<p><strong>Osnovnica</strong> je daljica med optičnima centroma obeh kamer. Tam, kjer osnovnica prebije slikovni ravnini, dobimo:</p>
+<ul>
+<li>
+<p>epipol $e$ (na levi sliki)</p>
+</li>
+<li>
+<p>epipol $e'$ (na desni sliki)</p>
+</li>
+<li>
+<p><strong>Epipol $e$</strong>: projekcija optičnega centra desne kamere na levo sliko.</p>
+</li>
+<li>
+<p><strong>Epipol $e'$</strong>: projekcija optičnega centra leve kamere na desno sliko.</p>
+</li>
+</ul>
+<hr>
+<p><strong>Epipolarna ravnina</strong> je ravnina, ki jo določajo:</p>
+<ul>
+<li>optični center prve kamere</li>
+<li>optični center druge kamere</li>
+<li>točka $P$ v prostoru</li>
+</ul>
+<p>To ravnino imenujemo <strong>epipolarna ravnina</strong>.</p>
+<p>Na tej ravnini ležijo:</p>
+<ul>
+<li>osnovnica</li>
+<li>točka $P$</li>
+<li>oba projekcijska žarka</li>
+</ul>
+<hr>
+<p>Presek epipolarne ravnine s slikovno ravnino da:</p>
+<ul>
+<li><strong>epipolarno premico $l$</strong> na levi sliki</li>
+<li><strong>epipolarno premico $l'$</strong> na desni sliki</li>
+</ul>
+<p>Velja:</p>
+<ul>
+<li>$l$ je daljica od $e$ do $p$</li>
+<li>$l'$ je daljica od $e'$ do $p'$</li>
+</ul>
+<hr>
+<p>Za rekonstrukcijo 3D točke moramo vedeti:</p>
+<blockquote>
+<p>Katera točka $p'$ na drugi sliki ustreza točki $p$ na prvi sliki?</p>
+</blockquote>
+<p>Če bi iskali korespondenčno točko po celotni sliki:</p>
+<ul>
+<li>časovna zahtevnost ≈ $O(n^2)$</li>
+</ul>
+<p>To je prepočasno (brute force pristop).</p>
+<hr>
+<p>Ključna ideja:</p>
+<p>Točka $p'$ mora ležati na epipolarni premici $l'$.</p>
+<p>Zato:</p>
+<blockquote>
+<p>Ni treba pregledovati cele slike.<br>
+Dovolj je pregledati točke na epipolarni premici.</p>
+</blockquote>
+<p>Iz točke $p$ na levi sliki lahko izračunamo epipolarno premico $l'$ na desni sliki. Vedno računamo epipolarno premico za drugo sliko.</p>
+<p>Z epipolarno omejitvijo zmanjšamo zahtevnost:</p>
+$$
+O(n^2) \rightarrow O(n)
+$$<p>S tem močno pohitrimo iskanje korespondenc.</p>
+<h3 id="trije-pogledi">
+<a class="header-anchor" href="#trije-pogledi"></a>
+Trije pogledi
+</h3><h3 id="določanje-položaja-točk-v-3d">
+<a class="header-anchor" href="#dolo%c4%8danje-polo%c5%beaja-to%c4%8dk-v-3d"></a>
+Določanje položaja točk v 3D
+</h3><h3 id="stereo-vid">
+<a class="header-anchor" href="#stereo-vid"></a>
+Stereo vid
 </h3></div>
     <footer class="article-footer"><ul class="article-category-list"></ul>
 <ul class="article-tag-list" itemprop="keywords"></ul>
@@ -2553,10 +3183,10 @@ Ujemanje šablon
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;11.3k</span
+          >&nbsp;13.9k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;00:55</span>
+        <span class="icon-coffee">&nbsp;01:07</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -2610,6 +3240,23 @@ Ujemanje šablon
         <li><a href="#pragovna-operacija">Pragovna operacija</a></li>
         <li><a href="#pragovna-operacija-na-sliki-robov">Pragovna operacija na sliki robov</a></li>
         <li><a href="#ujemanje-šablon">Ujemanje šablon</a></li>
+      </ul>
+    </li>
+    <li><a href="#zaporedje-slik-in-sledenje-gibanja">Zaporedje slik in sledenje gibanja</a>
+      <ul>
+        <li><a href="#osnovni-pojmi-1">Osnovni pojmi</a></li>
+        <li><a href="#slike-razlik">Slike razlik</a></li>
+        <li><a href="#statično-ozadje">Statično ozadje</a></li>
+        <li><a href="#optični-pretok">Optični pretok</a></li>
+        <li><a href="#sledenje-objektom">Sledenje objektom</a></li>
+      </ul>
+    </li>
+    <li><a href="#geometrija-več-pogledov">Geometrija več pogledov</a>
+      <ul>
+        <li><a href="#dva-pogleda-splošno">Dva pogleda (splošno)</a></li>
+        <li><a href="#trije-pogledi">Trije pogledi</a></li>
+        <li><a href="#določanje-položaja-točk-v-3d">Določanje položaja točk v 3D</a></li>
+        <li><a href="#stereo-vid">Stereo vid</a></li>
       </ul>
     </li>
   </ul>
