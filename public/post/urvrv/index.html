@@ -202,6 +202,16 @@ This article does not have a corresponding language version
         <li><a href="#stereo-vid">Stereo vid</a></li>
       </ul>
     </li>
+    <li><a href="#uvod-v-razpoznavanje-vzorcev">Uvod v razpoznavanje vzorcev</a>
+      <ul>
+        <li><a href="#definicije-in-osnovni-pojmi">Definicije in osnovni pojmi</a></li>
+        <li><a href="#model-razvrščevalnika-vzorcev">Model razvrščevalnika vzorcev</a></li>
+        <li><a href="#zapisi-vzorcev">Zapisi vzorcev</a></li>
+        <li><a href="#spoznavanje-področja-uporabe">Spoznavanje področja uporabe</a></li>
+        <li><a href="#razvrščanje-vzorcev">Razvrščanje vzorcev</a></li>
+        <li><a href="#preizkušanje-razvrščevalnika-vzorcev">Preizkušanje razvrščevalnika vzorcev</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div></div>
@@ -3115,33 +3125,581 @@ Geometrija dveh kamer
 <blockquote>
 <p>Katera točka $p'$ na drugi sliki ustreza točki $p$ na prvi sliki?</p>
 </blockquote>
-<p>Če bi iskali korespondenčno točko po celotni sliki:</p>
-<ul>
-<li>časovna zahtevnost ≈ $O(n^2)$</li>
-</ul>
-<p>To je prepočasno (brute force pristop).</p>
+<p>Če imamo piksel $p$ na sliki leve kamere, potrebujemo pripadajoči piksel $p'$ na sliki desne kamere. Preden lahko rekonstruiramo 3D točko $P$, moramo torej najti ustrezno točko $p'$.</p>
+<p>Če bi iskali pripadajoči piksel po celotni sliki bi morali pregledati vse piksle in časovna zahtevnost bi bila približno $O(n^2)$, kar bi pomenilo, da bi postopek bil zelo počasen. To je brute force pristop.</p>
 <hr>
-<p>Ključna ideja:</p>
-<p>Točka $p'$ mora ležati na epipolarni premici $l'$.</p>
-<p>Zato:</p>
-<blockquote>
-<p>Ni treba pregledovati cele slike.<br>
-Dovolj je pregledati točke na epipolarni premici.</p>
-</blockquote>
-<p>Iz točke $p$ na levi sliki lahko izračunamo epipolarno premico $l'$ na desni sliki. Vedno računamo epipolarno premico za drugo sliko.</p>
-<p>Z epipolarno omejitvijo zmanjšamo zahtevnost:</p>
+<p>Namesto pregledovanja celotne slike uporabimo <strong>epipolarno premico</strong>. Točka $p'$ mora ležati na epipolarni premici $l'$. Zato ne iščemo in pregledujemo celotne slike, ampak se sprehajamo samo po epipolarni premici in pregledujemo točke samo tam. S tem močno pohitrimo iskanje korespondenc in zmanjšamo časovno zahtevnost:</p>
 $$
 O(n^2) \rightarrow O(n)
-$$<p>S tem močno pohitrimo iskanje korespondenc.</p>
+$$<p>Iz točke $p$ na levi sliki lahko izračunamo epipolarno premico $l'$ na desni sliki. Vedno računamo epipolarno premico za drugo sliko.
+Ko najdemo ustrezno točko $p'$, lahko rekonstruiramo 3D točko $P$.</p>
+<hr>
+<p><strong>Kako pa določimo epipolarno premico $l'$?</strong></p>
+<p>Da lahko izračunamo <strong>epipolarno premico $l'$</strong>, moramo poznati transformacijo med obema pogledoma. Če poznamo transformacijo med kamerama znamo izračunati epipolarno premico, na njej pa lahko poiščemp ustrezno točko in nato izvedemo 3D rekonstrukcijo.</p>
+<h5 id="prva-varianta--kalibrirane-razmere">
+<a class="header-anchor" href="#prva-varianta--kalibrirane-razmere"></a>
+PRVA VARIANTA – Kalibrirane razmere
+</h5><p>Če imamo <strong>kalibrirane razmere</strong>, pomeni, da poznamo kalibracijski matriki obeh kamer in notranji parametri kamer so znani. V tem primeru je transformacija med obema pogledoma podana z <strong>osnovno (esencialno) matriko</strong> $E$.</p>
+<p>Povezava med pogledoma (točkama na obeh slikah) je podana z enačbo:</p>
+$$
+p^T E p' = 0
+$$<p>kjer:</p>
+<ul>
+<li>$p$ – piksel na levi sliki (v homogenih koordinatah)</li>
+<li>$p'$ – piksel na desni sliki (v homogenih koordinatah)</li>
+</ul>
+<hr>
+<p>Matrika $E$ je osnovna matrika v kalibriranih enotah.</p>
+<p>Sestavljena je iz:</p>
+<ul>
+<li>rotacije $R$</li>
+<li>translacije $t$</li>
+</ul>
+<p>Velja:</p>
+$$
+E = [t]_\times R
+$$<p>kjer je:</p>
+<ul>
+<li>$R$ – rotacijska matrika</li>
+<li>$[t]_\times$ – matrika, ki predstavlja translacijo v obliki navzkrižnega produkta</li>
+</ul>
+<hr>
+<p>Če je:</p>
+$$
+t = 
+\begin{bmatrix}
+t_x \\
+t_y \\
+t_z
+\end{bmatrix}
+$$<p>potem je pripadajoča matrika:</p>
+$$
+[t]_\times =
+\begin{bmatrix}
+0 & -t_z & t_y \\
+t_z & 0 & -t_x \\
+-t_y & t_x & 0
+\end{bmatrix}
+$$<p>Translacijski vektor je torej zapisan v matrični obliki.</p>
+<hr>
+<p>Če imamo točko $p'$ na desni sliki (v homogenih koordinatah), dobimo epipolarno premico na levi sliki z:</p>
+$$
+l = E p'
+$$<p>Rezultat je stolpec treh vrednosti:</p>
+$$
+l =
+\begin{bmatrix}
+a \\
+b \\
+c
+\end{bmatrix}
+$$<p>Te tri vrednosti predstavljajo parametre premice.</p>
+<hr>
+<p>Če ima piksel na sliki koordinate vektorjev $(u, v)$, potem je epipolarna premica podana z:</p>
+$$
+a u + b v + c = 0
+$$<hr>
+<p>V praksi je pogostejši primer, ko nimamo kalibriranih razmer. Takrat uporabljamo <strong>fundamentalno matriko</strong> namesto esencialne matrike.</p>
+<h5 id="druga-varianta--neurejene-oz-nekalibrirane-razmere">
+<a class="header-anchor" href="#druga-varianta--neurejene-oz-nekalibrirane-razmere"></a>
+DRUGA VARIANTA – Neurejene oz. nekalibrirane razmere
+</h5><p>V tem primeru transformacijo med obema pogledoma podaja <strong>temeljna matrika</strong> $F$.</p>
+<hr>
+<p>Povezava med pripadajočima piksloma $p$ in $p'$ je podana z enačbo:</p>
+$$
+p^T F p' = 0
+$$<p>Enačba je po obliki zelo podobna tisti pri esencialni matriki. Če poznamo temeljno matriko $F$, lahko delamo po isti relaciji kot prej.</p>
+<hr>
+<p><strong>Kako pridemo do temeljne matrike $F$?</strong></p>
+<p>Ne poznamo kalibracijskih matrik $K$. Teoretična povezava med kalibracijska in temeljno matriko je:</p>
+$$
+F = K^{-T} E K^{-1}
+$$<p>Vendar v praksi te enačbe ne moremo uporabiti, ker matrik $K$ ne poznamo. Zato do temeljne matrike pridemo preko <strong>kalibracije sistema kamer</strong>. Uporabimo kalibracijo in računamo kalibracijsko matriko!</p>
+<hr>
+<h6 id="kalibracija-sistema-kamer">
+<a class="header-anchor" href="#kalibracija-sistema-kamer"></a>
+Kalibracija sistema kamer
+</h6><p><strong>Korespondenčni pari</strong></p>
+<p>Potrebujemo pare pripadajočih točk:</p>
+<ul>
+<li>piksel na sliki leve kamere</li>
+<li>pripadajoči piksel na sliki desne kamere</li>
+</ul>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Korespondenčne točke morajo biti čim bolj natančno določene in čim bolj razpršene po celotni sliki (da ne ležijo preveč skupaj!), sicer postane usmerjanje nestabilno!</p></p>
+  </blockquote>
+
+<p>Lahko jih določimo:</p>
+<ol>
+<li>ročno (ročno določimo položaje točk na slikah),</li>
+<li>avtomatsko (iskanje značilnic in karakteristik v sliki npr. ogljišča objektov).</li>
+</ol>
+<hr>
+<h6 id="algoritem-osmih-točk">
+<a class="header-anchor" href="#algoritem-osmih-to%c4%8dk"></a>
+Algoritem osmih točk
+</h6><p>Matrika $F$ je velikosti $3 \times 3$:</p>
+$$
+F =
+\begin{bmatrix}
+F_{11} & F_{12} & F_{13} \\
+F_{21} & F_{22} & F_{23} \\
+F_{31} & F_{32} & F_{33}
+\end{bmatrix}
+$$<p>To pomeni, da ima 9 neznank. Kako jih določimo potem z 8 pari točk?
+Uporabimo trik.</p>
+<p>Postavimo:</p>
+$$
+F_{33} = 1
+$$<p>S tem zmanjšamo število neznank na 8. Naredimo stolpec 8 neznank. Imamo našo matriko, ki ima 8 stolpcev in toliko vrstic, kolikor je korespondenčnih parov. Prva vrstica za prvi korespondenčni par, druga vrstica za drug korespondenčni par itd.</p>
+<p>Oblikujemo sistem linearnih enačb:</p>
+<ul>
+<li>vsaka korespondenčna točka da eno enačbo</li>
+<li>dobimo sistem z 8 neznankami</li>
+</ul>
+<p>Rešimo ga z uporabo <strong>psevdoinverza</strong> (metoda najmanjših kvadratov).</p>
+<hr>
+<p>Algoritem osmih točk ima problem, da je občutljiv na napake. Raziskave kažejo, da je možno dobiti boljše rezultate, če uporabimo <strong>normalizacijo točk</strong>.</p>
+<hr>
+<p><strong>1. Centriranje podatkov (točk)</strong></p>
+<p>Pomeni, da izračunamo povprečni piksel (povprečje) in ga odštejemo od vsake točke-potem bo povprečje v točki 0,0 oz. koordinatnem izhodišču:</p>
+$$
+(0,0)
+$$<p>To naredimo za piksle leve in desne kamere.</p>
+<hr>
+<p><strong>2. Skaliranje</strong></p>
+<p>Po centriranju:</p>
+<ul>
+<li>izračunamo povprečno razdaljo točk od izhodišča</li>
+<li>skaliramo točke tako, da je ta razdalja enaka:</li>
+</ul>
+$$
+\sqrt{2}
+$$<p>To naredimo za vsako točko.</p>
+<hr>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Dobimo temeljno matriko $F$ za normalizirane (skalirane) točke. V praksi je algoritem osmih točk občutljiv na napake, zato se pogosto uporabljajo robustnejše metode.</p></p>
+  </blockquote>
+
+<hr>
 <h3 id="trije-pogledi">
 <a class="header-anchor" href="#trije-pogledi"></a>
 Trije pogledi
-</h3><h3 id="določanje-položaja-točk-v-3d">
+</h3><p>Če imamo <strong>3 poglede</strong>, obstajajo postopki, ki lahko problem napadejo direktno.</p>
+<p>V praksi pa raje rešujemo problem <strong>3× za 2 kameri</strong>:</p>
+<ul>
+<li>(1. in 2. kamera)</li>
+<li>(1. in 3. kamera)</li>
+<li>(2. in 3. kamera)</li>
+</ul>
+<hr>
+<p>Pojavi se vprašanje:</p>
+<blockquote>
+<p>Ali je bolje imeti 2 kameri, 3 kamere, 5 kamer …?</p>
+</blockquote>
+<p>Ne obstaja enostavna enačba, ki bi točno povedala optimalno število kamer. Raziskave pa kažejo, da če imamo manjši prostor (npr. učilnico), prehod iz <strong>2 na 3 kamere</strong> opazno izboljša natančnost. Prehod iz <strong>3 na 4 ali več kamer</strong> pa prinese zelo majhno izboljšanje (npr. le nekaj odstotkov). Glede na čas in kompleksnost sistema je za omejeno območje <strong>sistem treh kamer običajno povsem dovolj.</strong></p>
+<hr>
+<p>Ko govorimo o pogledih to pomeni, da kamere morajo gledati <strong>isti del prostora</strong> in zaznavati <strong>iste prostorske točke</strong>.</p>
+<hr>
+<h3 id="določanje-položaja-točk-v-3d">
 <a class="header-anchor" href="#dolo%c4%8danje-polo%c5%beaja-to%c4%8dk-v-3d"></a>
 Določanje položaja točk v 3D
-</h3><h3 id="stereo-vid">
+</h3><p>Imamo:</p>
+<ul>
+<li>pripadajoča piksla na levi kameri</li>
+<li>pripadajoča piksla na desni kameri</li>
+</ul>
+<p>Iz pikslov na levi in desni kameri bi želeli priti nazaj do točke v prostoru:</p>
+$$
+\text{prostorsko točko } P
+$$<p>Poznamo torej projekciji točke na slikah (piksla na sliki).</p>
+<hr>
+<blockquote>
+<p>Teoretični primer – 2 pogleda</p>
+<p>Imamo:</p>
+<ul>
+<li>optični center leve kamere $O$</li>
+<li>optični center desne kamere $O'$</li>
+</ul>
+<p>Pošljemo:</p>
+<ul>
+<li>žarek skozi $O$</li>
+<li>žarek skozi $O'$</li>
+</ul>
+<p>Teoretično velja:</p>
+<p><strong>Kjer se žarka sekata, tam leži rekonstruirana točka $P$.</strong> Problem je, da v praksi temu dosti krat ni tako.</p>
+</blockquote>
+<p>V realnosti se žarka skoraj nikoli ne sekata natančno in zaradi šuma in napak sta <strong>mimobežna</strong>. V primeru treh pogledov imamo v prostoru 3 žarke. V splošnem se ti trije žarki ne sekajo v eni točki. Nimajo skupnega presečišča.</p>
+<p>Kaj naredimo?
+Poiščemo točko, ki je:</p>
+$$
+\text{najbližja vsem trem premicam}
+$$<p>Torej iščemo točko, ki minimizira razdaljo do vseh treh žarkov.</p>
+<hr>
+<h4 id="postopek-za-2-pogleda">
+<a class="header-anchor" href="#postopek-za-2-pogleda"></a>
+Postopek za 2 pogleda?
+</h4><p>Imamo dve mimobežni premici.</p>
+<p>Postopek:</p>
+<ol>
+<li>Poiščemo daljico, ki je pravokotna na obe premici.</li>
+<li>Ta daljica predstavlja najkrajšo razdaljo med premicama.</li>
+<li>Točko postavimo na sredino te daljice.</li>
+</ol>
+<p>Geometrijsko:</p>
+$$
+P = \text{središče najkrajše povezovalne daljice}
+$$<p>Ali je to dobro ali slabo?</p>
+<p>Težko podamo absolutno oceno. Lahko pa rešitev dobro interpretiramo geometrijsko:</p>
+<ul>
+<li>minimiziramo napako med žarkoma.</li>
+</ul>
+<hr>
+<h4 id="postopek-za-3-poglede">
+<a class="header-anchor" href="#postopek-za-3-poglede"></a>
+Postopek za 3 poglede
+</h4><p>Problem rešimo <strong>3× po 2 kameri</strong>:</p>
+<ol>
+<li>Rekonstrukcija iz (1, 2) → dobimo točko $P_{12}$</li>
+<li>Rekonstrukcija iz (1, 3) → dobimo točko $P_{13}$</li>
+<li>Rekonstrukcija iz (2, 3) → dobimo točko $P_{23}$</li>
+</ol>
+<p>Dobimo tri približne točke v prostoru.</p>
+<p>Vzamemo povprečje:</p>
+$$
+P = \frac{P_{12} + P_{13} + P_{23}}{3}
+$$<p>To je končna ocena prostorske točke.</p>
+<hr>
+<h3 id="stereo-vid">
 <a class="header-anchor" href="#stereo-vid"></a>
 Stereo vid
+</h3><h4 id="rekonstrukcija">
+<a class="header-anchor" href="#rekonstrukcija"></a>
+Rekonstrukcija
+</h4><p>Matematični pristop nima neposredne geometrijske razlage. Točke, ki jo dobimo, geometrijsko ne znamo enostavno interpretirati in ne znamo povedati, zakaj je točno tam v prostoru.</p>
+<p>Izhaja iz osnovne projekcijske enačbe:</p>
+$$
+p = \frac{1}{z} M P
+$$<p>kjer je:</p>
+<ul>
+<li>$P$ — prostorska točka,</li>
+<li>$M$ — projekcijska matrika kamere,</li>
+<li>$p$ — projekcija na sliki,</li>
+<li>$z$ — globinska komponenta.</li>
+</ul>
+<p>Imamo dve kameri:</p>
+<ul>
+<li>leva kamera: $M$</li>
+<li>desna kamera: $M'$</li>
+</ul>
+<p>Poznamo:</p>
+<ul>
+<li>$p$ (leva slika),</li>
+<li>$p'$ (desna slika).</li>
+</ul>
+<hr>
+<p>Enačbo preuredimo:</p>
+$$
+p \times (M P) = 0
+$$<p>Dobimo:</p>
+<ul>
+<li>eno enačbo za levo kamero,</li>
+<li>eno enačbo za desno kamero.</li>
+</ul>
+<p>S tem dobimo sistem linearnih enačb za neznano točko $P$.</p>
+<hr>
+<p>Če je prava točka:</p>
+$$
+P = [100, 200, 300]^T
+$$<p>bi pričakovali, da bo rekonstrukcija enaka. Te vrednosti bodo pa v praksi žal drugačne.</p>
+<p>V praksi:</p>
+<ul>
+<li>dobimo drugačne vrednosti,</li>
+<li>oblika prostora je lahko deformirana,</li>
+<li>namesto kvadrov dobimo rombe,</li>
+<li>pojavljajo se rotacije in translacije.</li>
+</ul>
+<p>To pomeni, da je rekonstrukcija določena le do projektivne (ali afine) transformacije.</p>
+<hr>
+<h4 id="primer-paralelnih-kamer">
+<a class="header-anchor" href="#primer-paralelnih-kamer"></a>
+Primer paralelnih kamer
+</h4><p>Imamo poseben primer dveh pogledov, kjer ima konfiguracija 2 poljubni kameri. <strong>Stereo vid s paralelnimi kamerami</strong> pomeni, da predpostavljamo da imamo dve enaki kameri z enakim goriščem. Stereo pomeni <strong>2 kameri</strong>.</p>
+<p>Predpostavke:</p>
+<ul>
+<li>dve enaki kameri,</li>
+<li>enako gorišče,</li>
+<li>razdalja med kamerama $b$ (baseline),</li>
+<li>optični osi sta vzporedni,</li>
+<li>slikovni ravnini sta poravnani.</li>
+</ul>
+<p>Običajno:</p>
+$$
+b \in [8 \text{ cm}, 16 \text{ cm}]
+$$<p>(razmik med očmi).</p>
+<hr>
+<p>Epipolarne premice so:</p>
+<blockquote>
+<p>kar vrstice slike.</p>
+</blockquote>
+<p>Če se točka $P$ preslika v piksel na levi sliki, potem:</p>
+<ul>
+<li>pripadajoči piksel na desni sliki leži v isti vrstici,</li>
+<li>razlikuje se mogoče samo stolpec.</li>
+</ul>
+<p>To pomeni:</p>
+<blockquote>
+<p>iščemo samo po eni vrstici.</p>
+</blockquote>
+<p>To je prednost stereo vida s paralelnima paroma. Sprehodimo se po isti vrstici, pa najdemo v enem stolpcu iskan piksel!</p>
+<hr>
+<p><strong>Globina točke</strong> določa kako je točka oddaljena od osi. Odvisna je od razlike položajev na levi in desni sliki.</p>
+<p>Naj bo:</p>
+<ul>
+<li>$f$ — gorišče,</li>
+<li>$b$ — razdalja med kamerama,</li>
+<li>$d$ — disparity (v merskih enotah).</li>
+</ul>
+<p>Potem:</p>
+$$
+Z = \frac{f b}{d}
+$$
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>$d$ mora biti v merskih enotah (ne v piklih), zato potrebujemo velikost pixla.</p></p>
+  </blockquote>
+
+<hr>
+<p>Ampak ta stvar ni v realnosti tako lepa! Popolnoma paralelnih kamer praktično ne moremo izdelati.</p>
+<p>Razlogi:</p>
+<ul>
+<li>kameri nista identični,</li>
+<li>rahlo različni goriščni razdalji,</li>
+<li>mehanske napake,</li>
+<li>optični osi nista popolnoma vzporedni.</li>
+</ul>
+<p>Tak sistem je nemogoče popolnoma realizirati, lahko se mu samo približamo. Če bi kupili 2 identični kameri bo zagotovo vsaka imela malo drugačno goriščno razdaljo. Ne mogoče je stvari tako pritrditi, da bomo imeli vzporedne optične osi.</p>
+<hr>
+<h4 id="rektifikacija-oz-izravnavanje-slik">
+<a class="header-anchor" href="#rektifikacija-oz-izravnavanje-slik"></a>
+Rektifikacija oz. izravnavanje slik
+</h4><p>Ta problem pa se na srečo da rešiti matematično s postopkom <strong>izravnavanja slik</strong>. To pomeni, da slike, ki jih zajamemo (naredimo stereo sistem) transformiramo, jih zravnamo, kot da bi bile zajete s sistemom stereo vida. Na teh popravljenih slikah pa se lahko uporabi zgoraj opisano teorijo. Temu postopku rečemo <strong>rektifikacija</strong></p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p><strong>Rektifikacija</strong> je postopek s katerim sliko leve in desne kamere transformiramo v novo slikovno ravnino, tako da epipolarne premice postanejo vodoravne.</p></p>
+  </blockquote>
+
+<p>Rektifikacija ima 2 prosta parametra:</p>
+<ol>
+<li>Razdalja nove ravnine od osnovnice.</li>
+<li>Normala ravnine (vektor pravokoten na ravnino).</li>
+</ol>
+<p>S tema parametroma določimo geometrijsko transformacijo.</p>
+<hr>
+<h4 id="ujemanje-stereo-slik-paralelne-kamere">
+<a class="header-anchor" href="#ujemanje-stereo-slik-paralelne-kamere"></a>
+Ujemanje stereo slik (paralelne kamere)
+</h4><p>Imamo pa še problem <strong>ujemanja stereo slik</strong>. Če želimo globino in imamo piksel na levi sliki, moramo najti pripadajoči piksel na desni sliki. Temu pravimo stereo matching (ujemanje stereo slik). Za dosego tega imamo 2 skupini metod:</p>
+<ul>
+<li>ena skupina je na nivoju sivin</li>
+<li>druga skupina je na osnovi značilnic</li>
+</ul>
+<hr>
+<h5 id="1-metode-na-osnovi-sivin">
+<a class="header-anchor" href="#1-metode-na-osnovi-sivin"></a>
+1. Metode na osnovi sivin
+</h5><p>Postopek:</p>
+<ul>
+<li>opazujemo vrednost slikovne funkcije v obravnavani vrstici leve in desne slike</li>
+<li>izberemo okno v levi sliki in ga ne premikamo,</li>
+<li>v desni sliki pa imamo isto okno, ki ga pa premikamo (po izbrani vrstici),</li>
+<li>izračunamo podobnost med obema oknoma,</li>
+<li>poiščemo okno, kjer je bila razlika najmanjša</li>
+<li>izračunamo koliko premikov je bilo potrebnih, da smo našli pripadajoč piksel</li>
+<li>na koncu dobimo disparity value</li>
+</ul>
+<p>Število premikov = disparity.</p>
+<p>To so prva skupina metod, kjer opazujemo okno oz. profil v vrstici leve in desne kamere in kateri se najbolj ujema. To je t. i. <strong>block matching metode</strong>.</p>
+<hr>
+<h5 id="2-metode-na-osnovi-značilnic">
+<a class="header-anchor" href="#2-metode-na-osnovi-zna%c4%8dilnic"></a>
+2. Metode na osnovi značilnic
+</h5><p>Postopek:</p>
+<ol>
+<li>Poiščemo značilne točke (oglišče, markerji, robovi).</li>
+<li>Poiščemo ujemanje med značilnicami leve in desne slike.</li>
+</ol>
+<p>Ta postopek pa ne delamo za vse piksle, ampak samo za ključne točke.</p>
+<p>Problem je težaven in daleč od trivialnega.</p>
+<hr>
+<h5 id="omejitve-pri-ujemanju">
+<a class="header-anchor" href="#omejitve-pri-ujemanju"></a>
+Omejitve pri ujemanju
+</h5><p>Pri iskanju ujemanja upoštevamo razne omejitve:</p>
+<h6 id="1-podobnost">
+<a class="header-anchor" href="#1-podobnost"></a>
+1. Podobnost
+</h6><p>Značilnici morata imeti podobne lastnosti:</p>
+<ul>
+<li>gradient,</li>
+<li>sivino,</li>
+<li>lokalna struktura</li>
+</ul>
+<p>Težava:</p>
+<ul>
+<li>npr. gladka stena → vse točke na zidu so si podobne, skoraj da enake.</li>
+</ul>
+<hr>
+<h6 id="2-enoličnost">
+<a class="header-anchor" href="#2-enoli%c4%8dnost"></a>
+2. Enoličnost
+</h6><p>Vsaka značilnica na eni sliki se mora ujemati natanko z eno značilnico na drugi sliki.</p>
+<p>Težava:</p>
+<ul>
+<li>ponavljajoči se vzorci (ograja, znaki).</li>
+</ul>
+<hr>
+<h6 id="3-zveznost-smoothness">
+<a class="header-anchor" href="#3-zveznost-smoothness"></a>
+3. Zveznost (Smoothness)
+</h6><p>Predpostavimo, da se disparity med sosednjimi piksli malo spreminja.</p>
+<hr>
+<h6 id="4-urejanje-ordering-constraint">
+<a class="header-anchor" href="#4-urejanje-ordering-constraint"></a>
+4. Urejanje (Ordering constraint)
+</h6><p>Relativni vrstni red točk se med slikama ohranja. Če sta ujemajoča se para (m, m&rsquo;) in (n,n&rsquo;) potem, če je m levo od n, potem bo tudi m&rsquo; levo od n&rsquo; (in obratno).</p>
+<hr>
+<h5 id="5-epipolarna-omejitev">
+<a class="header-anchor" href="#5-epipolarna-omejitev"></a>
+5. Epipolarna omejitev
+</h5><p>Ujemajoča se točka lahko leži le na pripadajoči epipolarni premici. <strong>Ta omejitev je najbolj zanesljiva!</strong></p>
+<hr>
+<h2 id="uvod-v-razpoznavanje-vzorcev">
+<a class="header-anchor" href="#uvod-v-razpoznavanje-vzorcev"></a>
+Uvod v razpoznavanje vzorcev
+</h2><p>naši vzorci so iz dveh značilnic. Imamo množico m-tih takih vzorcev in zdaj probamo vzorce grupirat v roje na osnovi merjenja razdalje.</p>
+<h3 id="definicije-in-osnovni-pojmi">
+<a class="header-anchor" href="#definicije-in-osnovni-pojmi"></a>
+Definicije in osnovni pojmi
+</h3><p>V roje (skupine) združimo vzorce, ki so si po razdalji med seboj blizu. Ko dobimo roje jih pregleda ekspert in vsakemu roju dodeli oznako (labelo).</p>
+<blockquote>
+<p>Primer</p>
+<ul>
+<li>razred 1 → jabolka</li>
+<li>razred 2 → hruške</li>
+<li>itd.</li>
+</ul>
+</blockquote>
+<p>Na koncu dobimo <strong>Učno množico</strong>. To je množica parov:</p>
+$$
+(\text{vzorec}, \text{labela})
+$$<p>To je izhod faze <strong>spoznavanja področja uporabe</strong>.</p>
+<p>Rojanje temelji na:</p>
+<ul>
+<li>merjenju razdalje med vzorci,</li>
+<li>nivoju podobnosti med vzorci.</li>
+</ul>
+<p>Podobnost definiramo kot:</p>
+$$
+\text{podobnost} = \frac{1}{\text{razdalja}}
+$$<p>Manjša razdalja → večja podobnost.</p>
+<p>Med vzorci lahko definiramo neskončno mnogo razdalj.</p>
+<p>Potrebujemo <strong>mero razdalje</strong>, ki je smiselna za naš problem. Pred rojenjem je priporočljivo tudi izvesti <strong>preobdelavo podatkov</strong> in da preverimo kakovost množice vzorcev.</p>
+<hr>
+<h4 id="koraki-preobdelave">
+<a class="header-anchor" href="#koraki-preobdelave"></a>
+Koraki preobdelave
+</h4><h5 id="1-manjkajoče-vrednosti">
+<a class="header-anchor" href="#1-manjkajo%c4%8de-vrednosti"></a>
+1. Manjkajoče vrednosti
+</h5><p>Ali kateri značilnosti manjka vrednost?</p>
+<blockquote>
+<p><strong>Primer</strong>
+Senzor na neki točki pride v nasičenje in nimamo izmerjene neke meritve</p>
+</blockquote>
+<p>Možni rešitvi:</p>
+<ol>
+<li>Vzorec odstranimo (če si to lahko privoščimo).</li>
+<li>Nadomestimo manjkajočo vrednost s povprečjem:</li>
+</ol>
+$$
+x_i = \bar{x}
+$$<p>S tem minimiziramo napako.</p>
+<hr>
+<h5 id="2-odstopanja-outlierji">
+<a class="header-anchor" href="#2-odstopanja-outlierji"></a>
+2. Odstopanja (outlierji)
+</h5><p>Preverimo, ali katera značilnost močno odstopa od povprečja.</p>
+<p>Če si lahko privoščimo → vzorec odstranimo.<br>
+Če ne → ga moramo ustrezno obravnavati.</p>
+<p>Kako preverimo odstopanje?
+Za vsako značilnost izračunamo:</p>
+<p><strong>Povprečje:</strong></p>
+$$
+\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i
+$$<p><strong>Standardni odklon:</strong></p>
+$$
+\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (x_i - \bar{x})^2}
+$$<p><strong>Koeficient poševnosti (skewness):</strong></p>
+<p>Merimo asimetričnost porazdelitve.</p>
+<p>Interpretacija:</p>
+<ul>
+<li>če je koeficient poševnosti &lt; 0.5 → približno simetrična porazdelitev,</li>
+<li>če je ≥ 3 → močno asimetrična (možna problematična značilnost).</li>
+</ul>
+<p>Te tri statistike izračunamo za <strong>vsako značilnost</strong>.</p>
+<hr>
+<p>Po rojenju preverimo:</p>
+<blockquote>
+<p>Kako se vzorci porazdeljujejo v prostoru značilnic?</p>
+</blockquote>
+<p>Možni primeri:</p>
+<ul>
+<li>Naključna porazdelitev → ni dobra</li>
+<li>Močna zakonitost (linearni trend) → prav tako ni zaželena</li>
+<li>Jasno ločeni roji (npr. dva roja) → to je zaželjeno</li>
+</ul>
+<hr>
+<p>Če rezultat ni ustrezen se vrnemo nazaj:</p>
+<ul>
+<li>v blok določanja značilnic</li>
+<li>ali v sistem meritev</li>
+</ul>
+<p>in izboljšamo:</p>
+<ul>
+<li>izbor značilnic</li>
+<li>merilni postopek</li>
+<li>kvaliteto podatkov</li>
+</ul>
+<hr>
+<h3 id="model-razvrščevalnika-vzorcev">
+<a class="header-anchor" href="#model-razvr%c5%a1%c4%8devalnika-vzorcev"></a>
+Model razvrščevalnika vzorcev
+</h3><h3 id="zapisi-vzorcev">
+<a class="header-anchor" href="#zapisi-vzorcev"></a>
+Zapisi vzorcev
+</h3><h3 id="spoznavanje-področja-uporabe">
+<a class="header-anchor" href="#spoznavanje-podro%c4%8dja-uporabe"></a>
+Spoznavanje področja uporabe
+</h3><h3 id="razvrščanje-vzorcev">
+<a class="header-anchor" href="#razvr%c5%a1%c4%8danje-vzorcev"></a>
+Razvrščanje vzorcev
+</h3><h3 id="preizkušanje-razvrščevalnika-vzorcev">
+<a class="header-anchor" href="#preizku%c5%a1anje-razvr%c5%a1%c4%8devalnika-vzorcev"></a>
+Preizkušanje razvrščevalnika vzorcev
 </h3></div>
     <footer class="article-footer"><ul class="article-category-list"></ul>
 <ul class="article-tag-list" itemprop="keywords"></ul>
@@ -3183,10 +3741,10 @@ Stereo vid
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;13.9k</span
+          >&nbsp;16.1k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;01:07</span>
+        <span class="icon-coffee">&nbsp;01:17</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -3257,6 +3815,16 @@ Stereo vid
         <li><a href="#trije-pogledi">Trije pogledi</a></li>
         <li><a href="#določanje-položaja-točk-v-3d">Določanje položaja točk v 3D</a></li>
         <li><a href="#stereo-vid">Stereo vid</a></li>
+      </ul>
+    </li>
+    <li><a href="#uvod-v-razpoznavanje-vzorcev">Uvod v razpoznavanje vzorcev</a>
+      <ul>
+        <li><a href="#definicije-in-osnovni-pojmi">Definicije in osnovni pojmi</a></li>
+        <li><a href="#model-razvrščevalnika-vzorcev">Model razvrščevalnika vzorcev</a></li>
+        <li><a href="#zapisi-vzorcev">Zapisi vzorcev</a></li>
+        <li><a href="#spoznavanje-področja-uporabe">Spoznavanje področja uporabe</a></li>
+        <li><a href="#razvrščanje-vzorcev">Razvrščanje vzorcev</a></li>
+        <li><a href="#preizkušanje-razvrščevalnika-vzorcev">Preizkušanje razvrščevalnika vzorcev</a></li>
       </ul>
     </li>
   </ul>
