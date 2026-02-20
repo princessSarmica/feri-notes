@@ -6,17 +6,33 @@
   color: var(--red-1, #ff5252);
 }
 
-#loader .loading-bg {
+#loader {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1000;
+  pointer-events: none;
+}
+
+#loader .loading-bg {
+  position: absolute;
   width: 50%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.9);
-  transition: 0.8s;
+}
+
+#loader .loading-left-bg {
+  left: 0;
+  transform: translateX(-100%);
+  animation: full-sequence-left 2s forwards ease-in-out;
 }
 
 #loader .loading-right-bg {
   right: 0;
+  transform: translateX(100%);
+  animation: full-sequence-right 2s forwards ease-in-out;
 }
 
 #loader .spinner-box {
@@ -36,7 +52,7 @@
 }
 
 #loader .spinner-box .rotate {
-  animation: rotate-all 2s linear infinite;
+  animation: rotate-all 2s linear infinite,  fade-out-spinner 1.8s forwards ease-in-out;
 }
 
 #loader .spinner-box .loading-word {
@@ -46,23 +62,59 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font: 700 1.2rem "Mulish", "Noto Serif SC", "Mulish", "Noto Serif SC", "-apple-system", "PingFang SC", "Microsoft YaHei", "sans-serif";
+  animation: fade-out-spinner 1.8s forwards;
 }
 
-#loader.loading .loading-left-bg {
-  transform: translateX(-100%);
+@keyframes full-sequence-left {
+  0% {
+    transform: translateX(-100%);
+  }
+  25% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
-#loader.loading .loading-right-bg {
-  transform: translateX(100%);
-}
-
-#loader.loading .spinner-box {
-  opacity: 0;
-  visibility: hidden;
+@keyframes full-sequence-right {
+  0% {
+    transform: translateX(100%);
+  }
+  25% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @keyframes rotate-all {
-  to {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
     transform: rotate(360deg);
   }
+}
+
+@keyframes fade-out-spinner {
+  0%, 75% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+[data-theme="dark"] #loader .loading-bg {
+  background-color: rgba(37, 37, 37, 0.9);
 }
