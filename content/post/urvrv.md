@@ -3698,9 +3698,9 @@ Ujemajoča se točka lahko leži le na pripadajoči epipolarni premici. **Ta ome
 
 ## Uvod v razpoznavanje vzorcev
 
-naši vzorci so iz dveh značilnic. Imamo množico m-tih takih vzorcev in zdaj probamo vzorce grupirat v roje na osnovi merjenja razdalje.
-
 ### Definicije in osnovni pojmi
+
+naši vzorci so iz dveh značilnic. Imamo množico m-tih takih vzorcev in zdaj probamo vzorce grupirat v roje na osnovi merjenja razdalje.
 
 V roje (skupine) združimo vzorce, ki so si po razdalji med seboj blizu. Ko dobimo roje jih pregleda ekspert in vsakemu roju dodeli oznako (labelo).
 
@@ -3818,9 +3818,407 @@ in izboljšamo:
 
 ---
 
+Vid na koncu potrebuje **razpoznavanje vzorcev**. Razpoznavanje vzorcev pa ne potrebuje nujno vida. Cilj razpoznavanja vzorcev je razviti sistem, ki zna zaznavati svet na način, podoben človeku.
+
+---
+
+> [!IMPORTANT]
+> **Kaj je razpoznavanje vzorcev?**
+>
+> Gre za kategorizacijo vzorcev v enega od znanih ali neznanih razredov. Dobimo neznan objekt in določimo, kaj je to.  
+>
+> Primer: vzamemo predmet v roko in rečemo »aha, to je hruška«.
+
+---
+
+Pri razpoznavanju vzorcev pa so na področje uporabe tudi določene omejitve. Stroj, ki bi se popolnoma zavedal okolja, še ne obstaja. Zato problem omejimo na **področje uporabe**.
+
+> Primeri:
+>
+> - Če želimo prepoznavati prometne znake → zanima nas samo prometni znaki in nič drugega.
+> - Pri OCR sistemu → zanimajo nas črke.
+
+Okolje torej omejimo na področje uporabe!
+
+Znotraj okolja imamo:
+
+- **objekte**
+- **razrede objektov**
+
+> Primer:
+>
+> Če nas zanimajo prometni znaki imamo lahko sledeče razrede:
+> - razred opozorilnih znakov
+> - razred znakov za omejitve
+> 
+> Odznotraj posameznih razredov pa imamo neke objekte. Če imamo razred jabolk, imamo v njem lahko sledeče objekte:
+> - rdeče jabolko
+> - zeleno jabolko
+> - rumeno jabolko
+
+---
+
+> [!IMPORTANT]
+> Objekt moramo opisati v merljivi obliki. **Vzorec je merljiv opis objekta**. Najpogosteje je to vektor nekih lastnosti, ki jih nizamo eno za drugo:
+>
+> $$\textbf{vektor značilnic}$$
+>
+> Slika je prav tako vzorec.
+
+> Primer 
+> Če imamo jabolko ga popišemo lahko s sledečimi lastnostmi:
+> - masa
+> - barva
+> - premer
+> - tekstura
+> Vzorec jabolka so lastnosti jabolka s katerimi lahko nekaj delamo
+
+---
+
+- Slika razreda objektov je razred vzorcev.
+- Vzorci so matematične reprezentacije objektov.
+
+---
+
+Pri razredih vzorcev vedno imamo:
+
+1. Razred, ki nas zanima.
+2. Razred vsega ostalega, ki nas ne zanima (podobno kot pri segmentaciji).
+
+> Primer:
+> Če nas zanimajo na sliki kje so jabolka, potem imamo 2 razreda:
+> - razred jabolk
+> - razred "vse ostalo"
+
+> [!WARNING]
+> Razpoznavanje in razvrščanje **NI ISTO**! Razpoznavanje je širši pojem!
+
+#### Proces razvoja sistema
+
+Vedno začnemo s podatki.
+
+##### 1. Objekti → vzorci
+
+Prvo imamo objekte. Imamo množico vzorcev (vektorji v prostoru značilnic). Zanima nas ali se podobni vzorci združujejo skupaj?
+
+---
+
+##### 2. Rojanje
+
+Dobimo roje (clusterje) v večdimenzionalnem prostoru, kjer so notri vzorci.
+
+Ekspert pregleda roje:
+
+- »To so jabolka.«
+- »To so hruške.«
+
+Vsakemu roju dodeli **labelo**. Izhod tega koraka je **učna množica**.
+
+---
+
+##### 3. Učna množica
+
+Dobimo množico parov (vzorec, labela)
+
+Primer:
+
+- (vektor, jabolko)
+- (vektor, hruška)
+
+Če je $N$ število vzorcev, potem učna množica vsebuje $N$ parov.
+
+Učna množica mora vsebovati predstavnike vseh $M$ razredov.
+
+Kakovost je eden najpomembnejših korakov razvoja sistema. Učna množica mora biti:
+
+- reprezentativna,
+- verodostojen posnetek področja uporabe,
+- vsebovati tipične primere.
+
+Iz učne množice se naučimo pravil.
+
+Sistem predpostavi:
+
+> kar velja v učni množici, velja tudi v realnem okolju.
+
+Če je učna množica slaba bo sistem delal slabo.
+
+> **Primer**
+>
+> Sistem za detekcijo čevljev:
+>
+> Če treniramo samo na zimskih čevljih, sistem ne bo znal prepoznati sandalov ali tenisk. Če primerov ni v učni množici se jih sistem ne more naučiti!
+
+> **Primer iz prakse (Google)**
+>
+> Pri prepoznavanju hišnih številk:
+>
+> - imeli so več milijonov primerov,
+> - sistem ni deloval optimalno,
+> - morali so izboljšati učno množico.
+
+Optimalno bi bilo učno množico nenehno širiti. V praksi pa to ni mogoče v neskončnost.
+
+---
+
+#### Razvrščanje in razpoznavanje vzorcev
+
+##### Razvrščanje (klasifikacija)
+
+Razvrščanje oz. klasifikacija je ožji pojem kot razpoznavanje vzorcev. Pomeni, da imamo naučen model, dobimo nek neznan vzorec in ga popišemo, ter razvrstimo v enega od znanih razredov. To je klasifikacija.
+
+---
+
+##### Razpoznavanje
+
+Razpoznavanje vzorcev pa je širši pojem. Ne samo razvrstimo, ampak določimo tudi pomen (kontekst).
+
+---
+
+> **Primer 1** 
+>
+> Imamo sledeči stavek:
+>
+> "Z lučko tečeva na kavo v As"
+>
+> Kaj je razvrščanje in kaj razpoznavanje?
+>
+> **Razvrščanje**
+> 
+> Prvo bi čez izbrano sliko besedila pognali OCR sistem. OCR model prepozna črke, vsako črko razvrsti v razred (npr. v razred veliki L), prepozna razmike (če črke stojijo skupaj gre neko besedo, če je razmik je konec besede) in oblikuje besede. To je klasifikacija.
+>
+> **Razpoznavanje**
+>
+> Prej klasificiranim besedam sedaj dodamo pomen:
+>
+> - "Z" → lahko predlog
+> - "Lučko" → ime (lahko bi šlo za predmet, ki sveti, vendar, ker je zapisano z veliko začetnico gre za ime bitja)
+> - "tečeva" → verjetno gibanje (glede na kontekst)
+> - "na kavo" → pomeni odhod na kavo
+> - "As" → ime lokacije (lahko bi šlo za karto, ampak glede na to, da je zapisano z veliko začetnico in kontekst vemo, da gre verjetno za ime nekega kraja)
+>
+> To je razpoznavanje.
+
+---
+
+> **Primer 2**
+>
+> Moramo razvrstiti markerje
+> 
+> Razvrščanje vzorcev bi pomenilo prepoznavati markarje za tablo
+>
+> Razpoznavanje vzorcev bi pa ugotovilo, da so markerji pokriti z zamaškom, da so naslonjeni na mizo itd. Dobijo kontekst oz. nek pomen.
+
+---
+
 ### Model razvrščevalnika vzorcev
 
+Imamo 5 blokov, ki jih je treba implementirati.
+
+---
+
+#### 1. Sistem za zajemanje vzorcev
+
+Prvi blok je **sistem za zajemanje vzorcev** (vzamemo slike, prepoznamo regije, uporabimo računalniški vid). Tukaj pridemo do vzorcev – vektorjev nekih podatkov.
+
+Dobimo meritev `m` z nekimi podatki:
+- lahko so absolutni
+- lahko so relativni
+
+---
+
+#### 2. Določitev vrednosti značilnic (feature extraction)
+
+Drugi blok je **določitev vrednosti značilnic** (značilk – feature).
+
+Iz množice meritev skušamo ugotoviti najpomembnejše podatke, ki so ključni za naš problem. To so najpomembnejše značilke, potrebne za rešitev problema. Dobimo množico vzorcev, zapisanih v vektorju značilnic.
+
+---
+
+#### 3. Faza učenja (pozicija 1)
+
+Nato imamo dve veji: pozicija 1 in pozicija 2.  
+Stikalo preklopimo na pozicijo 1.
+
+Tukaj smo v fazi učenja, kjer se sistem priuči.
+
+Najprej moramo implementirati blok. Dobimo roje (clustre), nato ekspert popravi in labelira vzorce v rojih.
+
+Izhod tega koraka je:
+
+**Učna množica** (množica parov vzorec–labela razreda).
+
+**Kdo je učitelj?**
+
+Odvisno od problema:
+- Pri razvrščanju jabolk smo lahko učitelji tudi mi.
+- Pri prometnih znakih smo lahko sami eksperti.
+- Pri medicinskih slikah pa potrebujemo strokovnjaka (npr. zdravnika).
+
+
+Danes je v uporabi **strojno učenje**. Zelo priljubljeno je globoko učenje, ki zajema nevronske mreže. Ni pa nujno, da so vključene samo nevronske mreže.
+
+Po učenju dobimo naučen razvrščevalnik, kjer je znanje na nek način predstavljeno. Imamo nek razvrščevalnik.
+
+---
+
+#### 4. Faza razvrščanja (pozicija 2)
+
+Stikalo preklopimo v fazo 2. Tukaj imamo dve podfazi.
+
+##### Faza 2a – testiranje
+
+Razvrščevalnik moramo preizkusiti:
+- ali je dovolj uspešen
+- kako uspešno prepoznava vzorce
+
+Testiramo na testni množici, ki je podobna učni množici. Pri testiranju dobimo uspešnost prepoznavanja vzorcev.
+
+Če je model uspešen:
+- ga damo v produkcijo
+
+Če ni:
+- ga ponovno pošljemo skozi bloke
+- ga dopolnimo in popravimo
+
+> [!WARNING]
+> - V praksi ni razvrščevalnika, ki bi deloval 100 %. V realnosti nobena stvar ne deluje 100 %. Ne smemo pričakovati popolne uspešnosti. Sistem ima lahko še vedno napake.
+
+**Kako dobimo učno množico?**
+
+1. Dobimo objekte iz razredov.
+2. S senzorji dobimo vektorje meritev.
+3. Iz vektorjev meritev izluščimo vzorce.
+4. Preverimo, ali pašejo skupaj.
+5. Če dobimo to, kar iščemo, dobimo učno množico.
+
+Razvrščevalnik ne zna delati s kvalitativnimi podatki, zato jih moramo pretvoriti v številske podatke.
+
+Primeri:
+- visok, srednje visok, nizek → `0, 1, 2`
+- vijolična, rumena → numerične vrednosti
+- drag → številska predstavitev
+
+Kvalitativne podatke moramo vedno pretvoriti v numerično obliko.
+
 ### Zapisi vzorcev
+
+Mi bi radi vzorce zapisali v obliki značilnic. Značilnica so najpomembnejši podatki za nalogo, ki jo rešujemo.
+
+> **Primer (didaktičen)**:  
+> Če bi prepoznavali ljudi glede na barvo kože, kaj bi bila značilnica?
+>
+> - višina, širina, število prstov, barva las → irelevantni podatki  
+> - barva kože → relevantni podatek  
+>
+> **Želimo poiskati podatke, ki vplivajo oziroma so pomembni za naš problem.**
+
+---
+
+Imamo 2 pristopa:
+
+#### 1. Hevristični pristop
+
+Imamo eksperta, ki pove, kaj je pomembno in kaj nepomembno. Na podlagi znanja domene določi kaj gre v vektor značilnic.
+
+#### 2. Matematični pristop
+
+Matematični pristop je lahko bolj natančen. Na podatke gleda kot na vektorje. Na začetku želimo objekte čim bolj informacijsko bogato opisati. Uporabimo veliko senzorjev s čimer dobimo veliko meritev.
+
+Imamo meritve. Naš cilj je priti do **vektorja značilnic**. Želimo, da je dimenzija `n` čim manjša glede na začetno dimenzijo `r`.
+
+Pri matematičnih pristopih imamo:
+
+- **optimalne postopke**
+- **neoptimalne postopke**
+
+Optimalni postopki pomenijo, da dobimo najboljši možni vektor značilnic. V večini primerov se pa žal moramo zadovoljiti z lokalno (neoptimalno) rešitvijo. Informacije luščimo in dobimo vektor značilnic.
+
+Imamo matematični pristop, kjer imamo optimalne in neoptimalne postopke. Imamo pa še postopke **izbire značilnic** in **izpeljavo značilnic**, kjer imamo pri obeh podobno optimalen in neoptimalen postopek:
+
+- **Izbira značilnic (feature selection)**
+- **Izpeljava značilnic (feature extraction)**
+
+Oba imata lahko optimalne in neoptimalne pristope.
+
+> [!IMPORTANT]
+> Kaj je cilj matematičnega pristopa?
+>
+> Če reduciramo prostor iz `r` dimenzij v `n` dimenzij, izgubimo nekaj podatkov in informacij. Ta definicija pravi, da če s tem izgubljamo informacije, ne smemo povečat verjetnost napak razvrščanja.
+>
+> Redukcija je smiselna samo, če:
+> - ne povečamo verjetnosti napak razvrščanja.
+>
+> Redukcijo izvajamo dokler:
+> - razvrščevalnik še vedno deluje uspešno.
+>
+> Ko učinkovitost začne padati oz. začne razvrščevalnik delovat nepravilno:
+> - prenehamo z redukcijo.
+
+---
+
+#### Postopki izbire značilnic
+
+Postopki izbire značilnic med meritvami preverjajo:
+
+> Katere meritve lahko odstranimo, ne da bi poslabšali uspešnost razvrščanja?
+
+Primer (jabolka):
+- Če analiziramo samo slike, je teža lahko nepomembna.
+- Če odstranitev podatka ne poslabša uspešnosti → ga odstranimo.
+
+---
+
+> Primer z grafi
+>
+> - Če odstranimo meritev 1 → podatki se pomešajo → verjetnost napačne klasifikacije naraste → te meritve ne smemo odstraniti.
+> - Če odstranimo meritev 2 → podatki ostanejo lepo ločeni → uspešnost se ne zmanjša → meritev lahko odstranimo.
+>
+> Pri izbiri značilnic:
+> - značilnice ohranijo svoj pomen.
+> - Če je bila meritev volumen, bo tudi značilnica volumen.
+
+---
+
+#### Izpeljava značilnic (Feature Extraction)
+
+Izpeljava značilnic je transformacija oziroma funkcija, ki kot vhod dobi celoten vektor meritev (`r` spremenljivk), kot izhod pa vrne vektor `n` novih vrednosti.
+
+Pri izpeljavi ne uporabljamo neposredno originalnih meritev, ampak dobimo nove kombinacije podatkov.
+
+Pri izpeljavah funkcij jih običajno ne zapisujemo ročno (primeri na slikah so samo ilustrativni).
+
+Imamo:
+
+- optimalne postopke
+- neoptimalne postopke
+
+---
+
+##### Znani metodi
+
+###### 1. PCA – analiza glavnih komponent podatkov (SVD razcep)
+
+PCA transformacija:
+
+- podatke preslika v nov vektorski prostor,
+- prvi bazni vektor kaže v smer največje variance,
+- drugi bazni vektor v smer druge največje variance.
+
+PCA je neoptimalen postopek.
+
+---
+
+##### 2. Analiza neodvisnih komponent (ICA)
+
+- Deluje podobno kot PCA.
+- Nima tako enostavne interpretacije kot PCA.
+
+---
+
+Pri izpeljavi značilnic:
+- značilnice izgubijo svoj prvotni pomen,
+- izgubijo tudi prvotno enoto.
 
 ### Spoznavanje področja uporabe
 

@@ -3590,11 +3590,11 @@ Omejitve pri ujemanju
 <h2 id="uvod-v-razpoznavanje-vzorcev">
 <a class="header-anchor" href="#uvod-v-razpoznavanje-vzorcev"></a>
 Uvod v razpoznavanje vzorcev
-</h2><p>naši vzorci so iz dveh značilnic. Imamo množico m-tih takih vzorcev in zdaj probamo vzorce grupirat v roje na osnovi merjenja razdalje.</p>
-<h3 id="definicije-in-osnovni-pojmi">
+</h2><h3 id="definicije-in-osnovni-pojmi">
 <a class="header-anchor" href="#definicije-in-osnovni-pojmi"></a>
 Definicije in osnovni pojmi
-</h3><p>V roje (skupine) združimo vzorce, ki so si po razdalji med seboj blizu. Ko dobimo roje jih pregleda ekspert in vsakemu roju dodeli oznako (labelo).</p>
+</h3><p>naši vzorci so iz dveh značilnic. Imamo množico m-tih takih vzorcev in zdaj probamo vzorce grupirat v roje na osnovi merjenja razdalje.</p>
+<p>V roje (skupine) združimo vzorce, ki so si po razdalji med seboj blizu. Ko dobimo roje jih pregleda ekspert in vsakemu roju dodeli oznako (labelo).</p>
 <blockquote>
 <p>Primer</p>
 <ul>
@@ -3685,13 +3685,405 @@ $$<p><strong>Koeficient poševnosti (skewness):</strong></p>
 <li>kvaliteto podatkov</li>
 </ul>
 <hr>
+<p>Vid na koncu potrebuje <strong>razpoznavanje vzorcev</strong>. Razpoznavanje vzorcev pa ne potrebuje nujno vida. Cilj razpoznavanja vzorcev je razviti sistem, ki zna zaznavati svet na način, podoben človeku.</p>
+<hr>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p><strong>Kaj je razpoznavanje vzorcev?</strong></p>
+<p>Gre za kategorizacijo vzorcev v enega od znanih ali neznanih razredov. Dobimo neznan objekt in določimo, kaj je to.</p>
+<p>Primer: vzamemo predmet v roko in rečemo »aha, to je hruška«.</p></p>
+  </blockquote>
+
+<hr>
+<p>Pri razpoznavanju vzorcev pa so na področje uporabe tudi določene omejitve. Stroj, ki bi se popolnoma zavedal okolja, še ne obstaja. Zato problem omejimo na <strong>področje uporabe</strong>.</p>
+<blockquote>
+<p>Primeri:</p>
+<ul>
+<li>Če želimo prepoznavati prometne znake → zanima nas samo prometni znaki in nič drugega.</li>
+<li>Pri OCR sistemu → zanimajo nas črke.</li>
+</ul>
+</blockquote>
+<p>Okolje torej omejimo na področje uporabe!</p>
+<p>Znotraj okolja imamo:</p>
+<ul>
+<li><strong>objekte</strong></li>
+<li><strong>razrede objektov</strong></li>
+</ul>
+<blockquote>
+<p>Primer:</p>
+<p>Če nas zanimajo prometni znaki imamo lahko sledeče razrede:</p>
+<ul>
+<li>razred opozorilnih znakov</li>
+<li>razred znakov za omejitve</li>
+</ul>
+<p>Odznotraj posameznih razredov pa imamo neke objekte. Če imamo razred jabolk, imamo v njem lahko sledeče objekte:</p>
+<ul>
+<li>rdeče jabolko</li>
+<li>zeleno jabolko</li>
+<li>rumeno jabolko</li>
+</ul>
+</blockquote>
+<hr>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p>Objekt moramo opisati v merljivi obliki. <strong>Vzorec je merljiv opis objekta</strong>. Najpogosteje je to vektor nekih lastnosti, ki jih nizamo eno za drugo:</p>
+$$\textbf{vektor značilnic}$$<p>Slika je prav tako vzorec.</p></p>
+  </blockquote>
+
+<blockquote>
+<p>Primer
+Če imamo jabolko ga popišemo lahko s sledečimi lastnostmi:</p>
+<ul>
+<li>masa</li>
+<li>barva</li>
+<li>premer</li>
+<li>tekstura
+Vzorec jabolka so lastnosti jabolka s katerimi lahko nekaj delamo</li>
+</ul>
+</blockquote>
+<hr>
+<ul>
+<li>Slika razreda objektov je razred vzorcev.</li>
+<li>Vzorci so matematične reprezentacije objektov.</li>
+</ul>
+<hr>
+<p>Pri razredih vzorcev vedno imamo:</p>
+<ol>
+<li>Razred, ki nas zanima.</li>
+<li>Razred vsega ostalega, ki nas ne zanima (podobno kot pri segmentaciji).</li>
+</ol>
+<blockquote>
+<p>Primer:
+Če nas zanimajo na sliki kje so jabolka, potem imamo 2 razreda:</p>
+<ul>
+<li>razred jabolk</li>
+<li>razred &ldquo;vse ostalo&rdquo;</li>
+</ul>
+</blockquote>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Razpoznavanje in razvrščanje <strong>NI ISTO</strong>! Razpoznavanje je širši pojem!</p></p>
+  </blockquote>
+
+<h4 id="proces-razvoja-sistema">
+<a class="header-anchor" href="#proces-razvoja-sistema"></a>
+Proces razvoja sistema
+</h4><p>Vedno začnemo s podatki.</p>
+<h5 id="1-objekti--vzorci">
+<a class="header-anchor" href="#1-objekti--vzorci"></a>
+1. Objekti → vzorci
+</h5><p>Prvo imamo objekte. Imamo množico vzorcev (vektorji v prostoru značilnic). Zanima nas ali se podobni vzorci združujejo skupaj?</p>
+<hr>
+<h5 id="2-rojanje">
+<a class="header-anchor" href="#2-rojanje"></a>
+2. Rojanje
+</h5><p>Dobimo roje (clusterje) v večdimenzionalnem prostoru, kjer so notri vzorci.</p>
+<p>Ekspert pregleda roje:</p>
+<ul>
+<li>»To so jabolka.«</li>
+<li>»To so hruške.«</li>
+</ul>
+<p>Vsakemu roju dodeli <strong>labelo</strong>. Izhod tega koraka je <strong>učna množica</strong>.</p>
+<hr>
+<h5 id="3-učna-množica">
+<a class="header-anchor" href="#3-u%c4%8dna-mno%c5%beica"></a>
+3. Učna množica
+</h5><p>Dobimo množico parov (vzorec, labela)</p>
+<p>Primer:</p>
+<ul>
+<li>(vektor, jabolko)</li>
+<li>(vektor, hruška)</li>
+</ul>
+<p>Če je $N$ število vzorcev, potem učna množica vsebuje $N$ parov.</p>
+<p>Učna množica mora vsebovati predstavnike vseh $M$ razredov.</p>
+<p>Kakovost je eden najpomembnejših korakov razvoja sistema. Učna množica mora biti:</p>
+<ul>
+<li>reprezentativna,</li>
+<li>verodostojen posnetek področja uporabe,</li>
+<li>vsebovati tipične primere.</li>
+</ul>
+<p>Iz učne množice se naučimo pravil.</p>
+<p>Sistem predpostavi:</p>
+<blockquote>
+<p>kar velja v učni množici, velja tudi v realnem okolju.</p>
+</blockquote>
+<p>Če je učna množica slaba bo sistem delal slabo.</p>
+<blockquote>
+<p><strong>Primer</strong></p>
+<p>Sistem za detekcijo čevljev:</p>
+<p>Če treniramo samo na zimskih čevljih, sistem ne bo znal prepoznati sandalov ali tenisk. Če primerov ni v učni množici se jih sistem ne more naučiti!</p>
+</blockquote>
+<blockquote>
+<p><strong>Primer iz prakse (Google)</strong></p>
+<p>Pri prepoznavanju hišnih številk:</p>
+<ul>
+<li>imeli so več milijonov primerov,</li>
+<li>sistem ni deloval optimalno,</li>
+<li>morali so izboljšati učno množico.</li>
+</ul>
+</blockquote>
+<p>Optimalno bi bilo učno množico nenehno širiti. V praksi pa to ni mogoče v neskončnost.</p>
+<hr>
+<h4 id="razvrščanje-in-razpoznavanje-vzorcev">
+<a class="header-anchor" href="#razvr%c5%a1%c4%8danje-in-razpoznavanje-vzorcev"></a>
+Razvrščanje in razpoznavanje vzorcev
+</h4><h5 id="razvrščanje-klasifikacija">
+<a class="header-anchor" href="#razvr%c5%a1%c4%8danje-klasifikacija"></a>
+Razvrščanje (klasifikacija)
+</h5><p>Razvrščanje oz. klasifikacija je ožji pojem kot razpoznavanje vzorcev. Pomeni, da imamo naučen model, dobimo nek neznan vzorec in ga popišemo, ter razvrstimo v enega od znanih razredov. To je klasifikacija.</p>
+<hr>
+<h5 id="razpoznavanje">
+<a class="header-anchor" href="#razpoznavanje"></a>
+Razpoznavanje
+</h5><p>Razpoznavanje vzorcev pa je širši pojem. Ne samo razvrstimo, ampak določimo tudi pomen (kontekst).</p>
+<hr>
+<blockquote>
+<p><strong>Primer 1</strong></p>
+<p>Imamo sledeči stavek:</p>
+<p>&ldquo;Z lučko tečeva na kavo v As&rdquo;</p>
+<p>Kaj je razvrščanje in kaj razpoznavanje?</p>
+<p><strong>Razvrščanje</strong></p>
+<p>Prvo bi čez izbrano sliko besedila pognali OCR sistem. OCR model prepozna črke, vsako črko razvrsti v razred (npr. v razred veliki L), prepozna razmike (če črke stojijo skupaj gre neko besedo, če je razmik je konec besede) in oblikuje besede. To je klasifikacija.</p>
+<p><strong>Razpoznavanje</strong></p>
+<p>Prej klasificiranim besedam sedaj dodamo pomen:</p>
+<ul>
+<li>&ldquo;Z&rdquo; → lahko predlog</li>
+<li>&ldquo;Lučko&rdquo; → ime (lahko bi šlo za predmet, ki sveti, vendar, ker je zapisano z veliko začetnico gre za ime bitja)</li>
+<li>&ldquo;tečeva&rdquo; → verjetno gibanje (glede na kontekst)</li>
+<li>&ldquo;na kavo&rdquo; → pomeni odhod na kavo</li>
+<li>&ldquo;As&rdquo; → ime lokacije (lahko bi šlo za karto, ampak glede na to, da je zapisano z veliko začetnico in kontekst vemo, da gre verjetno za ime nekega kraja)</li>
+</ul>
+<p>To je razpoznavanje.</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Primer 2</strong></p>
+<p>Moramo razvrstiti markerje</p>
+<p>Razvrščanje vzorcev bi pomenilo prepoznavati markarje za tablo</p>
+<p>Razpoznavanje vzorcev bi pa ugotovilo, da so markerji pokriti z zamaškom, da so naslonjeni na mizo itd. Dobijo kontekst oz. nek pomen.</p>
+</blockquote>
+<hr>
 <h3 id="model-razvrščevalnika-vzorcev">
 <a class="header-anchor" href="#model-razvr%c5%a1%c4%8devalnika-vzorcev"></a>
 Model razvrščevalnika vzorcev
-</h3><h3 id="zapisi-vzorcev">
+</h3><p>Imamo 5 blokov, ki jih je treba implementirati.</p>
+<hr>
+<h4 id="1-sistem-za-zajemanje-vzorcev">
+<a class="header-anchor" href="#1-sistem-za-zajemanje-vzorcev"></a>
+1. Sistem za zajemanje vzorcev
+</h4><p>Prvi blok je <strong>sistem za zajemanje vzorcev</strong> (vzamemo slike, prepoznamo regije, uporabimo računalniški vid). Tukaj pridemo do vzorcev – vektorjev nekih podatkov.</p>
+<p>Dobimo meritev <code>m</code> z nekimi podatki:</p>
+<ul>
+<li>lahko so absolutni</li>
+<li>lahko so relativni</li>
+</ul>
+<hr>
+<h4 id="2-določitev-vrednosti-značilnic-feature-extraction">
+<a class="header-anchor" href="#2-dolo%c4%8ditev-vrednosti-zna%c4%8dilnic-feature-extraction"></a>
+2. Določitev vrednosti značilnic (feature extraction)
+</h4><p>Drugi blok je <strong>določitev vrednosti značilnic</strong> (značilk – feature).</p>
+<p>Iz množice meritev skušamo ugotoviti najpomembnejše podatke, ki so ključni za naš problem. To so najpomembnejše značilke, potrebne za rešitev problema. Dobimo množico vzorcev, zapisanih v vektorju značilnic.</p>
+<hr>
+<h4 id="3-faza-učenja-pozicija-1">
+<a class="header-anchor" href="#3-faza-u%c4%8denja-pozicija-1"></a>
+3. Faza učenja (pozicija 1)
+</h4><p>Nato imamo dve veji: pozicija 1 in pozicija 2.<br>
+Stikalo preklopimo na pozicijo 1.</p>
+<p>Tukaj smo v fazi učenja, kjer se sistem priuči.</p>
+<p>Najprej moramo implementirati blok. Dobimo roje (clustre), nato ekspert popravi in labelira vzorce v rojih.</p>
+<p>Izhod tega koraka je:</p>
+<p><strong>Učna množica</strong> (množica parov vzorec–labela razreda).</p>
+<p><strong>Kdo je učitelj?</strong></p>
+<p>Odvisno od problema:</p>
+<ul>
+<li>Pri razvrščanju jabolk smo lahko učitelji tudi mi.</li>
+<li>Pri prometnih znakih smo lahko sami eksperti.</li>
+<li>Pri medicinskih slikah pa potrebujemo strokovnjaka (npr. zdravnika).</li>
+</ul>
+<p>Danes je v uporabi <strong>strojno učenje</strong>. Zelo priljubljeno je globoko učenje, ki zajema nevronske mreže. Ni pa nujno, da so vključene samo nevronske mreže.</p>
+<p>Po učenju dobimo naučen razvrščevalnik, kjer je znanje na nek način predstavljeno. Imamo nek razvrščevalnik.</p>
+<hr>
+<h4 id="4-faza-razvrščanja-pozicija-2">
+<a class="header-anchor" href="#4-faza-razvr%c5%a1%c4%8danja-pozicija-2"></a>
+4. Faza razvrščanja (pozicija 2)
+</h4><p>Stikalo preklopimo v fazo 2. Tukaj imamo dve podfazi.</p>
+<h5 id="faza-2a--testiranje">
+<a class="header-anchor" href="#faza-2a--testiranje"></a>
+Faza 2a – testiranje
+</h5><p>Razvrščevalnik moramo preizkusiti:</p>
+<ul>
+<li>ali je dovolj uspešen</li>
+<li>kako uspešno prepoznava vzorce</li>
+</ul>
+<p>Testiramo na testni množici, ki je podobna učni množici. Pri testiranju dobimo uspešnost prepoznavanja vzorcev.</p>
+<p>Če je model uspešen:</p>
+<ul>
+<li>ga damo v produkcijo</li>
+</ul>
+<p>Če ni:</p>
+<ul>
+<li>ga ponovno pošljemo skozi bloke</li>
+<li>ga dopolnimo in popravimo</li>
+</ul>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><ul>
+<li>V praksi ni razvrščevalnika, ki bi deloval 100 %. V realnosti nobena stvar ne deluje 100 %. Ne smemo pričakovati popolne uspešnosti. Sistem ima lahko še vedno napake.</li>
+</ul></p>
+  </blockquote>
+
+<p><strong>Kako dobimo učno množico?</strong></p>
+<ol>
+<li>Dobimo objekte iz razredov.</li>
+<li>S senzorji dobimo vektorje meritev.</li>
+<li>Iz vektorjev meritev izluščimo vzorce.</li>
+<li>Preverimo, ali pašejo skupaj.</li>
+<li>Če dobimo to, kar iščemo, dobimo učno množico.</li>
+</ol>
+<p>Razvrščevalnik ne zna delati s kvalitativnimi podatki, zato jih moramo pretvoriti v številske podatke.</p>
+<p>Primeri:</p>
+<ul>
+<li>visok, srednje visok, nizek → <code>0, 1, 2</code></li>
+<li>vijolična, rumena → numerične vrednosti</li>
+<li>drag → številska predstavitev</li>
+</ul>
+<p>Kvalitativne podatke moramo vedno pretvoriti v numerično obliko.</p>
+<h3 id="zapisi-vzorcev">
 <a class="header-anchor" href="#zapisi-vzorcev"></a>
 Zapisi vzorcev
-</h3><h3 id="spoznavanje-področja-uporabe">
+</h3><p>Mi bi radi vzorce zapisali v obliki značilnic. Značilnica so najpomembnejši podatki za nalogo, ki jo rešujemo.</p>
+<blockquote>
+<p><strong>Primer (didaktičen)</strong>:<br>
+Če bi prepoznavali ljudi glede na barvo kože, kaj bi bila značilnica?</p>
+<ul>
+<li>višina, širina, število prstov, barva las → irelevantni podatki</li>
+<li>barva kože → relevantni podatek</li>
+</ul>
+<p><strong>Želimo poiskati podatke, ki vplivajo oziroma so pomembni za naš problem.</strong></p>
+</blockquote>
+<hr>
+<p>Imamo 2 pristopa:</p>
+<h4 id="1-hevristični-pristop">
+<a class="header-anchor" href="#1-hevristi%c4%8dni-pristop"></a>
+1. Hevristični pristop
+</h4><p>Imamo eksperta, ki pove, kaj je pomembno in kaj nepomembno. Na podlagi znanja domene določi kaj gre v vektor značilnic.</p>
+<h4 id="2-matematični-pristop">
+<a class="header-anchor" href="#2-matemati%c4%8dni-pristop"></a>
+2. Matematični pristop
+</h4><p>Matematični pristop je lahko bolj natančen. Na podatke gleda kot na vektorje. Na začetku želimo objekte čim bolj informacijsko bogato opisati. Uporabimo veliko senzorjev s čimer dobimo veliko meritev.</p>
+<p>Imamo meritve. Naš cilj je priti do <strong>vektorja značilnic</strong>. Želimo, da je dimenzija <code>n</code> čim manjša glede na začetno dimenzijo <code>r</code>.</p>
+<p>Pri matematičnih pristopih imamo:</p>
+<ul>
+<li><strong>optimalne postopke</strong></li>
+<li><strong>neoptimalne postopke</strong></li>
+</ul>
+<p>Optimalni postopki pomenijo, da dobimo najboljši možni vektor značilnic. V večini primerov se pa žal moramo zadovoljiti z lokalno (neoptimalno) rešitvijo. Informacije luščimo in dobimo vektor značilnic.</p>
+<p>Imamo matematični pristop, kjer imamo optimalne in neoptimalne postopke. Imamo pa še postopke <strong>izbire značilnic</strong> in <strong>izpeljavo značilnic</strong>, kjer imamo pri obeh podobno optimalen in neoptimalen postopek:</p>
+<ul>
+<li><strong>Izbira značilnic (feature selection)</strong></li>
+<li><strong>Izpeljava značilnic (feature extraction)</strong></li>
+</ul>
+<p>Oba imata lahko optimalne in neoptimalne pristope.</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p>Kaj je cilj matematičnega pristopa?</p>
+<p>Če reduciramo prostor iz <code>r</code> dimenzij v <code>n</code> dimenzij, izgubimo nekaj podatkov in informacij. Ta definicija pravi, da če s tem izgubljamo informacije, ne smemo povečat verjetnost napak razvrščanja.</p>
+<p>Redukcija je smiselna samo, če:</p>
+<ul>
+<li>ne povečamo verjetnosti napak razvrščanja.</li>
+</ul>
+<p>Redukcijo izvajamo dokler:</p>
+<ul>
+<li>razvrščevalnik še vedno deluje uspešno.</li>
+</ul>
+<p>Ko učinkovitost začne padati oz. začne razvrščevalnik delovat nepravilno:</p>
+<ul>
+<li>prenehamo z redukcijo.</li>
+</ul></p>
+  </blockquote>
+
+<hr>
+<h4 id="postopki-izbire-značilnic">
+<a class="header-anchor" href="#postopki-izbire-zna%c4%8dilnic"></a>
+Postopki izbire značilnic
+</h4><p>Postopki izbire značilnic med meritvami preverjajo:</p>
+<blockquote>
+<p>Katere meritve lahko odstranimo, ne da bi poslabšali uspešnost razvrščanja?</p>
+</blockquote>
+<p>Primer (jabolka):</p>
+<ul>
+<li>Če analiziramo samo slike, je teža lahko nepomembna.</li>
+<li>Če odstranitev podatka ne poslabša uspešnosti → ga odstranimo.</li>
+</ul>
+<hr>
+<blockquote>
+<p>Primer z grafi</p>
+<ul>
+<li>Če odstranimo meritev 1 → podatki se pomešajo → verjetnost napačne klasifikacije naraste → te meritve ne smemo odstraniti.</li>
+<li>Če odstranimo meritev 2 → podatki ostanejo lepo ločeni → uspešnost se ne zmanjša → meritev lahko odstranimo.</li>
+</ul>
+<p>Pri izbiri značilnic:</p>
+<ul>
+<li>značilnice ohranijo svoj pomen.</li>
+<li>Če je bila meritev volumen, bo tudi značilnica volumen.</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="izpeljava-značilnic-feature-extraction">
+<a class="header-anchor" href="#izpeljava-zna%c4%8dilnic-feature-extraction"></a>
+Izpeljava značilnic (Feature Extraction)
+</h4><p>Izpeljava značilnic je transformacija oziroma funkcija, ki kot vhod dobi celoten vektor meritev (<code>r</code> spremenljivk), kot izhod pa vrne vektor <code>n</code> novih vrednosti.</p>
+<p>Pri izpeljavi ne uporabljamo neposredno originalnih meritev, ampak dobimo nove kombinacije podatkov.</p>
+<p>Pri izpeljavah funkcij jih običajno ne zapisujemo ročno (primeri na slikah so samo ilustrativni).</p>
+<p>Imamo:</p>
+<ul>
+<li>optimalne postopke</li>
+<li>neoptimalne postopke</li>
+</ul>
+<hr>
+<h5 id="znani-metodi">
+<a class="header-anchor" href="#znani-metodi"></a>
+Znani metodi
+</h5><h6 id="1-pca--analiza-glavnih-komponent-podatkov-svd-razcep">
+<a class="header-anchor" href="#1-pca--analiza-glavnih-komponent-podatkov-svd-razcep"></a>
+1. PCA – analiza glavnih komponent podatkov (SVD razcep)
+</h6><p>PCA transformacija:</p>
+<ul>
+<li>podatke preslika v nov vektorski prostor,</li>
+<li>prvi bazni vektor kaže v smer največje variance,</li>
+<li>drugi bazni vektor v smer druge največje variance.</li>
+</ul>
+<p>PCA je neoptimalen postopek.</p>
+<hr>
+<h5 id="2-analiza-neodvisnih-komponent-ica">
+<a class="header-anchor" href="#2-analiza-neodvisnih-komponent-ica"></a>
+2. Analiza neodvisnih komponent (ICA)
+</h5><ul>
+<li>Deluje podobno kot PCA.</li>
+<li>Nima tako enostavne interpretacije kot PCA.</li>
+</ul>
+<hr>
+<p>Pri izpeljavi značilnic:</p>
+<ul>
+<li>značilnice izgubijo svoj prvotni pomen,</li>
+<li>izgubijo tudi prvotno enoto.</li>
+</ul>
+<h3 id="spoznavanje-področja-uporabe">
 <a class="header-anchor" href="#spoznavanje-podro%c4%8dja-uporabe"></a>
 Spoznavanje področja uporabe
 </h3><h3 id="razvrščanje-vzorcev">
@@ -3741,10 +4133,10 @@ Preizkušanje razvrščevalnika vzorcev
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;16.1k</span
+          >&nbsp;17.7k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;01:17</span>
+        <span class="icon-coffee">&nbsp;01:25</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
