@@ -4222,6 +4222,504 @@ Pri izpeljavi značilnic:
 
 ### Spoznavanje področja uporabe
 
+Preden začnemo z rojenjem, je potrebno vzorce obdelati.
+
+---
+
+#### Normiranje značilnic
+
+Primer: imamo vzorce z dvema značilnicama (teža in višina).
+
+Če značilnic ne normiramo:
+- lahko ena značilnica (npr. višina) bolj vpliva na mero podobnosti,
+- kar pomeni, da metoda daje prednost eni značilnici (npr. višini) namesto vsem (npr. teži).
+
+Tega si ne želimo.
+
+> [!IMPORTANT]
+> Z normiranjem vsem značilnicam določimo neke vrednosti da izenačimo vrednosti. S tem vse značilnice spravimo na primerljivo skalo in izenačimo njihov vpliv.
+
+---
+
+**Kako normiramo?**
+
+Naši vzorci so zloženi v matriko. Vsak **j-ti stolpec** predstavlja eno značilnico.
+
+Za vsak j-ti stolpec izračunamo:
+- povprečje
+- standardni odklon
+- kot poševnosti
+
+##### Simetrične značilnice - linearna transformacija
+
+Če je **kot poševnosti** tak, da lahko rečemo, da je **porazdelitev simetrična** uporabimo za normiranje **linearno transformacijo**:
+
+Za vsako j-to značilnico:
+- odštejemo povprečje
+- delimo s standardnim odklonom
+- rezultat zapišemo v matriko normiranih vrednosti.
+
+To naredimo za vsako značilnico posebej.
+
+Po normiranju pogosto še skaliramo značilnice. Pomeni, da značilnice omejimo na nek interval. Običajno jih omejimo na interval `[0, 1]` ali na interval `[-1, 1]`
+
+Nato ponovno skaliramo po vsaki značilnici.
+
+Postopek:
+- za vsak stolpec poiščemo `min` in `max`,
+- uporabimo skalirno transformacijo.
+
+Ta celoten postopek velja za **simetrične značilnice**!
+
+---
+
+##### Nesimetrične značilnice - nelinearna transformacija
+
+Normiranje poteka v dveh korakih:
+
+Uporabimo lahko skalirni faktor `r`:
+- lahko ga upoštevamo,
+- lahko ga ne upoštevamo in vzamemo vrednost 1.
+
+Rezultat linearne transformacije po normiranju vstavimo v drugo enačbo.
+
+Če uporabimo **nelinearno transformacijo** dodatno skaliranje ni potrebno, saj so značilnice so avtomatsko na intervalu `[0, 1]`.
+
+---
+
+#### Postopek rojenja (clustering)
+
+Ko smo s podatki zadovoljni, lahko začnemo rojenje.
+
+##### Postopek K povprečij – prvi postopek rojenja (k-means)
+
+`K` predstavlja celo število, ki je večje od 1 in predstavlja število rojev.
+
+**Postopek**
+
+Primer: rojimo s tremi roji (`k = 3`).
+
+**1. Inicializacija**
+- določimo začetne centre (središča) rojev.
+
+**2. Dodeljevanje vzorcev**
+
+V vsaki iteraciji pogledamo vzorec in v kateri roj bi spadal. Za vsak vzorec:
+- izračunamo razdaljo do vseh centrov rojev,
+- določimo najkrajšo razdaljo,
+- vzorec pripada najbližjemu roju.
+
+**3. Posodobitev centrov**
+
+Za vsak roj izračunamo nov center kot povprečje vseh vzorcev v tem roju.
+
+**Zgoraj opisane tri korake ponavljamo:**
+
+- ponovno določimo centre,
+- ponovno razporedimo vzorce,
+- dokler se centri ne prenehajo spreminjati.
+
+To je konvergenčni pogoj.
+
+**4. Končni korak**
+
+Ko dobimo roje:
+- ekspert pregleda roje,
+- določi labelo vsakemu roju,
+- nastane učna množica (vzorec – labela).
+
+To je postopek rojenja.
+
+---
+
+#### Postopek učenja
+
+Po rojenju sledi postopek učenja.
+
+Ena izmed možnosti učenja so **nevronske mreže**.
+
+Imamo:
+- blok učenja
+- blok razvrščanja vzorcev
+
+Iz učne množice moramo izluščiti neko znanje. Ko imamo naučen razvrščevalnik:
+- dobimo nov (neznan) vzorec,
+- razvrščevalnik mora znat določiti, v kateri razred znanih vzorcev ta neznan vzorec spada.
+
+---
+
 ### Razvrščanje vzorcev
 
+Obstaja več različnih načinov razvrščanja vzorcev.
+
+En način je, da v razvrščevalniku hranimo vse vzorce posameznega razreda.
+
+Znanje lahko shranimo na dva načina:
+
+1. **Shranjujemo znanje v obliki vseh vzorcev razreda**
+2. **Shranjujemo znanje v obliki tipičnega predstavnika razreda (šabloni razreda)**
+
+Tipični predstavnik se običajno določi kot povprečje vseh vzorcev v razredu. V tem primeru ne shranjujemo vseh vzorcev, ampak samo tipičnega predstavnika razreda.
+
+---
+
+#### 1. Razvrščanje po pravilu najbližjega soseda (k-NN)
+
+##### Prva varianta - Znanje o posameznem razredu shranjeno v obliki vseh vzorcev
+
+**Postopek:**
+
+1. Izmerimo razdaljo neznanega vzorca do vseh znanih vzorcev.
+2. Poiščemo najkrajšo razdaljo.
+3. Neznan vzorec uvrstimo v razred najbližjega soseda.
+
+Običajno gledamo **n najbližjih sosedov**:
+- Preštejemo labele.
+- Vzorec razvrstimo v razred, ki se največkrat ponovi.
+
+> **Primer**
+>
+> - Imamo neznen vzorec, ki ga želimo razvrstit v enega od možnih razredov znanih vzorcev.
+> - Prvi najbljižji sosed neznanemu vzorcu ima labelo C1
+> - Drugi najbljižji sosed neznanemu vzorcu ima labelo C2
+> - Tretji najbljižji sosed neznanemu vzorcu ima labelo C1  
+> → C1 se ponovi večkrat → vzorec razvrstimo v razred C1.
+
+---
+
+##### Druga varianta - Znanje shranjeno v obliki centrov razredov**
+
+Postopek:
+
+1. Izračunamo razdaljo neznanega vzorca do centrov razredov.
+2. Vzorec pripada razredu najbližjega centra.
+
+Če je vzorec enako oddaljen od dveh ali več centrov:
+- ga ne moremo enolično razvrstiti.
+
+Ta postopek je:
+- časovno hitrejši
+- prostorsko učinkovitejši
+
+---
+
+#### 2. Razvrščanje z odločitvenimi funkcijami
+
+Znanje tukaj predstavimo malenkost drugače. V koraku učenja tukaj za vsak razred naučimo **odločitveno funkcijo**. Nevronske mreže se naučijo odločitvenih funkcij. To se zgodi v fazi učenja.
+
+---
+
+**Kaj je odločitvena funkcija?**
+
+Funkcija, ki:
+
+- na vhodu dobi vektor značilnic `n`
+- na izhodu vrne realno število
+
+---
+
+**Kako razvrščamo?**
+
+1. Neznani vzorec `x` vstavimo v vse odločitvene funkcije (vsak razred ima svojo odločitveno funkcijo).
+2. Izberemo razred, katerega funkcija vrne največjo vrednost.
+
+---
+
+Podobno kot odločitvene funkcije razdelijo prostor na podprostore, pa to delajo tudi  **ločilne meje**. Namesto z odločitvenimi funkcijami pogosto razmišljamo z **ločilnimi mejami**. Pomeni, da se naulimo meje, ki ločijo podprostore.
+
+Ločilna meja:
+- razdeli prostor značilnic na podprostore,
+- vsak podprostor ustreza enemu razredu.
+
+Ločilne meje so lahko:
+- linearne
+- nelinearne
+
+Ločilna meja poteka tam, kjer imata dve odločitveni funkciji enako vrednost.
+
+Vzorcev na meji ne moremo enolično razvrstiti v razrede.
+
+**Koliko ločilnih mej potrebujemo?**
+
+Za:
+- 2 razreda → 1 meja
+- 3 razrede → 3 meje
+- 4 razrede → 6 mej
+
+Splošno:
+- za `m` razredov potrebujemo `m(m-1)/2` mej
+
+---
+
+Če imamo `n`-dimenzionalni prostor značilnic:
+
+- ločilna meja ima dimenzijo `n-1`
+
+Primeri:
+- 1 značilnica → meja je točka (0-dimenzionalna)
+- 2 značilnici → meja je premica
+- 3 značilnice → meja je ravnina
+
+---
+
+Najenostavnejše so linearne odločitvene funkcije. Pri the funkcijah gre za polinome prve stopnje.
+
+Oblika:
+
+$$
+g(x) = w^T x + w0
+$$
+
+kjer:
+- `x` = vektor značilnic
+- `w` = vektor uteži
+- `w0` = prag (bias)
+
+Če:
+- `g(x) > 0` → razred C1
+- `g(x) < 0` → razred C2
+
+---
+
+- Ločilna meja je definirana z enačbo `w^T x + w0 = 0`.
+- Gre za hiper-ravnino v prostoru značilnic.
+
+Nevronske mreže razvrščajo s pomočjo linearnih (ali sestavljenih) odločitvenih funkcij.
+
+Sedaj smo spoznali fazo 1 v katero sodi:
+- Spoznavanje področja uporabe
+- Učenje
+
+Na tej točki lahko preidemo na fazo 2 v kateri preizkusimo:
+- Razvrščanje z naučenim razvrščevalnikom
+
 ### Preizkušanje razvrščevalnika vzorcev
+
+Na začetku te faze naredimo preizkus razvrščevalnika. To naredimo s pomočjo **testne množice**.
+
+Testna množica je enake oblike kot učna množica. Imamo množico podatkov:
+- en del vzamemo za učenje,
+- en del pa za testiranje.
+
+Testna množica je oblike: vzorec → znan razred.
+
+Če je rezultat testa v redu, gremo naprej. Sicer se vrnemo nazaj v fazo učenja.
+
+---
+
+V fazi testiranja:
+- gremo preko vseh vzorcev v testni množici,
+- preverimo, v kateri razred bi moral biti posamezen vzorec razvrščen,
+- če je razvrstitev pravilna, je vse v redu,
+- če ni, zabeležimo napako.
+
+Štejemo verjetnost, da vzorec razvrstimo v napačen razred. S pomočjo testne množice ocenjujemo verjetnost napake.
+
+---
+
+> **Primer**
+>
+> V testni množici imamo 50 vzorcev razreda c1.
+>
+> Od teh:
+> - 42 pravilno razvrščenih,
+> - 8 napačno razvrščenih.
+>
+> Verjetnost napake:
+>
+> napaka = 8 / 50 = 0.16 = 16 %
+>
+> Napako lahko ocenimo za vsak razred posebej.  
+> Nato izračunamo povprečje vseh napak in dobimo skupno oceno razvrščevalnika.
+
+---
+
+Predpostavljamo, da učna množica dobro predstavlja realno okolje, kjer bo razvrščevalnik deloval. Tukaj velja korelacija. Če povečujemo učno množico, se razvrščevalnik izboljšuje. Z večanjem učne množice se verjetnost napake zmanjšuje.
+
+> **Primer: prepoznavanje hišnih tablic**
+>
+> Če učimo na milijonu slik hišnih tablic, se model nauči.  
+> Če dodamo še milijon novih primerov hišnih tablic, bo še boljši.
+>
+> Več podatkov → boljše učenje.
+>
+> **Če bi učno množico nenehno povečevali, bi se sistem vedno bolje učil.**
+
+Predpostavljamo, da obstajata:
+- najboljša možna ocena,
+- najslabša (največja) napaka.
+
+Točnih vrednosti ne poznamo, zato govorimo o:
+- spodnji meji napake,
+- zgornji meji napake.
+
+#### Spodnja meja predikcijske napake
+
+1. Naučimo model na učni množici.
+2. Nato testiramo na isti učni množici.
+
+(To je optimistična ocena.)
+
+#### Zgornja meja napake – Leave-One-Out
+
+Postopek:
+1. Imamo n vzorcev.
+2. En vzorec odstranimo.
+3. Model naučimo na preostalih n − 1 vzorcih.
+4. Testiramo model na izločenem vzorcu.
+5. Postopek ponovimo za vsak vzorec posebej.
+
+To je računsko zelo zahtevno in si tega pogosto ne moremo privoščiti. V praksi uporabimo približek temu, to je **K-Fold validacija**.
+
+##### K-Fold validacija
+
+1. Učno množico razdelimo na k delov (k ≥ 2).
+2. Dobimo podmnožice k1, k2, k3, ... , kk.
+3. Vsak del enkrat uporabimo kot testno množico.
+4. Preostale dele uporabimo za učenje.
+5. Izračunamo povprečno napako.
+
+> **Primer (npr. k = 3):**
+> - učimo na k2 in k3, testiramo na k1,
+> - učimo na k1 in k3, testiramo na k2,
+> - učimo na k1 in k2, testiramo na k3.
+
+---
+
+> **Primer - Razpoznavalnik za prepoznavanje obrazov**
+> Pri razvrščevalniku za prepoznavanje obrazov moramo paziti kako se lotimo učenja:
+>
+> Nepravilno:
+> - v učno množico damo slike neke osebe,
+> - v testno množico damo druge slike te iste osebe (npr. isto osebo slikano z nekoliko drugačnih kotov).
+>
+> To je nepravilen pristop, saj smo s tem mi razpoznavalniku pomagali, saj smo mu podali obraz osebe katero je že videl, zato rezultat razpoznavalnika ne bo realen.
+>
+> Boljše:
+> - uporabimo postopek leave-one-person-out,
+> - testiramo na popolnoma novih osebah.
+>
+> Tako dobimo realnejšo oceno uspešnosti modela.
+
+## Osnovni pojmi o nevronskih mrežah
+
+### Razlika med delovanjem računalnikov in možganov
+
+Nevronske mreže naj bi simulirale delovanje človeških možganov.
+
+**Razlika med algoritmi, ki tečejo na računalniških sistemih, in možgani je:**
+
+#### 1. Postopek razpoznavanja
+
+Človeški možgani delujejo tako, da se učimo s pomočjo izkušenj.
+
+> **Primer:**
+> Starši nas niso učili: »To je led, če to vidiš, se umakni.« Naučimo se tako, da smo morda dvakrat stopili nanj in po možnosti padli.
+
+Algoritmi v računalnikih pa so sprogramirani po določenem postopku.
+
+---
+
+#### 2. Čas potreben za izvrševanje nalog (razpoznavanje / razvrščanje vzorcev)
+
+Človeški možgani delujejo relativno počasi (preklapljajo približno 100 Hz). Stroji so bistveno hitrejši.
+
+> **Primer:**
+> Če hodimo in v daljavi nejasno vidimo osebo, jo lahko prepoznamo po hoji, tudi če je ne vidimo jasno. Računalnik pa mora najprej izostriti sliko iz kamere, čeprav je hitrejši pri procesiranju.
+
+---
+
+#### 3. Zgradba in način izračunavanja
+
+Večina algoritmov v računalnikih deluje zaporedno (sekvenčno).
+
+Možgani pa so sestavljeni iz ogromnega števila nevronov, ki informacije obdelujejo paralelno. Če del možganov začne odmirati, se lahko znanje prenese na drug del možganov. Računalniški sistemi tega še ne omogočajo.
+
+---
+
+### Organski nevron
+
+Osnovni gradnik naših možganov je biološki nevron, sestavljen iz treh delov. Takih gradnikov imamo približno 100 milijard.
+
+Lastnosti:
+- vsak nevron ima vhodna in izhodna vlakna,
+- en izhod se povezuje na vhod drugega nevrona,
+- nevron lahko implementira funkcijo z okoli 10.000 spremenljivkami in enim izhodom.
+
+**Kaj se pretaka po vlaknih?**
+
+Električni impulzi.
+
+- Če impulza ni → nevron ni vzbujen.
+- Če je impulz → obstaja napetost in nevron je aktiven.
+
+Sinapsa določa:
+- ali bo povezava zaviralna,
+- ali bo spodbujevalna.
+
+Nevron odda izhod, ko je dovolj vzbujen. Iz dendritov se preko sinaps "polni posoda". Ko je ta dovolj polna, preide nevron v vzbujeno stanje. Učinkovitost sinaps se lahko med delovanjem spreminja. Frekvenca električnih impulzov je relativno počasna (približno do 100 Hz).
+
+---
+
+### Model umetnega nevrona
+
+Model vključuje:
+- obtežene vhode,
+- seštevanje signalov,
+- aktivacijsko funkcijo.
+
+Izhod nevrona je:
+
+$$f(s)$$
+
+kjer je:
+- s = vsota obteženih vhodov,
+- f = aktivacijska funkcija.
+
+#### Aktivacijske funkcije
+
+- **Pragovna funkcija**  
+  Če je vsota večja od praga → izhod = 1  
+  Sicer → izhod = 0  
+
+- **Linearna funkcija**  
+  Izhod je n-kratnik obteženega vhoda.
+
+- Danes se uporabljajo tudi sodobnejše (nelinearne) funkcije.
+
+---
+
+### Umetne nevronske mreže
+
+**Topologija nevronske mreže** pomeni, kako so nevroni med seboj povezani.
+
+Lažje je analizirati mreže, kjer so nevroni organizirani v plasti.
+
+V nevronski mreži imamo:
+- vhodno plast,
+- eno ali več skritih plasti,
+- izhodno plast.
+
+---
+
+### Razdelitev nevronskih mrež
+
+#### Glede na izhodne vrednosti
+
+Glede na vrsto izhodne vrednosti ločimo **binarne nevronske mreže** in **zvezne nevronske mreže**.
+
+- **Binarne mreže**  
+  Izhod je lahko samo 0 ali 1 (manj uporabne).
+
+- **Zvezne mreže**  
+  Izhod je lahko poljubna realna vrednost.
+
+#### Glede na povezave
+
+Glede na vrsto povezave pa ločimo **statične nevronske mreže** in **dinamične nevronske mreže**.
+
+- **Statične mreže**  
+  Ni rekurzije – izhod ni povezan z eno od prejšnjih plasti.
+
+- **Dinamične mreže**  
+  Izhod je lahko povezan z eno od prejšnjih plasti (rekurzivne povezave).

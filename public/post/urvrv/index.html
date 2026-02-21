@@ -212,6 +212,15 @@ This article does not have a corresponding language version
         <li><a href="#preizkušanje-razvrščevalnika-vzorcev">Preizkušanje razvrščevalnika vzorcev</a></li>
       </ul>
     </li>
+    <li><a href="#osnovni-pojmi-o-nevronskih-mrežah">Osnovni pojmi o nevronskih mrežah</a>
+      <ul>
+        <li><a href="#razlika-med-delovanjem-računalnikov-in-možganov">Razlika med delovanjem računalnikov in možganov</a></li>
+        <li><a href="#organski-nevron">Organski nevron</a></li>
+        <li><a href="#model-umetnega-nevrona">Model umetnega nevrona</a></li>
+        <li><a href="#umetne-nevronske-mreže">Umetne nevronske mreže</a></li>
+        <li><a href="#razdelitev-nevronskih-mrež">Razdelitev nevronskih mrež</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div></div>
@@ -4086,13 +4095,505 @@ Znani metodi
 <h3 id="spoznavanje-področja-uporabe">
 <a class="header-anchor" href="#spoznavanje-podro%c4%8dja-uporabe"></a>
 Spoznavanje področja uporabe
-</h3><h3 id="razvrščanje-vzorcev">
+</h3><p>Preden začnemo z rojenjem, je potrebno vzorce obdelati.</p>
+<hr>
+<h4 id="normiranje-značilnic">
+<a class="header-anchor" href="#normiranje-zna%c4%8dilnic"></a>
+Normiranje značilnic
+</h4><p>Primer: imamo vzorce z dvema značilnicama (teža in višina).</p>
+<p>Če značilnic ne normiramo:</p>
+<ul>
+<li>lahko ena značilnica (npr. višina) bolj vpliva na mero podobnosti,</li>
+<li>kar pomeni, da metoda daje prednost eni značilnici (npr. višini) namesto vsem (npr. teži).</li>
+</ul>
+<p>Tega si ne želimo.</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p>Z normiranjem vsem značilnicam določimo neke vrednosti da izenačimo vrednosti. S tem vse značilnice spravimo na primerljivo skalo in izenačimo njihov vpliv.</p></p>
+  </blockquote>
+
+<hr>
+<p><strong>Kako normiramo?</strong></p>
+<p>Naši vzorci so zloženi v matriko. Vsak <strong>j-ti stolpec</strong> predstavlja eno značilnico.</p>
+<p>Za vsak j-ti stolpec izračunamo:</p>
+<ul>
+<li>povprečje</li>
+<li>standardni odklon</li>
+<li>kot poševnosti</li>
+</ul>
+<h5 id="simetrične-značilnice---linearna-transformacija">
+<a class="header-anchor" href="#simetri%c4%8dne-zna%c4%8dilnice---linearna-transformacija"></a>
+Simetrične značilnice - linearna transformacija
+</h5><p>Če je <strong>kot poševnosti</strong> tak, da lahko rečemo, da je <strong>porazdelitev simetrična</strong> uporabimo za normiranje <strong>linearno transformacijo</strong>:</p>
+<p>Za vsako j-to značilnico:</p>
+<ul>
+<li>odštejemo povprečje</li>
+<li>delimo s standardnim odklonom</li>
+<li>rezultat zapišemo v matriko normiranih vrednosti.</li>
+</ul>
+<p>To naredimo za vsako značilnico posebej.</p>
+<p>Po normiranju pogosto še skaliramo značilnice. Pomeni, da značilnice omejimo na nek interval. Običajno jih omejimo na interval <code>[0, 1]</code> ali na interval <code>[-1, 1]</code></p>
+<p>Nato ponovno skaliramo po vsaki značilnici.</p>
+<p>Postopek:</p>
+<ul>
+<li>za vsak stolpec poiščemo <code>min</code> in <code>max</code>,</li>
+<li>uporabimo skalirno transformacijo.</li>
+</ul>
+<p>Ta celoten postopek velja za <strong>simetrične značilnice</strong>!</p>
+<hr>
+<h5 id="nesimetrične-značilnice---nelinearna-transformacija">
+<a class="header-anchor" href="#nesimetri%c4%8dne-zna%c4%8dilnice---nelinearna-transformacija"></a>
+Nesimetrične značilnice - nelinearna transformacija
+</h5><p>Normiranje poteka v dveh korakih:</p>
+<p>Uporabimo lahko skalirni faktor <code>r</code>:</p>
+<ul>
+<li>lahko ga upoštevamo,</li>
+<li>lahko ga ne upoštevamo in vzamemo vrednost 1.</li>
+</ul>
+<p>Rezultat linearne transformacije po normiranju vstavimo v drugo enačbo.</p>
+<p>Če uporabimo <strong>nelinearno transformacijo</strong> dodatno skaliranje ni potrebno, saj so značilnice so avtomatsko na intervalu <code>[0, 1]</code>.</p>
+<hr>
+<h4 id="postopek-rojenja-clustering">
+<a class="header-anchor" href="#postopek-rojenja-clustering"></a>
+Postopek rojenja (clustering)
+</h4><p>Ko smo s podatki zadovoljni, lahko začnemo rojenje.</p>
+<h5 id="postopek-k-povprečij--prvi-postopek-rojenja-k-means">
+<a class="header-anchor" href="#postopek-k-povpre%c4%8dij--prvi-postopek-rojenja-k-means"></a>
+Postopek K povprečij – prvi postopek rojenja (k-means)
+</h5><p><code>K</code> predstavlja celo število, ki je večje od 1 in predstavlja število rojev.</p>
+<p><strong>Postopek</strong></p>
+<p>Primer: rojimo s tremi roji (<code>k = 3</code>).</p>
+<p><strong>1. Inicializacija</strong></p>
+<ul>
+<li>določimo začetne centre (središča) rojev.</li>
+</ul>
+<p><strong>2. Dodeljevanje vzorcev</strong></p>
+<p>V vsaki iteraciji pogledamo vzorec in v kateri roj bi spadal. Za vsak vzorec:</p>
+<ul>
+<li>izračunamo razdaljo do vseh centrov rojev,</li>
+<li>določimo najkrajšo razdaljo,</li>
+<li>vzorec pripada najbližjemu roju.</li>
+</ul>
+<p><strong>3. Posodobitev centrov</strong></p>
+<p>Za vsak roj izračunamo nov center kot povprečje vseh vzorcev v tem roju.</p>
+<p><strong>Zgoraj opisane tri korake ponavljamo:</strong></p>
+<ul>
+<li>ponovno določimo centre,</li>
+<li>ponovno razporedimo vzorce,</li>
+<li>dokler se centri ne prenehajo spreminjati.</li>
+</ul>
+<p>To je konvergenčni pogoj.</p>
+<p><strong>4. Končni korak</strong></p>
+<p>Ko dobimo roje:</p>
+<ul>
+<li>ekspert pregleda roje,</li>
+<li>določi labelo vsakemu roju,</li>
+<li>nastane učna množica (vzorec – labela).</li>
+</ul>
+<p>To je postopek rojenja.</p>
+<hr>
+<h4 id="postopek-učenja">
+<a class="header-anchor" href="#postopek-u%c4%8denja"></a>
+Postopek učenja
+</h4><p>Po rojenju sledi postopek učenja.</p>
+<p>Ena izmed možnosti učenja so <strong>nevronske mreže</strong>.</p>
+<p>Imamo:</p>
+<ul>
+<li>blok učenja</li>
+<li>blok razvrščanja vzorcev</li>
+</ul>
+<p>Iz učne množice moramo izluščiti neko znanje. Ko imamo naučen razvrščevalnik:</p>
+<ul>
+<li>dobimo nov (neznan) vzorec,</li>
+<li>razvrščevalnik mora znat določiti, v kateri razred znanih vzorcev ta neznan vzorec spada.</li>
+</ul>
+<hr>
+<h3 id="razvrščanje-vzorcev">
 <a class="header-anchor" href="#razvr%c5%a1%c4%8danje-vzorcev"></a>
 Razvrščanje vzorcev
-</h3><h3 id="preizkušanje-razvrščevalnika-vzorcev">
+</h3><p>Obstaja več različnih načinov razvrščanja vzorcev.</p>
+<p>En način je, da v razvrščevalniku hranimo vse vzorce posameznega razreda.</p>
+<p>Znanje lahko shranimo na dva načina:</p>
+<ol>
+<li><strong>Shranjujemo znanje v obliki vseh vzorcev razreda</strong></li>
+<li><strong>Shranjujemo znanje v obliki tipičnega predstavnika razreda (šabloni razreda)</strong></li>
+</ol>
+<p>Tipični predstavnik se običajno določi kot povprečje vseh vzorcev v razredu. V tem primeru ne shranjujemo vseh vzorcev, ampak samo tipičnega predstavnika razreda.</p>
+<hr>
+<h4 id="1-razvrščanje-po-pravilu-najbližjega-soseda-k-nn">
+<a class="header-anchor" href="#1-razvr%c5%a1%c4%8danje-po-pravilu-najbli%c5%bejega-soseda-k-nn"></a>
+1. Razvrščanje po pravilu najbližjega soseda (k-NN)
+</h4><h5 id="prva-varianta---znanje-o-posameznem-razredu-shranjeno-v-obliki-vseh-vzorcev">
+<a class="header-anchor" href="#prva-varianta---znanje-o-posameznem-razredu-shranjeno-v-obliki-vseh-vzorcev"></a>
+Prva varianta - Znanje o posameznem razredu shranjeno v obliki vseh vzorcev
+</h5><p><strong>Postopek:</strong></p>
+<ol>
+<li>Izmerimo razdaljo neznanega vzorca do vseh znanih vzorcev.</li>
+<li>Poiščemo najkrajšo razdaljo.</li>
+<li>Neznan vzorec uvrstimo v razred najbližjega soseda.</li>
+</ol>
+<p>Običajno gledamo <strong>n najbližjih sosedov</strong>:</p>
+<ul>
+<li>Preštejemo labele.</li>
+<li>Vzorec razvrstimo v razred, ki se največkrat ponovi.</li>
+</ul>
+<blockquote>
+<p><strong>Primer</strong></p>
+<ul>
+<li>Imamo neznen vzorec, ki ga želimo razvrstit v enega od možnih razredov znanih vzorcev.</li>
+<li>Prvi najbljižji sosed neznanemu vzorcu ima labelo C1</li>
+<li>Drugi najbljižji sosed neznanemu vzorcu ima labelo C2</li>
+<li>Tretji najbljižji sosed neznanemu vzorcu ima labelo C1<br>
+→ C1 se ponovi večkrat → vzorec razvrstimo v razred C1.</li>
+</ul>
+</blockquote>
+<hr>
+<h5 id="druga-varianta---znanje-shranjeno-v-obliki-centrov-razredov">
+<a class="header-anchor" href="#druga-varianta---znanje-shranjeno-v-obliki-centrov-razredov"></a>
+Druga varianta - Znanje shranjeno v obliki centrov razredov**
+</h5><p>Postopek:</p>
+<ol>
+<li>Izračunamo razdaljo neznanega vzorca do centrov razredov.</li>
+<li>Vzorec pripada razredu najbližjega centra.</li>
+</ol>
+<p>Če je vzorec enako oddaljen od dveh ali več centrov:</p>
+<ul>
+<li>ga ne moremo enolično razvrstiti.</li>
+</ul>
+<p>Ta postopek je:</p>
+<ul>
+<li>časovno hitrejši</li>
+<li>prostorsko učinkovitejši</li>
+</ul>
+<hr>
+<h4 id="2-razvrščanje-z-odločitvenimi-funkcijami">
+<a class="header-anchor" href="#2-razvr%c5%a1%c4%8danje-z-odlo%c4%8ditvenimi-funkcijami"></a>
+2. Razvrščanje z odločitvenimi funkcijami
+</h4><p>Znanje tukaj predstavimo malenkost drugače. V koraku učenja tukaj za vsak razred naučimo <strong>odločitveno funkcijo</strong>. Nevronske mreže se naučijo odločitvenih funkcij. To se zgodi v fazi učenja.</p>
+<hr>
+<p><strong>Kaj je odločitvena funkcija?</strong></p>
+<p>Funkcija, ki:</p>
+<ul>
+<li>na vhodu dobi vektor značilnic <code>n</code></li>
+<li>na izhodu vrne realno število</li>
+</ul>
+<hr>
+<p><strong>Kako razvrščamo?</strong></p>
+<ol>
+<li>Neznani vzorec <code>x</code> vstavimo v vse odločitvene funkcije (vsak razred ima svojo odločitveno funkcijo).</li>
+<li>Izberemo razred, katerega funkcija vrne največjo vrednost.</li>
+</ol>
+<hr>
+<p>Podobno kot odločitvene funkcije razdelijo prostor na podprostore, pa to delajo tudi  <strong>ločilne meje</strong>. Namesto z odločitvenimi funkcijami pogosto razmišljamo z <strong>ločilnimi mejami</strong>. Pomeni, da se naulimo meje, ki ločijo podprostore.</p>
+<p>Ločilna meja:</p>
+<ul>
+<li>razdeli prostor značilnic na podprostore,</li>
+<li>vsak podprostor ustreza enemu razredu.</li>
+</ul>
+<p>Ločilne meje so lahko:</p>
+<ul>
+<li>linearne</li>
+<li>nelinearne</li>
+</ul>
+<p>Ločilna meja poteka tam, kjer imata dve odločitveni funkciji enako vrednost.</p>
+<p>Vzorcev na meji ne moremo enolično razvrstiti v razrede.</p>
+<p><strong>Koliko ločilnih mej potrebujemo?</strong></p>
+<p>Za:</p>
+<ul>
+<li>2 razreda → 1 meja</li>
+<li>3 razrede → 3 meje</li>
+<li>4 razrede → 6 mej</li>
+</ul>
+<p>Splošno:</p>
+<ul>
+<li>za <code>m</code> razredov potrebujemo <code>m(m-1)/2</code> mej</li>
+</ul>
+<hr>
+<p>Če imamo <code>n</code>-dimenzionalni prostor značilnic:</p>
+<ul>
+<li>ločilna meja ima dimenzijo <code>n-1</code></li>
+</ul>
+<p>Primeri:</p>
+<ul>
+<li>1 značilnica → meja je točka (0-dimenzionalna)</li>
+<li>2 značilnici → meja je premica</li>
+<li>3 značilnice → meja je ravnina</li>
+</ul>
+<hr>
+<p>Najenostavnejše so linearne odločitvene funkcije. Pri the funkcijah gre za polinome prve stopnje.</p>
+<p>Oblika:</p>
+$$
+g(x) = w^T x + w0
+$$<p>kjer:</p>
+<ul>
+<li><code>x</code> = vektor značilnic</li>
+<li><code>w</code> = vektor uteži</li>
+<li><code>w0</code> = prag (bias)</li>
+</ul>
+<p>Če:</p>
+<ul>
+<li><code>g(x) &gt; 0</code> → razred C1</li>
+<li><code>g(x) &lt; 0</code> → razred C2</li>
+</ul>
+<hr>
+<ul>
+<li>Ločilna meja je definirana z enačbo <code>w^T x + w0 = 0</code>.</li>
+<li>Gre za hiper-ravnino v prostoru značilnic.</li>
+</ul>
+<p>Nevronske mreže razvrščajo s pomočjo linearnih (ali sestavljenih) odločitvenih funkcij.</p>
+<p>Sedaj smo spoznali fazo 1 v katero sodi:</p>
+<ul>
+<li>Spoznavanje področja uporabe</li>
+<li>Učenje</li>
+</ul>
+<p>Na tej točki lahko preidemo na fazo 2 v kateri preizkusimo:</p>
+<ul>
+<li>Razvrščanje z naučenim razvrščevalnikom</li>
+</ul>
+<h3 id="preizkušanje-razvrščevalnika-vzorcev">
 <a class="header-anchor" href="#preizku%c5%a1anje-razvr%c5%a1%c4%8devalnika-vzorcev"></a>
 Preizkušanje razvrščevalnika vzorcev
-</h3></div>
+</h3><p>Na začetku te faze naredimo preizkus razvrščevalnika. To naredimo s pomočjo <strong>testne množice</strong>.</p>
+<p>Testna množica je enake oblike kot učna množica. Imamo množico podatkov:</p>
+<ul>
+<li>en del vzamemo za učenje,</li>
+<li>en del pa za testiranje.</li>
+</ul>
+<p>Testna množica je oblike: vzorec → znan razred.</p>
+<p>Če je rezultat testa v redu, gremo naprej. Sicer se vrnemo nazaj v fazo učenja.</p>
+<hr>
+<p>V fazi testiranja:</p>
+<ul>
+<li>gremo preko vseh vzorcev v testni množici,</li>
+<li>preverimo, v kateri razred bi moral biti posamezen vzorec razvrščen,</li>
+<li>če je razvrstitev pravilna, je vse v redu,</li>
+<li>če ni, zabeležimo napako.</li>
+</ul>
+<p>Štejemo verjetnost, da vzorec razvrstimo v napačen razred. S pomočjo testne množice ocenjujemo verjetnost napake.</p>
+<hr>
+<blockquote>
+<p><strong>Primer</strong></p>
+<p>V testni množici imamo 50 vzorcev razreda c1.</p>
+<p>Od teh:</p>
+<ul>
+<li>42 pravilno razvrščenih,</li>
+<li>8 napačno razvrščenih.</li>
+</ul>
+<p>Verjetnost napake:</p>
+<p>napaka = 8 / 50 = 0.16 = 16 %</p>
+<p>Napako lahko ocenimo za vsak razred posebej.<br>
+Nato izračunamo povprečje vseh napak in dobimo skupno oceno razvrščevalnika.</p>
+</blockquote>
+<hr>
+<p>Predpostavljamo, da učna množica dobro predstavlja realno okolje, kjer bo razvrščevalnik deloval. Tukaj velja korelacija. Če povečujemo učno množico, se razvrščevalnik izboljšuje. Z večanjem učne množice se verjetnost napake zmanjšuje.</p>
+<blockquote>
+<p><strong>Primer: prepoznavanje hišnih tablic</strong></p>
+<p>Če učimo na milijonu slik hišnih tablic, se model nauči.<br>
+Če dodamo še milijon novih primerov hišnih tablic, bo še boljši.</p>
+<p>Več podatkov → boljše učenje.</p>
+<p><strong>Če bi učno množico nenehno povečevali, bi se sistem vedno bolje učil.</strong></p>
+</blockquote>
+<p>Predpostavljamo, da obstajata:</p>
+<ul>
+<li>najboljša možna ocena,</li>
+<li>najslabša (največja) napaka.</li>
+</ul>
+<p>Točnih vrednosti ne poznamo, zato govorimo o:</p>
+<ul>
+<li>spodnji meji napake,</li>
+<li>zgornji meji napake.</li>
+</ul>
+<h4 id="spodnja-meja-predikcijske-napake">
+<a class="header-anchor" href="#spodnja-meja-predikcijske-napake"></a>
+Spodnja meja predikcijske napake
+</h4><ol>
+<li>Naučimo model na učni množici.</li>
+<li>Nato testiramo na isti učni množici.</li>
+</ol>
+<p>(To je optimistična ocena.)</p>
+<h4 id="zgornja-meja-napake--leave-one-out">
+<a class="header-anchor" href="#zgornja-meja-napake--leave-one-out"></a>
+Zgornja meja napake – Leave-One-Out
+</h4><p>Postopek:</p>
+<ol>
+<li>Imamo n vzorcev.</li>
+<li>En vzorec odstranimo.</li>
+<li>Model naučimo na preostalih n − 1 vzorcih.</li>
+<li>Testiramo model na izločenem vzorcu.</li>
+<li>Postopek ponovimo za vsak vzorec posebej.</li>
+</ol>
+<p>To je računsko zelo zahtevno in si tega pogosto ne moremo privoščiti. V praksi uporabimo približek temu, to je <strong>K-Fold validacija</strong>.</p>
+<h5 id="k-fold-validacija">
+<a class="header-anchor" href="#k-fold-validacija"></a>
+K-Fold validacija
+</h5><ol>
+<li>Učno množico razdelimo na k delov (k ≥ 2).</li>
+<li>Dobimo podmnožice k1, k2, k3, &hellip; , kk.</li>
+<li>Vsak del enkrat uporabimo kot testno množico.</li>
+<li>Preostale dele uporabimo za učenje.</li>
+<li>Izračunamo povprečno napako.</li>
+</ol>
+<blockquote>
+<p><strong>Primer (npr. k = 3):</strong></p>
+<ul>
+<li>učimo na k2 in k3, testiramo na k1,</li>
+<li>učimo na k1 in k3, testiramo na k2,</li>
+<li>učimo na k1 in k2, testiramo na k3.</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>Primer - Razpoznavalnik za prepoznavanje obrazov</strong>
+Pri razvrščevalniku za prepoznavanje obrazov moramo paziti kako se lotimo učenja:</p>
+<p>Nepravilno:</p>
+<ul>
+<li>v učno množico damo slike neke osebe,</li>
+<li>v testno množico damo druge slike te iste osebe (npr. isto osebo slikano z nekoliko drugačnih kotov).</li>
+</ul>
+<p>To je nepravilen pristop, saj smo s tem mi razpoznavalniku pomagali, saj smo mu podali obraz osebe katero je že videl, zato rezultat razpoznavalnika ne bo realen.</p>
+<p>Boljše:</p>
+<ul>
+<li>uporabimo postopek leave-one-person-out,</li>
+<li>testiramo na popolnoma novih osebah.</li>
+</ul>
+<p>Tako dobimo realnejšo oceno uspešnosti modela.</p>
+</blockquote>
+<h2 id="osnovni-pojmi-o-nevronskih-mrežah">
+<a class="header-anchor" href="#osnovni-pojmi-o-nevronskih-mre%c5%beah"></a>
+Osnovni pojmi o nevronskih mrežah
+</h2><h3 id="razlika-med-delovanjem-računalnikov-in-možganov">
+<a class="header-anchor" href="#razlika-med-delovanjem-ra%c4%8dunalnikov-in-mo%c5%beganov"></a>
+Razlika med delovanjem računalnikov in možganov
+</h3><p>Nevronske mreže naj bi simulirale delovanje človeških možganov.</p>
+<p><strong>Razlika med algoritmi, ki tečejo na računalniških sistemih, in možgani je:</strong></p>
+<h4 id="1-postopek-razpoznavanja">
+<a class="header-anchor" href="#1-postopek-razpoznavanja"></a>
+1. Postopek razpoznavanja
+</h4><p>Človeški možgani delujejo tako, da se učimo s pomočjo izkušenj.</p>
+<blockquote>
+<p><strong>Primer:</strong>
+Starši nas niso učili: »To je led, če to vidiš, se umakni.« Naučimo se tako, da smo morda dvakrat stopili nanj in po možnosti padli.</p>
+</blockquote>
+<p>Algoritmi v računalnikih pa so sprogramirani po določenem postopku.</p>
+<hr>
+<h4 id="2-čas-potreben-za-izvrševanje-nalog-razpoznavanje--razvrščanje-vzorcev">
+<a class="header-anchor" href="#2-%c4%8das-potreben-za-izvr%c5%a1evanje-nalog-razpoznavanje--razvr%c5%a1%c4%8danje-vzorcev"></a>
+2. Čas potreben za izvrševanje nalog (razpoznavanje / razvrščanje vzorcev)
+</h4><p>Človeški možgani delujejo relativno počasi (preklapljajo približno 100 Hz). Stroji so bistveno hitrejši.</p>
+<blockquote>
+<p><strong>Primer:</strong>
+Če hodimo in v daljavi nejasno vidimo osebo, jo lahko prepoznamo po hoji, tudi če je ne vidimo jasno. Računalnik pa mora najprej izostriti sliko iz kamere, čeprav je hitrejši pri procesiranju.</p>
+</blockquote>
+<hr>
+<h4 id="3-zgradba-in-način-izračunavanja">
+<a class="header-anchor" href="#3-zgradba-in-na%c4%8din-izra%c4%8dunavanja"></a>
+3. Zgradba in način izračunavanja
+</h4><p>Večina algoritmov v računalnikih deluje zaporedno (sekvenčno).</p>
+<p>Možgani pa so sestavljeni iz ogromnega števila nevronov, ki informacije obdelujejo paralelno. Če del možganov začne odmirati, se lahko znanje prenese na drug del možganov. Računalniški sistemi tega še ne omogočajo.</p>
+<hr>
+<h3 id="organski-nevron">
+<a class="header-anchor" href="#organski-nevron"></a>
+Organski nevron
+</h3><p>Osnovni gradnik naših možganov je biološki nevron, sestavljen iz treh delov. Takih gradnikov imamo približno 100 milijard.</p>
+<p>Lastnosti:</p>
+<ul>
+<li>vsak nevron ima vhodna in izhodna vlakna,</li>
+<li>en izhod se povezuje na vhod drugega nevrona,</li>
+<li>nevron lahko implementira funkcijo z okoli 10.000 spremenljivkami in enim izhodom.</li>
+</ul>
+<p><strong>Kaj se pretaka po vlaknih?</strong></p>
+<p>Električni impulzi.</p>
+<ul>
+<li>Če impulza ni → nevron ni vzbujen.</li>
+<li>Če je impulz → obstaja napetost in nevron je aktiven.</li>
+</ul>
+<p>Sinapsa določa:</p>
+<ul>
+<li>ali bo povezava zaviralna,</li>
+<li>ali bo spodbujevalna.</li>
+</ul>
+<p>Nevron odda izhod, ko je dovolj vzbujen. Iz dendritov se preko sinaps &ldquo;polni posoda&rdquo;. Ko je ta dovolj polna, preide nevron v vzbujeno stanje. Učinkovitost sinaps se lahko med delovanjem spreminja. Frekvenca električnih impulzov je relativno počasna (približno do 100 Hz).</p>
+<hr>
+<h3 id="model-umetnega-nevrona">
+<a class="header-anchor" href="#model-umetnega-nevrona"></a>
+Model umetnega nevrona
+</h3><p>Model vključuje:</p>
+<ul>
+<li>obtežene vhode,</li>
+<li>seštevanje signalov,</li>
+<li>aktivacijsko funkcijo.</li>
+</ul>
+<p>Izhod nevrona je:</p>
+$$f(s)$$<p>kjer je:</p>
+<ul>
+<li>s = vsota obteženih vhodov,</li>
+<li>f = aktivacijska funkcija.</li>
+</ul>
+<h4 id="aktivacijske-funkcije">
+<a class="header-anchor" href="#aktivacijske-funkcije"></a>
+Aktivacijske funkcije
+</h4><ul>
+<li>
+<p><strong>Pragovna funkcija</strong><br>
+Če je vsota večja od praga → izhod = 1<br>
+Sicer → izhod = 0</p>
+</li>
+<li>
+<p><strong>Linearna funkcija</strong><br>
+Izhod je n-kratnik obteženega vhoda.</p>
+</li>
+<li>
+<p>Danes se uporabljajo tudi sodobnejše (nelinearne) funkcije.</p>
+</li>
+</ul>
+<hr>
+<h3 id="umetne-nevronske-mreže">
+<a class="header-anchor" href="#umetne-nevronske-mre%c5%bee"></a>
+Umetne nevronske mreže
+</h3><p><strong>Topologija nevronske mreže</strong> pomeni, kako so nevroni med seboj povezani.</p>
+<p>Lažje je analizirati mreže, kjer so nevroni organizirani v plasti.</p>
+<p>V nevronski mreži imamo:</p>
+<ul>
+<li>vhodno plast,</li>
+<li>eno ali več skritih plasti,</li>
+<li>izhodno plast.</li>
+</ul>
+<hr>
+<h3 id="razdelitev-nevronskih-mrež">
+<a class="header-anchor" href="#razdelitev-nevronskih-mre%c5%be"></a>
+Razdelitev nevronskih mrež
+</h3><h4 id="glede-na-izhodne-vrednosti">
+<a class="header-anchor" href="#glede-na-izhodne-vrednosti"></a>
+Glede na izhodne vrednosti
+</h4><p>Glede na vrsto izhodne vrednosti ločimo <strong>binarne nevronske mreže</strong> in <strong>zvezne nevronske mreže</strong>.</p>
+<ul>
+<li>
+<p><strong>Binarne mreže</strong><br>
+Izhod je lahko samo 0 ali 1 (manj uporabne).</p>
+</li>
+<li>
+<p><strong>Zvezne mreže</strong><br>
+Izhod je lahko poljubna realna vrednost.</p>
+</li>
+</ul>
+<h4 id="glede-na-povezave">
+<a class="header-anchor" href="#glede-na-povezave"></a>
+Glede na povezave
+</h4><p>Glede na vrsto povezave pa ločimo <strong>statične nevronske mreže</strong> in <strong>dinamične nevronske mreže</strong>.</p>
+<ul>
+<li>
+<p><strong>Statične mreže</strong><br>
+Ni rekurzije – izhod ni povezan z eno od prejšnjih plasti.</p>
+</li>
+<li>
+<p><strong>Dinamične mreže</strong><br>
+Izhod je lahko povezan z eno od prejšnjih plasti (rekurzivne povezave).</p>
+</li>
+</ul>
+</div>
     <footer class="article-footer"><ul class="article-category-list"></ul>
 <ul class="article-tag-list" itemprop="keywords"></ul>
 </footer>
@@ -4133,10 +4634,10 @@ Preizkušanje razvrščevalnika vzorcev
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;17.7k</span
+          >&nbsp;19.6k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;01:25</span>
+        <span class="icon-coffee">&nbsp;01:33</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -4217,6 +4718,15 @@ Preizkušanje razvrščevalnika vzorcev
         <li><a href="#spoznavanje-področja-uporabe">Spoznavanje področja uporabe</a></li>
         <li><a href="#razvrščanje-vzorcev">Razvrščanje vzorcev</a></li>
         <li><a href="#preizkušanje-razvrščevalnika-vzorcev">Preizkušanje razvrščevalnika vzorcev</a></li>
+      </ul>
+    </li>
+    <li><a href="#osnovni-pojmi-o-nevronskih-mrežah">Osnovni pojmi o nevronskih mrežah</a>
+      <ul>
+        <li><a href="#razlika-med-delovanjem-računalnikov-in-možganov">Razlika med delovanjem računalnikov in možganov</a></li>
+        <li><a href="#organski-nevron">Organski nevron</a></li>
+        <li><a href="#model-umetnega-nevrona">Model umetnega nevrona</a></li>
+        <li><a href="#umetne-nevronske-mreže">Umetne nevronske mreže</a></li>
+        <li><a href="#razdelitev-nevronskih-mrež">Razdelitev nevronskih mrež</a></li>
       </ul>
     </li>
   </ul>
