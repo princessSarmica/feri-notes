@@ -4723,3 +4723,426 @@ Glede na vrsto povezave pa ločimo **statične nevronske mreže** in **dinamičn
 
 - **Dinamične mreže**  
   Izhod je lahko povezan z eno od prejšnjih plasti (rekurzivne povezave).
+
+## Zvezni večplastni perceptroni
+
+### Osnovni pojmi
+
+Imamo več vrst nevronskih mrež. Ena pomembnejših vrst so **večplastne zvezne nevronske mreže** (večplastni perceptroni).
+
+Z nevronskimi mrežami želimo rešiti naslednji problem:
+
+Radi bi se naučili neznano funkcijo **F**, ki preslika iz 2D prostora realnih števil v množico M-dimenzionalnih vektorjev. Funkcija **F** je neznana. Naučiti se je želimo s pomočjo **večplastnega perceptrona**.
+
+Znanje o tej funkciji je skrito v:
+- učni množici (pari vhod–želen izhod),
+- utežeh mreže,
+- topologiji mreže.
+
+Oznaka:
+- **X** pomeni vhod.
+
+Predpostavljamo, da je učna množica reprezentativna. Če pripravimo slabo (nereprezentativno) učno množico, se funkcije **F** ne bomo pravilno naučili.
+
+Z večplastnim perceptronom se lahko naučimo neskončno mnogo različnih funkcij **F**, ki se med seboj razlikujejo glede na:
+- vrednosti uteži,
+- topologijo mreže.
+
+Znanje je torej shranjeno:
+- v utežeh,
+- v topologiji mreže.
+
+Učimo se s pari iz učne množice:
+
+1. Vstavimo vhod.
+2. Dobimo dejanski izhod mreže.
+3. Primerjamo ga z želenim izhodom.
+4. Popravimo uteži v mreži.
+
+Postopek je **iterativen**:
+- skozi več iteracij prilagajamo uteži,
+- cilj je, da je dejanski izhod čim bolj podoben želenemu izhodu.
+
+Učenje ustavimo, ko je izpolnjen izbrani kriterij (npr. dovolj majhna napaka).
+
+**Posplošitev (generalizacija)** pomeni, da zna nevronska mreža pravilno napovedovati izhode tudi za vhode, ki jih med učenjem še ni videla.
+
+Želimo, da mreža:
+- ne memorira učne množice,
+- temveč dobro generalizira na nove podatke.
+
+Znanje je skrito v dveh stvareh:
+- **topologiji**,
+- **utežeh**.
+
+Uspešnost mreže je močno odvisna od topologije, kar vključuje:
+- prenosno (aktivacijsko) funkcijo,
+- število nevronov,
+- število plasti.
+
+S topologijo in utežmi določimo:
+- količino funkcij F,
+- vrsto funkcij F, ki se jih nevronska mreža lahko nauči.
+
+Izbira topologije ni enostavna. Tudi če poznamo funkcijo, še ne vemo, katera topologija je najboljša zanjo.
+
+Zato je priporočljivo:
+- testirati več različnih topologij,
+- primerjati njihove rezultate.
+
+---
+
+### Splošni zvezni večplastni perceptroni
+
+Poljuben problem lahko rešimo s pomočjo **zveznega triplastnega perceptrona**:
+
+- vhodna plast,
+- skrita plast,
+- izhodna plast.
+
+Na vsaki plasti imamo množico nevronov.
+
+S takšno topologijo lahko teoretično rešimo katerikoli problem (ob ustreznem številu nevronov).
+
+Vsak nevron ima:
+- vhod(e),
+- izhod.
+
+Zvezni plastni perceptroni se v praksi ne učijo vedno optimalno. Zato pogosto uporabljamo **globoke nevronske mreže**. Namesto ene plasti z zelo veliko nevroni, raje uporabimo več plasti z manjšim številom nevronov. Takšne mreže se običajno učijo bolje kot klasične triplastne mreže z velikim številom nevronov v eni plasti.
+
+#### Aktivacijske (prenosne) funkcije
+
+Vsi nevroni v posamezni plasti imajo enako aktivacijsko (prenosno) funkcijo. Najpogosteje uporabljene funkcije so:
+
+##### 1. Linearna prenosna funkcija
+
+Najbolj preprosta oblika:
+
+y = s
+
+Kar damo na vhod, dobimo na izhod. Takšna funkcija sama po sebi ne omogoča nelinearnosti v modelu.
+
+---
+
+##### 2. Rectified Linear Unit (ReLU)
+
+Rectificirana linearna enota deluje tako:
+
+- za pozitivne vrednosti s → izhod = s
+- za negativne vrednosti s → izhod = 0
+
+Matematično:
+
+ReLU(s) = max(0, s)
+
+To je danes ena najpogosteje uporabljenih funkcij v globokem učenju.
+
+---
+
+##### 3. Sigmoidna funkcija
+
+Lastnosti:
+
+- če gre s proti +∞ → izhod gre proti 1
+- če gre s proti −∞ → izhod gre proti 0
+
+Sigmoidna funkcija preslika realne vrednosti v interval (0, 1).
+
+Pri klasičnih (plitvih) nevronskih mrežah je manj pomembno, kje uporabimo sigmoidno funkcijo. Pri globokem učenju pa sigmoidna funkcija običajno ni primerna za vhodne in skrite plasti, ampak se pogosto uporablja le na izhodni plasti (npr. pri binarni klasifikaciji).
+
+### Učno pravilo gradientnega sestopa
+
+Proces učenja je **iterativen**. Na osnovi napake v vsaki iteraciji popravljamo uteži.
+
+**Kako napako izračunati?**
+
+Eden najbolj preprostih pristopov za merjenje uspešnosti je **srednja kvadratna napaka (MSE – Mean Squared Error)**.
+
+**Kako se srednjo kvadratno napako izračuna?**
+
+1. Od želenega izhoda odštejemo dejanski izhod.
+2. Ker sta oba izhoda vektorja, odštevamo istoležne komponente.
+3. Razliko kvadriramo.
+4. Izračunamo povprečje čez vse komponente (in vse vzorce).
+
+Ta izračun moramo narediti za vsak vzorec v učni množici. Napaka je na začetku učenja velika. Tekom učenja se zmanjšuje. V idealnem primeru bi bila na koncu enaka 0.
+
+Učenje nevronske mreže je **optimizacijski problem**. Cilj je poiskati minimum kvadratne napake. Napako optimiziramo glede na uteži nevronske mreže. Iščemo torej minimum funkcije napake v odvisnosti od uteži. To pomeni, da variramo (popravljamo) uteži, dokler ne dosežemo minimuma napake.
+
+Obstaja veliko učnih pravil (učnih algoritmov). Eden najbolj klasičnih je:
+
+#### Učno pravilo gradientnega sestopa (vzvratno učenje)
+
+Pri tem učnem pravilu:
+
+- izvajamo vzvratno računanje napake (backpropagation),
+- od izhoda gremo proti vhodu,
+- postopoma popravljamo napako in uteži.
+
+---
+
+Vsako učno pravilo določa, kako popravimo uteži. Splošno pravilo:
+
+nova utež = stara utež + popravek
+
+To velja pri vsakem učnem algoritmu. Učni algoritem določa, kako izračunamo ta popravek!
+
+---
+
+Gradientni sestop določa naslednje:
+
+Napaka E se bo zmanjševala, če uteži prilagajamo v smeri:
+
+-ε · ∇E
+
+kjer je:
+- ε (epsilon) učna hitrost,
+- ∇E gradientni vektor (gradient napake).
+
+Če se premaknemo za majhen korak v smeri negativnega gradienta, se mora vrednost kriterijske funkcije v vsaki iteraciji zmanjšati. Problem pa je, da noben učni algoritem ne zagotavlja, da bomo našli **globalni minimum**. Običajno končamo v enem izmed **lokalnih minimumov**. Prostor uteži je zelo velik (veliko neznank), zato globalnega minimuma običajno ne moremo enostavno določiti.
+
+---
+
+#### Globalno in lokalno učenje
+
+Pri učenju imamo dve možnosti:
+
+##### 1. Globalno učenje
+
+- V enem koraku učenja uporabimo vse vzorce iz učne množice.
+- Nato adaptiramo (popravimo) naše sinapse (uteži).
+
+Globalnemu času se pravi **epoha**. Ena **epoha** pomeni, da smo celotno učno množico uporabili enkrat za prilagoditev uteži. To je globalni čas učenja in pomeni kolikokrat smo učno množico uporabili za adaptiranje uteži. Globalni čas učenja merimo v epohah.
+
+---
+
+##### 2. Lokalno (inkrementalno) učenje
+
+- Vzamemo en vzorec iz učne množice.
+- Izračunamo napako.
+- Takoj prilagodimo uteži.
+
+To je ena **iteracija učenja**.
+
+---
+
+**Razlika med iteracijo in epoho**
+
+Če ima učna množica 1000 vzorcev:
+
+- 1 iteracija → uporabili smo 1 vzorec.
+- 1 epoha → uporabili smo vseh 1000 vzorcev.
+
+Če izvedemo 20.000 iteracij:
+
+20.000 / 1000 = 20 epoh
+
+(To velja, če 1000 vzorcev predstavlja eno celotno učno množico.)
+
+---
+
+### Enonevronski zvezni perceptroni
+
+Imamo nevronsko mrežo z enim samim nevronom.
+
+- Imamo **n vhodov**.
+- Izhod je določen s **prenosno (aktivacijsko) funkcijo**.
+
+---
+
+Kako izračunamo srednjo kvadratno napako za en nevron?
+
+Formula je enaka kot prej, vendar ker imamo samo en nevron, odpade vsota po več izhodih. Tako dobimo že takoj želen izhod.
+
+Napaka za posamezen vzorec je:
+
+$$(želen izhod − dejanski izhod)²$$
+
+Skupno napako dobimo tako, da izračunamo kvadratno napako preko vseh vzorcev. Napako seštejemo (ali določimo povprečje) čez vse vzorce učne množice.
+
+---
+
+Pri prilagajanju uteži:
+
+- sprememba uteži vpliva na vrednost izhoda,
+- s tem se spremeni tudi napaka,
+- uteži se popravljajo v smeri zmanjševanja napake.
+
+---
+
+**Ali je en sam nevron uporaben?**
+
+Da. Obstaja teorija, da lahko en sam nevron uporabimo za **razvrščanje vzorcev v dva razreda (A in B)**. Nevron učimo tako, da njegov izhod uporabimo za odločitev, ali vzorec pripada razredu A ali B.
+
+Kako to naredimo?
+
+Imamo 3 načine. Predpostavimo, da ima nevron v vseh treh primerih **sigmoidno aktivacijsko funkcijo**. V vseh pristopih je ločilna meja definirana kot:
+
+skalarni produkt med:
+- vektorjem uteži w
+- vektorjem vhodov x
+
+Ločilna meja ima za **eno dimenzijo manj**, kot je dimenzija vhodnega prostora.
+
+> **Primeri:**
+>
+> - 2 značilnici → ločilna meja je premica
+> - 3 značilnice → ločilna meja je ravnina
+> - več kot 3 značilnice → hiperravnina
+
+Pri vseh treh pristopih je faza razvrščanja enaka:
+
+- če je izhod > 0.5 → razred A
+- sicer → razred B
+
+Razlika med pristopi je v **fazi učenja**. Za učenje potrebujemo učno množico (vzorce iz razreda A in B).
+
+---
+
+#### 1. Pristop – Razvrščanje s hiperravninsko ločilno mejo z ena in nič označevanjem
+
+##### 1. Učenje
+
+- vzorcem iz razreda A dodelimo želen izhod 1
+- vzorcem iz razreda B dodelimo želen izhod 0
+
+Uporabimo gradientni sestop in učimo mrežo.
+
+##### 2. Razvrščanje
+
+Neznan vzorec razvrstimo glede na izhod. Primerjamo ga na prag 0.5:
+
+- če je izhod > 0.5 damo vzorec v razred A
+- če je izhod ≤ 0.5 damo vzorec v razred B
+
+Predpostavljamo, da je verjetnost pojavitve razredov približno enaka.
+
+---
+
+#### 2. Pristop – Razvrščanje s hiperravninsko ločilno mejo z označevanjem z dvojmim pragom
+
+Imamo:
+
+- en prag za razvrščanje (0.5),
+- dva dodatna praga za učenje.
+
+Za razred A določimo prag med 0.5 in 1 (npr. 0.8).  
+Za razred B določimo prag pod 0.5 (npr. 0.4).
+
+Pogoji:
+
+- za A: izhod ≥ 0.8
+- za B: izhod ≤ 0.4
+
+Nevronu ni treba vračati točne vrednosti, temveč samo vrednost znotraj intervala.
+
+Prednost:
+- hitrejše učenje,
+- manj potrebnih epoh.
+
+Pri adaptaciji uteži popravljamo napako samo pri tistih vzorcih:
+- iz A, ki niso dosegli praga,
+- iz B, ki niso padli pod svoj prag.
+
+---
+
+#### 3. Pristop – Razvrščanje s hiperravninsko ločilno mejo z označevanjem z enojnim pragom
+
+Razvrščanje je enako kot prej (prag 0.5).
+
+##### 1. Učenje
+
+- za razred A zahtevamo izhod > 0.5
+- za razred B zahtevamo izhod ≤ 0.5
+
+---
+
+**Možen problem**
+Če ne damo neke varovalke tukaj notri bodo problemi. Če so vse sinaptične uteži enake 0:
+
+- obtežena vsota je 0,
+- sigmoidna funkcija vrne 0.5,
+- srednja kvadratna napaka je 0.
+
+To bi pomenilo, da je mreža "perfektno naučena", kar ni res.
+
+V tem primeru:
+- vsi vzorci iz razreda B so pravilno razvrščeni,
+- vsi vzorci iz razreda A so napačno razvrščeni,
+- uspešnost je 50 %.
+
+**Rešitev problema – Normiranje uteži**
+
+Po vsakem koraku (ali epohi) moramo uteži **normirati**.
+
+Normo vektorja uteži izračunamo kot:
+
+$$||w|| = sqrt(w₁² + w₂² + ... + wₙ²)$$
+
+Po vsaki epohi uteži delimo z njihovo normo. S tem preprečimo degeneriran primer (vse uteži = 0) in zagotovimo uporabnost tretjega pristopa.
+
+### Dvoplastni zvezni perceptroni
+
+Na primeru enega nevrona smo že pokazali kako ga učimo in kako ga smiselno uporabimo za razvrščanje v dva razreda. Sedaj si bomo pogledali **kompleksnejšo nevronsko mrežo**.
+
+#### Dvoplstni perceptron
+
+Imamo:
+
+- 2 plasti,
+- v vhodni plasti 2 nevrona,
+- v izhodni plasti 1 nevron,
+- 2 vhodni liniji.
+
+Imamo tudi zapisan način, kako izgledajo popravki (adaptacije uteži) za vsak nevron.
+
+> [!WARNING]
+> Vse, kar se nahaja na posamezni povezavi (liniji), vpliva na adaptacijo uteži!
+
+---
+
+#### Dvoplastni, trinevronski perceptron
+
+Imamo:
+
+- 2 plasti,
+- 3 nevrone skupaj.
+
+---
+
+#### Preverjanje naučenosti mreže
+
+Preverimo, ali je nevronska mreža naučena.
+
+##### Prvi graf
+Prikazuje prostor vhodov.
+
+##### Drugi graf
+Prikazuje, kaj pride v posamezen nevron:
+
+- nevron s1
+- nevron s2
+
+###### Tretji graf
+Prikazuje izračunane izhode posameznih nevronov.
+
+---
+
+##### Analiza rezultatov
+
+Opazimo:
+
+- nekateri krožci ne ležijo samo na eni strani,
+- krožci drugega razreda prav tako ne ležijo pravilno ločeno.
+
+To pomeni, da mreža **ni naučena**.
+
+Potrebna je adaptacija uteži.
+
+Za vsak posamezen nevron pogledamo:
+
+- kakšen vhod (kot / kombinacija vhodov) je prišel v nevron,
+- kako to vpliva na njegov izhod,
+- kako moramo prilagoditi uteži.
+
+### Hitrost učenja in inicializacija sinaptičnih uteži
