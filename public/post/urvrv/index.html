@@ -231,6 +231,14 @@ This article does not have a corresponding language version
         <li><a href="#hitrost-učenja-in-inicializacija-sinaptičnih-uteži">Hitrost učenja in inicializacija sinaptičnih uteži</a></li>
       </ul>
     </li>
+    <li><a href="#samoorganizirajoče-se-nevronske-mreže">Samoorganizirajoče se nevronske mreže</a>
+      <ul>
+        <li><a href="#topologija-in-obnašanje">Topologija in obnašanje</a></li>
+        <li><a href="#ekvivalentni-algoritem-in-spreminajnje-sinaptičnih-uteži">Ekvivalentni algoritem in spreminajnje sinaptičnih uteži</a></li>
+        <li><a href="#ekvivalentni-algoritem-in-postopek-učenja">Ekvivalentni algoritem in postopek učenja</a></li>
+        <li><a href="#napotki-za-uporabo-ekvivalentnega-algoritma">Napotki za uporabo ekvivalentnega algoritma</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </div></div>
@@ -4992,10 +5000,498 @@ Analiza rezultatov
 <li>kako to vpliva na njegov izhod,</li>
 <li>kako moramo prilagoditi uteži.</li>
 </ul>
+<hr>
+<p>Pri dovplastnem perceptronu imamo:</p>
+<ul>
+<li>v prvi plasti več nevronov,</li>
+<li>v drugi plasti en nevron, ki poda izhod,</li>
+<li>eno izhodno vrednost,</li>
+</ul>
+<p>Skupaj torej en perceptron, ki bo imel več vhodnih spremenljivk in eno izhodno vrednost.</p>
+<p>Funkcija, ki jo naučimo z dvoplastnim perceptronom, je odvisna od topologije mreže. Odvisna je od števila plasti in števila nevronov. Z drugimi besedami od kapacitete nevronske mreže. Kapaciteta pomeni, koliko uteži (prostih parametrov) moramo uporabiti, za učenje mreže.</p>
+<h4 id="podprileganja-underfitting">
+<a class="header-anchor" href="#podprileganja-underfitting"></a>
+podprileganja (underfitting)**
+</h4><p>Če imamo premalo nevronov v prvi plasti (premalo kapacitete), pride do problema <strong>podprileganja</strong>.</p>
+<p>To pomeni:</p>
+<ul>
+<li>mreža se ne more naučiti učne množice,</li>
+<li>krivulja po učenju ne gre skozi točke učne množice.</li>
+</ul>
+<blockquote>
+<p>Primer:
+Problem podprileganja je podobno, kot da se pri matematiki sploh ne bi učili primerov, ker bi se zabavali.</p>
+</blockquote>
+<p>Podprileganju se izognemo tako, da:</p>
+<ul>
+<li>ne izberemo premalo nevronov,</li>
+<li>zagotovimo zadostno kapaciteto,</li>
+<li>omogočimo dovolj prostih parametrov (uteži).</li>
+</ul>
+<hr>
+<h4 id="nadprileganje-overfitting">
+<a class="header-anchor" href="#nadprileganje-overfitting"></a>
+Nadprileganje (Overfitting)
+</h4><p>Če imamo preveč nevronov v prvi plasti (preveliko kapaciteto), pa pride do problema <strong>nadprileganja (overfitting)</strong></p>
+<p>To pomeni:</p>
+<ul>
+<li>mreža se relacije iz učne množice nauči &ldquo;na pamet&rdquo;,</li>
+<li>ne posplošuje znanja, ampak si ga zapomni,</li>
+<li>za nove primere, ki jih še ni videla, ne zna pravilno napovedati.</li>
+</ul>
+<blockquote>
+<p>Primer:
+Naučimo se 10 primerov na pamet brez razumevanja. Ko dobimo 11. primer na testu, ga ne znamo rešiti. Po domače povedano smo se primere &ldquo;napiflali&rdquo;.</p>
+</blockquote>
+<p>Pri nadprileganju:</p>
+<ul>
+<li>mreža vrača točne vrednosti, ki si jih je zapomnila,</li>
+<li>vendar ne zna reševati novih primerov.</li>
+</ul>
+<p>Nadprileganju se izognemo tako, da:</p>
+<ul>
+<li>povečamo učno množico,</li>
+<li>s tem preprečimo, da bi si mreža podatke zapomnila na pamet,</li>
+<li>mreža je prisiljena posploševati znanje.</li>
+</ul>
+<hr>
+<h4 id="teorem-univerzalne-aproksimacije">
+<a class="header-anchor" href="#teorem-univerzalne-aproksimacije"></a>
+Teorem univerzalne aproksimacije
+</h4>
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p>Teorem pravi:</p>
+<p>Z dvoplastnim zveznim perceptronom lahko aproksimiramo (naučimo) katerokoli matematično funkcijo z:</p>
+<ul>
+<li>n vhodi</li>
+<li>enim izhodom</li>
+</ul>
+<p>in to s poljubno natančnostjo.</p>
+<p>V praksi bi taka mreža potrebovala zelo veliko nevronov v prvi plasti. Zato pogosto raje uporabimo <strong>triplasno mrežo</strong>, da zmanjšamo število nevronov v posamezni plasti. Namesto širjenja (več nevronov v eni plasti) povečamo globino (več plasti).</p></p>
+  </blockquote>
+
+<hr>
 <h3 id="hitrost-učenja-in-inicializacija-sinaptičnih-uteži">
 <a class="header-anchor" href="#hitrost-u%c4%8denja-in-inicializacija-sinapti%c4%8dnih-ute%c5%bei"></a>
 Hitrost učenja in inicializacija sinaptičnih uteži
-</h3></div>
+</h3><p>Hitrosti učenja ne merimo v:</p>
+<ul>
+<li>sekundah,</li>
+<li>minutah,</li>
+<li>urah,</li>
+</ul>
+<p>temveč v:</p>
+<ul>
+<li>epohah,</li>
+<li>iteracijah,</li>
+<li>številu korakov.</li>
+</ul>
+<p>Če uporabljamo gradientno metodo, uteži popravljamo z:</p>
+$$popravek = ε × gradientni vektor$$<p><strong>Nova utež:</strong></p>
+$$nova utež = stara utež + popravek$$<p>Popravek določi učni algoritem. Če delamo z gradienti je popravek gradientni vektor. Po določenem času učenja postanejo pri tem spremembe uteži zelo majhne.</p>
+<h4 id="1-metoda-momenta-momentum">
+<a class="header-anchor" href="#1-metoda-momenta-momentum"></a>
+1. Metoda momenta (Momentum)
+</h4><p>Učenje lahko pohitrimo tako, da v postopek vključimo <strong>moment</strong>.</p>
+<p>Ideja:</p>
+<ul>
+<li>v trenutni popravek vključimo znanje iz prejšnje iteracije,</li>
+<li>upoštevamo izračunan pretekli gradient,</li>
+<li>dodamo novo znanje iz trenutnega koraka.</li>
+</ul>
+<p>Popravek izračunamo kot:</p>
+$$popravek = gradient v trenutnem koraku + α × popravek v prejšnjem koraku$$<p>kjer je:</p>
+<ul>
+<li>α realno število med 0 in 1,</li>
+<li>če je α blizu 0 → manj si zapomnimo,</li>
+<li>če je α blizu 1 → več znanja prenesemo iz prejšnjih korakov.</li>
+</ul>
+<p>Metodo momenta lahko vključimo v katerikoli učni algoritem.</p>
+<p>Primer naprednejše metode je <strong>Adam (Adaptive Moments)</strong>. Adam samodejno prilagaja učne parametre in uporablja idejo momentov.</p>
+<hr>
+<h4 id="skaliranje-vhodov-in-izhodov">
+<a class="header-anchor" href="#skaliranje-vhodov-in-izhodov"></a>
+Skaliranje vhodov in izhodov
+</h4><h5 id="skaliranje-vhodov">
+<a class="header-anchor" href="#skaliranje-vhodov"></a>
+Skaliranje vhodov
+</h5><p>Teoretično vhodov ni potrebno skalirati.</p>
+<p>V praksi pa, če so vhodne vrednosti zelo velike, postanejo koraki učenja majhni in adaptacije uteži se upočasnijo. Zato vhode pogosto skaliramo (npr. med 0 in 1).</p>
+<hr>
+<h5 id="skaliranje-izhodov">
+<a class="header-anchor" href="#skaliranje-izhodov"></a>
+Skaliranje izhodov
+</h5><p>Ali je skaliranje izhodov potrebno?</p>
+<h6 id="če-je-izhodna-funkcija-linearna">
+<a class="header-anchor" href="#%c4%8de-je-izhodna-funkcija-linearna"></a>
+Če je izhodna funkcija linearna:
+</h6><ul>
+<li>skaliranje na izhodu NI NUJNO,</li>
+<li>mreža se lahko priuči ustreznih vrednosti.</li>
+</ul>
+<h6 id="če-je-izhodna-funkcija-sigmoidna">
+<a class="header-anchor" href="#%c4%8de-je-izhodna-funkcija-sigmoidna"></a>
+Če je izhodna funkcija sigmoidna:
+</h6><ul>
+<li>skaliranje na izhodu je NUJNO,</li>
+<li>sigmoidna funkcija nima nujno poljubnega območja vrednosti,</li>
+<li>zato mora biti učna množica ustrezno prilagojena.</li>
+</ul>
+<hr>
+<h4 id="inicializacija-uteži">
+<a class="header-anchor" href="#inicializacija-ute%c5%bei"></a>
+Inicializacija uteži
+</h4><p>Mrežo moramo na začetku inicializirati. Ta korak je zelo pomemben.</p>
+<h5 id="napačne-izbire">
+<a class="header-anchor" href="#napa%c4%8dne-izbire"></a>
+Napačne izbire:
+</h5><ul>
+<li>inicializacija vseh uteži na 0,</li>
+<li>enaka inicializacija vseh uteži, bi pomenilo, da se bodo nevroni učili enako.</li>
+</ul>
+<h5 id="boljša-izbira">
+<a class="header-anchor" href="#bolj%c5%a1a-izbira"></a>
+Boljša izbira:
+</h5><ul>
+<li>naključna (random) inicializacija uteži.</li>
+</ul>
+<p>Je pa pri uporabi te metode en problem. Pri učenju iščemo minimum napake. Pri tem bi radi našli <strong>globalni minimum</strong>, vendar:</p>
+<ul>
+<li>pogosto končamo v <strong>lokalnem minimumu</strong>,</li>
+<li>naučena mreža je lokalno optimalna rešitev.</li>
+</ul>
+<p>Zato je smiselno:</p>
+<ul>
+<li>učenje ponoviti večkrat,</li>
+<li>z različnimi inicializacijami,</li>
+<li>izbrati najboljši rezultat.</li>
+</ul>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Random inicializacija nas ne reši vedno. Ni nujno, da bomo z novo inicializacijo prišli v drug minimum. Lahko ponovno končamo v istem lokalnem minimumu.</p></p>
+  </blockquote>
+
+<hr>
+<h4 id="inicializacija-praga-bias">
+<a class="header-anchor" href="#inicializacija-praga-bias"></a>
+Inicializacija praga (bias)
+</h4><p>Tudi praga ni pametno nastaviti na 0. Teorija pravi, da lahko prag določimo tako, da:</p>
+<ol>
+<li>izračunamo povprečni podatek.</li>
+<li>uporabimo to povprečje pri nastavitvi praga.</li>
+</ol>
+<hr>
+<h2 id="samoorganizirajoče-se-nevronske-mreže">
+<a class="header-anchor" href="#samoorganizirajo%c4%8de-se-nevronske-mre%c5%bee"></a>
+Samoorganizirajoče se nevronske mreže
+</h2><h3 id="topologija-in-obnašanje">
+<a class="header-anchor" href="#topologija-in-obna%c5%a1anje"></a>
+Topologija in obnašanje
+</h3><p>Teoretično gledano je ta tip nevronskih mrež najbolj podoben človeškim možganom.</p>
+<p>SOM (Self-Organizing Maps) so nevronske mreže, ki imajo:</p>
+<ul>
+<li>K nevronov,</li>
+<li>nevrone razporejene v določeno topologijo (rešetko / grid).</li>
+</ul>
+<p>Nevroni so organizirani v mrežasto strukturo, ki je lahko:</p>
+<ul>
+<li>1D</li>
+<li>2D</li>
+<li>3D</li>
+<li>ali celo N-dimenzionalna</li>
+</ul>
+<p>Primer: 3 × 3 rešetka nevronov.</p>
+<hr>
+<p>R-ti nevron ima:</p>
+<ol>
+<li>Zunanje (eksterne) vhode:</li>
+</ol>
+<ul>
+<li>opazovalni vektorji</li>
+<li>sinaptične uteži</li>
+</ul>
+<ol start="2">
+<li>Notranje (interne) vhode:</li>
+</ol>
+<ul>
+<li>izhode vseh ostalih nevronov</li>
+<li>povezave preko bočnih (lateralnih) sinaptičnih uteži</li>
+</ul>
+<p>Celoten vhod v R-ti nevron je:</p>
+<p>zunanji vhodi + notranji vhodi  v časovnem trenutku t</p>
+<p>Nevron ima en izhod, ki je nelinearna, monotona aktivacijska funkcija. Izhod se pojavi po zakasnitvi δ (dokler se mreža ne stabilizira). Vsi nevroni med seboj vplivajo drug na drugega (ostali nevroni vplivajo na r-ti nevron, r-ti nevron pa vpliva na ostale nevrone).</p>
+<hr>
+<p>Ko vstavimo vhod v SOM se vsi nevroni se aktivirajo, nekateri močneje, drugi šibkeje. Močneje se zbudijo, večji je izhod. Ko mi vstavimo na vhodu nek podatek se en nevron odzove najmočneje. To je <strong>zmagovalni nevron</strong> (tisti, ki je imel pri danem vhodu največji izhod). Po učenju je vedno en zmagovalec. Ko je določen nevron zmagovalec se močneje odzovejo tudi njegovi sosedi, bolj oddaljeni nevroni pa se odzovejo šibkeje.</p>
+<p>Učenje v SOM temelji na <strong>Hebbovem pravilu</strong>, po katerem se adaptirajo uteži v mreži.</p>
+<p>Nova utež za R-ti nevron:</p>
+<p>nova utež = stara utež + popravek</p>
+<p>Popravek je:</p>
+<p>popravek = izhod nevrona × vhod</p>
+<p>Pravilo Hebba nam pove, kateri nevron bo imel najbolj adaptirane uteži. Za vse nevrone pa, da je:</p>
+<ul>
+<li>ε (učni faktor) enak,</li>
+<li>vhod enak.</li>
+</ul>
+<p>Nevroni se razlikujejo samo po izhodu. Najbolj se bodo adaptirale uteži nevrona z največjim izhodom. To je zmagovalni nevron. Ker se močno odzovejo tudi njegovi sosedi se močno adaptirajo tudi uteži sosednjih nevronov. Po vsakem učnem koraku pa se uteži normalizirajo:</p>
+<ul>
+<li>vsota uteži = 1</li>
+</ul>
+<p>Posledica Hebbovega pravila je, da se najbolj adaptira:</p>
+<ul>
+<li>zmagovalni nevron</li>
+<li>njegovi sosedi</li>
+</ul>
+<p>Zmagovalni nevron bo po učenju tako najbolj občutljiv na podobne vhode.</p>
+<blockquote>
+<p><strong>Primer</strong></p>
+<p>Če se na vhod 10 najmočneje odzove 100-ti nevron, se bo tudi na vhod 9.98 najverjetneje najmočneje odzval isti nevron.</p>
+</blockquote>
+<hr>
+<p>Pri vhodih z dvema značilnicama:</p>
+<ul>
+<li>imamo prostor vhodov,</li>
+<li>imamo prostor sinaptičnih uteži.</li>
+</ul>
+<p>Ta dva prostora sta enaka. Prostor uteži nevrona se nahaja v istem prostoru kot vhodni podatki.</p>
+<hr>
+<p><strong>Sprejemno polje (receptive field)</strong> R-tega nevrona je množica vseh vhodov, za katere je bil R-ti nevron zmagovalec.</p>
+<p>R-ti nevron adaptira svoje uteži po Hebbovem pravilu.</p>
+<p>Po učenju vektor sinaptičnih uteži R-tega nevrona postane podoben vhodom, za katere je bil R zmagovalec. Utežni vektor nevrona torej predstavlja tipične vhode njegovega sprejemnega polja.</p>
+<p><strong>Proces učenja v SOM</strong></p>
+<ol>
+<li>Organizacija v rešetko</li>
+<li>Stabilizacija</li>
+<li>Hebbovo pravilo:
+<ul>
+<li>najbolj se adaptira zmagovalni nevron</li>
+<li>ter njegovi sosedi</li>
+</ul>
+</li>
+</ol>
+
+  <blockquote class="alert-blockquote info">
+    <p class="alert-heading">
+      Info
+    </p>
+    <p><p>V praksi implementacija ni povsem enaka teoretični razlagi.</p></p>
+  </blockquote>
+
+<h3 id="ekvivalentni-algoritem-in-spreminajnje-sinaptičnih-uteži">
+<a class="header-anchor" href="#ekvivalentni-algoritem-in-spreminajnje-sinapti%c4%8dnih-ute%c5%bei"></a>
+Ekvivalentni algoritem in spreminajnje sinaptičnih uteži
+</h3><p>Ko implementiramo mreže SOM, uporabimo <strong>ekvivalentni algoritem</strong>, ki deluje podobno kot teoretični model, posnema teorijo, vendar jo žal tudi nekoliko poenostavi.</p>
+<p>Ekvivalentni algoritem poteka v <strong>dveh korakih</strong>.</p>
+<hr>
+<h4 id="1-korak--iskanje-zmagovalnega-nevrona">
+<a class="header-anchor" href="#1-korak--iskanje-zmagovalnega-nevrona"></a>
+1. korak – Iskanje zmagovalnega nevrona
+</h4><p>Najprej moramo poiskati <strong>zmagovalca</strong>.</p>
+<p>Pri ekvivalentnem algoritmu:</p>
+<ul>
+<li>ne potrebujemo izhoda <code>y</code>,</li>
+<li>izhodov sploh ne gledamo.</li>
+</ul>
+<p><strong>Kako pa poiščemo zmagovalca?</strong></p>
+<p>Če ima mreža SOM <strong>K nevronov</strong>, ima vsak nevron svoj vektor sinaptičnih uteži. Zmagovalca poiščemo tako, da izračunamo razdaljo med vhodnim vektorjem in vektorjem sinaptičnih uteži vsakega nevrona. Nevron, pri katerem je razdalja <strong>najmanjša</strong>, je zmagovalec.</p>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Pri ekvivalentnem algoritmu nas izhod nevrona <strong>ne zanima</strong>.</p></p>
+  </blockquote>
+
+<p>Zmagovalec je nevron <strong>S</strong>.</p>
+<hr>
+<h4 id="2-korak--adaptacija-uteži">
+<a class="header-anchor" href="#2-korak--adaptacija-ute%c5%bei"></a>
+2. korak – Adaptacija uteži
+</h4><p>Adaptacija poteka po pravilu:</p>
+$$nova utež = stara utež + popravek$$<p>Popravek je:</p>
+<p>vhod − vektor sinaptičnih uteži r-tega nevrona</p>
+<p>Uporabimo še skalirno funkcijo, ki vrača vrednosti med 0 in 1. V tej funkciji je zajeto:</p>
+<ul>
+<li>jakost učenja,</li>
+<li>lokacija nevrona v rešetki,</li>
+<li>okolica nevronov, ki jih bomo adaptirali.</li>
+</ul>
+<p>Na začetlu bo jakost adaptiranja velika, bolj ko bomo učili, manjša bo okolica.</p>
+<hr>
+<h5 id="funkcija-g">
+<a class="header-anchor" href="#funkcija-g"></a>
+Funkcija g
+</h5><p>Funkcija <code>g</code> je sestavljena iz:</p>
+$$g(r, s, t) = ε(t) × h(r, s, t)$$<p>kjer:</p>
+<ul>
+<li><strong>ε(t)</strong> → stopnja učenja,</li>
+<li><strong>h(r, s, t)</strong> → skalirna (okoljska) funkcija.</li>
+</ul>
+<p>Funkcija <code>h</code>:</p>
+<ul>
+<li>določa velikost adaptiranja,</li>
+<li>je eksponentno padajoče oblike.</li>
+</ul>
+<p>V števcu merimo razdaljo med zmagovalnim nevronom (s) in nevronom, ki ga adaptiramo (r).</p>
+<p>V imenovalcu je <strong>σ (sigma)</strong>, ki se s časom zmanjšuje skozi učne korake.</p>
+<p>Na začetku:</p>
+<ul>
+<li>okolica je velika,</li>
+<li>adaptacija je močna.</li>
+</ul>
+<p>Med učenjem:</p>
+<ul>
+<li>okolica postaja vedno manjša.</li>
+</ul>
+<p>Na koncu:</p>
+<ul>
+<li>adaptira se samo še zmagovalni nevron.</li>
+</ul>
+<p>Če učimo zelo dolgo:</p>
+<ul>
+<li>σ → 0,</li>
+<li>sigma gre blizu vrednosti 0 in učenje se praktično ustavi.</li>
+</ul>
+<p>Zmagovalni nevron določimo glede na podobnost sinaptičnih uteži vhodu, ne glede na izhod. Nevron z najbolj podobnimi utežmi vhodu je zmagovalec.</p>
+<p>Pri učenju mreže SOM:</p>
+<ul>
+<li>vstavljamo vhode,</li>
+<li>izhodov ni,</li>
+<li>uteži se adaptirajo.</li>
+</ul>
+<p>Učna množica ni enake oblike kot pri klasičnem nadzorovanem učenju (imamo samo vhode).</p>
+<hr>
+<h3 id="ekvivalentni-algoritem-in-postopek-učenja">
+<a class="header-anchor" href="#ekvivalentni-algoritem-in-postopek-u%c4%8denja"></a>
+Ekvivalentni algoritem in postopek učenja
+</h3><p>Med učenjem se zgodita dve pomembni stvari:</p>
+<h4 id="1-faza-urejanja-sinaptičnih-uteži-začetna-faza">
+<a class="header-anchor" href="#1-faza-urejanja-sinapti%c4%8dnih-ute%c5%bei-za%c4%8detna-faza"></a>
+1. Faza urejanja sinaptičnih uteži (začetna faza)
+</h4><p>Na začetku se sinaptične uteži hitro uredijo. To pomeni, da sosednji nevroni dobijo podobne vektorje uteži zaradi učenja hebba in mreža se organizira. To se zgodi že po nekaj začetnih korakih.</p>
+<hr>
+<h4 id="2-kvantizacijska-faza-končna-faza">
+<a class="header-anchor" href="#2-kvantizacijska-faza-kon%c4%8dna-faza"></a>
+2. Kvantizacijska faza (končna faza)
+</h4><p>Mreža lahko postane pravilno urejena (poseben primer, ne vedno).</p>
+<p>To pomeni sosednji nevroni imajo sosednja sprejemna polja, pri čemer si sprejemna polja mejijo. Sprejemno polje r-tega nevrona je množica vhodov, za katere je bil ta nevron zmagovalec.</p>
+<p>Desna spodnja slika - Mreža je <strong>neurejena</strong>.</p>
+<p>Leva slika - Mreža je <strong>urejena</strong> – sosednji nevroni imajo podobne sinaptične uteži.</p>
+<p>To se zgodi na začetku učenja. Tu nam ni treba ničesar posebej narediti – mreža se <strong>sama uredi</strong>.</p>
+<p><strong>Kaj pomeni kvantizirati?</strong></p>
+<p><strong>Kvantizirati pomeni razdeliti</strong>. Če imamo vhodni prostor <strong>X</strong>, ga po učenju razdelimo na več delov.</p>
+<p>(slika 11)</p>
+<p>Po koncu učenja se vhodni prostor kvantizira na <strong>K podprostorov</strong>.</p>
+<ul>
+<li><strong>K</strong> = število nevronov v SOM</li>
+<li>Unija vseh podprostorov predstavlja celoten vhodni prostor</li>
+</ul>
+<p>Vsak podprostor ima tipičnega predstavnika, to je vektor sinaptičnih uteži ustreznega nevrona.</p>
+<p>Primer:</p>
+<ul>
+<li>\( X_1 \) → sprejemno polje 1. nevrona</li>
+<li>\( X_2 \) → sprejemno polje 2. nevrona</li>
+</ul>
+<p>Temu rečemo <strong>kvantizacijska faza</strong>.</p>
+<p>Vhodni prostor n-dimenzionalnih vhodov se nadomesti z manjšo množico <strong>K n-dimenzionalnih sinaptičnih uteži</strong> nevronske mreže. Po kvantizacijski fazi se prostor porazdeli na K podprostorov. Vsak podprostor je sprejemno polje posameznega nevrona.</p>
+<p>Tudi za kvantizacijsko fazo nam ni treba ničesar dodatno narediti, zgodi se avtomatsko med učenjem.</p>
+<p><strong>Kje poteka meja?</strong></p>
+<p>(slika 11)</p>
+<p>Meja med podprostori poteka tam, kjer so točke enako oddaljene od dveh sosednjih nevronov. Posamezen podprostor je ravno sprejemno polje posameznega nevrona.</p>
+<hr>
+<p>Prosojnici 144 in 145 preberite sami.</p>
+<h3 id="napotki-za-uporabo-ekvivalentnega-algoritma">
+<a class="header-anchor" href="#napotki-za-uporabo-ekvivalentnega-algoritma"></a>
+Napotki za uporabo ekvivalentnega algoritma
+</h3><p>Kako učimo mreže SOM za razvrščevalni problem z <strong>M razredi</strong>?</p>
+<p>Gre za problem razvrščanja v M razredov. Kako bi to rešili s SOM?</p>
+<p>Potrebujemo <strong>učno množico</strong>.</p>
+<p>(slika 12)</p>
+<hr>
+<p>Kako pa učimo, če nimamo želenih izhodov?</p>
+<p>Ker je SOM nenadzorovana metoda nimamo želenih izhodov. Za take primere obstaja več pristopov, spoznali bomo enega.</p>
+<h4 id="1-faza-učenja">
+<a class="header-anchor" href="#1-faza-u%c4%8denja"></a>
+1. Faza učenja
+</h4><p>Za vsak razred uvedemo <strong>svojo mrežo SOM</strong>. Če imamo <strong>M razredov</strong>, pripravimo <strong>M mrež SOM</strong></p>
+<p>Vsako mrežo učimo samo z vzorci iz njenega razreda.</p>
+<blockquote>
+<p><strong>Primer:</strong></p>
+<ul>
+<li>mrežo za 3. razred učimo samo z vzorci iz 3. razreda.</li>
+</ul>
+</blockquote>
+<p>Vsako mrežo torej učimo z njenimi vzorci.</p>
+<p>Po tem imamo:</p>
+<ul>
+<li>mrežo za 1. razred,</li>
+<li>mrežo za 2. razred,</li>
+<li>&hellip;</li>
+<li>mrežo za M-ti razred.</li>
+</ul>
+<hr>
+<h4 id="2-faza-razvrščanja">
+<a class="header-anchor" href="#2-faza-razvr%c5%a1%c4%8danja"></a>
+2. Faza razvrščanja
+</h4><p>Dobimo nov vhod. <strong>V kateri razred spada ta vhod?</strong></p>
+<p>Postopek:</p>
+<ol>
+<li>V vsaki mreži poiščemo nevron, katerega uteži so najbolj podobne vhodu.</li>
+<li>V vsaki mreži določimo zmagovalni nevron.</li>
+<li>Med vsemi zmagovalci izberemo tistega, ki je najbolj podoben vhodu.</li>
+<li>Vhod razvrstimo v razred tiste mreže, iz katere prihaja zmagovalni nevron.</li>
+</ol>
+<p>Učenje je <strong>iterativen proces</strong>. Za učno množico potrebujemo več <strong>epoh</strong>.</p>
+<ul>
+<li>Ena epoha = en prehod skozi celotno učno množico.</li>
+<li>Minimalno pričakujemo vsaj približno 10 epoh.</li>
+</ul>
+<p>Če imamo zelo veliko število epoh:</p>
+<ul>
+<li>stopnja učenja postane zelo majhna,</li>
+<li>po veliko korakih (npr. 10.000) je adaptacija skoraj 0,</li>
+<li>nadaljnje učenje postane nesmiselno.</li>
+</ul>
+<p><strong>Kaj narediti pri veliki učni množici?</strong></p>
+<p>Če imamo zelo veliko učno množico moramo prilagoditi stopnjo učenja.</p>
+<blockquote>
+<p><strong>Primer:</strong><br>
+če imamo 2.000.000 hišnih tablic.</p>
+</blockquote>
+<p><strong>Če je učna množica majhna</strong> večkrat gremo skozi njo, za vsako epoho jo premešamo, da se mreža ne &ldquo;napifla&rdquo; zaporedja vzorcev.</p>
+<p><strong>Če je učna množica zelo velika</strong> pa lahko gremo zaporedoma skozi podatke npr. pri milijardah podatkov naredimo en prehod in se ustavimo.</p>
+<h4 id="merjenje-učinkovitosti-ekvivalentnega-algoritma">
+<a class="header-anchor" href="#merjenje-u%c4%8dinkovitosti-ekvivalentnega-algoritma"></a>
+Merjenje učinkovitosti ekvivalentnega algoritma
+</h4><p>Metrike nam povedo:</p>
+<ul>
+<li>kako dobra je topologija,</li>
+<li>kako dobro je problem rešen.</li>
+</ul>
+<h4 id="energija-kvantizacijskega-šuma">
+<a class="header-anchor" href="#energija-kvantizacijskega-%c5%a1uma"></a>
+Energija kvantizacijskega šuma
+</h4><p>Kako jo izračunamo?</p>
+<ol>
+<li>Gremo preko vseh vzorcev v učni množici.</li>
+<li>Imamo K nevronov.</li>
+<li>Za vsak vzorec poiščemo njegov zmagovalni nevron (za vsak nevron pogledamo njegovo sprejemno polje).</li>
+<li>Izmerimo razdaljo med vhodnim vektorjem in vektorjem sinaptičnih uteži.</li>
+<li>Vse te razdalje seštejemo.</li>
+</ol>
+<p>Manjša kot je energija kvantizacijskega šuma → boljša je mreža.</p>
+<p>Za vsak par nevronov izračunamo razdaljo med nevronoma v nevronski rešetki. Če sta nevrona soseda (njuni sprejemni polji sta sosednji):</p>
+<ul>
+<li>izračunamo razdaljo v rešetki,</li>
+<li>na koncu delimo s številom vseh parov.</li>
+</ul>
+<p>To nam pove, kako dobro je ohranjena topologija.</p>
+</div>
     <footer class="article-footer"><ul class="article-category-list"></ul>
 <ul class="article-tag-list" itemprop="keywords"></ul>
 </footer>
@@ -5036,10 +5532,10 @@ Hitrost učenja in inicializacija sinaptičnih uteži
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;21.3k</span
+          >&nbsp;23.4k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;01:41</span>
+        <span class="icon-coffee">&nbsp;01:51</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -5139,6 +5635,14 @@ Hitrost učenja in inicializacija sinaptičnih uteži
         <li><a href="#enonevronski-zvezni-perceptroni">Enonevronski zvezni perceptroni</a></li>
         <li><a href="#dvoplastni-zvezni-perceptroni">Dvoplastni zvezni perceptroni</a></li>
         <li><a href="#hitrost-učenja-in-inicializacija-sinaptičnih-uteži">Hitrost učenja in inicializacija sinaptičnih uteži</a></li>
+      </ul>
+    </li>
+    <li><a href="#samoorganizirajoče-se-nevronske-mreže">Samoorganizirajoče se nevronske mreže</a>
+      <ul>
+        <li><a href="#topologija-in-obnašanje">Topologija in obnašanje</a></li>
+        <li><a href="#ekvivalentni-algoritem-in-spreminajnje-sinaptičnih-uteži">Ekvivalentni algoritem in spreminajnje sinaptičnih uteži</a></li>
+        <li><a href="#ekvivalentni-algoritem-in-postopek-učenja">Ekvivalentni algoritem in postopek učenja</a></li>
+        <li><a href="#napotki-za-uporabo-ekvivalentnega-algoritma">Napotki za uporabo ekvivalentnega algoritma</a></li>
       </ul>
     </li>
   </ul>
