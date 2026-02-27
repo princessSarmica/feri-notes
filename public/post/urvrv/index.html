@@ -344,15 +344,14 @@ y = x(t)
 <li>vrednost signala se skozi čas <strong>neprekinjeno</strong> spreminja</li>
 </ul>
 <p>Da bi zvezni signal lahko obdelovali z računalnikom, izvedemo postopek <strong>diskretizacije</strong> (<strong>vzorčenja</strong>). Pri tem si želimo, da bi v enakomerno razmaknjenih časovnih trenutkih odtipati vrednosti zveznega signala. S tem dobimo zaporedje številskih vrednosti, kar imenujemo <strong>diskreten signal</strong>. Ko imamo diskreten signal (številke v časovnih trenutkih) odtipamo signal na nek določen časovni interval npr. signal odtipamo na 5, 10, 15 milisekund.</p>
-<p>Kakšna pa je vmes vrednost signala med dvema odčitkoma(npr. med 5 in 10 milisekund)?</p>
+<p><strong>Kakšna pa je vmes vrednost signala med dvema odčitkoma(npr. med 5 in 10 milisekund)?</strong></p>
 <p>Tam signal ni definiran, ker ga na teh mestih nismo odtipali. To je ključna razlika med zveznim in diskretnim signalom. Za diskreten signal pravimo, da je vrednost funkcije definirana samo v določenih časovnih trenutkih npr. 5, 10, 15 mislisekund, za vrednosti vmes pa rečemo, da signal ni definiran-<strong>TO JE OPIS DISKRETNEGA SINGALA</strong>.</p>
 
   <blockquote class="alert-blockquote important">
     <p class="alert-heading">
       Important
     </p>
-    <p><p>Diskreten signal je signal, pri katerem je vrednost funkcije definirana samo v določenih, ločenih časovnih trenutkih (npr. pri 5 ms, 10 ms, 15 ms),
-medtem ko za vmesne časovne trenutke signal ni definiran, ker ga nismo odtipali (vzorčili).</p></p>
+    <p><p>Diskreten signal je signal, pri katerem je vrednost funkcije definirana samo v določenih, ločenih časovnih trenutkih (npr. pri 5 ms, 10 ms, 15 ms), medtem ko za vmesne časovne trenutke signal ni definiran, ker ga nismo odtipali (vzorčili).</p></p>
   </blockquote>
 
 <hr>
@@ -369,8 +368,8 @@ I = I(x, y)
 <li>slikovna funkcija je definirana v vsaki točki ravnine</li>
 </ul>
 <p>Zvezna slika (prostorska funkcija) je definirana v vsaki točki ravnine. Katerokoli točko si izberemo, bo funkcija definirana. Za vsak \(x\) in \(y\) vemo vrednost funkcije.</p>
-<p>Kaj pa zdaj ta vrednost pomeni?</p>
-<p>Pri govoru npr. Večja je vrednost, močnejši je glas. Pri sliki pa je odvisno od naprave. Če bo naprava ultrazvok, bo vrednost predstavljala odboj, pri fotoaparatu bo vrednost predstavljala določen spekter barv, svetlost itd.</p>
+<p><strong>Kaj pa zdaj ta vrednost pomeni?</strong></p>
+<p>Pri govoru npr. večja je vrednost, močnejši je glas. Pri sliki pa je odvisno od naprave. Če bo naprava ultrazvok, bo vrednost predstavljala odboj, pri fotoaparatu bo vrednost predstavljala določen spekter barv, svetlost itd.</p>
 <p><strong>Vrednost slikovne funkcije lahko pomeni:</strong></p>
 <ul>
 <li>svetlost (sivino),</li>
@@ -388,8 +387,8 @@ I = I(x, y)
     <p><p>Zvezna slika je zvezna funkcija dveh neodvisnih spremenljivk (\(x\) in \(y\)), ki je definirana v vsaki točki ravnine.</p></p>
   </blockquote>
 
-<p>Kako pa pridemo iz zvezne slike v diskretno sliko?</p>
-<p>To dosežemo podobno kot pri zvoku s postopkom diskretizacije oz. vzorčenja. To pomeni, da ne bomo imeli vse podatke za vsak časovni trenutek.</p>
+<p><strong>Kako pa pridemo iz zvezne slike v diskretno sliko?</strong></p>
+<p>To dosežemo podobno kot pri zvoku s postopkom <strong>diskretizacije</strong> oz. <strong>vzorčenja</strong>. To pomeni, da ne bomo imeli vse podatke za vsak časovni trenutek.</p>
 <p>V smeri \(x\) bomo se zdaj sprehajali s korakom <strong>\(\Delta x\)</strong>.
 Podobno pa bomo diskritizirali tudi drugo prostorsko os \(y\) s korakom <strong>\(\Delta y\)</strong>.</p>
 <p>Sedaj smo dobili <strong>prostorske trenutke</strong> (to je na presečiščih korakov <strong>\(\Delta x\)</strong> in <strong>\(\Delta y\)</strong>). Diskretna slika je definirana samo v teh diskretnih prostorskih trenutkih. V teh točkah imamo definirane podatke o vrednosti slikovne funkcije.</p>
@@ -398,44 +397,40 @@ Podobno pa bomo diskritizirali tudi drugo prostorsko os \(y\) s korakom <strong>
     <p class="alert-heading">
       Important
     </p>
-    <p><p>Digitalna oz. diskretna 2D-slika je diskretizirana zvezna 2D-slika. Vrednost slikovne funkcije obstaja samo v diskretnih prostorskih trenutnik oz. lokacijah: </p>
-\[
-I = I(i, j), \quad i, j \in \mathbb{N}
-\]</p>
+    <p><p>Digitalna oz. diskretna 2D-slika je diskretizirana zvezna 2D-slika. Vrednost slikovne funkcije obstaja samo v diskretnih prostorskih trenutnik oz. lokacijah:
+</p>
+\[I = I(i, j), \quad i, j \in \mathbb{N}\]</p>
   </blockquote>
 
 <p>Točka nima ploščine in nimamo naprave, ki bi znala zajeti nekaj iz prostora kar nima ploščine. Tega ne znamo naredit. V nekem malem območju zato ocenimo nek mali prostor za predstavitev izbrane točke.</p>
 <p>Diskretna slika se najbolj pogosto definira oz. predstavi s pomočjo <strong>matrike</strong>. Pomembno je tudi omenit, da diskretne slike nimajo nikoli neskončno dimenzij-v realnem svetu ko pogledamo vidimo zmeraj neko omejeno območje. V primeru slik, če jih ne bi diskretizirali, bi imeli opravka z neskončnim številom podatkov oz. neskončnimi slikami, kar v praksi ni izvedljivo.</p>
-<p>Vrednosti, ki smo jih prebrali v prostorskih trenutkih vpisujemo v matriko.
-Osnovni najmanjši gradnik diskretne slike se imenuje <strong>piksel</strong> (picture element oz. slikovni element). Eni programi imenujejo to tudi slikovna točka, kar pa je zavajajoče, saj točke v prostoru ne moremo zajemat, ker točka nima ploščine. Imamo opravka z dimenzijo diskretne slike, podobno kot imamo dimenzije pri matrikah.
-Število vrstic in število stolpcev je matrika dimenzije \(M \times N\).</p>
-<p>Štetje oz. indeksiranje je vedno problem (ali začeti z 1 ali z 0)-mi bomo indeksirali z 0. Vsako celico matrike (piksel) bomo označili z indeksom vrstice in stolpca \(p = (x, y)\) oz. \(p = (i, j)\).</p>
+<p>Vrednosti, ki smo jih prebrali v prostorskih trenutkih vpisujemo v matriko. Osnovni najmanjši gradnik diskretne slike se imenuje <strong>piksel</strong> (picture element oz. slikovni element). Eni programi imenujejo to tudi slikovna točka, kar pa je zavajajoče, saj točke v prostoru ne moremo zajemat, ker točka nima ploščine. Imamo opravka z dimenzijo diskretne slike, podobno kot imamo dimenzije pri matrikah. Število vrstic in število stolpcev je matrika dimenzije \(M \times N\).</p>
+<p>Štetje oz. indeksiranje je vedno problem (ali začeti z 1 ali z 0)-<strong>mi bomo indeksirali z 0</strong>. Vsako celico matrike (piksel) bomo označili z indeksom vrstice in stolpca \(p = (x, y)\) oz. \(p = (i, j)\).</p>
 <p>Vrednosti iz grafa, kjer se po korakih sprehajamo, prenesemo v celice matrike
 Npr. 1 korak v smeri\(x\) in 2 koraka v smer\(y\).</p>
 <p>Vrednost diskretne slikovne funkcije v pikslu p označimo kot:
 </p>
 \[
 I(p) \text{ oz. } I(i, j)
-\]<p>Ker je naša slika omejena ima \(M\) vrstic in \(N\) stolpcev, za vrednosti, ki so zunaj teh dimenzij pa <strong>NE VEMO</strong>.</p>
+\]<p>Ker je naša slika omejena ima \(M\) vrstic in \(N\) stolpcev, za vrednosti, ki so zunaj teh dimenzij <strong>NE VEMO</strong>.</p>
 
   <blockquote class="alert-blockquote info">
     <p class="alert-heading">
       Info
     </p>
-    <p><p>Tu pri tem predmetu lahko dosti krat rečemo kot odgovor <strong>NE VEMO</strong>, pa še prav bo!</p></p>
+    <p><p>Tu pri tem predmetu Uvod v računalniški vid in razpoznavanje vzorcev lahko dosti krat rečemo kot odgovor <strong>NE VEMO</strong>, pa še prav bo!</p></p>
   </blockquote>
 
-<p>Najmanjši gradnik slike je piksel in slika ima vse skupaj \(M \times N\) pikslov. Je pa še alternativa za predstavitev slike v obliki satovja namesto matrike. Ene stvari se dajo s satovjem boljše rešit.</p>
+<p>Najmanjši gradnik slike je <strong>piksel</strong> in slika ima vse skupaj \(M \times N\) pikslov. Je pa še alternativa za predstavitev slike v obliki satovja namesto matrike. Ene stvari se dajo s satovjem boljše rešit.</p>
 <p>Vrednosti v matriki:
 Rabimo neko podatkovno strukturo v katero bomo shranili matriko in določili kakšnega tipa so ti podatki. Za določanje tega imamo neka pravila oz. določila:</p>
-<p>Najbolj pogosto, če delamo s sivinskimi slikami, piksel hrani vrednost sivine oz. svetlosti (brightness). Vrednost piksla (tj. sivina oziroma svetlost v tem pikslu) leži na intervalu \([0, Q]\). Kot tip se tu najbolj pogosto uporablja za hranjenje vrednosti vsakega piksla 8 bitov. Kot tip podatkov za matriko uporabimo tako 8 bitov. Zato imamo 8 bitne slike. Imamo slike po vrednostih od 0-255. Pri 8-bitnih slikah je
+<p>Najbolj pogosto, če delamo s sivinskimi slikami, piksel hrani vrednost <strong>sivine</strong> oz. <strong>svetlosti (brightness)</strong>. Vrednost piksla (tj. sivina oziroma svetlost v tem pikslu) leži na intervalu \([0, Q]\). Kot tip se tu najbolj pogosto uporablja za hranjenje vrednosti vsakega piksla 8 bitov. Kot tip podatkov za matriko uporabimo tako 8 bitov. Zato imamo 8 bitne slike. Imamo slike po vrednostih od 0-255. Pri 8-bitnih slikah je
 </p>
 \[
 Q = 2^8 - 1 = 255
 \]<ul>
 <li>
-<p><strong>Sivinske slike</strong> vizualiziramo tako, da vrednost piksla pomeni en vstop v barvno paleto.<br>
-V primeru sivinskih slik je to paleta sivin:</p>
+<p><strong>Sivinske slike</strong> vizualiziramo tako, da vrednost piksla pomeni en vstop v barvno paleto. V primeru sivinskih slik je to paleta sivin:</p>
 </li>
 <li>
 <p>vrednost <strong>0</strong> → črna barva</p>
@@ -453,23 +448,20 @@ V primeru sivinskih slik je to paleta sivin:</p>
 <li>za zeleno (green) 8 bitov</li>
 <li>za modro (blue) 8 bitov.</li>
 </ul>
-<p>Če imamo sivinsko sliko, zakaj 8 bitov?
-Normalen človek (če nismo supermani) razlikuje nekje 250 različnih barv, zato 8 bitov zadošča-od tukaj sledi 255 različnih nivojev, ker jih več enostavno človeško oko ne loči.</p>
-<p>Nekatere medicinske naprave so zmožne piksle odčitat, da vrednost shranimo v 16 bitov in imamo 16 bitne slike. Ljudje jih ne ločimo, nekateri stroji pa jih znajo zajeti. Tako imamo lahko imamo 16 bitne sivinske slike.</p>
-<p>Pri delu z slikami in biti je tudi dobro omenit, da bite običajno probamo zbit ali pa zakodirat z manjšo količino-uporabljamo kompresijo, ker so slike prostorsko lahko zelo potratne.</p>
+<p><strong>Če imamo sivinsko sliko, zakaj 8 bitov?</strong></p>
+<p>Normalen človek (če nismo supermani) razlikuje nekje 250 različnih barv, zato 8 bitov zadošča-od tukaj sledi 255 različnih nivojev, ker jih več enostavno človeško oko ne loči.</p>
+<p>Nekatere medicinske naprave so zmožne piksle odčitat, da vrednost shranimo v 16 bitov in imamo 16 bitne slike. Ljudje jih ne ločimo, nekateri stroji pa jih znajo zajeti. Tako imamo lahko 16 bitne sivinske slike.</p>
+<p>Pri delu z slikami in biti je tudi dobro omenit, da bite običajno probamo zbit ali pa zakodirat z manjšo količino-uporabljamo <strong>kompresijo</strong>, ker so slike prostorsko lahko zelo potratne.</p>
 <hr>
 <h5 id="video">
 <a class="header-anchor" href="#video"></a>
 Video
-</h5><p>Videoposnetek pa je slika, ki se s časom spreminja.</p>
-<p>Videoposnetek bi definirali s tremi neodvisnih spremenljivkami-\(x\) in \(y\) os, ter čas \(t\) skozi katerega se ti 2 komponenti spreminjata.</p>
-<p>Diskretni video je zaporedje diskretnih slik.</p>
+</h5><p>Videoposnetek pa je slika, ki se s časom spreminja. Videoposnetek bi definirali s tremi neodvisnih spremenljivkami-\(x\) in \(y\) os, ter čas \(t\) skozi katerega se ti 2 komponenti spreminjata. Diskretni video je zaporedje diskretnih slik.</p>
 <hr>
 <h4 id="kontrastna-in-prostorska-ločljivost-slike">
 <a class="header-anchor" href="#kontrastna-in-prostorska-lo%c4%8dljivost-slike"></a>
 Kontrastna in prostorska ločljivost slike
 </h4><p>Nalednja dva pojma sta <strong>prostorska</strong> in <strong>kontrastna ločljivost</strong>.</p>
-<hr>
 <h5 id="kontrastna-ločljivost">
 <a class="header-anchor" href="#kontrastna-lo%c4%8dljivost"></a>
 Kontrastna ločljivost
@@ -501,8 +493,7 @@ Dejanska kontrastna ločljivost
 <li>višja kontrastna ločljivost → več sivinskih nivojev</li>
 <li>nižja kontrastna ločljivost → manj sivinskih nivojev</li>
 </ul>
-<p>Višja kontrastna ločljivost omogoča ohranitev več podrobnosti v sceni.<br>
-Z več sivinskimi nivoji lahko natančneje predstavimo prehode med svetlimi in temnimi območji slike.</p>
+<p>Višja kontrastna ločljivost omogoča ohranitev več podrobnosti v sceni. Z več sivinskimi nivoji lahko natančneje predstavimo prehode med svetlimi in temnimi območji slike.</p>
 <p>Manjša kontrastna ločljivost pomeni, da se bližnji sivinski nivoji zlijejo med seboj, kar povzroči izgubo informacij –<br>
 podrobnosti se združijo z večjimi, enotnimi območji slike.</p>
 <h6 id="vpliv-kontrastne-ločljivosti-na-analizo-slike">
@@ -516,17 +507,13 @@ Pri realno-časovnih aplikacijah, kjer je čas obdelave omejen, lahko z zmanjša
 <li>pospešimo obdelavo,</li>
 <li>prihranimo prostor za shranjevanje in prenos.</li>
 </ul>
-<h6 id="kdaj-uporabiti-zmanjšano-kontrastno-ločljivost">
-<a class="header-anchor" href="#kdaj-uporabiti-zmanj%c5%a1ano-kontrastno-lo%c4%8dljivost"></a>
-Kdaj uporabiti zmanjšano kontrastno ločljivost
-</h6><ul>
+<p><strong>Kdaj uporabiti zmanjšano kontrastno ločljivost</strong></p>
+<ul>
 <li>ko nas zanimajo predvsem velike oblike in objekti na sliki</li>
 <li>ko želimo prihraniti čas obdelave in prostor za shranjevanje</li>
 </ul>
-<h6 id="kdaj-zmanjšane-kontrastne-ločljivosti-ne-uporabiti">
-<a class="header-anchor" href="#kdaj-zmanj%c5%a1ane-kontrastne-lo%c4%8dljivosti-ne-uporabiti"></a>
-Kdaj zmanjšane kontrastne ločljivosti ne uporabiti
-</h6><ul>
+<p><strong>Kdaj zmanjšane kontrastne ločljivosti ne uporabiti</strong></p>
+<ul>
 <li>ko je potrebna visoka natančnost</li>
 <li>ko so pomembne podrobnosti in detajli na sliki</li>
 </ul>
@@ -539,7 +526,7 @@ Prostorska ločljivost
     <p class="alert-heading">
       Important
     </p>
-    <p><p><strong>Prostorska ločljivost</strong> je določena kot število pikslov na določeno mersko enoto. Omogoča povezavo med svetom pikslov (meritve v slikah) in realnim svetom, kjer uporabljamo merske enote, kot so mm, cm ali m.</p></p>
+    <p><p><strong>Prostorska ločljivost</strong> je določena kot število pikslov na določeno mersko enoto. Omogoča povezavo med svetom pikslov (meritve v slikah) in realnim svetom, kjer uporabljamo merske enote, kot so mm, cm ali m. Velja za nujno potrebno pri interpretaciji dolžin na slikah.</p></p>
   </blockquote>
 
 <p>Izražena je kot:</p>
@@ -557,7 +544,7 @@ Prostorska ločljivost
     <p class="alert-heading">
       Warning
     </p>
-    <p><p><strong>Prostorske ločljivosti ne smemo zamenjevati z velikostjo slike. Čeprav sta prostorska ločljivost in velikost slike pogosto povezani med sabo, to NISTA ISTA POJMA!</strong></p></p>
+    <p><p><strong>Prostorske ločljivosti ne smemo zamenjevati z velikostjo slike. Čeprav sta prostorska ločljivost in velikost slike tesno povezani med sabo pri opazovanju scene, to NISTA ISTA POJMA!</strong></p></p>
   </blockquote>
 
 <blockquote>
@@ -685,15 +672,15 @@ Svetloba in fotoni
 <h5 id="pretvorba-svetlobnega-naboja-v-sliko">
 <a class="header-anchor" href="#pretvorba-svetlobnega-naboja-v-sliko"></a>
 Pretvorba svetlobnega naboja v sliko
-</h5><p>Akumulirani svetlobni naboj pretvorimo v <strong>zvezni signal</strong> (napetost v odvisnosti od časa). Pretvorba poteka <strong>vrstico po vrstici</strong>, podobno kot igra &ldquo;4 v vrsto&rdquo;: spodnja vrstica se obdeluje prva. Začnemo s spodnjo linijo našega senzorja (matrike) in naboj pretvorimo v zvezni signal (napetost v odvisnosti od časa). Višji kot je svetlobni naboj notri, višja bo napetost in večja bo amplituda (podobno je obratno-nižji bo naboj notri, manjša bo napetost). Vrstico za vsak element pretvorimo v vrednost svetlobnega signala. Na koncu pride kontrolni signal in se vrstica shrani (posreduje v serijski izhodni register). Nato gre naslednja vrstica po podobnem postopku notri za obdelavo.</p>
+</h5><p>Akumulirani svetlobni naboj pretvorimo v <strong>zvezni signal</strong> (napetost v odvisnosti od časa). Pretvorba poteka <strong>vrstico po vrstici</strong>, podobno kot igra &ldquo;4 v vrsto&rdquo;: spodnja vrstica se obdeluje prva. Začnemo s spodnjo linijo našega senzorja (matrike) in naboj pretvorimo v zvezni signal (napetost v odvisnosti od časa). Višji kot je svetlobni naboj notri, višja bo napetost in večja bo amplituda (podobno je obratno-nižji bo naboj notri, manjša bo napetost). Vrstico za vsak element pretvorimo v vrednost svetlobnega signala. Na koncu pride kontrolni signal in se vrstica shrani <strong>(posreduje v serijski izhodni register)</strong>. Nato gre naslednja vrstica po podobnem postopku notri za obdelavo.</p>
 <p>Za tem korakom sledi diskretizacija signala.</p>
 <hr>
-<h5 id="diskretizacija-in-ad-pretvorba">
-<a class="header-anchor" href="#diskretizacija-in-ad-pretvorba"></a>
-Diskretizacija in AD pretvorba
-</h5><p>Register posreduje prejet naboj polja (enega na enkrat) v izhodni <strong>ojačevalnik</strong>, ki zgenerira ustrezen analogni oz. zvezni signal, pri čemerdobimo v signalu večje razlike. Ta signal gre nato v <strong>AD pretvornik</strong>, da pretvorimo analogni signal v digitalni signal (diskretizacija). V fotoaparatih je čas vzorčenja oz. trenutki ko bo signal diskretniziran (\(\Delta T\)) tovarniško zapečeno. Ta vrednost določa koliko vzorcev moremo dobit, da lahko dobimo vsako vrstico.</p>
+<h5 id="diskretizacija-in-ad-analogno-digitalna-pretvorba">
+<a class="header-anchor" href="#diskretizacija-in-ad-analogno-digitalna-pretvorba"></a>
+Diskretizacija in AD (analogno-digitalna) pretvorba
+</h5><p>Register posreduje prejet naboj polja (enega na enkrat) v <strong>izhodni ojačevalnik</strong>, ki zgenerira ustrezen analogni oz. zvezni signal, pri čemer dobimo v signalu večje razlike. Ta signal gre nato v <strong>AD pretvornik</strong>, da pretvorimo analogni signal v digitalni signal (diskretizacija). V fotoaparatih je čas vzorčenja oz. trenutki ko bo signal diskretniziran (\(\Delta T\)) tovarniško zapečeno. Ta vrednost določa koliko vzorcev moremo dobit, da lahko dobimo vsako vrstico.</p>
 <p>Če napetost preseže maksimalno vrednost \(U_\text{MAX}\), AD pretvornik odreže višek. AD pretvornik shrani vrednosti v <strong>register</strong>, običajno 8-bitni, ki lahko hrani <strong>256 različnih nivojev</strong> (od 0 do 255). Vsak ta nivo dobi neko številko oz. indeks. Po AD pretvorbi dobimo <strong>matriko</strong>, ki je enake velikosti in ima enako število elementov kot senzor CCD.</p>
-<p>Postopek ponavljamo za vse vrstice senzorja. Za eno vrstico dobimo signal, to damo v AD pretvornik. V posameznem trenutku ne vrnemo napetost, ampak številko nivoja v katerega je svetlobna točka padla. Ko pridemo do kontrolnega signala vzamemo naslednjo vrstico in spet pretvorimo.</p>
+<p>Postopek ponavljamo za vse vrstice senzorja. Za eno vrstico dobimo signal, to damo v AD pretvornik. V posameznem trenutku ne vrnemo napetost, ampak številko nivoja v katerega je svetlobna točka padla. Ko pridemo do <strong>kontrolnega signala</strong> vzamemo naslednjo vrstico in spet pretvorimo.</p>
 <p>Branje oz. formiranje slike, po tem postopku, se lahko ponovi večkrat na sekundo (npr. 30 fps), lahko pa traja tudi več ur (npr. v astronomiji).</p>
 <p>Za korakom diskretizacije sledi shranjevanje slike.</p>
 <hr>
@@ -702,7 +689,39 @@ Diskretizacija in AD pretvorba
 Shranjevanje slike
 </h5><p>Matriko na koncu shranimo v <strong>pomnilnik</strong> – to je slika v surovem formatu. Pri videu se ta postopek zgodi večkrat na sekundo.</p>
 <hr>
-<p>Zgoraj opisan postopek velja za sivinsko sliko. Pri barvni sliki pa so potrebni za vsako barvo 3 komponente RGB. Kako priti torej do barvnih slik?</p>
+<p><strong>Kako dobimo digitalno sliko?</strong></p>
+<p>Digitalna slika nastane iz analognega video signala.</p>
+<p><strong>1. Pretvorba signala</strong></p>
+<p>Ustvarjeni analogni video signal se posreduje <strong>slikovnemu digitalizatorju</strong> (frame grabber).</p>
+<p>Izvede se analogno-digitalna (A/D) pretvorba-signal se pretvori v <strong>nivo sivine</strong>:</p>
+<p>Primer:</p>
+<ul>
+<li>v trenutku T ima signal vrednost 0,5 V,</li>
+<li>ta vrednost se pretvori v sivino 127.</li>
+</ul>
+<p><strong>2. Kvantizacija (ločljivost sivin)</strong></p>
+<p>Digitalizacija se tipično izvaja z ločljivostjo <strong>8 bitov</strong>.</p>
+<p>To pomeni:</p>
+<ul>
+<li>2⁸ = 256 različnih sivin,</li>
+<li>napetostno območje razdelimo na 256 razredov, pri čemer je vsak razred velik \(
+\Delta = \frac{U_{\text{Max}} - U_{\text{min}}}{256}
+\)</li>
+<li>vsem napetostim znotraj istega razreda priredimo enako sivino.</li>
+</ul>
+<p><strong>3. Vzorčenje</strong></p>
+<p>Signal vzorčimo ob točno določenih časovnih trenutkih.</p>
+<ul>
+<li>Časovni trenutek natančno določa položaj piksla v matriki (sliki).</li>
+<li>Vsak vzorec postane en piksel.</li>
+</ul>
+<p><strong>4. Rezultat</strong></p>
+<p>Rezultat vzorčenja analognega video signala je <strong>digitalna slika</strong></p>
+<hr>
+<h4 id="kako-pridemo-do-barvnih-digitalnih-slik">
+<a class="header-anchor" href="#kako-pridemo-do-barvnih-digitalnih-slik"></a>
+Kako pridemo do barvnih digitalnih slik?
+</h4><p>Zgoraj opisan postopek velja za sivinsko sliko. Pri barvni sliki pa so potrebni za vsako barvo 3 komponente RGB. Kako priti torej do barvnih slik?</p>
 <p>Obstajata 2 pristopa:</p>
 <ul>
 <li><strong>single-shot</strong> (zaslonka se 1x odpre)</li>
@@ -773,6 +792,10 @@ Modeli kamer
 <li>matematične modele kamere,</li>
 <li>načine, kako proces zajema slike opisati z matematičnimi formulami.</li>
 </ul>
+<p>Obravnavali bomo naslednje modele kamer:
+-kamera na luknjico (pinhole camera)
+-kamera s tankimi lečami
+-kamera z debelimi lečami</p>
 <p>Modela, kot sta <strong>kamera obskura</strong> in <strong>kamera s tankimi lečami</strong>, sta pogosto preveč poenostavljena, medtem ko je <strong>kamera z lečami</strong> najbolj realističen model.</p>
 <hr>
 <h4 id="kamera-na-luknjico-camera-obscura">
@@ -876,7 +899,7 @@ $$<p>Ti dve formuli povesta, kako se točka preslika na slikovno ravnino.</p>
 $x'$, $y'$ in $z'$ so še vedno izraženi v isti merski enoti kot $x$, $y$, $z$. <strong>Tukaj še ne govorimo o pikslih.</strong><br>
 Če so $x, y, z$ podani v cm, so tudi $x', y', z'$ v cm.</p>
 <blockquote>
-<p>Primer</p>
+<p><strong>Primer</strong></p>
 <p>Podano imamo točko $P$ s koordinatami ($x, y, z$), ter podatek za oddaljenost ravnine od luknjice ($f'$):</p>
 $$ P(100, 200, 450), \quad f' = 150 $$<p>Zanima nas določitev koordinat točke $P'$. Ker točka $P'$ leži na slikovni ravnini, velja $z' = f'$. V tem primeru to pomeni, da je $z' = 150$. Določiti moramo torej $x'$ in $y'$.</p>
 <p>Izračun:</p>
@@ -888,14 +911,13 @@ Omejitve modela kamere na luknjico
 <p>Zato v model kamere uvedemo <strong>leče</strong> (običajno pred odprtino). S tem imamo luknjico, pred njo pa zbiralne (konveksne) leče.</p>
 <p>Leče omogočijo:</p>
 <ul>
-<li>boljšo fokusacijo žarkov,</li>
-<li>ostrejšo sliko,</li>
-<li>bolj realističen model kamere.</li>
+<li>zbiranje svetlobe in s tem boljšo fokusacijo žarkov</li>
+<li>obdržati sliko v čim bolj ostrem fokusu (pri čemer se zbira svetloba iz širšega fokusa)</li>
 </ul>
 <hr>
-<h4 id="model-s-tankimi-lečami">
-<a class="header-anchor" href="#model-s-tankimi-le%c4%8dami"></a>
-Model s tankimi lečami
+<h4 id="kamera-s-tankimi-lečami">
+<a class="header-anchor" href="#kamera-s-tankimi-le%c4%8dami"></a>
+Kamera s tankimi lečami
 </h4><p>Lastnost zbiralne leče katera sestavlja ta model je, da <strong>fokusira oziroma zbira žarke</strong>. Žarki, ki izhajajo iz iste točke, se zaradi leče ne razpršijo, temveč se na koncu zberejo v eni točki na slikovni ravnini. Lastnosti leče določata dve goriščni točki. Ti dve točki sta na razdalji $f$, kjer je $f$ <strong>goriščna razdalja</strong> leče.</p>
 <h5 id="koordinatni-sistem-modela-s-tankimi-lečami">
 <a class="header-anchor" href="#koordinatni-sistem-modela-s-tankimi-le%c4%8dami"></a>
@@ -927,7 +949,7 @@ $$\frac{1}{z'} - \frac{1}{z} = \frac{1}{f}$$<p>kjer:</p>
 <ul>
 <li>$z$ predstavlja razdaljo objekta,</li>
 <li>$z'$ predstavlja razdaljo slike,</li>
-<li>$f$ predstavlja goriščno razdaljo.</li>
+<li>$f$ predstavlja goriščno razdaljo leče.</li>
 </ul>
 <p>Če ta pogoj ni izpolnjen, se žarki ne zberejo v eni točki in slika ni ostra.</p></p>
   </blockquote>
@@ -938,28 +960,29 @@ $$\frac{1}{z'} - \frac{1}{z} = \frac{1}{f}$$<p>kjer:</p>
 <li>lastnosti leče,</li>
 <li>velikosti senzorja.</li>
 </ul>
-<p>To je tisti del prostora, ki ga kamera &ldquo;vidi&rdquo;.</p>
+<p>To je tisti del prostora, ki ga kamera &ldquo;vidi&rdquo;. Odvisen je od goriščne razdalje in efektivnega področja retine (ploščine filma v kameri oz. ploščine senzorja CCD).</p>
 <h5 id="omejitve-modela">
 <a class="header-anchor" href="#omejitve-modela"></a>
 Omejitve modela
 </h5><p>Idealnih tankih leč s popolnimi lastnostmi v praksi ne moremo izdelati. Zato je tudi model &ldquo;kamera na luknjico z lečo&rdquo;, še vedno nekoliko <strong>preoptimističen matematični model</strong> realne kamere.</p>
 <hr>
-<h4 id="model-z-debelimi-lečami">
-<a class="header-anchor" href="#model-z-debelimi-le%c4%8dami"></a>
-Model z debelimi lečami
+<h4 id="kamera-z-debelimi-lečami">
+<a class="header-anchor" href="#kamera-z-debelimi-le%c4%8dami"></a>
+Kamera z debelimi lečami
 </h4><p>Najbolj realističen model je <strong>model kamere z debelimi lečami</strong>. To je najboljši približek dejanskemu fizikalnemu dogajanju v kameri.</p>
 <p>Debela leča je poleg:</p>
 <ul>
-<li>dveh goriščnic,</li>
+<li>dveh goriščnic $F$ in $F'$,</li>
 <li>goriščne razdalje $f$,</li>
 </ul>
 <p>opisana še z:</p>
 <ul>
-<li><strong>glavnima točkama leče</strong>,</li>
+<li><strong>glavnima točkama leče $H$ in $H'$</strong>,</li>
 <li><strong>razdaljo med njima</strong>.</li>
 </ul>
 <p>S temi parametri lahko natančneje opišemo obnašanje debele leče.</p>
-<h5 id="koordinatni-sistem-modela-z-debelimi-lečami">
+<p>Pri tem modelu še zmeraj velja enačba:</p>
+$$\frac{1}{z'} - \frac{1}{z} = \frac{1}{f}$$<h5 id="koordinatni-sistem-modela-z-debelimi-lečami">
 <a class="header-anchor" href="#koordinatni-sistem-modela-z-debelimi-le%c4%8dami"></a>
 Koordinatni sistem modela z debelimi lečami
 </h5><p>Ponovno nas zanima:</p>
@@ -974,10 +997,10 @@ Koordinatni sistem modela z debelimi lečami
 <p>Žarek, ki je <strong>vzporeden optični osi</strong>, se lomi tako, da pri drugi glavni točki spremeni smer in se pod določenim kotom preslika na slikovno ravnino.</p>
 </li>
 <li>
-<p>Žarek, ki gre skozi <strong>prvo gorišče</strong>, se po lomljenju usmeri tako, da postane vzporeden optični osi.</p>
+<p>Žarek, ki gre skozi <strong>prvo gorišče $F$</strong>, se po lomljenju usmeri tako, da postane vzporeden optični osi.</p>
 </li>
 <li>
-<p>Žarek, ki zadene <strong>prvo glavno točko</strong>, se preslika skozi drugo glavno točko in nato seka slikovno ravnino.</p>
+<p>Žarek, ki zadene <strong>prvo glavno točko $H$</strong>, se preslika skozi drugo glavno točko in nato seka slikovno ravnino.</p>
 </li>
 </ul>
 <hr>
@@ -991,6 +1014,7 @@ Omejitve modela
 <li>optične aberacije,</li>
 <li>druge nepravilnosti.</li>
 </ul>
+<p>Popačenja sicer lahko minimiziramo, če sestavimo več preprostih leč z dobro izbranimi oblikami in karakteristikami. Sestavljene leče lahko še vedno modeliramo z enačbami, veljavnimi za debele leče.</p>
 <hr>
 <h3 id="parametri-kamere">
 <a class="header-anchor" href="#parametri-kamere"></a>
@@ -1005,7 +1029,7 @@ $$<p>Ta točka se preslika na slikovno ravnino v koordinatah, ki so še vedno iz
     <p class="alert-heading">
       Important
     </p>
-    <p><p><strong>Notranji parametri kamere</strong> omogočijo preslikavo iz sveta merskih enot v svet pikslov. Tako dobimo končno digitalno sliko, kjer je vsaka točka predstavljena kot piksel.</p></p>
+    <p><p><strong>Notranji parametri kamere</strong> omogočijo preslikavo iz sveta merskih enot v svet pikslov. Tako dobimo končno digitalno sliko, kjer je vsaka točka predstavljena kot piksel. V relacijo spravijo tako koordinatni sistem kamere in idealiziran kootdinatni sistem.</p></p>
   </blockquote>
 
 <p>Če želimo uporabiti matematične enačbe projekcije, pa moramo poznati <strong>koordinatni sistem naše kamere</strong>. Za dosego tega, pa je potrebno točke, ki smo jih dobili iz koordinatnega sistema v naravi pretvorit v koordinatni sistem, kot bi ga zajela naša kamera. Določitev tega nam omogočajo <strong>zunanji parametri kamere</strong>.</p>
@@ -1014,7 +1038,7 @@ $$<p>Ta točka se preslika na slikovno ravnino v koordinatah, ki so še vedno iz
     <p class="alert-heading">
       Important
     </p>
-    <p><p><strong>Zunanji parametri kamere</strong> so potrebni za merjenje razdalj, ter opis lege in orientacije v prostoru. Zunanji parametri kamere so potrebni, ker ne znamo neposredno meriti lokacije točke glede na koordinatni sistem kamere in moramo svetovni koordinatni sistem pretvoriti v koordinatni sistem kamere.</p></p>
+    <p><p><strong>Zunanji parametri kamere</strong> so potrebni za merjenje razdalj, ter opis lege in orientacije v prostoru. Zunanji parametri kamere so potrebni, ker ne znamo neposredno meriti lokacije točke glede na koordinatni sistem kamere in moramo svetovni koordinatni sistem pretvoriti v koordinatni sistem kamere. V relacijo spravijo koordinatni sistem kamere s fiksnim realnim koordinatnim sistemom.</p></p>
   </blockquote>
 
 <h4 id="notranji-parametri-kamere">
@@ -1033,6 +1057,11 @@ Notranji parametri kamere
 <li>stolpca: 0, 1, 2, 3, &hellip;</li>
 </ul>
 <p>in <strong>ne uporabljamo negativnih števil</strong>. Zaradi tega koordinatno izhodišče slikovnega sistema ni v središču senzorja, temveč v enem od njegovih vogalov.</p>
+<ul>
+<li><strong>Kooridnatni sistem kamere</strong> je v točki $C$.</li>
+<li><strong>Perspektivna projekcijska matrika</strong> je označena kot $M$</li>
+<li><strong>Matrika notranjih parametrov</strong> je označena s črko $K$</li>
+</ul>
 <h5 id="glavna-točka--parametra--in">
 <a class="header-anchor" href="#glavna-to%c4%8dka--parametra--in"></a>
 Glavna točka – parametra \( u_0 \) in \( v_0 \)
@@ -1041,7 +1070,7 @@ Glavna točka – parametra \( u_0 \) in \( v_0 \)
 <li>\( u_0 \) – premik v smeri vrstic</li>
 <li>\( v_0 \) – premik v smeri stolpcev</li>
 </ul>
-<p>Ta dva parametra določata, kje se nahaja <strong>koordinatno izhodišče</strong> glede na pikslovni koordinatni sistem.</p>
+<p>Ta dva parametra določata, kje se nahaja <strong>koordinatno izhodišče</strong> glede na pikslovni koordinatni sistem. Določata premik izhodišča koordinatnega sistema kamere (točka $C$) v točko, kjer optična os prebada slikovno ravnino (točka $C'$)</p>
 <h5 id="parametra--in">
 <a class="header-anchor" href="#parametra--in"></a>
 Parametra \( \alpha \) in \( \beta \)
@@ -1061,19 +1090,20 @@ Parametra \( \alpha \) in \( \beta \)
 
 <p>Velja:</p>
 <ul>
-<li>\( \alpha = f \cdot s_x \)</li>
-<li>\( \beta = f \cdot s_y \)</li>
+<li>\( \alpha = k \cdot f \)</li>
+<li>\( \beta = l \cdot f \)</li>
 </ul>
 <p>kjer:</p>
 <ul>
 <li>\( f \) – goriščna razdalja,</li>
-<li>\( s_x \) – prostorska ločljivost v smeri \( x \),</li>
-<li>\( s_y \) – prostorska ločljivost v smeri \( y \).</li>
+<li>\( k \) – prostorska ločljivost v smeri \( x \),</li>
+<li>\( l \) – prostorska ločljivost v smeri \( y \).</li>
 </ul>
 <p>Ključni namen teh parametrov je:</p>
 <blockquote>
 <p>prehod iz merskih enot (cm, mm) v svet pikslov.</p>
 </blockquote>
+<p>Prostorski ločljivosti $k$ in $l$ sta podana v enoti piksel/meter in določata veliksot piksla.</p>
 <h5 id="kot-theta">
 <a class="header-anchor" href="#kot-theta"></a>
 Kot theta \( \theta \)
@@ -1110,10 +1140,10 @@ K =
 \]<p>Ta matrika omogoča prehod iz koordinat kamere v pikslovni sistem. S pomočjo te matrike naredimo projekcijsko matriko $M$ velikosti \( 3 \times 4 \) oz. perspektivno projekcijsko matriko.</p>
 <h5 id="projekcijska-matrika">
 <a class="header-anchor" href="#projekcijska-matrika"></a>
-Projekcijska matrika
+Projekcijska matrika \( M \)
 </h5><p>S pomočjo notranjih in zunanjih parametrov dobimo <strong>projekcijsko matriko</strong>:</p>
 \[
-M = K [R , t]
+M_{3\times4} = [K, 0]
 \]<p>Imenujemo jo tudi <strong>perspektivna projekcijska matrika</strong> in je velikosti \(3 \times 4\).</p>
 <h5 id="model-kamere--matrična-enačba">
 <a class="header-anchor" href="#model-kamere--matri%c4%8dna-ena%c4%8dba"></a>
@@ -1138,14 +1168,24 @@ Projekcija
 <li>\( P \) – točka v prostoru (v homogenih koordinatah)</li>
 <li>\( p \) – projicirana točka na sliki</li>
 </ul>
-<p>Mala črka \( p \) predstavlja slikovno točko po projekciji.</p>
+<p>Mala črka \( p \) predstavlja slikovno točko po projekciji. Točka \( p \) je izražena v pikslih - $p = [u, v, 1]^T$.</p>
+<p>Točka \( P \) pa je izražena v homogenih koordinatah koordinatnega sistema kamere - $P = [x, y, z, 1]^T</p>
 <p>To predstavlja celoten matematični model kamere:
 3D točka → projekcija → 2D piksel.</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p><strong>Normalizirana slikovna ravnina</strong> je ravnina, ki je oddaljena za 1 enoto od luknjice.</p></p>
+  </blockquote>
+
+<p><strong>Fizikalna mrežnica</strong> je na oddaljenosti goriščne razdalje $f$ od luknjice in vzporedna normalizirani slikovni ravnini</p>
 <hr>
 <h4 id="zunanji-parametri-kamere">
 <a class="header-anchor" href="#zunanji-parametri-kamere"></a>
 Zunanji parametri kamere
-</h4><p>Poleg notranjih parametrov pa potrebujemo tudi <strong>zunanje parametre kamere</strong>.</p>
+</h4><p>Poleg notranjih parametrov pa potrebujemo tudi <strong>zunanje parametre kamere</strong>. Ta je uporaben ko realni koordinatni sistem ($w$) in koordinatni sistem kamere ($C$) nista enaka.</p>
 <p>Imamo koordinatni sistem kamere, vendar v realnosti ne moremo meriti prostora neposredno glede na središče leče.</p>
 <p>Običajno imamo:</p>
 <ul>
@@ -1158,14 +1198,25 @@ Zunanji parametri kamere
 Povezava koordinatnih sistemov
 </h5><p>Imamo torej dva koordinatna sistema:</p>
 <ul>
-<li>svetovni (world) koordinatni sistem</li>
-<li>koordinatni sistem kamere</li>
+<li>svetovni (world) koordinatni sistem ($W$)</li>
+<li>koordinatni sistem kamere ($C$)</li>
 </ul>
 <p>Da ju pa povežemo in da lahko izvedemo pretvorbo iz enega koordinatnega sistema v drugega, moramo izvesti:</p>
 <ol>
 <li><strong>Translacijo</strong> (poravnava izhodišč)</li>
 <li><strong>Rotacijo</strong> (poravnava osi)</li>
 </ol>
+\[
+p = \frac{1}{z} M P
+\]<p>vendar je sedaj:</p>
+\[
+M_{3\times4} = K [R , t]
+\]<p>To enačbo pa lahko zapišemo tudi kot:</p>
+\[
+u = \frac{m_1 \cdot P}{m_3 \cdot P}
+\qquad
+v = \frac{m_2 \cdot P}{m_3 \cdot P}
+\]<p>pri čemer si $m_i$ vrstice matrike $M$</p>
 <h6 id="translacija">
 <a class="header-anchor" href="#translacija"></a>
 Translacija
@@ -1175,7 +1226,7 @@ Translacija
 <li>premik po osi \( y \)</li>
 <li>premik po osi \( z \)</li>
 </ul>
-<p>To zapišemo kot translacijski vektor:</p>
+<p>To zapišemo kot translacijski (stolpični) vektor velikosti 3x1:</p>
 \[
 t =
 \begin{bmatrix}
@@ -1183,7 +1234,8 @@ t_x \\
 t_y \\
 t_z
 \end{bmatrix}
-\]<h6 id="rotacija">
+\]<p>Ta vektor opiše izhodišče realnega koordinatnega sistema v koordinatah kamere.</p>
+<h6 id="rotacija">
 <a class="header-anchor" href="#rotacija"></a>
 Rotacija
 </h6><p>Rotacijo definiramo s tremi koti:</p>
@@ -1201,7 +1253,7 @@ Rotacija
 <li>nato okoli osi \( y \),</li>
 <li>nato okoli osi \( z \).</li>
 </ol>
-<p>Rotacijsko matriko zapišemo kot kompozitum rotacij:</p>
+<p>$R_{3x3}$ je rotacijska matrika, ki opiše realni koordinatni sistem ($W$) v koordinatnem sistemu kamere. Rotacijsko matriko zapišemo kot kompozitum rotacij:</p>
 \[
 R = R_x R_y R_z
 \]<p>kjer so</p>
@@ -1244,7 +1296,7 @@ Geometrijsko kalibriranje kamer
 Parametri kamere in kalibracija
 </h4><p>Notranji parametri kamere modelirajo lastnosti kamere. Omogočajo pretvorbo merskega sveta (realnih enot) v svet pikslov, tako da na koncu dobimo sliko v pikslih. Za to so zadolženi <strong>notranji parametri kamere</strong>. Skupaj imamo <strong>5 notranjih parametrov kamere</strong>.</p>
 <p>Drugi nabor parametrov so <strong>zunanji parametri kamere</strong>. Vse točke v sceni bi morali meriti glede na koordinatni sistem kamere, kar je v praksi nemogoče. Zato potrebujemo referenčni (world) koordinatni sistem, katerega v koordinatni sistem kamere pretvorijo zunanji parametri kamere. Skupaj imamo <strong>6 zunanjih parametrov kamere</strong>.</p>
-<p>Ali nam lahko kdo poda vseh 11 parametrov kamere?</p>
+<p><strong>Ali nam lahko kdo poda vseh 11 parametrov kamere?</strong></p>
 <p><strong>Notranji parametri</strong>
 Nemogoče je izdelati dve popolnoma enaki kameri. Tudi če je leča izdelana strojno, bo druga leča vedno nekoliko drugačna.</p>
 <p><strong>Zunanji parametri</strong>
@@ -1281,6 +1333,7 @@ p = \frac{1}{z} M P
 <li>\( M \) je projekcijska matrika.</li>
 </ul>
 <p>Neznanka v tej enačbi je <strong>projekcijska matrika \( M \)</strong>.</p>
+<hr>
 <h4 id="linearni-postopek-kalibriranja">
 <a class="header-anchor" href="#linearni-postopek-kalibriranja"></a>
 Linearni postopek kalibriranja
@@ -1315,13 +1368,55 @@ Postopek
 </li>
 <li>itd.</li>
 </ul>
-<p>Za kalibracijo kamere potrebujemo <strong>12 enačb</strong> (ker ima projekcijska matrika \( M \) 12 elementov). Za vsak korespondenčni par pa dobimo 2 enačbi in 2 vrstici v matriki P.</p>
+<p>Če preuredimo enačbo:</p>
+\[
+u = \frac{m_1 \cdot P}{m_3 \cdot P}
+\qquad
+v = \frac{m_2 \cdot P}{m_3 \cdot P}
+\]<p>dobimo:</p>
+\[(m_1 - u_i m_3)P_i = 0 \qquad \text{in} \qquad (m_2 - v_i m_3)P_i = 0\]<p>Za eno točko tako dobimo 2 enačbi.</p>
+<p>Za n točk dobimo 2n enačb, ki jih zložimo v matriko $P$ in vektor $m$:</p>
+\[
+P_{2n \times 12} =
+\begin{bmatrix}
+P_1^{T} & 0^{T} & -u_1 P_1^{T} \\
+0^{T} & P_1^{T} & -v_1 P_1^{T} \\
+\vdots & \vdots & \vdots \\
+P_n^{T} & 0^{T} & -u_n P_n^{T} \\
+0^{T} & P_n^{T} & -v_n P_n^{T}
+\end{bmatrix}
+\qquad
+\text{in}
+\qquad
+m_{12 \times 1} =
+\begin{bmatrix}
+m_1^{T} \\
+m_2^{T} \\
+m_3^{T}
+\end{bmatrix}
+\]<p>Potrebno je rešiti homogen sistem enačb:</p>
+$$
+P \times \mathbf{m} = \mathbf{0_{2n x 1}}
+$$<p>Pri tem je matrika $P$ znana, vektor $m$ pa je neznan (iskan).</p>
+<p>Dimenzije:</p>
+<ul>
+<li>$P \in \mathbb{R}^{2n \times 12}$</li>
+<li>$\mathbf{m} \in \mathbb{R}^{12 \times 1}$</li>
+<li>$\mathbf{0} \in \mathbb{R}^{2n \times 1}$</li>
+</ul>
+<p>(Trivialna rešitev je, da bi $\mathbf{m}$ bil iz samih ničel, to nas ne zanima.)</p>
+<p>Matriko $M$ s parametri kamere dobimo iz izračunanega vektorja $m$ kot:</p>
+\[M = \begin{bmatrix}
+m_1 \\
+m_2 \\
+m_3
+\end{bmatrix}\]<p>Za kalibracijo kamere potrebujemo <strong>12 enačb</strong> (ker ima projekcijska matrika \( M \) 12 elementov). Za vsak korespondenčni par pa dobimo 2 enačbi in 2 vrstici v matriki P.</p>
 <p>Ker iz vsakega korespondenčnega para dobimo 2 enačbi:</p>
 \[
 \frac{12}{2} = 6
 \]<p>Potrebujemo <strong>minimalno 6 korespondenčnih parov</strong>.</p>
 <ul>
-<li>Če imamo <strong>točno 6 parov</strong>, dobimo eksaktno rešitev.</li>
+<li>Če imamo <strong>točno 6 parov</strong>, dobimo eksaktno enolično rešitev, sicer minimiziramo izraz $|Pm|^2$.</li>
 <li>Če imamo <strong>več kot 6 parov</strong>, dobimo sistem s presežkom enačb.</li>
 </ul>
 <p>V primeru, da imamo več kot 6 parov se pojavijo srednje minimizacije oz. napake, vendar je rezultat te kalibracije boljši. Več korespondenčnih parov kot uporabimo, bolj robusten in natančen je rezultat.</p>
@@ -1340,20 +1435,7 @@ Postopek
 <p>Zato morajo biti točke razporejene v prostoru in ne smejo vse ležati na isti ravnini.</p></p>
   </blockquote>
 
-<h4 id="geometrijsko-kalibriranje-kamere">
-<a class="header-anchor" href="#geometrijsko-kalibriranje-kamere"></a>
-Geometrijsko kalibriranje kamere
-</h4><p>Sistem lahko zapišemo kot:</p>
-$$
-P \times \mathbf{m} = \mathbf{0}
-$$<p>Dimenzije:</p>
-<ul>
-<li>$P \in \mathbb{R}^{2n \times 12}$</li>
-<li>$\mathbf{m} \in \mathbb{R}^{12 \times 1}$</li>
-<li>$\mathbf{0} \in \mathbb{R}^{2n \times 1}$</li>
-</ul>
-<p>(Trivialna rešitev je, da bi $\mathbf{m}$ bil iz samih ničel, to nas ne zanima.)</p>
-<p>Ta metoda (geometrijsko kalibriranje kamere), je precej občutljiva – podatki morajo biti zelo točni. Parametri kamere so v projekcijski matriki $M$.</p>
+<p>Ta metoda (geometrijsko kalibriranje kamere), je precej občutljiva – podatki morajo biti zelo točni. Parametri kamere (zunanji in notranji parametri) so določeni v projekcijski matriki $M$.</p>
 <p>Iz piksla lahko pridemo nazaj v prostor, kar pa brez modela</p>
 $$
 \mathbf{p} = \frac{1}{z} M \mathbf{P}
@@ -1362,16 +1444,17 @@ $$<p>ne moremo.</p>
 <h2 id="predobdelava-slik">
 <a class="header-anchor" href="#predobdelava-slik"></a>
 Predobdelava slik
-</h2><p>Pri predobdelavi slik sta ključna dva cilja:</p>
+</h2><p>Preobdelava slik je proces, ki se izvaja na najnižjem nivoju slike tj. nivoju pikslov. Pri predobdelavi slik sta ključna dva cilja:</p>
 <ol>
-<li>Želimo popraviti napake, ki so se zgodile pri zajemu slike.</li>
-<li>V slikah želimo poudariti informacijo, ki nas zanima.</li>
+<li>Želimo popraviti napake, ki so se zgodile pri zajemu slike (npr. neenakomerna osvetlitev scene, slab kontrast, šum, geometrijske deformacije).</li>
+<li>V slikah želimo poudariti informacijo, ki nas zanima oz. ki je pomembna za nadaljno obdelavo (npr. robovi, oglišča).</li>
 </ol>
 <p>Če imamo vpliv nad okoljem, kjer zajemamo sliko (npr. svetila), potem lahko, če vidimo, da slika ni ustrezna, poskusimo ponovno zajeti sliko, pri tem pa popravimo dejavnike v okolju (npr. osvetlitev, svetila).</p>
 <p>Če pa delamo s satelitskimi slikami ali medicinskimi napravami, pa je problem, da se ne moremo vrniti nazaj in slike ponovno zajeti<br>
 Podobno velja tudi za slike v naravi, kjer je veliko odvisno od vremena.</p>
 <p>Če se lahko vrnemo, poskusimo sliko popraviti že pri zajemu. Če to ni mogoče, pa moramo problem rešiti programsko.</p>
 <p>Če sami načrtujemo (dizajniramo) sistem, lahko veliko stvari izboljšamo že v fazi zasnove. Lažje pa nam je tudi, če poznamo podatke o degradaciji slike (napakah ob zajemu).</p>
+<p>Večjo učinkovitost dosežemo, če imamo vnaprejšnje znanje o sliki in tipu degredacije v sliki.</p>
 <p>Pri obdelavi slik velja:</p>
 <ul>
 <li>Če uporabimo pravo metodo za določeno degradacijo, bo rezultat uspešen.</li>
@@ -1392,9 +1475,9 @@ Podobno velja tudi za slike v naravi, kjer je veliko odvisno od vremena.</p>
 <blockquote>
 <p><strong>Operacije pri obdelavi slik</strong></p>
 <p><strong>1. Točkovne (pixel-to-pixel) operacije</strong></p>
-<p>Pixel-to-pixel operacije delujejo tako, da vzamemo en pixel, ga podamo v neko funkcijo (operacijo) in dobimo nov (spremenjen) pixel. Vsak izhodni pixel je odvisen samo od ustreznega vhodnega pixla.</p>
+<p>Pixel-to-pixel operacije delujejo tako, da vzamemo en piksel, ga podamo v neko funkcijo (operacijo) in dobimo nov (spremenjen) piksel. Vsak izhodni piksel je odvisen samo od ustreznega vhodnega pixla.</p>
 <p><strong>2. Lokal­ne operacije (z okolico)</strong></p>
-<p>Pri tej varianti vzamemo pixel, upoštevamo tudi njegove sosednje pixle (okolico), vse skupaj podamo v funkcijo in dobimo ven nov pixel. Izhodna vrednost je torej odvisna od lokalne okolice.</p>
+<p>Pri tej varianti vzamemo piksel, upoštevamo tudi njegove sosednje pixle (okolico), vse skupaj podamo v funkcijo in dobimo ven nov piksel. Izhodna vrednost je torej odvisna od lokalne okolice.</p>
 <p><strong>3. Algoritemske metode</strong></p>
 <p>Gre za kompleksnejše postopke, kjer obdelava temelji na določenem algoritmu, ki lahko vključuje več korakov, pravil ali odločitev.</p>
 <p><strong>4. Globoko učenje</strong></p>
@@ -1404,35 +1487,51 @@ Podobno velja tudi za slike v naravi, kjer je veliko odvisno od vremena.</p>
 <a class="header-anchor" href="#spreminajnje-kontrasta"></a>
 Spreminajnje kontrasta
 </h3><p>Točkovna operacija deluje tako, da imamo neko sliko in nad vsakim pixlom izvedemo isto transformacijo.</p>
+<p>Najpreprostejše spreminjanje kontrasta je oblike:</p>
+<p>$g' = F(g)$</p>
+<p>$g$ - stara sivina piksla $p$ oz. $g=I(p)$
+$g'$ - nova sivina piksla $p$
+$F$ - poljubna funkcija</p>
+<p>Funkcija $F$ imenujemo drugače tudi <strong>točkovna operacija</strong> oz. <strong>operacija piksel v piksel</strong>. V splošnem ne obstaja inverz funkcije $F$!</p>
 <h4 id="linearizacija-sivin">
 <a class="header-anchor" href="#linearizacija-sivin"></a>
 Linearizacija sivin
-</h4><p>Prvi tak postopek je <strong>linearizacija sivin</strong>.</p>
+</h4><p>Prvi tak postopek je <strong>linearizacija sivin</strong>. Linearizacija enakomerno raztegne sivine skozi celoten pas sivin (tj. na območje [0, 255])</p>
 <p>Imamo formulo:</p>
 $$
 g' = \frac{Q}{\max - \min} \left( g - \min \right)
-$$<p>Linearizacija se pogosto uporablja za vizualizacijo. Lahko pa se uporablja tudi kot vmesni korak pri nadaljnji obdelavi slike.</p>
+$$<p>$max$ in $min$ - največja in najmanjša sivina, ki jo najdemo v sliki $I$
+$Q$ - teoretično maksimalna sivina po želeni transformaciji (npr. 15, 255, 4095)</p>
+<p>Linearizacija se pogosto uporablja za vizualizacijo. Lahko pa se uporablja tudi kot vmesni korak pri nadaljnji obdelavi slike.</p>
 <h4 id="histogram-sivin">
 <a class="header-anchor" href="#histogram-sivin"></a>
 Histogram sivin
-</h4><p>Histogram sivin je vektor (polje), ki ima toliko elementov, kolikor znaša kontrastna ločljivost slike. Posamezen element histograma sivin beleži število pixlov, ki imajo določeno sivinsko vrednost.</p>
+</h4><p>Histogram daje preprost pregled nad razdelitvijo sivin v sliki. Histogram sivin je vektor (polje), ki ima toliko elementov, kolikor znaša teoretično maksimalna kontrastna ločljivost slike (tj. $Q + 1$). Posamezen element histograma sivin beleži število pixlov, ki imajo določeno sivinsko vrednost:</p>
+\[h = [h_0, h_1,...,h_Q]\]<p>$h_i$ predstavlja število pikslov, ki imajo sivino enako $i$.</p>
 <p>Primer:
 8-bitna sivinska slika ima 256 sivinskih nivojev. Zato ima histogram 256 elementov in kontrastno ločljivost 256.</p>
-<p>Če seštejemo vse elemente histograma, dobimo skupno število vseh pixlov v sliki.</p>
+<p>Če seštejemo vse elemente histograma, dobimo skupno število vseh pikslov v sliki.</p>
 <p>Histogram sivin običajno vizualiziramo s pomočjo <strong>stolpčnih grafov</strong>.</p>
-<p>Histogram sivin <strong>ne vsebuje prostorske informacije</strong>.</p>
-<p>To pomeni, da v histogramu samo štejemo pixle. Notri v histogramu tako <strong>ni informacije o tem, kje v sliki se posamezni pixli nahajajo</strong>.</p>
+<p>Če je v histogramu sivin težišče (večina pikslov) na levi strani (tj. pri nizkih sivinah), potem je slika najverjetneje pretemna (in obratno).</p>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Histogram sivin <strong>ne vsebuje prostorske informacije</strong>. To pomeni, da v histogramu samo štejemo pixle. Notri v histogramu tako <strong>ni informacije o tem, kje v sliki se posamezni pixli nahajajo</strong>.</p>
 <p>Zato lahko:</p>
 <ul>
 <li>dve sliki enake velikosti</li>
 <li>z enakim histogramom sivin</li>
 </ul>
-<p>vsebujeta popolnoma različne vsebine.</p>
+<p>vsebujeta popolnoma različne vsebine.</p></p>
+  </blockquote>
+
 <p>Pri delu s histogrami sivin poskušamo histogram &ldquo;razpotegniti&rdquo;, da so sivinske vrednosti čim bolj enakomerno porazdeljene in histogram s tem kar se da uravnan. Najbolj ostri vrhovi na histogramu običajno predstavljajo ključne oziroma bistvene elemente slike. Histogram sivin sam po sebi ni metoda za spreminjanje kontrasta, nam pa pomaga pri analizi kontrasta slike.</p>
 <h5 id="metoda-izenačitev-histograma">
 <a class="header-anchor" href="#metoda-izena%c4%8ditev-histograma"></a>
 Metoda: Izenačitev histograma
-</h5><p><strong>Izenačitev histograma</strong> pomeni, da želimo doseči, da so vse sivinske vrednosti približno enako zastopane. V praksi tega popolnoma ne moremo doseči, je pa to cilj metode.</p>
+</h5><p><strong>Izenačitev histograma</strong> pomeni, da želimo doseči, da so vse sivinske vrednosti približno enako zastopane. V praksi tega popolnoma ne moremo doseči, je pa to cilj metode. Gre za postopek za avtomatsko spreminjanje kontrasta. Izboljša kontrast za sivine, ki so blizu maksimumov v histogramu, ter zmanjša kontrast za sivine blizu minimumov.</p>
 <p>Z vidika kontrasta:</p>
 <ul>
 <li>Najvišje (ostre) vrhove na histogramu raztegnemo,
@@ -1441,19 +1540,38 @@ da postanejo bolj kontrastni.</li>
 sklepamo, da informacija ni tako pomembna,
 zato tam lahko izgubimo nekaj podatkov.</li>
 </ul>
+<p>Postopek:</p>
+\[
+g' = \frac{Q}{MN} \sum_{i=0}^{g} h_i
+\]<p>$M N$ predstavlja število pikslov v sliki
+$g'$ predstavlja novo sivino
+$h_i$ predstavlja $i$-ti element histograma</p>
 
   <blockquote class="alert-blockquote warning">
     <p class="alert-heading">
       Warning
     </p>
-    <p><p>Izenačitev histograma ni isto kot linearizacija!</p></p>
+    <p><p>Izenačitev histograma ni isto kot linearizacija! Zgolj če so vse sivine v sliki zastopane z istim deležem, je postopek izenačitve histograma enak linearizaciji!</p></p>
   </blockquote>
 
 <h5 id="prenosne-funkcije">
 <a class="header-anchor" href="#prenosne-funkcije"></a>
 Prenosne funkcije
-</h5><p><strong>Prenosne funkcije</strong> lahko vizualiziramo v grafu prenosnih funkcij.
-Če gre prenosna funkcija nad identiteto, potem točkovna operacija sliko posvetli. Če pa gre prenosna funkcija pod identiteto, pa točkovna operacija sliko potemni.</p>
+</h5><p>Spreminjanje kontrasta definiramo s funkcijo v grafu.</p>
+<ul>
+<li>na abcisi so vhodne vrednosti oz. sivine $g$ pred spreminjanjem</li>
+<li>na ordinati so izhodne vrednosti na intervalu [0, 1]</li>
+<li>novo sivino $g'$ dobimo tako, da izhodno vrednost pomnožimo z $Q$</li>
+<li>prenosne funkcije so lahko analitične (npr. $g'=\frac{1}{16}\sqrt{g}$) ali pa numerične</li>
+</ul>
+<p><strong>Prenosne funkcije</strong> lahko vizualiziramo v grafu prenosnih funkcij.</p>
+<p><strong>Graf prenosne funkcije sivin</strong> uporabimo na naslednji način:</p>
+<ul>
+<li>izberemo vhodno vrednsot</li>
+<li>poiščemo oz. odčitamo izhodno vrednost funkcije</li>
+<li>izhodno vrednost pomnožimo z $Q$</li>
+</ul>
+<p>Če gre prenosna funkcija nad identiteto, potem točkovna operacija sliko posvetli. Če pa gre prenosna funkcija pod identiteto, pa točkovna operacija sliko potemni.</p>
 
   <blockquote class="alert-blockquote warning">
     <p class="alert-heading">
@@ -1466,26 +1584,29 @@ Prenosne funkcije
 <h3 id="lokalne-operacije-oz-filtriranje-slik">
 <a class="header-anchor" href="#lokalne-operacije-oz-filtriranje-slik"></a>
 Lokalne operacije oz. filtriranje slik
-</h3><p>Imamo sliko in izbran pixel.<br>
-Pri filtriranju slik opazujemo:</p>
+</h3><p>Filter je sistem. Imamo sliko in izbran piksel. Pri filtriranju slik opazujemo:</p>
 <ul>
-<li>izbran pixel</li>
+<li>izbran piksel</li>
 <li>njegovo okolico</li>
 </ul>
-<p>Vzeli bomo ta pixel in njegove sosednje pixle, jih podali v funkcijo, in dobili nov rezultat. Pri tem poznamo točkovne operacije in filtriranje.</p>
+<p>Vzeli bomo ta piksel in njegove sosednje pixle, jih podali v funkcijo, in dobili nov rezultat. Pri tem poznamo točkovne operacije in filtriranje.</p>
+<p>Novo vrednost piksla $p$, tj. $I' (p)$, določimo kot funkcijo $F$, ki operira nad pikslom $p$ in njegovo okolico $O$:
+</p>
+\[I'(p) = F(O_p)\]<p>
+Obnašanje (lastnosti) funkcije $F$ je opredeljeno z enotinim odzivom $H$.</p>
 <h4 id="točkovne-operacije">
 <a class="header-anchor" href="#to%c4%8dkovne-operacije"></a>
 Točkovne operacije
 </h4><ul>
-<li>Delamo pixel po pixel.</li>
+<li>Delamo piksel po piksel.</li>
 <li>Lahko uporabljamo isto matriko oziroma sliko za vhod in izhod.</li>
-<li>Vsak pixel je obdelan neodvisno od drugih.</li>
+<li>Vsak piksel je obdelan neodvisno od drugih.</li>
 </ul>
 <h4 id="filtriranje">
 <a class="header-anchor" href="#filtriranje"></a>
 Filtriranje
 </h4><ul>
-<li>Uporabljamo pixel in njegovo okolico.</li>
+<li>Uporabljamo piksel in njegovo okolico.</li>
 <li>Potrebujemo <strong>novo sliko (novo matriko)</strong> za zapis rezultatov.</li>
 <li>Ne pišemo nazaj na isto lokacijo (zaradi tega temu pravimo filtriranje, saj imamo vhodno in izhodno filtrirano sliko).</li>
 </ul>
@@ -1524,26 +1645,22 @@ $$<p>Ne glede na vrstni red podajanja vhodov, ali prvo damo notri kot vhod $x_1$
 Ne slišimo zvoka, če prej ne potrkamo po tabli.</p>
 </blockquote>
 <p>Obnašanje filtra oziroma črne škatle lahko opišemo s pomočjo <strong>enotinega odziva (impulznega odziva)</strong>. Ta popolnoma določa obnašanje linearnega premično neodvisnega sistema.</p>
-<h4 id="definicija-filtra">
-<a class="header-anchor" href="#definicija-filtra"></a>
-Definicija filtra
-</h4><h5 id="določitev-filtra">
-<a class="header-anchor" href="#dolo%c4%8ditev-filtra"></a>
-Določitev filtra
+<h4 id="kako-filtriramo-sliko">
+<a class="header-anchor" href="#kako-filtriramo-sliko"></a>
+Kako filtriramo sliko?
+</h4><h5 id="1-določitev--obnašanja-filtra">
+<a class="header-anchor" href="#1-dolo%c4%8ditev--obna%c5%a1anja-filtra"></a>
+1. Določitev  obnašanja filtra
 </h5><p>Najprej je potrebno določiti filter. Učinek filtra mora biti tak, kot si ga želimo. Filter je podan z <strong>enotnim (impulznim) odzivom</strong>. Enotni odziv je matrika, ki vsebuje koeficiente (uteži).</p>
-<p>Običajno filter označimo s $H$, kjer je $H$ matrika.</p>
-<h5 id="matrika-filtra-maska">
-<a class="header-anchor" href="#matrika-filtra-maska"></a>
-Matrika filtra (maska)
-</h5><p>Tej matriki določimo:</p>
+<p>Običajno filter označimo s $H$, kjer je $H$ matrika in predstavlja masko filtra. Maska je majhna podslika, običajno pravokotne (kvadratne) oblike in lihih dimenzij — npr. maska 3x3 piksle, 5x7 pikslov. Najdemo tudi maske drugih oblik (npr. oblike križa, diskretiziran krog). Tej matriki določimo:</p>
 <ul>
-<li>velikost (dimenzijo),</li>
-<li>vrednosti (koeficiente / uteži).</li>
+<li>velikost (dimenzija),</li>
+<li>vrednosti (uteži znotraj maske).</li>
 </ul>
 <h6 id="dimenzija-filtra">
 <a class="header-anchor" href="#dimenzija-filtra"></a>
 Dimenzija filtra
-</h6><p>Velikost oziroma dimenzija filtra določa kako veliko okolico pixla bomo opazovali. Filter položimo tako, da pokrije izbran pixel, ter njegovo okolico. S tem definiramo lokalno območje obdelave.</p>
+</h6><p>Velikost oziroma dimenzija filtra določa kako veliko okolico pixla bomo opazovali. Filter položimo tako, da pokrije izbran piksel, ter njegovo okolico. S tem definiramo lokalno območje obdelave.</p>
 <h6 id="vrednosti-uteži-koeficientov">
 <a class="header-anchor" href="#vrednosti-ute%c5%bei-koeficientov"></a>
 Vrednosti uteži (koeficientov)
@@ -1556,22 +1673,21 @@ Vrednosti uteži (koeficientov)
     <p><p>Dimenzija maske določa <strong>katero okolico opazujemo</strong>, vrednosti v maski pa določajo <strong>kako jo obdelamo</strong>. To dvoje skupaj določa lastnosti filtra.</p></p>
   </blockquote>
 
-<h5 id="implementacija">
-<a class="header-anchor" href="#implementacija"></a>
-Implementacija
+<hr>
+<h5 id="2-izračun-konvolucije-med-masko--in-sliko">
+<a class="header-anchor" href="#2-izra%c4%8dun-konvolucije-med-masko--in-sliko"></a>
+2. Izračun konvolucije med masko $H$ in sliko $O$
 </h5><p>Implementacijsko je najlažje definirati maske oziroma okolice pikslov kot kvadratno masko (npr. 3×3, 5×5), saj jo lahko preprosto implementiramo s for-zankami.</p>
 <p>Če imamo za okolico masko drugačne (ne kvadratne) oblike (npr. krožno ali nepravilno obliko), uporabimo kvadratno matriko, vrednosti, ki jih ne želimo upoštevati, pa nastavimo na 0.</p>
-<h4 id="filtriranje-1">
-<a class="header-anchor" href="#filtriranje-1"></a>
-filtriranje
-</h4><p>Ko imamo enkrat definiran filter, lahko začnemo s filtriranjem. Vsaka maska ima <strong>sredino</strong> (sredinski element maske). Masko navidezno postavimo nad sliko tako, da prekrije del slike. Nato izračunamo <strong>skalarni produkt</strong> med <strong>vrednostmi maske</strong> in <strong>vrednostmi pixlov slike</strong>, ki jih maska prekriva.</p>
-<p>To pomeni:</p>
+<p>Ko imamo enkrat definiran filter, lahko začnemo s filtriranjem. Vsaka maska ima <strong>sredino</strong> (sredinski element maske). Masko navidezno postavimo nad sliko tako, da prekrije del slike. Nato izračunamo <strong>skalarni produkt</strong> med <strong>vrednostmi maske</strong> in <strong>vrednostmi pikslov slike</strong>, ki jih maska prekriva.</p>
+<p>Postopek je torej sledeč:</p>
 <ul>
-<li>vsak pixel množimo z ustrezno vrednostjo v maski,</li>
-<li>vse zmnožke seštejemo,</li>
-<li>dobimo novo vrednost za en pixel izhodne slike.</li>
+<li>masko $H$ položimo na sliko $I$ tako, da je sredina maske poravnana s pikslom $p$</li>
+<li>vsak piksel slike množimo z ustreznim elementom v zgoraj ležeči maski,</li>
+<li>vse zmnožke seštejemo in dobimo novo vrednost za piksel $I'(p)$ izhodne slike.</li>
 </ul>
-<p>To je izračun za en pixel.</p>
+<p>To je izračun za en piksel. Velotno sliko filtriramo tako, da opisani postopek ponovimo za vsak piksel v
+sliki. Običajno začnemo v levem zgornjem kotu slike in nadaljujemo od leve proti desni ter od zgoraj navzdol</p>
 <p>Za implementacijo potrebujemo 4 for-zanke:</p>
 <ol>
 <li>Zanka čez vse vrstice za vse piksle slike</li>
@@ -1580,14 +1696,24 @@ filtriranje
 <li>Zanka čez stolpce za vse piksle maske</li>
 </ol>
 <p>Skupaj torej 4 for-zanke. Temu postopku pravimo <strong>konvolucija</strong>.</p>
+<p>Konvolucija med masko $H$ in sliko $I$ je oblike:</p>
+\[I' = I * H\]<p><code>*</code> - operacija konvolucije</p>
 <p>$I$ je vhodna slika.</p>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Pri filtriranju moramo nove vrednosti shranjevati v novo sliko (pri točkovnih operacijah to ni bilo potrebno)</p></p>
+  </blockquote>
+
 <h5 id="problemi-pri-konvoluciji">
 <a class="header-anchor" href="#problemi-pri-konvoluciji"></a>
 Problemi pri konvoluciji
-</h5><h6 id="problem-robnih-pixlov">
-<a class="header-anchor" href="#problem-robnih-pixlov"></a>
-Problem robnih pixlov
-</h6><p>Kaj narediti z robnimi pixli, ko del maske pade izven slike?</p>
+</h5><h6 id="problem-robnih-pikslov">
+<a class="header-anchor" href="#problem-robnih-pikslov"></a>
+Problem robnih pikslov
+</h6><p>Kaj narediti z robnimi piksli, ko del maske pade izven slike?</p>
 <p><strong>Možna rešitev 1: Ničelno dopolnjevanje (zero padding)</strong></p>
 <p>Če maska pade izven slike:</p>
 <ul>
@@ -1600,13 +1726,13 @@ Problem robnih pixlov
 </ul>
 <p><strong>Možna rešitev 2: Ocenjevanje manjkajočih vrednosti</strong></p>
 <ul>
-<li>Manjkajoče pixle si &ldquo;izmislimo&rdquo; oziroma jih ocenimo.</li>
+<li>Manjkajoče piksle si &ldquo;izmislimo&rdquo; oziroma jih ocenimo.</li>
 <li>(npr. kopiranje robnih vrednosti, zrcaljenje ipd.)</li>
 </ul>
-<p><strong>Možna rešitev 3: Brez filtriranja robov</strong></p>
+<p><strong>Možna rešitev 3: Brez filtriranja robov (ne upoštevamo pikslov zunaj slike)</strong></p>
 <ul>
 <li>
-<p>Če pixel nima vseh sosedov okrog sebe, ga ne filtriramo.</p>
+<p>Če piksel nima vseh sosedov okrog sebe, ga ne filtriramo.</p>
 </li>
 <li>
 <p>S tem zmanjšamo dimenzije slike:</p>
@@ -1626,7 +1752,7 @@ Problem vrednosti po filtriranju
 </h6><p>Po filtriranju dobimo celoštevilčno vrednost, vendar v realnosti dobimo realna (decimalna) števila, ki po vrednosti padejo izven intervala $[0, 255]$. Teoretično to ni problem, problem pa nastane pri vizualizaciji. Takšne slike namreč ne moremo neposredno prikazati.</p>
 <p>Za rešitev tega problema se lahko uporabi:</p>
 <ol>
-<li>Skaliranje vrednosti nazaj v ustrezen interval</li>
+<li>Skaliranje vrednosti nazaj v ustrezen interval (linearizacija)</li>
 <li>Zaokroževanje na celoštevilske vrednosti</li>
 </ol>
 <h6 id="še-ena-dilema-kje-je-sredina-maske">
@@ -1637,7 +1763,7 @@ Problem vrednosti po filtriranju
 <blockquote>
 <p>Primer:</p>
 <ul>
-<li>Pri filtru 2×2 lahko določimo, da je sredina zgornji desni pixel.</li>
+<li>Pri filtru 2×2 lahko določimo, da je sredina zgornji desni piksel.</li>
 </ul>
 </blockquote>
 <hr>
@@ -1657,9 +1783,10 @@ Odstranjevanje šuma z lokalnimi operatorji
 Nizko sito (Low-pass filter)
 </h4><p>Nizko sito:</p>
 <ul>
-<li>pusti nizke frekvence pri miru,</li>
-<li>visoke frekvence odstrani oziroma zaduši.</li>
+<li>pusti nizke frekvence pri miru (to so velika področja s približno enakimi sivinami),</li>
+<li>visoke frekvence odstrani oziroma zaduši (to so majhna področja nenadnih sprememb oz. detajlov).</li>
 </ul>
+<p>Je lokalni operator, s katerim izračunamo povprečje v okolici piksla. Maska vsebuje same 1 in je pomnožena z obratno vrednostjo števila enic v maski.</p>
 
   <blockquote class="alert-blockquote warning">
     <p class="alert-heading">
@@ -1731,6 +1858,23 @@ Visoko sito (High-pass filter)
 <li>poudarjalci detajlov.</li>
 </ul>
 <p>Rezultat visokega sita je pogosto večinoma temna slika, z izrazitimi svetlimi točkami ali linijami na mestih robov. Zato rezultat običajno prištejemo ali &ldquo;pritisnemo&rdquo; nazaj na originalno sliko, da poudarimo robove in detajle.</p>
+<hr>
+<p>Primer nizko in visoko sito 3x3 piksle:</p>
+\[
+H_{\text{nizko}} = \frac{1}{9}
+\begin{bmatrix}
+1 & 1 & 1 \\
+1 & 1 & 1 \\
+1 & 1 & 1
+\end{bmatrix}
+\qquad
+H_{\text{visoko}} =
+\begin{bmatrix}
+1 & -2 & 1 \\
+-2 & 5 & -2 \\
+1 & -2 & 1
+\end{bmatrix}
+\]<hr>
 <h4 id="gaussov-filter">
 <a class="header-anchor" href="#gaussov-filter"></a>
 Gaussov filter
@@ -1741,15 +1885,18 @@ Gaussov filter
 <li>Pri <strong>gaussovem šumu</strong> pa predpostavimo, da so vse frekvence pokvarjene z nekim deležem.</li>
 </ul>
 <p>V tem primeru uporabimo <strong>Gaussov filter</strong>.</p>
-<p>Gaussov filter nastane iz <strong>Gaussove krivulje</strong>:</p>
+<p>Gaussov filter (maska) nastane iz <strong>Gaussovega jedra</strong>:</p>
 $$
-G(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{x^2}{2\sigma^2}}
+G_\sigma = \frac{1}{{2\pi}\sigma^2} e^{-\frac{x^2 + y^2}{2\sigma^2}}
 $$<p>Ta krivulja ima parameter:</p>
 <ul>
 <li>$\sigma$ — standardni odklon</li>
 </ul>
 <p>Krivuljo rotiramo okoli osi $y$, s čimer dobimo 2D Gaussovo &ldquo;kapo&rdquo;. To kapo nato vzorčimo in dobimo matriko filtra.</p>
-<p>Parameter $\sigma$ določa:</p>
+<p>(i,j)-ti element maske, velikosti $(2k + 1)x(2k + 1)$ pikslov, dobimo kot:</p>
+$$
+H(i,j)= \frac{1}{{2\pi}\sigma^2} e^{-\frac{(i-k-1)^2 + (j-k-1)^2}{2\sigma^2}}
+$$<p>Parameter $\sigma$ določa:</p>
 <ul>
 <li>kako položna ali strma je krivulja,</li>
 <li>kako močno bo filter glajenje izvajal.</li>
@@ -1763,8 +1910,7 @@ $$
  2 & 4 & 2 \\
  1 & 2 & 1
  \end{bmatrix}
- $$<p>in</p>
-$$
+\qquad
  H = \frac{1}{10}
  \begin{bmatrix}
  1 & 1 & 1 \\
@@ -1786,27 +1932,30 @@ $$
 <li>
 <p>Večja kot je $\sigma$:</p>
 <ul>
-<li>močnejše glajenje,</li>
+<li>močnejše glajenje, odstranimo več šuma, izbrišemo veliko detajlov</li>
 <li>upoštevamo širšo okolico,</li>
-<li>filter postane podoben nizkemu situ.</li>
+<li>filter postane podoben nizkemu situ,</li>
+<li>večja je tudi maska.</li>
 </ul>
 </li>
 </ul>
-<p>Če je $\sigma$ zelo majhen:</p>
+<p>Če je $\sigma$ zelo majhen (&lt; 1 piksel):</p>
 <ul>
-<li>skoraj ne upoštevamo sosednjih pixlov,</li>
-<li>filter postane skoraj nesmiseln,</li>
-<li>pixel praktično množimo sam s seboj.</li>
+<li>skoraj ne upoštevamo sosednjih pikslov,</li>
+<li>filter postane skoraj nesmiseln (nima učinka),</li>
+<li>piksel praktično množimo sam s seboj.</li>
 </ul>
+<hr>
 <h4 id="mediani-filter">
 <a class="header-anchor" href="#mediani-filter"></a>
 Mediani filter
-</h4><p>Mediani filter sodi med <strong>rank value filtre</strong>. Gre za filtre, ki sortirajo vrednosti v okolici pixla, nato pa izberejo določeno vrednost iz urejenega seznama. Pri teh filtrih je pomembna okolica pixla, uteži (koeficienti) pa niso pomembne oziroma jih ti filtri ne uporabljajo.</p>
+</h4><p>Osnovna ideja je, da zamenjamo trenutni piksel z vrednostjo mediane iz njegove okolice.</p>
+<p><strong>Mediani filter</strong> sodi med <strong>rank value filtre</strong>. Gre za filtre, ki sortirajo vrednosti v okolici piksla, nato pa izberejo določeno vrednost iz urejenega seznama. Pri teh filtrih je pomembna okolica piksla, uteži (koeficienti) pa niso pomembne oziroma jih ti filtri ne uporabljajo.</p>
 <p>Postopek uporabe <strong>rank value filtrov</strong>:</p>
 <ol>
-<li>Položimo masko nad pixel, ki ga filtriramo.</li>
+<li>Položimo masko nad piksel, ki ga filtriramo.</li>
 <li>NE izvajamo konvolucije.</li>
-<li>Vzamemo vse pixle iz okolice.</li>
+<li>Vzamemo vse piksle iz okolice.</li>
 <li>Vrednosti sortiramo (od najmanjše do največje ali obratno).</li>
 <li>Iz sortiranega seznama izberemo določeno vrednost.</li>
 </ol>
@@ -1825,12 +1974,12 @@ Mediani filter
 → izberemo srednji element v sortiranem seznamu (mediano).</p>
 </li>
 </ul>
-<p>Median filter je namenjen odstranjevanju <strong>impulznega šuma</strong>. Impulzni šum pomeni, da je posamezen, izoliran pixel pokvarjen, pojavi se kot nenadna motnja (impulz), pogosto kot zelo svetla ali zelo temna točka.</p>
+<p>Median filter je namenjen odstranjevanju <strong>impulznega šuma</strong>. Impulzni šum pomeni, da je posamezen, izoliran piksel pokvarjen, pojavi se kot nenadna motnja (impulz), pogosto kot zelo svetla ali zelo temna točka.</p>
 <ul>
 <li>Če je impulznega šuma malo → uporabimo manjši filter (npr. 3×3).</li>
 <li>Če je šuma več → potrebujemo večjo masko.</li>
 </ul>
-<p>Problem median filtra je, da lahko izbriše tanke črte in odstrani drobne detajle v sliki.</p>
+<p>Problem median filtra je, da lahko izbriše tanke črte in odstrani drobne detajle v sliki. Problem delno rešimo z ustreznejšo izbiro okolice (npr. okolica oblike križa je primerna za ohranjanje vertikalnih in horizontalnih linij).</p>
 <hr>
 <h3 id="detektorji-robov">
 <a class="header-anchor" href="#detektorji-robov"></a>
@@ -1841,27 +1990,43 @@ Detektorji robov
 <li>odstranjevanje šuma,</li>
 <li>poudarjanje pomembnih struktur (npr. robov).</li>
 </ul>
-<p>Kaj je rob v sliki?
-Rob nastane, ko prehajamo iz enega območja slike v drugo, med dvema različnima regijama.</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p><strong>Detektorji robov</strong> se uporabljajo za ugotavljanje nenadnih sprememb v funkciji intenzivnosti (slikovni funkciji). Pravi robovi so piksli, kjer se slikovna funkcija nenadno in močno spremeni.</p></p>
+  </blockquote>
+
+<p><strong>Kaj je rob v sliki?</strong>
+Rob nastane, ko prehajamo iz enega območja slike v drugo, med dvema različnima regijama. Rob je lastnost, ki je pridružena vsakemu pikslu v sliki. Določi se iz slikovne funkcije in okolice piksla.</p>
+<blockquote>
 <p>Primer:</p>
 <ul>
 <li>prehod iz ene barve stene v drugo, kjer je meja med dvema objektoma.</li>
 </ul>
-<p>Kako se rob kaže v sliki?
-Če gledamo slikovno funkcijo se sprehodimo po vrstici pixel po pixel in opazujemo, kako se vrednost funkcije spreminja. Robovi se pojavijo tam, kjer pride do nenadnega skoka v vrednosti slikovne funkcije. Pravi robovi so torej tam, kjer funkcija skoči oz. močno spremeni vrednost.</p>
-<p>Slikovna funkcija je funkcija dveh prostorskih koordinat:</p>
-$$
-f(x, y)
-$$<p>Za vsak pixel lahko definiramo <strong>lastnost roba</strong>. Rob je opisan z <strong>vektorsko spremenljivko</strong>:</p>
+</blockquote>
+<p><strong>Kako se rob kaže v sliki?</strong>
+Če gledamo slikovno funkcijo se sprehodimo po vrstici piksel po piksel in opazujemo, kako se vrednost funkcije spreminja. Robovi se pojavijo tam, kjer pride do nenadnega skoka v vrednosti slikovne funkcije. Pravi robovi so torej tam, kjer funkcija skoči oz. močno spremeni vrednost.</p>
+
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p><strong>Slikovna funkcija</strong> je funkcija dveh prostorskih koordinat:</p>
+$$f(x, y)$$</p>
+  </blockquote>
+
+<p>Za vsak piksel lahko definiramo <strong>lastnost roba</strong>. Rob je opisan z <strong>vektorsko spremenljivko</strong>:</p>
 <ul>
-<li>ena komponenta predstavlja jakost roba,</li>
-<li>druga komponenta predstavlja smer roba.</li>
+<li>ena komponenta predstavlja <strong>velikost (jakost) roba</strong>,</li>
+<li>druga komponenta predstavlja <strong>smer roba</strong>.</li>
 </ul>
-<p>Da določimo rob, nas zanima, kako hitro se funkcija spreminja. Za dosego tega izračunamo <strong>gradient funkcije</strong>:</p>
+<p>Da določimo rob, nas zanima, kako hitro se slikovna funkcija $I$ spreminja. Za dosego tega izračunamo <strong>gradient funkcije</strong> (velikost i smer gradienta), ki kaže v smeri največje rasti slikovne funkcije:</p>
 $$
 \nabla f(x,y) =
 \begin{bmatrix}
-\frac{\partial f}{\partial x} \\
+\frac{\partial Z}{\partial x} \\
 \frac{\partial f}{\partial y}
 \end{bmatrix}
 $$<p>Gradient dobimo iz dveh parcialnih odvodov:</p>
@@ -1870,15 +2035,15 @@ $$<p>Gradient dobimo iz dveh parcialnih odvodov:</p>
 <li>odvod po $y$ smeri.</li>
 </ul>
 <hr>
-<h4 id="jakost-roba">
-<a class="header-anchor" href="#jakost-roba"></a>
-Jakost roba
-</h4><p>Jakost roba določimo s pomočjo <strong>jakosti (velikosti) gradienta</strong>:</p>
+<h4 id="velikost-jakost-roba">
+<a class="header-anchor" href="#velikost-jakost-roba"></a>
+Velikost (jakost) roba
+</h4><p>Velikost (jakost) roba določimo s pomočjo <strong>jakosti (velikosti) gradienta</strong>:</p>
 $$
-|\nabla f| =
+|\nabla I (x,y)| =
 \sqrt{
-\left( \frac{\partial f}{\partial x} \right)^2 +
-\left( \frac{\partial f}{\partial y} \right)^2
+\left( \frac{\partial I}{\partial x} \right)^2 +
+\left( \frac{\partial I}{\partial y} \right)^2
 }
 $$<p>Večja kot je vrednost, močnejši je rob.</p>
 <hr>
@@ -1888,12 +2053,12 @@ Smer roba
 </h4><p>Smer roba je določena s smerjo gradienta. Gradiantni vektor kaže smer največjega in najmanjšega vektorja.</p>
 <p><strong>Smer gradienta</strong> lahko določimo z:</p>
 $$
-\theta = \arctan
+\psi = \arctan
 \left(
-\frac{\partial f / \partial y}
-{\partial f / \partial x}
+\frac{\partial I}{\partial y}/
+\frac{\partial I}{\partial x}
 \right)
-$$<p>Za vsak pixel izračunamo:</p>
+$$<p>Za vsak piksel izračunamo:</p>
 <ul>
 <li><strong>jakost roba</strong></li>
 <li><strong>smer roba</strong></li>
@@ -1903,7 +2068,7 @@ $$<p>Za vsak pixel izračunamo:</p>
 <li>matriko jakosti robov</li>
 <li>matriko smeri robov</li>
 </ol>
-<p>Prave robove določimo tako, da preverimo ali je jakost roba dovolj velika. Če je jakost premajhna, pixel ne obravnavamo kot rob.</p>
+<p>Prave robove določimo tako, da preverimo ali je jakost roba dovolj velika. Če je jakost premajhna, piksel ne obravnavamo kot rob.</p>
 <hr>
 <h4 id="gradient-za-zvezno-slikovno-funkcijo">
 <a class="header-anchor" href="#gradient-za-zvezno-slikovno-funkcijo"></a>
@@ -1915,20 +2080,19 @@ $$
 \frac{\partial I}{\partial x} \\
 \frac{\partial I}{\partial y}
 \end{bmatrix}
-$$<p>Jakost roba:</p>
+$$<p>Velikost (jakost) gradienta:</p>
 $$
-|\nabla I| =
+|\nabla I (x, y)| =
 \sqrt{
 \left(\frac{\partial I}{\partial x}\right)^2 +
 \left(\frac{\partial I}{\partial y}\right)^2
 }
-$$<p>Smer roba:</p>
+$$<p>Smer gradienta:</p>
 $$
-\theta =
-\arctan
+\psi = \arctan
 \left(
-\frac{\frac{\partial I}{\partial y}}
-{\frac{\partial I}{\partial x}}
+\frac{\partial I}{\partial y}/
+\frac{\partial I}{\partial x}
 \right)
 $$<hr>
 <h4 id="aproksimacija-parcialnih-odvodov-v-digitalnih-slikah">
@@ -1957,7 +2121,8 @@ $$
 $$<p>Običajno vzamemo:</p>
 $$
 \Delta x = 1
-$$<p>Podobno velja za odvod po $y$ smeri.</p>
+$$<p>Podobno velja zapis za parcialne odvode po $y$ smeri in 2. odvode.</p>
+<p>Detektorji robov implementirajo zgoraj zapisano teorijo. Če sliko I obdelamo z detektorjem robov, dobimo kot rezultat sliko robov E (edge image). Vvsak piksel v tej sliki ima dve komponenti: velikost roba in smer roba</p>
 <hr>
 <h4 id="laplaceov-operator">
 <a class="header-anchor" href="#laplaceov-operator"></a>
@@ -1971,10 +2136,11 @@ $$
 \frac{\partial^2 I}{\partial y^2}
 $$<p>V digitalni sliki ga aproksimiramo z masko (konvolucijskim filtrom), npr.:</p>
 $$
+H = 
 \begin{bmatrix}
-0 & -1 & 0 \\
--1 & 4 & -1 \\
-0 & -1 & 0
+1 & 1 & 1 \\
+1 & -8 & 1 \\
+1 & 1 & 1
 \end{bmatrix}
 $$<p>Rezultat je matrika, v kateri je ocenjen približek za <strong>drugi odvod</strong> slike.</p>
 <hr>
@@ -1983,42 +2149,48 @@ $$<p>Rezultat je matrika, v kateri je ocenjen približek za <strong>drugi odvod<
 Sobelov operator
 </h4><p>Sobelov operator uporabljamo za oceno <strong>prvih parcialnih odvodov</strong> (gradienta).</p>
 <p>Uporabimo dve maski:</p>
-<p><strong>Maska $H_x$ (odvod po x)</strong></p>
+<p><strong>Maska $H_x$ (odvod po x) za poudarjanje horizontalnih robov</strong></p>
 $$
 H_x =
 \begin{bmatrix}
--1 & 0 & 1 \\
--2 & 0 & 2 \\
--1 & 0 & 1
+1 & 2 & 1 \\
+0 & 0 & 0 \\
+-1 & -2 & -1
 \end{bmatrix}
 $$<p>Z njo dobimo ocenjen parcialni odvod po $x$:</p>
 $$
 G_x = I * H_x
-$$<p><strong>Maska $H_y$ (odvod po y)</strong></p>
+$$<p><strong>Maska $H_y$ (odvod po y) za poudarjanje vertikalnih robov</strong></p>
 <p>Masko dobimo z rotacijo za 90°:</p>
 $$
 H_y =
 \begin{bmatrix}
--1 & -2 & -1 \\
-0 & 0 & 0 \\
-1 & 2 & 1
+1 & 0 & -1 \\
+2 & 0 & -2 \\
+1 & 0 & -1
 \end{bmatrix}
 $$<p>Z njo dobimo ocenjen parcialni odvod po $y$:</p>
 $$
 G_y = I * H_y
 $$<hr>
-<h5 id="jakost-in-smer-gradienta">
-<a class="header-anchor" href="#jakost-in-smer-gradienta"></a>
-Jakost in smer gradienta
-</h5><p>Jakost gradienta:</p>
+<p>Če je $Y = I * H_x$ in $X = I * H_y$, potem je:</p>
+<p><strong>Velikost (jakost) roba:</strong></p>
 $$
 |\nabla I| =
-\sqrt{G_x^2 + G_y^2}
-$$<p>Smer gradienta:</p>
+\sqrt{X^2 + Y^2}
+$$<p>Smer roba:</p>
 $$
 \psi =
-\arctan\left(\frac{G_y}{G_x}\right)
-$$<hr>
+\arctan\left(\frac{Y}{X}\right)
+$$
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>Pravi robovi so tam, kjer je velikost roba velika!</p></p>
+  </blockquote>
+
+<hr>
 <p>Digitalne slike niso samo črno-bele, ampak imajo <strong>sivinske vrednosti</strong>:</p>
 <ul>
 <li>temnejši del slike → manjša vrednost</li>
@@ -2036,7 +2208,15 @@ Pragovna operacija
 </h3><h4 id="segmentacija">
 <a class="header-anchor" href="#segmentacija"></a>
 Segmentacija
-</h4><p>Pri segmentaciji je cilj, da sliko razdelimo na <strong>regije</strong>:</p>
+</h4>
+  <blockquote class="alert-blockquote important">
+    <p class="alert-heading">
+      Important
+    </p>
+    <p><p>Segmentacija oz. razčlenjevanje slik je proces, ki sliko razdeli (razčleni) na posamezne dele (tj. regije), ki imajo močno korelacijo z objekti/področji iz realnega sveta vsebovanega v sliki.</p></p>
+  </blockquote>
+
+<p>Pri segmentaciji je cilj, da sliko razdelimo na <strong>regije</strong>:</p>
 <ul>
 <li>regija 1</li>
 <li>regija 2</li>
@@ -2101,7 +2281,7 @@ Koliko dodatnih regij imamo, je odvisno od problema, ki ga rešujemo.</p>
     <p><p>Cilj segmentacije je, da dobimo regijo, ki čim bolje ustreza objektu, ki nas zanima.</p></p>
   </blockquote>
 
-<p>Poznamo 2 vrsti segmentacij, <strong>popolno segmentacijo</strong> in <strong>delno segmentacijo</strong>.</p>
+<p>Glede na cilj poznamo 2 vrsti segmentacij, <strong>popolno segmentacijo</strong> in <strong>delno segmentacijo</strong>.</p>
 
   <blockquote class="alert-blockquote important">
     <p class="alert-heading">
@@ -2115,7 +2295,7 @@ Koliko dodatnih regij imamo, je odvisno od problema, ki ga rešujemo.</p>
     <p class="alert-heading">
       Important
     </p>
-    <p><p>V praksi pa so pogostejše <strong>delne segmentacije</strong>. Pri tej vrsti segmentacij dobimo poleg objekta, ki nas zanima, tudi dodatne neželene dele in regije, kjer se pojavijo napake.</p></p>
+    <p><p>V praksi pa so pogostejše <strong>delne segmentacije</strong>. Pri tej vrsti segmentacij dobimo poleg objekta, ki nas zanima, tudi dodatne neželene dele in regije, kjer se pojavijo napake. To pomeni, da dobljene regije ne ustrezajo direktno željenim objektom. Pri delni segmentaciji sliko razdelimo na ločene oz. posamezne regije, ki so homogene glede na izbrano lastnost (npr. sivina, barva, vsebina, tekstura). Delno segmentirano sliko še nadalje obdelamo, pri čemer vključimo znanje iz višjih nivojev (npr. znanje o naravi iskanih objektov, medsebojnih relacij med objekti, lastnosti ozadja&hellip;)</p></p>
   </blockquote>
 
 
@@ -2123,17 +2303,18 @@ Koliko dodatnih regij imamo, je odvisno od problema, ki ga rešujemo.</p>
     <p class="alert-heading">
       Warning
     </p>
-    <p><p>NI UNIVERZALNE SEGMENTACIJSKE METODE ZA REŠEVANJE VSAKEGA PROBLEMA! ENE EDINSTSTVENE METODE NI! METODO PRILAGODIMO GLEDE NA NAŠ PROBLEM, KI GA REŠUJEMO.</p></p>
+    <p><p>NI UNIVERZALNE SEGMENTACIJSKE METODE ZA REŠEVANJE VSAKEGA PROBLEMA! ENE EDINSTSTVENE METODE NI! METODE SO PROBLEMSKO NARAVNANE IN JIH PRILAGODIMO GLEDE NA NAŠ PROBLEM, KI GA REŠUJEMO.</p></p>
   </blockquote>
 
+<p>Problem definira način, po katerem se poudarjajo iskane lastnosti objektov, ter način, kako se uravnavajo in sklepajo kompromisi med želenimi lastnostmi.</p>
 <hr>
 <h4 id="segmentacijske-metode">
 <a class="header-anchor" href="#segmentacijske-metode"></a>
 Segmentacijske metode
-</h4><p>Segmentacijske metode lahko razdelimo v različne skupine. Metode delimo glede na <strong>informacijo</strong>, ki jo uporabljajo za segmentacijo. Ločimo 3 skupine segmentacijskih metod, in sicer glede na dominantno lastnost, ki jo uporabljajo.</p>
+</h4><p>Segmentacijske metode lahko razdelimo v različne skupine. Metode delimo glede na <strong>informacijo oz. dominantno lastnost</strong>, ki jo uporabljajo za segmentacijo. Ločimo 3 skupine segmentacijskih metod, in sicer glede na dominantno lastnost, ki jo uporabljajo.</p>
 <p>Ločimo sledeče 3 skupine segmentacijskih metod:</p>
 <ul>
-<li><strong>segmentacija z globalnim znanjem o sliki oz. njenih delih</strong> (npr. pragodvna operacija).</li>
+<li><strong>segmentacija z globalnim znanjem o sliki oz. njenih delih</strong> (npr. pragodvna operacija). Znanje zbrano v raznih histogramih (npr. sivin)</li>
 <li><strong>segmentacija na osnovi robov</strong></li>
 <li><strong>segmentacija na osnovi regij</strong></li>
 </ul>
@@ -2153,17 +2334,27 @@ in se vprašamo:</p>
 <p>Ali ta model obstaja v sliki?</p>
 </blockquote>
 <p>Segmentacija temelji na preverjanju ujemanja med modelom in dejansko sliko.</p>
-<h5 id="thresholding-pragovna-operacija">
+<h4 id="thresholding-pragovna-operacija">
 <a class="header-anchor" href="#thresholding-pragovna-operacija"></a>
 Thresholding (Pragovna operacija)
-</h5><p>Thresholding je <strong>najhitrejši način segmentacije</strong>. Zaradi svoje enostavnosti in hitrosti je zelo primeren za real-time aplikacije. Imamo en prag $T$. Vsak piksel slike po vrsticah in stolpcih primerjamo s tem pragom. Za vsak piksel $I(i,j)$:</p>
+</h4><p>Thresholding je <strong>najpreprostejši in najhitrejši način segmentacije</strong>. Zaradi svoje enostavnosti in hitrosti je zelo primeren za real-time aplikacije.</p>
+<p>Vhod pri tej segmentaciji je originalna slika (npr. slika sivin $I$).
+Izhod pa je segmentirana slika $S$.
+Imamo en prag $T$. Vsak piksel slike po vrsticah in stolpcih primerjamo s tem pragom. Za vsak piksel $I(i,j)$:</p>
 $$
-g(i,j) =
+S(i,j) =
 \begin{cases}
 1, & \text{če } I(i,j) \geq T \\
 0, & \text{sicer}
 \end{cases}
-$$<p>Najenostavnejše so operacije z enim pragom in da je ta prag konstanten za celotno sliko.</p>
+$$<p>Pragovna operacija ima več variant. Poznamo <strong>enopragovne</strong> in <strong>večpragovne</strong> operacije.</p>
+<h5 id="enopragovne-operacije">
+<a class="header-anchor" href="#enopragovne-operacije"></a>
+Enopragovne operacije
+</h5><h6 id="konstantni-prag">
+<a class="header-anchor" href="#konstantni-prag"></a>
+Konstantni prag
+</h6><p>Najenostavnejše so operacije z <strong>enim pragom</strong> in da je ta prag konstanten za celotno sliko.</p>
 <p>Algoritem:</p>
 <ul>
 <li>na začetku določimo prag (npr. $T = 87$),</li>
@@ -2171,11 +2362,23 @@ $$<p>Najenostavnejše so operacije z enim pragom in da je ta prag konstanten za 
 <li>vsak piksel primerjamo s pragom,</li>
 <li>če je vrednost piksla večja ali enaka določenemu pragu (npr. $T = 87$), potem vrnemo vrednost 1, sicer vrnemo vrednost 0</li>
 </ul>
-<h5 id="variabilni-prag-lokalni-thresholding">
+\[
+S(i,j) =
+\begin{cases}
+1, & \text{če } I(i,j) \ge T \\
+0, & \text{sicer}
+\end{cases}
+\]<h6 id="variabilni-prag-lokalni-thresholding">
 <a class="header-anchor" href="#variabilni-prag-lokalni-thresholding"></a>
 Variabilni prag (lokalni thresholding)
-</h5><p>Če je prag variabilen se prag prilagaja glede na del slike in metoda postane zahtevnejša. V praksi ne računamo popolnoma neodvisnega praga za vsak pixel, ampak prag določimo na lokalnem območju (npr. v oknu okoli pixla).</p>
-<p>Če iščemo svetle objekte na temnem ozadju:</p>
+</h6><p>Če je prag variabilen se prag prilagaja glede na del slike in metoda postane zahtevnejša. V praksi ne računamo popolnoma neodvisnega praga za vsak piksel, ampak prag določimo na lokalnem območju (npr. v oknu okoli pixla).</p>
+\[
+S(i,j) =
+\begin{cases}
+1, & \text{če } I(i,j) \ge T(i,j) \\
+0, & \text{sicer}
+\end{cases}
+\]<p>Če iščemo svetle objekte na temnem ozadju:</p>
 $$
 I(i,j) \geq T
 $$<p>Če pa iščemo temne objekte na svetlem ozadju, obrnemo neenačaj:</p>
@@ -2190,28 +2393,33 @@ $$<hr>
 </ul>
 <p>Če lahko nadzorujemo svetlobo, je thresholding pogosto najboljša izbira.</p>
 <hr>
-<p>Namesto enega praga pa lahko uporabimo tudi več pragov:</p>
+<h5 id="večpragovne-operacije">
+<a class="header-anchor" href="#ve%c4%8dpragovne-operacije"></a>
+Večpragovne operacije
+</h5><p>Namesto enega praga pa lahko uporabimo tudi več pragov:</p>
 $$
 T_1 < T_2 < T_3 < \dots
-$$<p>Pixel razvrstimo glede na interval, v katerega pade njegova vrednost.</p>
+$$<p>Piksel razvrstimo glede na interval, v katerega pade njegova vrednost.</p>
 <p>Primer:</p>
-$$
-g(i,j) =
+\[
+S(i,j) =
 \begin{cases}
-0, & I < T_1 \\
-1, & T_1 \leq I < T_2 \\
-2, & T_2 \leq I < T_3 \\
-\dots
+0, & \text{če } I(i,j) < T_1 \\
+1, & \text{če } T_1 \le I(i,j) < T_2 \\
+2, & \text{če } T_2 \le I(i,j) < T_3 \\
+\vdots & \vdots \\
+n-1, & \text{če } T_{n-1} \le I(i,j) < T_n \\
+n, & \text{sicer}
 \end{cases}
-$$<p>Rezultat:</p>
+\]<p>Rezultat:</p>
 <ul>
 <li>več-regijska segmentacija</li>
 <li>ne samo binarna slika</li>
 </ul>
 <hr>
-<h5 id="kako-določiti-prag">
-<a class="header-anchor" href="#kako-dolo%c4%8diti-prag"></a>
-Kako določiti prag?
+<h5 id="metode-za-določanje-globalnih-pragov">
+<a class="header-anchor" href="#metode-za-dolo%c4%8danje-globalnih-pragov"></a>
+Metode za določanje globalnih pragov
 </h5><p>Metoda je zelo preprosta. Glavni problem pa je kako pravilno določiti prag. Izbira praga je namreč ključna za uspešno segmentacijo.</p>
 <p>Če imamo 8-bitno sivinsko sliko, imajo pixli vrednosti od:</p>
 $$
@@ -2248,16 +2456,15 @@ $$<p>Metoda je preprosta, vendar pogosto ni optimalna.</p>
 <hr>
 <p>Za naprednejše metode potrebujemo določiti nekaj pomožnih izrazov iz slike I:</p>
 <ol>
-<li>histogram sivin</li>
-<li>dve pomožni polji</li>
+<li>histogram sivin $h = [h_0, h_1, ... , h_Q]$</li>
+<li>dve pomožni polji (izraz $A_k$ in $B_k$)</li>
 </ol>
 <p>Naj ima histogram $L$ elementov (pri 8-bitni sliki je $L = 256$).</p>
 <p>Označimo:</p>
 <ul>
 <li>$h_k$ → število pikslov s sivinsko vrednostjo $k$</li>
 </ul>
-<hr>
-<p><strong>Pomožno polje</strong></p>
+<p><strong>Pomožno polje A</strong></p>
 <p>Polje $A$ ima enako število elementov kot histogram.</p>
 <p>V njem hranimo kumulativno vsoto števila pikslov do nivoja $k$:</p>
 $$
@@ -2270,8 +2477,7 @@ $$<p>To pomeni:</p>
 <li>&hellip;</li>
 <li>$A_k = \sum_{i=0}^{k} h_i$</li>
 </ul>
-<p>Polje $A_k$ nam pove, koliko pixlov ima sivinsko vrednost manjšo ali enako $k$.</p>
-<hr>
+<p><strong>Polje $A_k$ nam pove, koliko pikslov ima sivinsko vrednost manjšo ali enako $k$</strong>.</p>
 <p><strong>Pomožno polje B</strong></p>
 <p>Polje $B$ ima prav tako enako število elementov kot histogram.</p>
 <p>V njem hranimo kumulativno vsoto sivinskih vrednosti:</p>
@@ -2288,19 +2494,19 @@ $$<p>Primeri:</p>
 <blockquote>
 <p>sivina × število pixlov (za vse sivine ≤ k)</p>
 </blockquote>
-<ul>
-<li>$B_k$ hrani vsoto vseh sivinskih vrednosti, ki so manjše ali enake $k$.</li>
-<li>Zadnji element $B_{L-1}$ predstavlja vsoto vseh sivinskih vrednosti v celotni sliki.</li>
-</ul>
+<p><strong>izraz $B_k$ je obtežena vsota pikslov do sivine k (vrednost je proporcionalna povprečni svetlosti v sliki, če upoštevamo zgolj piksle do sivine k).</strong></p>
+<p>$B_k$ hrani vsoto vseh sivinskih vrednosti, ki so manjše ali enake $k$. Zadnji element $B_{L-1}$ predstavlja vsoto vseh sivinskih vrednosti v celotni sliki.**</p>
 <p>To sta osnovni pomožni polji, ki ju uporabljamo pri naprednejših metodah določanja praga (npr. optimizacijskih metodah).</p>
+<p>$A_Q$ — število vseh pikslov v sliki, tj. $A_Q = M N$
+$B_Q$ — vsota vseh sivin v sliki, tj. $B_Q = \sum_i{} \sum_j{} I(i,j)$</p>
 <hr>
-<h6 id="3prag-kot-povprečje-slike">
-<a class="header-anchor" href="#3prag-kot-povpre%c4%8dje-slike"></a>
-3.Prag kot povprečje slike
+<h6 id="3prag-kot-povprečje-slike-mean">
+<a class="header-anchor" href="#3prag-kot-povpre%c4%8dje-slike-mean"></a>
+3.Prag kot povprečje slike (MEAN)
 </h6><p>Prag postavimo na <strong>povprečno sivinsko vrednost slike</strong>.</p>
 <p>Izračun:</p>
 $$
-T = \frac{\text{vsota vseh sivinskih vrednosti}}{\text{število vseh pixlov}}
+T = \frac{B_Q}{A_Q} = \frac{\text{vsota vseh sivinskih vrednosti}}{\text{število vseh pixlov}}
 $$<p>Ker že imamo definirani pomožni polji:</p>
 <ul>
 <li>$A_Q$ → skupno število vseh pixlov</li>
@@ -2316,9 +2522,9 @@ $$<p>Dobimo aritmetično sredino (povprečje) sivinskih vrednosti.</p>
 <li>ni nujno optimalna za slike z več vrhovi v histogramu.</li>
 </ul>
 <hr>
-<h6 id="4-prag-kot-mediana">
-<a class="header-anchor" href="#4-prag-kot-mediana"></a>
-4. Prag kot mediana
+<h6 id="4-prag-kot-mediana-median">
+<a class="header-anchor" href="#4-prag-kot-mediana-median"></a>
+4. Prag kot mediana (MEDIAN)
 </h6><p>Prag določimo z <strong>mediano histogramov sivin</strong>.</p>
 <p>Prag postavimo tako, da:</p>
 <ul>
@@ -2328,7 +2534,7 @@ $$<p>Dobimo aritmetično sredino (povprečje) sivinskih vrednosti.</p>
 <p>Formalno:</p>
 <p>Poiščemo tak $T$, da velja:</p>
 $$
-A_T \approx \frac{A_Q}{2}
+\frac{A_T}{A_Q} \approx 0,5
 $$<p>kjer je:</p>
 <ul>
 <li>$A_T$ → kumulativno število pixlov do sivine $T$</li>
@@ -2345,9 +2551,9 @@ $$
 A_T \geq \frac{A_Q}{2}
 $$<p>Ta $T$ je mediana sivinskih vrednosti.</p>
 <hr>
-<h6 id="5-optimalni-prag-iterativna-metoda">
-<a class="header-anchor" href="#5-optimalni-prag-iterativna-metoda"></a>
-5. Optimalni prag (iterativna metoda)
+<h6 id="5-globalni-optimalni-prag-optimal">
+<a class="header-anchor" href="#5-globalni-optimalni-prag-optimal"></a>
+5. Globalni optimalni prag (OPTIMAL)
 </h6>
   <blockquote class="alert-blockquote warning">
     <p class="alert-heading">
@@ -2370,10 +2576,7 @@ $$<p>Ta $T$ je mediana sivinskih vrednosti.</p>
 <p><strong>Cilj metode je najti prag, ki najbolje loči ti dve porazdelitvi.</strong></p>
 <hr>
 <p>Metoda je <strong>iterativna</strong>.</p>
-<p>Potrebujemo:</p>
-<ul>
-<li>začetni približek praga $T_0$ (<strong>Začetni prag določimo sami!</strong>)</li>
-</ul>
+<p>Potrebujemo začetni približek praga $T_0$ (<strong>Začetni prag določimo sami!</strong>)</p>
 <hr>
 <p>Pri pragu $T_0$:</p>
 <ul>
@@ -2382,13 +2585,13 @@ $$<p>Ta $T$ je mediana sivinskih vrednosti.</p>
 </ul>
 <p>Izračunamo:</p>
 <ul>
-<li>povprečno vrednost ozadja → $\mu_0(T_0)$</li>
-<li>povprečno vrednost objekta → $\mu_1(T_0)$</li>
+<li>povprečno vrednost ozadja → $\mu(T_k)$</li>
+<li>povprečno vrednost objekta → $\gamma(T_k)$</li>
 </ul>
 <hr>
 <p>Nov prag določimo kot sredino med obema povprečjema:</p>
 $$
-T_{1} = \frac{\mu_0(T_0) + \mu_1(T_0)}{2}
+T_{1} = \frac{\mu(T_k) + \gamma(T_k)}{2}
 $$<hr>
 <p>Postopek ponavljamo:</p>
 <ol>
@@ -2399,31 +2602,31 @@ $$<hr>
 <li>$\mu_1(T_k)$</li>
 </ul>
 </li>
-<li>Posodobimo prag:</li>
+<li>Posodobimo prag (nov prag v koraku $k + 1$):</li>
 </ol>
 $$
-T_{k+1} = \frac{\mu_0(T_k) + \mu_1(T_k)}{2}
+T_{k+1} = \frac{\mu(T_k) + \gamma(T_k)}{2}
 $$<hr>
-<p>Iteracije izvajamo, dokler se prag bistveno spreminja.</p>
-<p>Razliko merimo z majhno konstanto $\varepsilon$:</p>
+<p>Iteracije izvajamo, dokler se prag bistveno spreminja. Razliko merimo z majhno konstanto $\varepsilon$. Postopek zaključimo, kadar:</p>
 $$
 |T_{k+1} - T_k| < \varepsilon
-$$<p>Ker delamo z realnimi števili, se prag običajno vedno nekoliko spremeni, zato potrebujemo toleranco $\varepsilon$.</p>
+$$<p>Kjer, je $\varepsilon$ majhno realno število.</p>
+<p>Ker delamo z realnimi števili, se prag običajno vedno nekoliko spremeni, zato potrebujemo toleranco $\varepsilon$.</p>
 <hr>
-<h6 id="6-globalni-prag-določen-z-entropijo-kapurjev-prag">
-<a class="header-anchor" href="#6-globalni-prag-dolo%c4%8den-z-entropijo-kapurjev-prag"></a>
-6. Globalni prag določen z entropijo (Kapurjev prag)
-</h6><p>Ta metoda določi prag na podlagi <strong>entropije</strong>. Entropija je mera za količino informacije v sistemu.</p>
-<p>Slika vsebuje malo informacij, če imajo vsi pixli enako ali zelo podobno sivinsko vrednost in je histogram močno skoncentriran okoli ene vrednosti.</p>
+<h6 id="6-globalni-prag-določen-z-entropijo-kapurjev-prag---kapur">
+<a class="header-anchor" href="#6-globalni-prag-dolo%c4%8den-z-entropijo-kapurjev-prag---kapur"></a>
+6. Globalni prag določen z entropijo (Kapurjev prag - KAPUR)
+</h6><p>Ta metoda določi prag na podlagi <strong>entropije</strong>. Entropija je mera za količino informacije v sistemu. Slika vsebuje malo informacij, če imajo vsi pixli enako ali zelo podobno sivinsko vrednost in je histogram močno skoncentriran okoli ene vrednosti.</p>
 <p>Primer:</p>
 <ul>
 <li>vsi pixli imajo isto sivino → entropija je minimalna.</li>
 </ul>
-<hr>
 <p>Slika vsebuje veliko informacij, če so zastopane vse sivinske vrednosti in so vrednosti približno naključno porazdeljene. Takrat je entropija visoka.</p>
-<hr>
 <p><strong>Ideja Kapurjeve metode</strong></p>
-<p>Imamo izbran prag $T$, ki sliko razdeli na:</p>
+<p>Pri tej metodi prag določimo tako, da maksimiziramo informacijo med ozadjem in objekti — tj. poiščemo maksimum izraza:</p>
+$$
+max_T (H_ozadje(T) + H_objekti(T))
+$$<p>Imamo izbran prag $T$, ki sliko razdeli na:</p>
 <ul>
 <li><strong>ozadje</strong> (sivine ≤ T)</li>
 <li><strong>ospredje</strong> (sivine &gt; T)</li>
@@ -2446,15 +2649,20 @@ $$<p>Ker delamo z realnimi števili, se prag običajno vedno nekoliko spremeni, 
 <p><strong>Entropija ozadja</strong>:
 </p>
 $$
-H_0(T)
-$$<p><strong>Entropija ospredja</strong>:
+H_ozadje(T) = -\sum_{i=0}^{T} \frac{p_i}{P_T} \log \frac{p_i}{P_T}
+$$<p><strong>Entropija ospredja oz. objektov</strong>:
 </p>
 $$
-H_1(T)
-$$<p><strong>Skupna entropija</strong>:
+H_objekti(T) = -\sum_{i=T+1}^{Q} \frac{p_i}{1-P_T} \log \frac{p_i}{1 - P_T}
+$$$$
+p = \frac{1}{M N}h
+\qquad
+P_T = \sum_{i=0}^{T} p_i
+$$<p>$p= [p_0,p_1,...,p_Q]$ - normaliziran histogram sivin</p>
+<p><strong>Skupna entropija</strong>:
 </p>
 $$
-H(T) = H_0(T) + H_1(T)
+H(T) = H_ozadje(T) + H_objekti(T)
 $$<hr>
 <p><strong>Postopek</strong>:</p>
 <ol>
@@ -2479,7 +2687,8 @@ $$<hr>
 <h3 id="pragovna-operacija-na-sliki-robov">
 <a class="header-anchor" href="#pragovna-operacija-na-sliki-robov"></a>
 Pragovna operacija na sliki robov
-</h3><p>Najenostavnejši pristop:</p>
+</h3><p>V sliki robov imajo &ldquo;nepravi&rdquo; robni piksli vrednosti zelo blizu 0 (vendar nikoli dejansko vrednost 0). Razlogi za to so šum v podatkih, majhne nepravilnosti v osvetlitvi scene ipd. Prave robne piksle (oz. močne robove) lahko dobimo s pragovno operacijo.</p>
+<p>Najenostavnejši pristop:</p>
 <ol>
 <li>Na sivinski sliki uporabimo <strong>detektor robov</strong>.</li>
 <li>Dobimo sliko jakosti robov.</li>
@@ -2490,8 +2699,10 @@ Pragovna operacija na sliki robov
 <li>piksli, ki predstavljajo rob → vrednost 1</li>
 <li>ostali piksli → vrednost 0</li>
 </ul>
-<hr>
-<p>Po thresholdingu dobimo robove objekta. Te robove pa moramo med seboj povezati v smiselne konture. Samo binarna slika robov še ne pomeni, da imamo zaključene meje regij.</p>
+<h4 id="sledenje-meji">
+<a class="header-anchor" href="#sledenje-meji"></a>
+Sledenje meji
+</h4><p>Po thresholdingu dobimo robove objekta. Te robove pa moramo med seboj povezati v smiselne konture. Samo binarna slika robov še ne pomeni, da imamo zaključene meje regij.</p>
 <p>Algoritem sledenja meji:</p>
 <ul>
 <li>poveže robne piksle v zaprto konturo,</li>
@@ -2503,34 +2714,35 @@ Pragovna operacija na sliki robov
 <li>ali ko regijo že imamo (iščemo njen obris).</li>
 </ul>
 <hr>
-<h4 id="notranja-in-zunanja-meja-regije">
+<h5 id="notranja-in-zunanja-meja-regije">
 <a class="header-anchor" href="#notranja-in-zunanja-meja-regije"></a>
 Notranja in zunanja meja regije
-</h4><h5 id="notranja-meja">
+</h5><h6 id="notranja-meja">
 <a class="header-anchor" href="#notranja-meja"></a>
 Notranja meja
-</h5><p>Notranjo mejo tvorijo:</p>
+</h6><p>Notranjo mejo tvorijo:</p>
 <ul>
-<li>pixli, ki še pripadajo regiji,</li>
+<li>piksli, ki še pripadajo regiji,</li>
 <li>in se nahajajo na njenem robu.</li>
+<li>to je krivulja na skrajnem robu regije</li>
 </ul>
 <p>Ko govorimo o <strong>obrisu regije</strong>, mislimo na notranjo mejo.</p>
 <hr>
-<h5 id="zunanja-meja">
+<h6 id="zunanja-meja">
 <a class="header-anchor" href="#zunanja-meja"></a>
 Zunanja meja
-</h5><p>Zunanjo mejo tvorijo:</p>
+</h6><p>Zunanjo mejo tvorijo:</p>
 <ul>
-<li>pixli, ki so sosedi notranje meje,</li>
-<li>vendar ne pripadajo regiji,</li>
-<li>ampak ozadju ali drugi regiji.</li>
+<li>piksli, ki so sosedi notranje meje,</li>
+<li>ne pripadajo regiji, ampak ozadju ali drugi regiji</li>
+<li>to je najbližja ali najkrajša krivulja, ki oklepa opazovano regijo in ni del regije</li>
 </ul>
 
   <blockquote class="alert-blockquote warning">
     <p class="alert-heading">
       Warning
     </p>
-    <p><p>Regija ne sme biti velika samo 1 pixel. Če dobimo regijo velikosti 1 pixel, smo najverjetneje naredili napako v segmentaciji.</p></p>
+    <p><p>Regija ne sme biti velika samo 1 piksel. Če dobimo regijo velikosti 1 piksel, smo najverjetneje naredili napako v segmentaciji.</p></p>
   </blockquote>
 
 <hr>
@@ -2544,7 +2756,7 @@ Kako deluje algoritem sledenja meji?
 <h6 id="4-sosedstvo">
 <a class="header-anchor" href="#4-sosedstvo"></a>
 4-sosedstvo
-</h6><p>Pixel ima 4 sosede:</p>
+</h6><p>Piksel ima 4 sosede:</p>
 <ul>
 <li>gor</li>
 <li>dol</li>
@@ -2554,7 +2766,7 @@ Kako deluje algoritem sledenja meji?
 <h6 id="8-sosedstvo">
 <a class="header-anchor" href="#8-sosedstvo"></a>
 8-sosedstvo
-</h6><p>Pixel ima 8 možnih smeri gibanja:</p>
+</h6><p>Piksel ima 8 možnih smeri gibanja:</p>
 <ul>
 <li>gor</li>
 <li>dol</li>
@@ -2563,6 +2775,12 @@ Kako deluje algoritem sledenja meji?
 <li>štiri diagonalne smeri</li>
 </ul>
 <p>Pri 8-sosedstvu se lahko iz posameznega pixla premaknemo v 8 različnih smeri. To omogoča bolj naravno in neprekinjeno sledenje robov.</p>
+<h5 id="slabost-algoritma-sledenja-meji">
+<a class="header-anchor" href="#slabost-algoritma-sledenja-meji"></a>
+Slabost algoritma sledenja meji
+</h5><p>S tem algoritmom ni možno najti meje za luknje znotraj regij! Problem za sledenje so področja, kjer je meja prekinjena (npr. zaradi šuma, prekrivanja objektov). Ta problem se da rešiti tako, da uporabimo hevristične pristope (tj. predvidimo potek meje na
+takšnih področjih).</p>
+<p>Sledenje v sivinskih slikah je možno, vendar predstavlja težji problem kot na binarnih slikah oz. že segmentiranih slikah.</p>
 <h3 id="ujemanje-šablon">
 <a class="header-anchor" href="#ujemanje-%c5%a1ablon"></a>
 Ujemanje šablon
@@ -2584,7 +2802,14 @@ Osnovni pojmi
 </h3><h4 id="zaporedje-slik">
 <a class="header-anchor" href="#zaporedje-slik"></a>
 Zaporedje slik
-</h4><p><strong>Zvezno zaporedje slik</strong>-poemni, da se slika spreminja v zveznem času. Takšno sliko lahko opišemo s tremi časovnimi spremenljivkami:</p>
+</h4><p>Zaporedje digitalnih slik je zaporedje K-tih 2D-digitalnih slik:</p>
+$$I = {\{I_0,I_1,...,I_{K-1}\}}$$<p>Ob tem še zahtevamo, da če je bila slika $I_k$ zajeta v času $t_k$, potem je morala biti slika $I_{k+1}$ zajeta v času $t_{k+1}$, pri čemer $t_k$ &lt; $t_{k+1}$.</p>
+<p>Časovni interval med sosednjimi slikami je običajno fiksen (npr. $Δt$). Zato velja:</p>
+$$t_{k+1}=t_k+Δt
+\qquad
+\text{oz.}
+\qquad
+t_{k+1}=t_0+(k+1)Δt$$<p><strong>Zvezno zaporedje slik</strong>-pomeni, da se slika spreminja v zveznem času. Takšno sliko lahko opišemo s tremi časovnimi spremenljivkami:</p>
 <ul>
 <li>x-os (prostorska dimenzija),</li>
 <li>y-os (prostorska dimenzija),</li>
@@ -2597,14 +2822,15 @@ $$<p>Mi bomo delali z diskretnimi slikami in zaporedjem diskretnih slik (npr. vi
 <blockquote>
 <p><strong>Kaj pridobimo z zaporedjem slik?</strong></p>
 <p>Če vsako sliko obdelujemo posebej, ignoriramo časovno povezanost med njimi.</p>
-<p>Zaporedje slik pa nam omogoča dodatne analize.</p>
-<p><strong>Primer: medicinske slike</strong></p>
+<p>Zaporedje slik pa nam omogoča dodatne analize. Glede na način zajemanja ločimo različne vrste zaporedij slik:</p>
+<p><strong>1. Zaporedje medicinskih slik oz. prerezov skozi določene strukture</strong></p>
 <p>Pri medicinskih slikah lahko:</p>
 <ul>
 <li>rekonstruiramo strukture v telesu,</li>
 <li>izvedemo 3D rekonstrukcijo objekta.</li>
 </ul>
-<p><strong>Primer: videoposnetek</strong></p>
+<p>Dejansko ne gre za pravo gibanje — prerezi so res zajeti v različnih časovnih trenutkih, vendar pa je struktura statična.</p>
+<p><strong>2. Zaporedje slik vizualne scene (npr. posnete z video kamero)</strong></p>
 <p>Pri videoposnetkih lahko izvajamo:</p>
 <ul>
 <li>zaznavanje gibanja</li>
@@ -2617,13 +2843,13 @@ $$<p>Mi bomo delali z diskretnimi slikami in zaporedjem diskretnih slik (npr. vi
 <a class="header-anchor" href="#slike-razlik"></a>
 Slike razlik
 </h3><p>Najenostavnejši pristop pri obdelavi zaporedij slik so <strong>slike razlik</strong>. Gre za približek <strong>odvoda po času</strong>.</p>
-<p>Vzamemo dve sliki in odštejemo istoležne pixle:</p>
+<p>Vzamemo dve sliki in odštejemo istoležne piksle:</p>
 $$
-D(x,y) = I_t(x,y) - I_{t-1}(x,y)
+ΔI_k=I_{k+1}-I_k
 $$<p>kjer:</p>
 <ul>
-<li>$I_t$ predstavlja trenutno sliko,</li>
-<li>$I_{t-1}$ predstavlja prejšnjo sliko,</li>
+<li>$I_k$ predstavlja trenutno sliko,</li>
+<li>$I_{k+1}$ predstavlja prejšnjo sliko,</li>
 <li>$D(x,y)$ je slika razlik.</li>
 </ul>
 <hr>
@@ -2632,7 +2858,7 @@ $$<p>kjer:</p>
 $$
 D(x,y) \approx 0
 $$<hr>
-<p>Če se v sceni pojavi gibanje pa bodo na mestih, kjer se objekt premika, vrednosti različne od 0. Tam zaznamo spremembo. Pri tem pa ni nujno, da odštevamo samo dve zaporedni sliki. Lahko odštejemo dve zaporedni sliki, lahko pa odštejemo sliko, ki je npr. 10 framov nazaj. Ključno je samo, da odštejemo dve sliki in na tak način dobimo sliko razlik.</p>
+<p>Če se v sceni pojavi gibanje pa bodo na mestih, kjer se objekt premika, spremembe velike in vrednosti precej različne od 0. Tam zaznamo spremembo. Pri tem pa ni nujno, da odštevamo samo dve zaporedni sliki. Lahko odštejemo dve zaporedni sliki, lahko pa odštejemo sliko, ki je npr. 10 framov nazaj. Ključno je samo, da odštejemo dve sliki in na tak način dobimo sliko razlik.</p>
 <p>Primer:</p>
 $$
 D(x,y) = I_t(x,y) - I_{t-k}(x,y)
@@ -2652,24 +2878,24 @@ $$<p>kjer je $k$ poljubno število framov.</p>
 <p>Ker lahko pri odštevanju dobimo tudi negativne vrednosti, uporabimo absolutno vrednost:</p>
 $$
 D'(x,y) = |I_t(x,y) - I_{t-k}(x,y)|
-$$<p>Nato izvedemo pragovanje:</p>
+$$<p>Nato izvedemo pragovno operacijo na sliki razlik:</p>
 $$
-g(x,y) =
+S(p) =
 \begin{cases}
-gibajoči se, & \text{če } D'(x,y) \geq T \\
-0, & \text{sicer}
+\text{gibajoči se}, & \text{IF } |ΔI_k(p)| \geq T \\
+0, & \text{ELSE}
 \end{cases}
 $$<h3 id="statično-ozadje">
 <a class="header-anchor" href="#stati%c4%8dno-ozadje"></a>
 Statično ozadje
-</h3><p>Pri uporabi slike razlik je problem, da ni nujno, da bomo uspešno izsegmentirali gibajoči se objekt.</p>
+</h3><p>Ta metoda je alternativi sliki razlik. Motivacija pri tem je, da je ozadje običajno najbolj statičen del slike. Pri uporabi slike razlik je problem, da ni nujno, da bomo uspešno izsegmentirali gibajoči se objekt.</p>
 <p>Uspešnost metode je močno odvisna od:</p>
 <ul>
 <li>hitrosti objekta v slikovni ravnini,</li>
 <li>frekvence zajema slik (FPS),</li>
 <li>količine šuma v sliki.</li>
 </ul>
-<p>Če je objekt zelo počasen ali se premika zelo malo, so razlike med slikami lahko zelo majhne. Ravno za te primere, ki so bolj enostavni, da so scene z majhnimi spremembami, pa je metoda slike razlik ravno najbolj primerna. Gre za preprost postopek, kjer aproksimiramo <strong>odvod po času</strong>.</p>
+<p>Če je objekt zelo počasen ali se premika zelo malo, so razlike med slikami lahko zelo majhne. Ravno za te primere, ki so bolj enostavni, da so scene z majhnimi spremembami je metoda slike razlik najbolj primerna. Gre za preprost postopek, kjer aproksimiramo <strong>odvod po času</strong>.</p>
 <hr>
 <p>Metodo lahko posplošimo. Namesto da odštevamo dve zaporedni sliki, lahko:</p>
 <ul>
@@ -2709,6 +2935,8 @@ $$<p>kjer je:</p>
 <li>kasneje vsako novo sliko primerjamo s tem ozadjem.</li>
 </ul>
 <p>Tak pristop je zelo pogost pri nadzornih sistemih.</p>
+<p>Če imamo na voljo sliko ozadja $I_{Ozadje}$ potem lahko uporabimo idejo slik razlik:</p>
+$$ΔI_k=I_k-I_{Ozadje}$$<p>Velike vrednosti v ΔI_k (gledano absolutno) določajo področja velikih sprememb (npr. gibajočih se objektov).</p>
 <hr>
 <h4 id="postopki-tvorjenja-statičnega-ozadja">
 <a class="header-anchor" href="#postopki-tvorjenja-stati%c4%8dnega-ozadja"></a>
@@ -2718,7 +2946,7 @@ Postopki tvorjenja statičnega ozadja
 <a class="header-anchor" href="#1-metoda---povpre%c4%8denje-celotnega-zaporedja-slik"></a>
 1. Metoda - Povprečenje celotnega zaporedja slik
 </h5><p><strong>Postopek</strong>
-Za vsak pixel $(i,j)$ spremljamo njegovo vrednost skozi vse slike v zaporedju in izračunamo zanj povprečno vrednost. Ta postopek naredimo za vse pixle slike.</p>
+Za vsak piksel $(i,j)$ spremljamo njegovo vrednost skozi vse slike v zaporedju in izračunamo zanj povprečno vrednost. Ta postopek naredimo za vse pixle slike.</p>
 <p>Matematično:</p>
 $$
 B(i,j) = \frac{1}{N} \sum_{t=1}^{N} I_t(i,j)
@@ -2729,13 +2957,13 @@ $$<p>kjer je:</p>
 </ul>
 <p>Gre za enostaven postopek. Deluje dobro, če se objekti <strong>relativno hitro premikajo</strong>. Če je gibanje zelo počasno, pa se lahko objekt “skrije” v ozadje (postane del povprečja).</p>
 <hr>
-<h5 id="2-metoda---iskanje-skokov-robov-v-časovni-funkciji-pixla">
-<a class="header-anchor" href="#2-metoda---iskanje-skokov-robov-v-%c4%8dasovni-funkciji-pixla"></a>
-2. Metoda - Iskanje skokov (robov) v časovni funkciji pixla
+<h5 id="2-metoda---iskanje-skokov-robov-v-časovni-funkciji-piksla">
+<a class="header-anchor" href="#2-metoda---iskanje-skokov-robov-v-%c4%8dasovni-funkciji-piksla"></a>
+2. Metoda - Iskanje skokov (robov) v časovni funkciji piksla
 </h5><p><strong>Postopek</strong></p>
-<p>Izberemo en pixel $(i,j)$ na prvi sliki. Nato spremljamo njegovo vrednost skozi celotno zaporedje slik in opazujemo, kako se njegova vrednost spreminja skozi čas. Iščemo <strong>skoke (robove)</strong> v časovni funkciji.</p>
+<p>Izberemo en piksel $(i,j)$ na prvi sliki. Nato spremljamo njegovo vrednost skozi celotno zaporedje slik in opazujemo, kako se njegova vrednost spreminja skozi čas. Iščemo <strong>skoke (robove)</strong> v časovni funkciji.</p>
 <p>Primer:
-Če se objekt premakne čez pixel, pride do nenadne spremembe vrednosti (skoka).</p>
+Če se objekt premakne čez piksel, pride do nenadne spremembe vrednosti (skoka).</p>
 <p>Pri slikah, kjer zaznamo pri izbranem pikslu skok, sklepamo, da gre za gibajoči se objekt. Te dele izločimo in ne upoštevamo. Seštejemo del pred skokom in po skoku in izračunamo povprečje. Povprečje izračunamo samo iz stabilnih delov (brez skokov). Na ta način poskušamo dobiti boljšo oceno statičnega ozadja.</p>
 <hr>
 <h5 id="3-metoda---z-drsečim-oknom-skozi-čas">
@@ -2767,14 +2995,17 @@ $$<p>Dobimo oceno ozadja, ki je bolj robustna na gibanje.</p>
 <h3 id="optični-pretok">
 <a class="header-anchor" href="#opti%c4%8dni-pretok"></a>
 Optični pretok
-</h3><p>Gre za metodo, ki ocenjuje <strong>polje gibanja</strong> med dvema zaporednima slikama.</p>
+</h3><p>Imejmo gibajoč se predmet v sceni (prostoru), ki jo snemamo npr. z video kamero. Gre za metodo, ki ocenjuje <strong>polje gibanja</strong> med dvema zaporednima slikama.</p>
 <p>Vzememo $ij$-ti piksel na sliki. Predpostavimo, da zajemamo premikanje objekta (npr. pilota). Med premikanjem se piksel premakne za vektor $\mathbf{u}$:</p>
 <ul>
 <li>premik v smeri $x$: $u_x$</li>
 <li>premik v smeri $y$: $u_y$</li>
 </ul>
 <p>Temu pravimo <strong>vektor gibanja</strong> iz slike 1 v sliko 2.</p>
-<p><strong>Matrika gibanja</strong> $\mathbf{U}$ pa hrani vektorje gibanja za vse piksle slike. Če ima slika dimenzijo $M \times N$, ima tudi matrika $\mathbf{U}$ dimenzijo $M \times N$, saj vsebuje toliko elelmentov kot je pikslov na sliki.</p>
+<p><strong>Matrika gibanja</strong> $\mathbf{U}$ pa hrani vektorje gibanja za vse piksle slike. Definira za koliko se je premaknil vsak piksel v sliki:</p>
+$$
+\mathbf{U}(p)=[u_x,u_y]
+$$<p>Če ima slika dimenzijo $M \times N$, ima tudi matrika $\mathbf{U}$ dimenzijo $M \times N$, saj vsebuje toliko elelmentov kot je pikslov na sliki.</p>
 <p><strong>Postopek implementacije:</strong></p>
 <ul>
 <li>ena matrika vsebuje vrednosti premikov po $x$</li>
@@ -2783,7 +3014,7 @@ Optični pretok
 </ul>
 <p>Torej:</p>
 $$
-\mathbf{U} = (U_x, U_y)
+\mathbf{U}(p)=[u_x,u_y]
 $$<p>kjer:</p>
 <ul>
 <li>$U_x$ vsebuje vse vrednosti $u_x$</li>
@@ -2799,11 +3030,17 @@ $$<p>Med:</p>
 <li>itd.</li>
 </ul>
 <hr>
-<p>V praksi pa mi nimamo matrike gibanja — imamo le zaporedje slik. Matriko gibanja ocenimo s pomočjo <strong>optičnega toka</strong>, na podlagi zaporedja slik. Optični tok je tehnika, ki temelji na predpostavki, da svetlost gibajočega se objekta ostane konstantna skozi čas.</p>
-<p>Svetlost gibajočega se objekta ostane konstantna skozi čas:</p>
-$$
-I(x,y,t) = I(x + u_x, y + u_y, t+1)
-$$<p>Iz tega sledi, da je popolni odvod po času enak 0:</p>
+
+  <blockquote class="alert-blockquote warning">
+    <p class="alert-heading">
+      Warning
+    </p>
+    <p><p>V praksi pa mi nimamo matrike gibanja — imamo le zaporedje slik $I(x,y,t)$!</p></p>
+  </blockquote>
+
+<p>Matriko gibanja ocenimo s pomočjo <strong>optičnega toka</strong>, na podlagi zaporedja slik $I(x,y,t)$. Optični tok je tehnika, ki temelji na predpostavki, da svetlost gibajočega se objekta ostane konstantna skozi čas.</p>
+<p>Svetlost gibajočega se objekta ostane konstantna skozi čas zapišemo s sledečo formulo:</p>
+\[\frac{dI}{dt} = 0\quad \text{oziroma} \quad\left[ I_x, I_y \right][u_x,u_y]^T+ I_t = 0\]<p>Iz tega sledi, da je popolni odvod po času enak 0:</p>
 $$
 \frac{dI}{dt} = 0
 $$<p>Imamo tri parcialne odvode:</p>
@@ -2822,7 +3059,7 @@ $$<p>kjer:</p>
 <li>$I_y = \frac{\partial I}{\partial y}$</li>
 <li>$I_t = \frac{\partial I}{\partial t}$</li>
 </ul>
-<p>Parcialna odvoda $I_x$ in $I_y$ predstavljata robove slike.</p>
+<p>Parcialna prostorska odvoda $I_x$ in $I_y$ predstavljata robove slike. Parcialni odvod $I_t$ pa predstavlja odvod po času.</p>
 <hr>
 <p>Imamo skupaj:</p>
 <ul>
@@ -2841,9 +3078,9 @@ $$
 \mathbf{u} = (u_x, u_y)
 $$<p>Zaradi tega dobimo več enačb za isti dve neznanki.</p>
 <hr>
-<h4 id="oblikovanje-sistema-enačb">
-<a class="header-anchor" href="#oblikovanje-sistema-ena%c4%8db"></a>
-Oblikovanje sistema enačb
+<h4 id="oblikovanje-sistema-enačb---kako-določimo-vektor-premika--za-en-piksel">
+<a class="header-anchor" href="#oblikovanje-sistema-ena%c4%8db---kako-dolo%c4%8dimo-vektor-premika--za-en-piksel"></a>
+Oblikovanje sistema enačb - Kako določimo vektor premika $u$ za en piksel?
 </h4><h5 id="korak-1-izberemo-okolico">
 <a class="header-anchor" href="#korak-1-izberemo-okolico"></a>
 Korak 1: Izberemo okolico
@@ -2866,10 +3103,10 @@ Korak 3: Matrika A
 $$
 A =
 \begin{bmatrix}
-I_{x1} & I_{y1} \\
-I_{x2} & I_{y2} \\
+I_{x}(p_1) & I_{y}(p_1) \\
+I_{x}(p_2) & I_{y}(p_2) \\
 \vdots & \vdots \\
-I_{xq} & I_{yq}
+I_{x}(p_Q) & I_{y}(p_Q)
 \end{bmatrix}
 $$<p>Če imamo okolico 3×3:</p>
 <ul>
@@ -2885,10 +3122,10 @@ Korak 4: Stolpec b
 $$
 b =
 \begin{bmatrix}
-I_{t1} \\
-I_{t2} \\
+I_{t}(p_1) \\
+I_{t}(p_2) \\
 \vdots \\
-I_{tq}
+I_{t}(p_Q)
 \end{bmatrix}
 $$<p>Od trenutnega piksla odštejemo istoležni piksel na prejšnji sliki — to je ocena parcialnega odvoda za naš piksel.</p>
 <hr>
@@ -5532,10 +5769,10 @@ Energija kvantizacijskega šuma
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;23.4k</span
+          >&nbsp;25.5k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;01:51</span>
+        <span class="icon-coffee">&nbsp;02:01</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -5766,7 +6003,7 @@ Energija kvantizacijskega šuma
           author: "PrincessSarmica",
           title: "Uvod v računalniški vid in razpoznavanje vzorcev",
           url: "https:\/\/example.org\/post\/urvrv\/",
-          description: "Zapiski za predmet Uvod v računalniški vid in razpoznavanje vzorcev za zimski semester tretjega letnika FERI RIT UNI, ki zajemajo osnovne koncepte računalniškega vida, obdelavo slik, prepoznavanje vzorcev ter uvod v strojno učenje za analizo vizualnih podatkov.",
+          description: "Zapiski za predmet Uvod v računalniški vid in razpoznavanje vzorcev za zimski semester tretjega letnika FERI RIT UNI.",
           cover: "https:\/\/example.org\/images\/banner.webp",
         };
       </script><script src="/js/insert_highlight.js" integrity="" crossorigin="anonymous" data-pjax ></script><script src="/js/tabs.js" integrity="" crossorigin="anonymous" data-pjax defer></script><script type="module" data-pjax>const PhotoSwipeLightbox = (await safeImport("https:\/\/npm.webcache.cn\/photoswipe@5.4.4\/dist\/photoswipe-lightbox.esm.min.js", "sha384-DiL6M\/gG\u002bwmTxmCRZyD1zee6lIhawn5TGvED0FOh7fXcN9B0aZ9dexSF\/N6lrZi\/")).default;const initPswp = (gallery, children) => {
