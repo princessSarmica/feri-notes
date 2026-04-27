@@ -3143,7 +3143,15 @@ $$
 \mathbf{u} = (A^T A)^{-1} A^T (-b)
 $$
 
-To je rešitev v smislu najmanjših kvadratov.
+To je rešitev v smislu najmanjših kvadratov. Sistem je torej:
+
+\[\mathbf{u}=\begin{bmatrix}u_x \\u_y\end{bmatrix}=-A^{-g} \mathbf{b}\]
+
+kjer je
+
+\[
+A^{-g} = (A^T A)^{-1} A^T
+\]
 
 Za vsak piksel posebej moramo:
 

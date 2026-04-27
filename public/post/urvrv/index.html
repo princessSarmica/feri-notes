@@ -50,7 +50,7 @@
     href="https://npm.webcache.cn/@fortawesome/fontawesome-free@7.1.0/css/v4-font-face.min.css"
     integrity="sha384-UlkrhOIvZxJFd4MElSUp7ow6/RUeYKi/orfCZIRRiOENFuQPIAA3T3HjYfmBRhNq" crossorigin="anonymous"
     onload="this.onload=null;this.rel='stylesheet'"
-  /><link rel="stylesheet" href="/css/loader.min.5f50bd060406585b5ccb2925f34199b27ecafe338509590da24ab1d72bd8ae51.css" /><meta property="og:type" content="website" />
+  /><link rel="stylesheet" href="/css/loader.min.ac746e154f756f8220326eeb52a719f142ab038be5a8ddf30ea5ef15ef2356ea.css" /><meta property="og:type" content="website" />
   <meta property="og:title" content="Uvod v računalniški vid in razpoznavanje vzorcev | PrincessSarmica" />
   <meta
     property="og:description"
@@ -3145,8 +3145,11 @@ u_y
 $$<p>Tu imamo problem da imamo inverz matrike, ki obstaja samo za kvadratne matrike. Matrika $A$ ni kvadratna (npr. 9×2), zato ne moremo izračunati klasičnega inverza. Zato uporabimo <strong>psevdoinverz</strong>:</p>
 $$
 \mathbf{u} = (A^T A)^{-1} A^T (-b)
-$$<p>To je rešitev v smislu najmanjših kvadratov.</p>
-<p>Za vsak piksel posebej moramo:</p>
+$$<p>To je rešitev v smislu najmanjših kvadratov. Sistem je torej:</p>
+\[\mathbf{u}=\begin{bmatrix}u_x \\u_y\end{bmatrix}=-A^{-g} \mathbf{b}\]<p>kjer je</p>
+\[
+A^{-g} = (A^T A)^{-1} A^T
+\]<p>Za vsak piksel posebej moramo:</p>
 <ul>
 <li>določiti matriko $A$</li>
 <li>določiti stolpec $b$</li>
