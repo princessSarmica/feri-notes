@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Feri Notes</title>
-    <link>http://localhost:1313/</link>
+    <link>https://example.org/</link>
     <description>Recent content from Feri Notes</description>
     <generator>Hugo</generator>
     <language>sl-si</language>
@@ -15,7 +15,7 @@
     <lastBuildDate>Tue, 03 Feb 2026 07:07:07 +0100</lastBuildDate>
     
     
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss&#43;xml" />
+    <atom:link href="https://example.org/index.xml" rel="self" type="application/rss&#43;xml" />
     
 
     
@@ -23,16 +23,16 @@
 
     <item>
       <title>Uvod v računalniški vid in razpoznavanje vzorcev</title>
-      <link>http://localhost:1313/post/urvrv/</link>
+      <link>https://example.org/post/urvrv/</link>
       <pubDate>Tue, 03 Feb 2026 07:07:07 &#43;0100</pubDate>
       <author>xxx@example.com (PrincessSarmica)</author>
-      <guid>http://localhost:1313/post/urvrv/</guid>
+      <guid>https://example.org/post/urvrv/</guid>
       <description>
         <![CDATA[<h1>Uvod v računalniški vid in razpoznavanje vzorcev</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
         
           Zapiski za predmet Uvod v računalniški vid in razpoznavanje vzorcev za zimski semester tretjega letnika FERI RIT UNI.
         
-        <hr><p>Published on 2026-02-03 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2026-02-03</p>]]>
+        <hr><p>Published on 2026-02-03 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2026-02-03</p>]]>
       </description>
       
     </item>
@@ -41,16 +41,16 @@
 
     <item>
       <title>Sistemska administracija</title>
-      <link>http://localhost:1313/post/sa/</link>
+      <link>https://example.org/post/sa/</link>
       <pubDate>Tue, 03 Feb 2026 07:07:07 &#43;0100</pubDate>
       <author>xxx@example.com (PrincessSarmica)</author>
-      <guid>http://localhost:1313/post/sa/</guid>
+      <guid>https://example.org/post/sa/</guid>
       <description>
         <![CDATA[<h1>Sistemska administracija</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
         
           Zapiski za predmet Sistemska administracija za poletni semester drugega letnika FERI RIT UNI.
         
-        <hr><p>Published on 2026-02-03 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2026-02-03</p>]]>
+        <hr><p>Published on 2026-02-03 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2026-02-03</p>]]>
       </description>
       
     </item>
@@ -59,16 +59,16 @@
 
     <item>
       <title>Programiranje 2</title>
-      <link>http://localhost:1313/post/programiranje2/</link>
+      <link>https://example.org/post/programiranje2/</link>
       <pubDate>Tue, 03 Feb 2026 07:07:07 &#43;0100</pubDate>
       <author>xxx@example.com (PrincessSarmica)</author>
-      <guid>http://localhost:1313/post/programiranje2/</guid>
+      <guid>https://example.org/post/programiranje2/</guid>
       <description>
         <![CDATA[<h1>Programiranje 2</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
         
           Zapiski za predmet Programiranje 2 za poletni semester prvega letnika FERI RIT UNI.
         
-        <hr><p>Published on 2026-02-03 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2026-02-03</p>]]>
+        <hr><p>Published on 2026-02-03 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2026-02-03</p>]]>
       </description>
       
     </item>
@@ -77,16 +77,16 @@
 
     <item>
       <title>Hello World</title>
-      <link>http://localhost:1313/post/hello/</link>
+      <link>https://example.org/post/hello/</link>
       <pubDate>Wed, 15 Mar 2023 11:00:00 -0700</pubDate>
       <author>xxx@example.com (PrincessSarmica)</author>
-      <guid>http://localhost:1313/post/hello/</guid>
+      <guid>https://example.org/post/hello/</guid>
       <description>
         <![CDATA[<h1>Hello World</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
         
           <p>💘 博麗 霊夢 💘</p>
         
-        <hr><p>Published on 2023-03-15 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2023-03-15</p>]]>
+        <hr><p>Published on 2023-03-15 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2023-03-15</p>]]>
       </description>
       
     </item>
