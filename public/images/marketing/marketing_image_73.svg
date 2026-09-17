@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 790 380" width="790" height="380">
+  <line x1="395.0" y1="105.0" x2="395.0" y2="150.0" stroke="#333333" stroke-width="1.5"/>
+  <line x1="395.0" y1="230.0" x2="395.0" y2="275.0" stroke="#333333" stroke-width="1.5"/>
+  <line x1="255.0" y1="190.0" x2="280.0" y2="190.0" stroke="#333333" stroke-width="1.5"/>
+  <line x1="510.0" y1="190.0" x2="535.0" y2="190.0" stroke="#333333" stroke-width="1.5"/>
+  <rect x="280.0" y="25.0" width="230" height="80" rx="6" fill="#ECECFF" stroke="#9370DB" stroke-width="1.5"/>
+  <text x="395.0" y="59.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="15" font-weight="700" fill="#333333">e) Potencialni ponudniki</text>
+  <text x="395.0" y="81.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="14" fill="#333333">(nevarnost vstopa)</text>
+  <rect x="25.0" y="150.0" width="230" height="80" rx="6" fill="#ECECFF" stroke="#9370DB" stroke-width="1.5"/>
+  <text x="140.0" y="184.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="15" font-weight="700" fill="#333333">d) Dobavitelji</text>
+  <text x="140.0" y="206.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="14" fill="#333333">(moč dobaviteljev)</text>
+  <rect x="280.0" y="150.0" width="230" height="80" rx="6" fill="#ECECFF" stroke="#9370DB" stroke-width="1.5"/>
+  <text x="395.0" y="184.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="15" font-weight="700" fill="#333333">a) Konkurenti v panogi</text>
+  <text x="395.0" y="206.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="14" fill="#333333">(tekmovanje)</text>
+  <rect x="535.0" y="150.0" width="230" height="80" rx="6" fill="#ECECFF" stroke="#9370DB" stroke-width="1.5"/>
+  <text x="650.0" y="184.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="15" font-weight="700" fill="#333333">c) Kupci</text>
+  <text x="650.0" y="206.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="14" fill="#333333">(moč kupcev)</text>
+  <rect x="280.0" y="275.0" width="230" height="80" rx="6" fill="#ECECFF" stroke="#9370DB" stroke-width="1.5"/>
+  <text x="395.0" y="309.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="15" font-weight="700" fill="#333333">b) Nadomestki</text>
+  <text x="395.0" y="331.0" text-anchor="middle" font-family='"trebuchet ms", verdana, arial, sans-serif' font-size="14" fill="#333333">(nevarnost substitutov)</text>
+</svg>
