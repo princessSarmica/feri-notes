@@ -204,7 +204,9 @@ Osrednji cilj socialnega marketinga je (ustvarjati) "družbeno dobro".
 
 Izhajajoč iz spoznanja, da zgolj informiranje posameznikov/družbenih skupin o določenih družbenih vedenjih ne zadostuje, da bi slednji/e pričeli/e ta spreminjati, začne socialni marketing uporabljati orodja in izsledke s področja **socialne psihologije**, in sicer z namenom odkrivanja zaznanih ovir pri spreminjanju vedenja in načinov njihovega premagovanja.
 
-Primeri: oglasi za vedenje na avtocestah, varna vožnja, oglasi proti kajenju…
+> **Primeri**
+>
+> Oglasi za vedenje na avtocestah, varna vožnja, oglasi proti kajenju…
 
 Gre za družbeno dobro. Gre za spodbujanje družbenih sprememb. Angleško je to *social marketing*. Zajema celoto marketinških aktivnosti, naravnanih predvsem na družbeno koristne namene in ne na pridobivanje denarja in finančnih sredstev. Izvira iz socialne psihologije. Teži k spreminjanju naših navad, da bi te navade spremenili.
 
@@ -364,8 +366,9 @@ Struktura marketinškega okolja (od najožjega do najširšega): organizacija (m
 
 **Intenziteta** - spremembe številnih področij. To so lahko socialna, ekonomska, politična, način življenja itd.
 
-**Primer**  
-Klimatske spremembe - moč, intenziteta, daljše časovno obdobje itd. Npr. bolj vroča poletja, gladina morja se dviga, izumrtje živalskih vrst, razvoj tehnologije, potrošnja - to vse sodi k megatrendom.
+> **Primer**
+>
+> Klimatske spremembe - moč, intenziteta, daljše časovno obdobje itd. Npr. bolj vroča poletja, gladina morja se dviga, izumrtje živalskih vrst, razvoj tehnologije, potrošnja - to vse sodi k megatrendom.
 
 **Kakšni so trenutni megatrendi?**
 
@@ -430,10 +433,10 @@ Zakaj je demografsko področje pomembno v marketingu? Da lahko segmentiramo ljud
 
 **Imena, SURS (2022):** najpogostejše ime novorojencev Luka, najpogostejše ime novorojenk Mia, najpogostejše moško ime Franc, najpogostejše žensko ime Marija, najpogostejši priimek Novak.
 
-**Primera:**
-
-- Za organizacije s področja turizma, ki imajo probleme s sezonskimi nihanji povpraševanja kupcev, predstavlja naraščanje deleža starejših ljudi v sestavi prebivalstva ugodno možnost za usklajevanje razlik med ponudbo in povpraševanjem, ki so značilne za to panogo. Z ustrezno ponudbo bi lahko v izvensezonskih razdobjih pritegnili omenjeni segment prebivalstva.
-- V razvitih državah je značilen trend povečevanja števila samskih gospodinjstev, kar ima posledice na področju marketinga izdelkov, ki so prilagojeni tem gospodinjstvom (pomivalni stroji, dostava hrane na dom,…).
+> **Primera**
+>
+> - Za organizacije s področja turizma, ki imajo probleme s sezonskimi nihanji povpraševanja kupcev, predstavlja naraščanje deleža starejših ljudi v sestavi prebivalstva ugodno možnost za usklajevanje razlik med ponudbo in povpraševanjem, ki so značilne za to panogo. Z ustrezno ponudbo bi lahko v izvensezonskih razdobjih pritegnili omenjeni segment prebivalstva.
+> - V razvitih državah je značilen trend povečevanja števila samskih gospodinjstev, kar ima posledice na področju marketinga izdelkov, ki so prilagojeni tem gospodinjstvom (pomivalni stroji, dostava hrane na dom,…).
 
 Zakaj ima turizem problem s sezonskimi nihanji? Zaradi dogodkov, počitnic, letnih časov, vremena. Ker prihaja do staranja prebivalstva, bi bilo smiselno več akcij za starostnike.
 
@@ -462,7 +465,9 @@ Sem sodijo tudi različne organizacije, na katere organizacija - izvajalec marke
 
 Pomembne so vrednote in način življenja. To okolje se nanaša na odnose med ljudmi, pri katerih se kultura udejanja preko nekega znanja, kulturnih vrednot, idej, norm, umetnosti, navade tudi sodijo sem.
 
-Primeri: države z različnimi verami - drugačne navade so v državah s krščansko vero, v državah z budistično vero. Različna gibanja za zaščito potrošnikov.
+> **Primeri**
+>
+> Države z različnimi verami - drugačne navade so v državah s krščansko vero, v državah z budistično vero. Različna gibanja za zaščito potrošnikov.
 
 ### 4. Naravno okolje
 
@@ -480,10 +485,11 @@ Vključuje stanja gibanja in organizacije, ki pa se nanašajo na naravne razsež
 - Viri, ki so v naravi v omejenih količinah, vendar jih je možno obnavljati, npr. rodovitna zemlja, hrana itd.
 - Viri, ki so v omejenih in neobnovljivih količinah - nafta, premog, zemeljski plin in razna rudna bogastva.
 
-**Primer**  
-Radenska - da moramo na stvari gledati s srcem (*"Tvoje srce vidi, česar oči ne."* - Radenska za jutri). Ciljali so na ljudi, katerim je pomembno okoljevarstvo in obnovitveni projekti.
-
-![Radenska - "Tvoje srce vidi, česar oči ne."](/images/marketing/marketing_image_35.webp)
+> **Primer**
+>
+> Radenska - da moramo na stvari gledati s srcem (*"Tvoje srce vidi, česar oči ne."* - Radenska za jutri). Ciljali so na ljudi, katerim je pomembno okoljevarstvo in obnovitveni projekti.
+>
+> ![Radenska - "Tvoje srce vidi, česar oči ne."](/images/marketing/marketing_image_35.webp)
 
 ### 5. Tehnološko okolje
 
@@ -722,12 +728,13 @@ Organizacija se v poslovanju običajno srečuje z drugimi organizacijami, ki men
 
 Za podjetja so največji konkurenti druga podjetja, ki želijo zadovoljiti potrebe istih kupcev in imajo tudi podobno ponudbo.
 
-**Primer:**
-Luka je v soglasju z občino Maribor in ostalimi pristojnimi organizacijami postavil kiosk, kjer prodaja hamburgerje, Coca Colo in vodo. Kiosku je dal ime Hambi. Primarna ciljna skupina so dijaki srednješolskega centra. Pojavi se Andrej, ki redno hodi mimo. On je imel idejo, da bi prodajal na triciklu hotdoge in pijačo. Ko prodaja Andrej hotdoge po Taboru, so njegova ciljna publika osnovnošolci in ne dijaki. Nista konkurenta, ker imata drugo ciljno skupino, kljub temu, da imata podobne izdelke in kljub temu, da zadovoljujete zelo podobne potrebe, nista konkurenta.
-
-Če se Andrej postavi pred srednješolskim centrom in tam na triciklu prodaja izdelke? Takrat sta konkurenta s podobno stopnjo konkuriranja.
-
-Jure pa na Ptuju pred srednješolskim centrom postavi kiosk isto kot Luka, z imenom Hambi, kjer prodaja prav tako hamburgerje. Sta konkurenta? Nista konkurenta, ker imata po geografskem kriteriju popolnoma drugačno ciljno skupino. Srednješolci s Ptuja ne bodo hodili v Maribor po hrano in pijačo. Po geografskem kriteriju imata drugačno ciljno skupino in nista konkurenta.
+> **Primer**
+>
+> Luka je v soglasju z občino Maribor in ostalimi pristojnimi organizacijami postavil kiosk, kjer prodaja hamburgerje, Coca Colo in vodo. Kiosku je dal ime Hambi. Primarna ciljna skupina so dijaki srednješolskega centra. Pojavi se Andrej, ki redno hodi mimo. On je imel idejo, da bi prodajal na triciklu hotdoge in pijačo. Ko prodaja Andrej hotdoge po Taboru, so njegova ciljna publika osnovnošolci in ne dijaki. Nista konkurenta, ker imata drugo ciljno skupino, kljub temu, da imata podobne izdelke in kljub temu, da zadovoljujete zelo podobne potrebe, nista konkurenta.
+>
+> Če se Andrej postavi pred srednješolskim centrom in tam na triciklu prodaja izdelke? Takrat sta konkurenta s podobno stopnjo konkuriranja.
+>
+> Jure pa na Ptuju pred srednješolskim centrom postavi kiosk isto kot Luka, z imenom Hambi, kjer prodaja prav tako hamburgerje. Sta konkurenta? Nista konkurenta, ker imata po geografskem kriteriju popolnoma drugačno ciljno skupino. Srednješolci s Ptuja ne bodo hodili v Maribor po hrano in pijačo. Po geografskem kriteriju imata drugačno ciljno skupino in nista konkurenta.
 
 ### Trikotnik strateškega marketinga
 
@@ -842,9 +849,13 @@ Gre za enačenje konkurence s tržno strukturo.
 - **Posredna konkurenca**
 - **Neposredna konkurenca**
 
-**Primer:** Picerija posredno tekmuje s prodajalno ocvrtih piščancev, neposredno pa tekmuje z neko konkurenčno picerijo.
+> **Primer**
+>
+> Picerija posredno tekmuje s prodajalno ocvrtih piščancev, neposredno pa tekmuje z neko konkurenčno picerijo.
 
-**Primer:** Coca Cola in Pepsi sta si neposredna konkurenta.
+> **Primer**
+>
+> Coca Cola in Pepsi sta si neposredna konkurenta.
 
 ### Prepoznavanje konkurentov
 
@@ -873,23 +884,23 @@ Hipotetična tržna struktura panoge:
 
 **Nišarji** - iščejo neke tržne niše, ki so za večje nezanimive, so pa dovolj velike, da se jim vseeno izplača, da so dovolj donosni za nišarje. Tržne niše imajo možnost nadaljnje rasti.
 
-**Primer: identifikacija vlog med mobilnimi operaterji**
-
-| Operater | Tržni delež (Q4, 2021; v %) |
-| --- | --- |
-| Telekom | 33,7 |
-| Telemach | 27,2 |
-| T-2 | 19,6 |
-| A-1 | 11,7 |
-| Ostali | 7,8 |
-
-*(Vir: AKOS, 2021)*
-
-- Telekom - tržni vodja
-- Telemach - izzivalec
-- T2 - sledilec
-- A1 - sledilec/tržni nišar
-- Ostali - tržni nišarji
+> **Primer: identifikacija vlog med mobilnimi operaterji**
+>
+> | Operater | Tržni delež (Q4, 2021; v %) |
+> | --- | --- |
+> | Telekom | 33,7 |
+> | Telemach | 27,2 |
+> | T-2 | 19,6 |
+> | A-1 | 11,7 |
+> | Ostali | 7,8 |
+>
+> *(Vir: AKOS, 2021)*
+>
+> - Telekom - tržni vodja
+> - Telemach - izzivalec
+> - T2 - sledilec
+> - A1 - sledilec/tržni nišar
+> - Ostali - tržni nišarji
 
 ### Pomen sodelovanja s konkurenti
 
@@ -1030,7 +1041,9 @@ Npr. avtomobili, računalniki, skeniranje telesa, individualna psihoterapija ...
 
 **Mikrotrženje** - gre za majhno skupino, ki išče točno določene značilnosti proizvoda. Iščejo točno določene lastnosti nekega proizvoda npr. si želijo izjemno kakovost, kake posebne storitve, dostavo na dom itd. Gre za mikrotrženje in gre za popolno prilagajanje potrošnikov. Kupci so tu pripravljeni plačati bistveno več, tudi višjo ceno. Zaradi manjšega obsega so višji stroški. Gre za manjše število konkurentov, število konkurentov ni veliko. Pomembno, da lahko govorimo o možnosti specializacije, s čimer postane boljše od drugih in ima konkurenčno prednost.
 
-Primer mikrotrženja: pasji saloni, estetske storitve, kozmetične storitve.
+> **Primer mikrotrženja**
+>
+> Pasji saloni, estetske storitve, kozmetične storitve.
 
 #### Mikrotrženje: pasti čezmerne izbire
 
@@ -1067,23 +1080,27 @@ Spol, starost, življenjski cikel družine (mlad, sam, poročen, brez otrok ...)
 
 Osebnost je lahko zadržana, družabna, ambiciozna. To je pomembno, ker osebnost lahko enačimo z osebnostjo blagovne znamke. Npr. kakšna ura je za takšne in takšne ženske. Način življenja - razgiban, športen itd. Zajema: družbeni sloj, življenjski slog, osebnost, vrednote, način življenja ...
 
-**Primer: LEVI'S** - kupci bi naj bili tradicionalisti, neodvisneži, cenovno občutljivi.
+> **Primer: LEVI'S**
+>
+> Kupci bi naj bili tradicionalisti, neodvisneži, cenovno občutljivi.
 
-**Primer: psihografske značilnosti kupcev kavbojk Levi's** - klasični neodvisnež, tradicionalist, cenovno občutljiv, 'casual' (sproščen).
+> **Primer: psihografske značilnosti kupcev kavbojk Levi's**
+>
+> Klasični neodvisnež, tradicionalist, cenovno občutljiv, 'casual' (sproščen).
 
-**Primer: psihografske značilnosti voznikov** (ločili na pet možnosti, glede na to, na koga ciljajo, prilagodijo marketing):
+> **Primer: psihografske značilnosti voznikov** (ločili na pet možnosti, glede na to, na koga ciljajo, prilagodijo marketing)
+>
+> - **Navdušenci** (17 %) - malo vedo, a jih zanima, ogledajo si veliko modelov, radi kupujejo inovativna vozila.
+> - **Avtomobilski poznavalci** (26 %) - poznajo avtomobile, se zanimajo, se radi pogovarjajo, kupujejo prestižne avtomobile.
+> - **Motoristi** (16 %) - tehnično podkovani, natančno sprejemajo nakupne odločitve.
+> - **Pragmatiki** (19 %) - avtomobili jih ne zanimajo, nimajo znanja in ne uživajo v izbiri.
+> - **Plašni uporabniki** (22 %) - ne vedo veliko o avtomobilih, so lojalni blagovni znamki, avtomobili so zanje bolj ali manj podobni, lastniki manjših vozil.
 
-- **Navdušenci** (17 %) - malo vedo, a jih zanima, ogledajo si veliko modelov, radi kupujejo inovativna vozila.
-- **Avtomobilski poznavalci** (26 %) - poznajo avtomobile, se zanimajo, se radi pogovarjajo, kupujejo prestižne avtomobile.
-- **Motoristi** (16 %) - tehnično podkovani, natančno sprejemajo nakupne odločitve.
-- **Pragmatiki** (19 %) - avtomobili jih ne zanimajo, nimajo znanja in ne uživajo v izbiri.
-- **Plašni uporabniki** (22 %) - ne vedo veliko o avtomobilih, so lojalni blagovni znamki, avtomobili so zanje bolj ali manj podobni, lastniki manjših vozil.
-
-**Primer: psihografske značilnosti kupcev sladoledov** (obstajajo tri vrste kupcev):
-
-- **Mlečkoti** (22 %) - oboževalci mlečnih sladoledov, nezainteresiranost za certifikate, ne obremenjujejo se s količino dodanega sladkorja, vsebnostjo aditivov, sladoled konzumirajo brez slabe vesti, nenaklonjeni sadnim sladoledom.
-- **Centkoti** (35 %) - so najbolj cenovno občutljivi, priložnostni jedci sladoleda, večinoma jedo sladoled na počitnicah, menijo, da so mlečni sladoledi boljšega okusa kot naravne, bolj zdrave alternative.
-- **Zdravkoti** (43 %) - preferirajo sadne sladolede, iščejo izdelke z nizko vsebnostjo sladkorja in drugih aditivov, iščejo naravne, lokalne in zdrave izdelke, velik pomen dajejo certifikatom, za kakovosten in naraven izdelek so pripravljeni odšteti več denarja, zdrav in aktiven življenjski slog, sladoled pripravijo tudi sami, zanima jih zgodba blagovne znamke, o izdelkih se radi prepričajo na spletu.
+> **Primer: psihografske značilnosti kupcev sladoledov** (obstajajo tri vrste kupcev)
+>
+> - **Mlečkoti** (22 %) - oboževalci mlečnih sladoledov, nezainteresiranost za certifikate, ne obremenjujejo se s količino dodanega sladkorja, vsebnostjo aditivov, sladoled konzumirajo brez slabe vesti, nenaklonjeni sadnim sladoledom.
+> - **Centkoti** (35 %) - so najbolj cenovno občutljivi, priložnostni jedci sladoleda, večinoma jedo sladoled na počitnicah, menijo, da so mlečni sladoledi boljšega okusa kot naravne, bolj zdrave alternative.
+> - **Zdravkoti** (43 %) - preferirajo sadne sladolede, iščejo izdelke z nizko vsebnostjo sladkorja in drugih aditivov, iščejo naravne, lokalne in zdrave izdelke, velik pomen dajejo certifikatom, za kakovosten in naraven izdelek so pripravljeni odšteti več denarja, zdrav in aktiven življenjski slog, sladoled pripravijo tudi sami, zanima jih zgodba blagovne znamke, o izdelkih se radi prepričajo na spletu.
 
 **Življenjski slog** se nanaša na vzorec potrošnje, ki odseva človekov izbor izrabe časa in denarja, pogosto pa se nanaša tudi na stališča in vrednote, ki se ujemajo s temi vedenjskimi vzorci. V ekonomskem smislu pomeni življenjski slog način izbire alokacije dohodkov. Temelji na statusnem sistemu.
 
@@ -1093,9 +1110,11 @@ Gre za omejen dohodek in omejen čas. Je način, kako posameznik živi, kar vklj
 
 {{< youtube MG2hqD-2lJI >}}
 
-**Primer: Marlboro** - je s svojimi cigareti prvo ciljal ženske. Usmeril se je za preusmeritev k mladim moškim, ker se pri ženskah ni toliko uspel prijeti.
-
-![Marlboro - cigareti, sprva usmerjeni k ženskam, kasneje k mladim moškim](/images/marketing/marketing_image_39.webp)
+> **Primer: Marlboro**
+>
+> Je s svojimi cigareti prvo ciljal ženske. Usmeril se je za preusmeritev k mladim moškim, ker se pri ženskah ni toliko uspel prijeti.
+>
+> ![Marlboro - cigareti, sprva usmerjeni k ženskam, kasneje k mladim moškim](/images/marketing/marketing_image_39.webp)
 
 #### 4. Vedenjska (behavioristična) segmentacija
 
@@ -1154,9 +1173,11 @@ Ciljno trženje lahko povzroča kakšna nasprotovanja, npr. prodaja škodljivih 
 - **Napeljevanje ljudi k pretiranemu nakupovanju**.
 - **Ciljanje na otroke** - to je marsikje že prepovedano, ampak se še zmeraj pojavlja.
 
-**Primer: zavajajoče prikazovanje količine izdelka s pomočjo pretirano velike embalaže** (npr. Herta Finesse - dva videza podobne embalaže z različnima vsebinama, 150 g in 100 g).
-
-![Herta Finesse - zavajajoče prikazovanje količine izdelka](/images/marketing/marketing_image_40.webp)
+> **Primer: zavajajoče prikazovanje količine izdelka s pomočjo pretirano velike embalaže**
+>
+> Npr. Herta Finesse - dva videza podobne embalaže z različnima vsebinama, 150 g in 100 g.
+>
+> ![Herta Finesse - zavajajoče prikazovanje količine izdelka](/images/marketing/marketing_image_40.webp)
 
 ## Pozicioniranje
 
@@ -1213,11 +1234,13 @@ Izbrati moramo lastnost, način, kako se bo naš izdelek, naša storitev od konk
 
 Podjetje mora značilnosti, ki jih poudarja pri pozicioniranju, poleg cene še upoštevati druge dejavnike spletnega marketinga, torej vsi 4P oz. 7P pri storitvah mora biti usklajenih.
 
-**Primer Gorenjka** - "Popolna kot najljubša pesem." **Primer Natureta** - "Naravno okusno" - so poudarjali, da imajo vse naravno.
-
-![Gorenjka - "Popolna kot najljubša pesem."](/images/marketing/marketing_image_41.webp)
-
-![Natureta - "Naravno okusno"](/images/marketing/marketing_image_42.webp)
+> **Primer: Gorenjka in Natureta**
+>
+> Gorenjka - "Popolna kot najljubša pesem." Natureta - "Naravno okusno" - so poudarjali, da imajo vse naravno.
+>
+> ![Gorenjka - "Popolna kot najljubša pesem."](/images/marketing/marketing_image_41.webp)
+>
+> ![Natureta - "Naravno okusno"](/images/marketing/marketing_image_42.webp)
 
 ### Napake pri pozicioniranju
 
@@ -1382,21 +1405,25 @@ Tu bomo govorili o izdelku glede na ravni pričakovanj: **jedro** → **osnovni 
 - **Razširjen izdelek** vključuje razen generičnega in pričakovanega izdelka še sestavine, ki so nad pričakovanji udeležencev v menjavi. Značilnost razširjenega izdelka je diferenciacija. Diferenciacijo lahko dosežemo z omogočanjem lažje uporabe izdelka, dodamo kake okolju prijazne lastnosti itd.
 - **Potencialni izdelek** ali **možen izdelek** vsebuje vse prej omenjene ravni in vse, kar bi izvajalec v marketingu lahko storil, da bi lahko obdržal kupca, da zagotovi nekaj, kar presega pričakovanja kupca. Pri potencialnem izdelku lahko pride do omejitev npr. zakonodaja, vrednote, finance, znanje.
 
-**Primer: hotel** - Hotel ima v jedru spanje, počitek. Osnovni izdelek ponudi posteljo, omaro. Naš pričakovan izdelek pa ponuja še televizijo in wifi. Lahko pa hotel ponudi razširjen izdelek, kar pomeni, da vključuje dodatno poleg še wellness, fitnes itd. Potencialni izdelek pa je npr. ko hotel obiskujejo neke stalne stranke in hotel za njih še dodatno personalizira izkušnjo.
+> **Primer: hotel**
+>
+> Hotel ima v jedru spanje, počitek. Osnovni izdelek ponudi posteljo, omaro. Naš pričakovan izdelek pa ponuja še televizijo in wifi. Lahko pa hotel ponudi razširjen izdelek, kar pomeni, da vključuje dodatno poleg še wellness, fitnes itd. Potencialni izdelek pa je npr. ko hotel obiskujejo neke stalne stranke in hotel za njih še dodatno personalizira izkušnjo.
+>
+> - **jedro (udobje)**: relativen mir
+> - **osnovni izdelek**: postelja, kopalnica, brisače, omara
+> - **pričakovani izdelek**: sveža posteljnina, sveže brisače, televizija, delujoč wifi, delujoč telefon
+> - **razširjeni izdelek (zabava)**: fitnes center, wellness center, bazen, sejna soba/kongresna dvorana
+> - **potencialni izdelek**: popolna personalizacija nočitve, dolgoročnejše bivanje (polna storitev)
 
-- **jedro (udobje)**: relativen mir
-- **osnovni izdelek**: postelja, kopalnica, brisače, omara
-- **pričakovani izdelek**: sveža posteljnina, sveže brisače, televizija, delujoč wifi, delujoč telefon
-- **razširjeni izdelek (zabava)**: fitnes center, wellness center, bazen, sejna soba/kongresna dvorana
-- **potencialni izdelek**: popolna personalizacija nočitve, dolgoročnejše bivanje (polna storitev)
-
-**Drugi primer izdelka: avto** - Jedro avta je prevoz, da se premaknemo iz lokacije A na lokacijo B. Osnovni izdelek so kolesa, luči, sedeži, motor. Pričakovan izdelek je pa še garancija, varnost itd. Razširjen izdelek pa je tak, ki ima gretje sedežev. Potencialni izdelek pa je npr. pameten avtomobil z AI:
-
-- **jedro (prevoz > premakniti se iz točke A do B)**
-- **osnovni izdelek**: motor, karoserija, zavorni sistem, sedeži, luči, okna, kolesa, pnevmatike
-- **pričakovani izdelek**: delujoče vozilo, varnost, garancija, servis, različne možnosti financiranja
-- **razširjeni izdelek**: pametni avtomobili (napredni sistemi, kot so sistemi za preprečevanje trkov, sledenje poteku cestnih pasov, prepoznavo prometnih znakov, satelitska navigacija, funkcije za digitalno zabavo)
-- **potencialni izdelek**: izpopolnjeno pametni avtomobili (nadgradnja > samodejna priprava na vožnjo), popolnoma avtonomna/samodejna vožnja
+> **Drugi primer izdelka: avto**
+>
+> Jedro avta je prevoz, da se premaknemo iz lokacije A na lokacijo B. Osnovni izdelek so kolesa, luči, sedeži, motor. Pričakovan izdelek je pa še garancija, varnost itd. Razširjen izdelek pa je tak, ki ima gretje sedežev. Potencialni izdelek pa je npr. pameten avtomobil z AI:
+>
+> - **jedro (prevoz > premakniti se iz točke A do B)**
+> - **osnovni izdelek**: motor, karoserija, zavorni sistem, sedeži, luči, okna, kolesa, pnevmatike
+> - **pričakovani izdelek**: delujoče vozilo, varnost, garancija, servis, različne možnosti financiranja
+> - **razširjeni izdelek**: pametni avtomobili (napredni sistemi, kot so sistemi za preprečevanje trkov, sledenje poteku cestnih pasov, prepoznavo prometnih znakov, satelitska navigacija, funkcije za digitalno zabavo)
+> - **potencialni izdelek**: izpopolnjeno pametni avtomobili (nadgradnja > samodejna priprava na vožnjo), popolnoma avtonomna/samodejna vožnja
 
 ### Izdelčni splet
 
@@ -1427,21 +1454,33 @@ Ožji asortiment je npr. Barcaffe. Ima nizke stroške na enoto izdelka. To je en
 
 Če gre za širši asortiment, podjetje npr. Michael Kors prodaja oblačila, nakit, torbice. Njihova širina je bistveno večja. Niso odvisni od tržnih dogajanj, lahko več prodajo, ker imajo več ciljnih skupin in lažje zadovoljijo potrebe najrazličnejših strank. Slabosti so pa višji stroški, kot pri ožjem asortimentu. Imajo tudi manjše možnosti financiranja.
 
-**Primer širine asortimenta: Gorenjev program** - štedilniki, nape, mikrovalovne pečice, pralni stroji, pomivalni stroji, sušilni stroji ... Je eno vodilnih slovenskih podjetij, ki se ukvarja s prodajo štedilnikov, nap, klim, pralnih strojev. Njihova širina je izredno široka.
+> **Primer širine asortimenta: Gorenjev program**
+>
+> Štedilniki, nape, mikrovalovne pečice, pralni stroji, pomivalni stroji, sušilni stroji ... Je eno vodilnih slovenskih podjetij, ki se ukvarja s prodajo štedilnikov, nap, klim, pralnih strojev. Njihova širina je izredno široka.
 
-**Primer dolžine asortimenta: Gorenjev program pralnih strojev** - pralno-sušilni stroj, s Swarovski kamenčki itd. Dolžina se nanaša na število različic znotraj posamezne proizvodnje ali produktne linije. Nanaša se na število variant izdelkov, ki jih podjetje ponuja v okviru ene linije. Recimo Gorenjev program pralnih strojev. Imamo pralne sušilne stroje in swarovske keramične. Imamo tudi osnovne hladilnike, mini hladilnike, ameriške hladilnike. Vzamemo eno produktno linijo in jo razdelimo.
+> **Primer dolžine asortimenta: Gorenjev program pralnih strojev**
+>
+> Pralno-sušilni stroj, s Swarovski kamenčki itd. Dolžina se nanaša na število različic znotraj posamezne proizvodnje ali produktne linije. Nanaša se na število variant izdelkov, ki jih podjetje ponuja v okviru ene linije. Recimo Gorenjev program pralnih strojev. Imamo pralne sušilne stroje in swarovske keramične. Imamo tudi osnovne hladilnike, mini hladilnike, ameriške hladilnike. Vzamemo eno produktno linijo in jo razdelimo.
 
-**Primer globine asortimenta: Gorenjev program pralnih strojev** - pralni stroji 6 kg, pralni stroji 5 kg, pralni stroji 3 kg ... Globina je tretja dimenzija in se nanaša na število različic odznotraj neke določene produktne linije. Osredotoča se na različne modele, različne specifikacije, znotraj enega tipa izdelka. To je lahko velikost, barva, energetska učinkovitost itd. Hladilniki npr. glede na dizajn so lahko beli hladilniki, imajo inox modele in retro linijo. Gorenjev program pralnih strojev so npr. treh nivojev do 3 kg, do 6 kg itd.
+> **Primer globine asortimenta: Gorenjev program pralnih strojev**
+>
+> Pralni stroji 6 kg, pralni stroji 5 kg, pralni stroji 3 kg ... Globina je tretja dimenzija in se nanaša na število različic odznotraj neke določene produktne linije. Osredotoča se na različne modele, različne specifikacije, znotraj enega tipa izdelka. To je lahko velikost, barva, energetska učinkovitost itd. Hladilniki npr. glede na dizajn so lahko beli hladilniki, imajo inox modele in retro linijo. Gorenjev program pralnih strojev so npr. treh nivojev do 3 kg, do 6 kg itd.
 
-**Primer: Natureta** - Širina izdelčnega spleta Natureta: 12 (vložena zelenjava, pripravljene jedi, omake, paradižnik za kuho, džemi in marmelade, kompoti, kisi, riži, priloge in dodatki, zamrznjeni izdelki, bio, program HoReCa). 12 vrst izdelkov je širina. Npr. analiziramo eno vrsto teh izdelkov, džeme in marmelade. Ti vsebujejo 14 vrst izdelkov (dolžina linije džemov in marmelad: 14). Potem pa določimo še globino džemov in marmelad, kjer je 5x215g, 5x320g, 4x600g, 1x650g, 1x210g. To pa je globina. Skladnost oz. konsistentnost - ali ima Natureta skladne izdelke med seboj? Več ali manj so.
+> **Primer: Natureta**
+>
+> Širina izdelčnega spleta Natureta: 12 (vložena zelenjava, pripravljene jedi, omake, paradižnik za kuho, džemi in marmelade, kompoti, kisi, riži, priloge in dodatki, zamrznjeni izdelki, bio, program HoReCa). 12 vrst izdelkov je širina. Npr. analiziramo eno vrsto teh izdelkov, džeme in marmelade. Ti vsebujejo 14 vrst izdelkov (dolžina linije džemov in marmelad: 14). Potem pa določimo še globino džemov in marmelad, kjer je 5x215g, 5x320g, 4x600g, 1x650g, 1x210g. To pa je globina. Skladnost oz. konsistentnost - ali ima Natureta skladne izdelke med seboj? Več ali manj so.
 
-**Primer: Dana** - Ima širino izdelkov 7: voda, voda s sokom, sirupi, ledeni čaj, gazirane pijače, alkohol in alkoholno razkužilo. Npr. odločimo se določit dolžino gaziranih pijač, kjer so 3 različne (dolžina linije gazirana pijača: 3, globina linije gazirana pijača: 3x0,5L plastenka). Za ledeni čaj: dolžina linije ledeni čaj: 2, globina linije ledenih čajev: 2x0,5L (plastenka), 1x1,5L (plastenka), 1x0,2L (tetrapak), 1x0,2L (steklenica).
+> **Primer: Dana**
+>
+> Ima širino izdelkov 7: voda, voda s sokom, sirupi, ledeni čaj, gazirane pijače, alkohol in alkoholno razkužilo. Npr. odločimo se določit dolžino gaziranih pijač, kjer so 3 različne (dolžina linije gazirana pijača: 3, globina linije gazirana pijača: 3x0,5L plastenka). Za ledeni čaj: dolžina linije ledeni čaj: 2, globina linije ledenih čajev: 2x0,5L (plastenka), 1x1,5L (plastenka), 1x0,2L (tetrapak), 1x0,2L (steklenica).
 
 *Izziv: Kako bi lahko poglobili linijo gaziranih pijač?* Npr. dodali še pločevinke in tetrapak gaziranih pijač.
 
-**Primer: Barcaffe cappuccino s črno čokolado z manj sladkorja** - kaj je s tem izdelkom naredilo? Dolžino.
-
-![Barcaffè cappuccino s črno čokolado, z manj sladkorja](/images/marketing/marketing_image_46.webp)
+> **Primer: Barcaffe cappuccino s črno čokolado z manj sladkorja**
+>
+> Kaj je s tem izdelkom naredilo? Dolžino.
+>
+> ![Barcaffè cappuccino s črno čokolado, z manj sladkorja](/images/marketing/marketing_image_46.webp)
 
 *Izziv: Opišite storitveni splet Zavarovalnice Sava po širini in dolžini!* (zavarovanje za osebna vozila, mladi voznik, Kasko/Totalka ...)
 
@@ -1470,7 +1509,9 @@ Obstajajo tudi koristi, ki jih težko merimo. Recimo, si kupimo pulover Boss in 
 
 So **psiho-socialne koristi izdelka**, ki ob nakupovanju in uporabljanju izdelka vzročno-posledično delujejo na psiho kupca/uporabnika in na njegov odnos z ostalimi ljudmi.
 
-**Primer**: občutek dobrodelnosti ob predaji oblačil Rdečemu križu ali občutek ozaveščenosti zaradi nakupa kolesa - izdelka, ki je okolju prijazen.
+> **Primer**
+>
+> Občutek dobrodelnosti ob predaji oblačil Rdečemu križu ali občutek ozaveščenosti zaradi nakupa kolesa - izdelka, ki je okolju prijazen.
 
 ## Blagovna znamka
 
@@ -1521,7 +1562,9 @@ Nekaj besedne asociacije z znamko - npr. Disney asociira potrošnike na neko pra
 
 Znamčimo lahko pohištva, okna, vrata itd.
 
-**Primeri oznamčenega blaga** - dobrine za vsakdanjo rabo (kaj vse še lahko (o)znamčimo?): izvirska voda, čaji, banane, rezano cvetje, paradižnik, kumarice, ananas, piščanec v vinski omaki itd.
+> **Primeri oznamčenega blaga** (dobrine za vsakdanjo rabo - kaj vse še lahko (o)znamčimo?)
+>
+> Izvirska voda, čaji, banane, rezano cvetje, paradižnik, kumarice, ananas, piščanec v vinski omaki itd.
 
 **Primer:** Dorina - spremenili obliko, ker so jo želeli približati mladim ("Dorina - Prelomi i uzmi sve!").
 
@@ -1595,19 +1638,21 @@ Poznavanje lahko označimo z zavedanjem in imidžem.
 **Aktivno delo:** Preberi članek *"Zakaj je priporočljivo poskrbeti za osebno strokovno znamko?"*
 {{</alertBlockquote>}}
 
-**Primer:** Vino Fazan - etiketa je bila uvrščena med prvih 10 najboljših embalaž na svetu (embalaža vina Fazan vinske hiše Doppler).
-
-![Vino Fazan - etiketa med prvih 10 najboljšimi embalažami na svetu](/images/marketing/marketing_image_47.webp)
+> **Primer: Vino Fazan**
+>
+> Etiketa je bila uvrščena med prvih 10 najboljših embalaž na svetu (embalaža vina Fazan vinske hiše Doppler).
+>
+> ![Vino Fazan - etiketa med prvih 10 najboljšimi embalažami na svetu](/images/marketing/marketing_image_47.webp)
 
 ### Soznamčenje ali co-branding
 
 To je marketinška strategija, ki uporabi več imen blagovnih znamk, za izdelek ali storitev, kot del nekega strateškega zavezništva. Največkrat vključuje blagovni znamki vsaj dveh podjetij. Vsaka od teh blagovnih znamk prispeva svoj delež, svojo identiteto k zavezništvu. To doseže s pomočjo barvnih shem, logotipa itd. Bistvo združevanja je, da združijo blagovne znamke marketinško moč, prepoznavnost blagovne znamke ali pa dajo neke pozitivne asociacije, pozitiven imidž blagovne znamke, da bi potrošniki več kupili. Pomembno pa je še, da bi potrošniki bili pripravljeni plačat višjo ceno. Potrošniki so pripravljeni plačati višjo ceno. Co-branding pa ima še to prednost, da je manj možnosti za fakanje, da se pojavijo kopije s strani konkurence.
 
-**Soznamčenje (co-branding) - primeri:**
-
-- PepsiCo + Starbucks = Frappuccino
-- Gorenje + Swarovski = linija Gorenje with CRYSTALLIZED™ Swarovski Elements
-- Milka + Philadelphia = Milka Philadelphia
+> **Soznamčenje (co-branding) - primeri**
+>
+> - PepsiCo + Starbucks = Frappuccino
+> - Gorenje + Swarovski = linija Gorenje with CRYSTALLIZED™ Swarovski Elements
+> - Milka + Philadelphia = Milka Philadelphia
 
 Npr. Starbucks in PepsiCo sta naredli Frapuchino. Na embalaži se vidi logotip od Starbucksa. Milka pa Philadelphia pa sta skupaj naredili namaz z okusom Milke.
 
@@ -1871,9 +1916,11 @@ Marketinško komuniciranje je del splošnega komuniciranja. To je proces, kjer i
 
 Cilj marketinškega komuniciranja je, da se preko sporočanja ustvari, stimulira, olajša menjalne procese. Na eni strani izvajalca marketinga s svojim okoljem, da ustvari, stimulira menjalne procese s svojim okoljem.
 
-**Primer:** Kako je Liquid Death z embalažo prodal vodo. Podjetja, ki znajo najbolj nezanimive izdelke narediti zanimive. Podjetje je naredilo veliko marketinško uspešnico ("Liquid Death ali kako navadno H2O spremeniti v milijardni eliksir" - *"Murder Your Thirst"*).
-
-![Liquid Death - "Murder Your Thirst"](/images/marketing/marketing_image_48.webp)
+> **Primer: Liquid Death**
+>
+> Kako je Liquid Death z embalažo prodal vodo. Podjetja, ki znajo najbolj nezanimive izdelke narediti zanimive. Podjetje je naredilo veliko marketinško uspešnico ("Liquid Death ali kako navadno H2O spremeniti v milijardni eliksir" - *"Murder Your Thirst"*).
+>
+> ![Liquid Death - "Murder Your Thirst"](/images/marketing/marketing_image_48.webp)
 
 ### Opredelitev marketinškega komuniciranja
 

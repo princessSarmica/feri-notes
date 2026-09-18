@@ -252,7 +252,9 @@ Gre za dajanje prispevkov organizacije v obliki denarja, napisov, drugim sponzor
 
 Kaj pa sponzorji? Sponzorjem se splača biti sponzor, da sebe promovira, da ga drugi opazijo, s tem skrbi za ugled.
 
-**Primer:** Primož Roglič (sponzorstvo kolesarja s strani blagovne znamke).
+> **Primer**
+>
+> Primož Roglič (sponzorstvo kolesarja s strani blagovne znamke).
 
 {{< alertBlockquote type="info" >}}
 **Aktivno delo:** Preberi članek *"Nogomet je šport, ki najbolj ustreza našim vrednotam in viziji"* in podaj komentar.
@@ -406,10 +408,12 @@ Treba je določiti, katere interesne dejavnosti so za podjetje višjega pomena.
 
 **Ciljne javnosti** so definirane kot interesne skupine in posamezniki, ki so (ali bodo) prisotni v življenju organizacije in niso zgolj sedanji ali potencialni kupci ali uporabniki izdelkov in storitev.
 
-Ko imamo rangirano, kaj je za nas pomembno, določimo ciljne javnosti. To so določeni segmenti. Primeri:
+Ko imamo rangirano, kaj je za nas pomembno, določimo ciljne javnosti. To so določeni segmenti.
 
-- Študentje so lahko ciljna javnost (npr. za fakulteto).
-- Politiki, bankirji so lahko ciljne javnosti.
+> **Primeri**
+>
+> - Študentje so lahko ciljna javnost (npr. za fakulteto).
+> - Politiki, bankirji so lahko ciljne javnosti.
 
 Z vsako javnostjo komuniciramo seveda drugače. Vsaka organizacija pa ima druge specifične javnosti. Za vsako organizacijo veljajo druge ciljne in specifične javnosti.
 
@@ -526,7 +530,9 @@ Lokalna adaptacija:
 
 Delo strokovnjakov za delo z odnosi z javnostmi je ključno pri adaptaciji, npr. reklam za neko lokalno javnost, npr. da so priredili igralce, jezik, izdelke v reklami za lokalno skupnost, da prepoznajo, kaj je ključno za uspešno kampanjo.
 
-**Primer: Tuš - "Spoštujmo slovensko, kupujmo domače"** - Tuš je v svojih oglasih dal kakšen slogen v narečju za vsako regijo v Sloveniji, da bi se jih združilo (npr. "Domač, pa nč drugač.").
+> **Primer: Tuš - "Spoštujmo slovensko, kupujmo domače"**
+>
+> Tuš je v svojih oglasih dal kakšen slogen v narečju za vsako regijo v Sloveniji, da bi se jih združilo (npr. "Domač, pa nč drugač.").
 
 ---
 
@@ -1389,7 +1395,9 @@ Kriza ni nujno zgolj negativna - iz nje lahko izhajajo tudi priložnosti. Kriza 
 
 Športni dogodki se v takih primerih uporabljajo kot distraktorji, ki odvračajo pozornost ljudi od aktualnih družbenih in političnih problemov - torej gre za izkoriščanje priljubljenosti športa za "pranje" podobe blagovne znamke ali države, kar predstavlja močno komunikacijsko orodje. Članek prav tako izpostavlja, da športno zavajanje ni vedno učinkovito, saj potrošniki hitro prepoznajo namen in resnično stanje stvari. Kljub temu pa, če je pravilno zastavljeno in izvedeno, lahko športno zavajanje postane močno komunikacijsko orodje, ki kratkoročno zasenči dejansko stanje v očeh javnosti.
 
-**Primer: kako dobri komunikatorji so gasilci?** Gasilci in gasilska društva imajo povsod po svetu običajno zelo pozitivno podobo, saj so vedno v ospredju s požrtvovalnostjo, odzivnostjo in pripravljenostjo na pomoč, ko se jih najbolj potrebuje.
+> **Primer: kako dobri komunikatorji so gasilci?**
+>
+> Gasilci in gasilska društva imajo povsod po svetu običajno zelo pozitivno podobo, saj so vedno v ospredju s požrtvovalnostjo, odzivnostjo in pripravljenostjo na pomoč, ko se jih najbolj potrebuje.
 
 {{< alertBlockquote type="info" >}}
 **Aktivno delo:** Preberi članek *"Mediji so v kriznih situacijah glavni vir (kredibilnih) informacij"* in podaj svoj komentar.
