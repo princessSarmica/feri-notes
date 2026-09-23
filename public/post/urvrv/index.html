@@ -172,86 +172,581 @@ This article does not have a corresponding language version
   <ul>
     <li><a href="#uvod-v-računalniški-vid">Uvod v računalniški vid</a>
       <ul>
-        <li><a href="#osnovni-pojmi">Osnovni pojmi</a></li>
+        <li><a href="#osnovni-pojmi">Osnovni pojmi</a>
+          <ul>
+            <li><a href="#zvezna-in-diskretna-predstavitev-signalov">Zvezna in diskretna predstavitev signalov</a>
+              <ul>
+                <li><a href="#2d-slika">2D-slika</a></li>
+                <li><a href="#video">Video</a></li>
+              </ul>
+            </li>
+            <li><a href="#kontrastna-in-prostorska-ločljivost-slike">Kontrastna in prostorska ločljivost slike</a>
+              <ul>
+                <li><a href="#kontrastna-ločljivost">Kontrastna ločljivost</a>
+                  <ul>
+                    <li><a href="#teoretična-kontrastna-ločljivost">Teoretična kontrastna ločljivost</a></li>
+                    <li><a href="#dejanska-kontrastna-ločljivost">Dejanska kontrastna ločljivost</a></li>
+                    <li><a href="#vpliv-kontrastne-ločljivosti-na-analizo-slike">Vpliv kontrastne ločljivosti na analizo slike</a></li>
+                  </ul>
+                </li>
+                <li><a href="#prostorska-ločljivost">Prostorska ločljivost</a>
+                  <ul>
+                    <li><a href="#prostorska-ločljivost-z-vidika-obdelave-slik">Prostorska ločljivost z vidika obdelave slik</a></li>
+                    <li><a href="#pomen-prostorske-ločljivosti-v-praksi">Pomen prostorske ločljivosti v praksi</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#uporabljene-oznake">Uporabljene oznake</a></li>
         <li><a href="#operacije-nad-slikami">Operacije nad slikami</a></li>
       </ul>
     </li>
     <li><a href="#model-kamere-in-zajemanje-slik">Model kamere in zajemanje slik</a>
       <ul>
-        <li><a href="#zajemanje-slik-s-kamerami-ccd">Zajemanje slik s kamerami CCD</a></li>
-        <li><a href="#modeli-kamer">Modeli kamer</a></li>
-        <li><a href="#parametri-kamere">Parametri kamere</a></li>
-        <li><a href="#geometrijsko-kalibriranje-kamer">Geometrijsko kalibriranje kamer</a></li>
+        <li><a href="#zajemanje-slik-s-kamerami-ccd">Zajemanje slik s kamerami CCD</a>
+          <ul>
+            <li><a href="#proces-formiranja-slike">Proces formiranja slike</a>
+              <ul>
+                <li><a href="#senzor-ccd">Senzor CCD</a></li>
+                <li><a href="#svetloba-in-fotoni">Svetloba in fotoni</a></li>
+                <li><a href="#pretvorba-svetlobnega-naboja-v-sliko">Pretvorba svetlobnega naboja v sliko</a></li>
+                <li><a href="#diskretizacija-in-ad-analogno-digitalna-pretvorba">Diskretizacija in AD (analogno-digitalna) pretvorba</a></li>
+                <li><a href="#shranjevanje-slike">Shranjevanje slike</a></li>
+              </ul>
+            </li>
+            <li><a href="#kako-pridemo-do-barvnih-digitalnih-slik">Kako pridemo do barvnih digitalnih slik?</a>
+              <ul>
+                <li><a href="#single-shot">Single-shot</a>
+                  <ul>
+                    <li><a href="#single-shot--cenejša-rešitev">Single-shot – cenejša rešitev</a></li>
+                    <li><a href="#single-shot--dražja-rešitev">Single-shot – dražja rešitev</a></li>
+                  </ul>
+                </li>
+                <li><a href="#multi-shot">Multi-shot</a>
+                  <ul>
+                    <li><a href="#multi-shot-pristop">Multi-shot pristop</a></li>
+                  </ul>
+                </li>
+                <li><a href="#velikost-senzorjev">Velikost senzorjev</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#modeli-kamer">Modeli kamer</a>
+          <ul>
+            <li><a href="#kamera-na-luknjico-camera-obscura">Kamera na luknjico (camera obscura)</a>
+              <ul>
+                <li><a href="#koordinatni-sistem-kamere-na-luknjico">Koordinatni sistem kamere na luknjico</a></li>
+                <li><a href="#kako-določimo-za-točko-v-sceni-njen-položaj-na-sliki">Kako določimo za točko v sceni njen položaj na sliki?</a></li>
+                <li><a href="#omejitve-modela-kamere-na-luknjico">Omejitve modela kamere na luknjico</a></li>
+              </ul>
+            </li>
+            <li><a href="#kamera-s-tankimi-lečami">Kamera s tankimi lečami</a>
+              <ul>
+                <li><a href="#koordinatni-sistem-modela-s-tankimi-lečami">Koordinatni sistem modela s tankimi lečami</a></li>
+                <li><a href="#omejitve-modela">Omejitve modela</a></li>
+              </ul>
+            </li>
+            <li><a href="#kamera-z-debelimi-lečami">Kamera z debelimi lečami</a>
+              <ul>
+                <li><a href="#koordinatni-sistem-modela-z-debelimi-lečami">Koordinatni sistem modela z debelimi lečami</a></li>
+                <li><a href="#omejitve-modela-1">Omejitve modela</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#parametri-kamere">Parametri kamere</a>
+          <ul>
+            <li><a href="#notranji-parametri-kamere">Notranji parametri kamere</a>
+              <ul>
+                <li><a href="#glavna-točka--parametra--in">Glavna točka – parametra  in </a></li>
+                <li><a href="#parametra--in">Parametra  in </a></li>
+                <li><a href="#kot-theta">Kot theta </a></li>
+                <li><a href="#pet-notranjih-parametrov-kamere">Pet notranjih parametrov kamere</a></li>
+                <li><a href="#kalibracijska-matrika">Kalibracijska matrika </a></li>
+                <li><a href="#projekcijska-matrika">Projekcijska matrika </a></li>
+                <li><a href="#model-kamere--matrična-enačba">Model kamere – matrična enačba</a></li>
+                <li><a href="#homogene-koordinate">Homogene koordinate</a></li>
+                <li><a href="#projekcija">Projekcija</a></li>
+              </ul>
+            </li>
+            <li><a href="#zunanji-parametri-kamere">Zunanji parametri kamere</a>
+              <ul>
+                <li><a href="#povezava-koordinatnih-sistemov">Povezava koordinatnih sistemov</a>
+                  <ul>
+                    <li><a href="#translacija">Translacija</a></li>
+                    <li><a href="#rotacija">Rotacija</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#geometrijsko-kalibriranje-kamer">Geometrijsko kalibriranje kamer</a>
+          <ul>
+            <li><a href="#parametri-kamere-in-kalibracija">Parametri kamere in kalibracija</a></li>
+            <li><a href="#linearni-postopek-kalibriranja">Linearni postopek kalibriranja</a>
+              <ul>
+                <li><a href="#postopek">Postopek</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#predobdelava-slik">Predobdelava slik</a>
       <ul>
-        <li><a href="#spreminajnje-kontrasta">Spreminajnje kontrasta</a></li>
-        <li><a href="#lokalne-operacije-oz-filtriranje-slik">Lokalne operacije oz. filtriranje slik</a></li>
-        <li><a href="#odstranjevanje-šuma-z-lokalnimi-operatorji">Odstranjevanje šuma z lokalnimi operatorji</a></li>
-        <li><a href="#detektorji-robov">Detektorji robov</a></li>
+        <li><a href="#spreminajnje-kontrasta">Spreminajnje kontrasta</a>
+          <ul>
+            <li><a href="#linearizacija-sivin">Linearizacija sivin</a></li>
+            <li><a href="#histogram-sivin">Histogram sivin</a>
+              <ul>
+                <li><a href="#metoda-izenačitev-histograma">Metoda: Izenačitev histograma</a></li>
+                <li><a href="#prenosne-funkcije">Prenosne funkcije</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#lokalne-operacije-oz-filtriranje-slik">Lokalne operacije oz. filtriranje slik</a>
+          <ul>
+            <li><a href="#točkovne-operacije">Točkovne operacije</a></li>
+            <li><a href="#filtriranje">Filtriranje</a>
+              <ul>
+                <li><a href="#1-linearnost">1. Linearnost</a></li>
+                <li><a href="#2-premična-neodvisnost">2. Premična neodvisnost</a></li>
+              </ul>
+            </li>
+            <li><a href="#kako-filtriramo-sliko">Kako filtriramo sliko?</a>
+              <ul>
+                <li><a href="#1-določitev--obnašanja-filtra">1. Določitev  obnašanja filtra</a>
+                  <ul>
+                    <li><a href="#dimenzija-filtra">Dimenzija filtra</a></li>
+                    <li><a href="#vrednosti-uteži-koeficientov">Vrednosti uteži (koeficientov)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#2-izračun-konvolucije-med-masko--in-sliko">2. Izračun konvolucije med masko  in sliko </a></li>
+                <li><a href="#problemi-pri-konvoluciji">Problemi pri konvoluciji</a>
+                  <ul>
+                    <li><a href="#problem-robnih-pikslov">Problem robnih pikslov</a></li>
+                    <li><a href="#problem-vrednosti-po-filtriranju">Problem vrednosti po filtriranju</a></li>
+                    <li><a href="#še-ena-dilema-kje-je-sredina-maske">Še ena dilema: Kje je sredina maske?</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#odstranjevanje-šuma-z-lokalnimi-operatorji">Odstranjevanje šuma z lokalnimi operatorji</a>
+          <ul>
+            <li><a href="#nizko-sito-low-pass-filter">Nizko sito (Low-pass filter)</a>
+              <ul>
+                <li><a href="#kaj-pomeni-nizka-frekvenca">Kaj pomeni nizka frekvenca</a></li>
+                <li><a href="#kaj-pomeni-visoka-frekvenca">Kaj pomeni visoka frekvenca?</a></li>
+                <li><a href="#maska-nizkega-sita">Maska nizkega sita</a></li>
+              </ul>
+            </li>
+            <li><a href="#visoko-sito-high-pass-filter">Visoko sito (High-pass filter)</a></li>
+            <li><a href="#gaussov-filter">Gaussov filter</a></li>
+            <li><a href="#mediani-filter">Mediani filter</a></li>
+          </ul>
+        </li>
+        <li><a href="#detektorji-robov">Detektorji robov</a>
+          <ul>
+            <li><a href="#velikost-jakost-roba">Velikost (jakost) roba</a></li>
+            <li><a href="#smer-roba">Smer roba</a></li>
+            <li><a href="#gradient-za-zvezno-slikovno-funkcijo">Gradient za zvezno slikovno funkcijo</a></li>
+            <li><a href="#aproksimacija-parcialnih-odvodov-v-digitalnih-slikah">Aproksimacija parcialnih odvodov v digitalnih slikah</a>
+              <ul>
+                <li><a href="#aproksimacija-odvoda-po-x">Aproksimacija odvoda po x</a></li>
+              </ul>
+            </li>
+            <li><a href="#laplaceov-operator">Laplaceov operator</a></li>
+            <li><a href="#sobelov-operator">Sobelov operator</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#segmentacija-slik">Segmentacija slik</a>
       <ul>
-        <li><a href="#pragovna-operacija">Pragovna operacija</a></li>
-        <li><a href="#pragovna-operacija-na-sliki-robov">Pragovna operacija na sliki robov</a></li>
+        <li><a href="#pragovna-operacija">Pragovna operacija</a>
+          <ul>
+            <li><a href="#segmentacija">Segmentacija</a></li>
+            <li><a href="#segmentacijske-metode">Segmentacijske metode</a></li>
+            <li><a href="#thresholding-pragovna-operacija">Thresholding (Pragovna operacija)</a>
+              <ul>
+                <li><a href="#enopragovne-operacije">Enopragovne operacije</a>
+                  <ul>
+                    <li><a href="#konstantni-prag">Konstantni prag</a></li>
+                    <li><a href="#variabilni-prag-lokalni-thresholding">Variabilni prag (lokalni thresholding)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#večpragovne-operacije">Večpragovne operacije</a></li>
+                <li><a href="#metode-za-določanje-globalnih-pragov">Metode za določanje globalnih pragov</a>
+                  <ul>
+                    <li><a href="#1-eksperimentalna-določitev">1. Eksperimentalna določitev</a></li>
+                    <li><a href="#2-polovica-med-minimalno-in-maksimalno-sivino-na-sliki">2. Polovica med minimalno in maksimalno sivino na sliki</a></li>
+                    <li><a href="#3prag-kot-povprečje-slike-mean">3.Prag kot povprečje slike (MEAN)</a></li>
+                    <li><a href="#4-prag-kot-mediana-median">4. Prag kot mediana (MEDIAN)</a></li>
+                    <li><a href="#5-globalni-optimalni-prag-optimal">5. Globalni optimalni prag (OPTIMAL)</a></li>
+                    <li><a href="#6-globalni-prag-določen-z-entropijo-kapurjev-prag---kapur">6. Globalni prag določen z entropijo (Kapurjev prag - KAPUR)</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#pragovna-operacija-na-sliki-robov">Pragovna operacija na sliki robov</a>
+          <ul>
+            <li><a href="#sledenje-meji">Sledenje meji</a>
+              <ul>
+                <li><a href="#notranja-in-zunanja-meja-regije">Notranja in zunanja meja regije</a>
+                  <ul>
+                    <li><a href="#notranja-meja">Notranja meja</a></li>
+                    <li><a href="#zunanja-meja">Zunanja meja</a></li>
+                  </ul>
+                </li>
+                <li><a href="#kako-deluje-algoritem-sledenja-meji">Kako deluje algoritem sledenja meji?</a>
+                  <ul>
+                    <li><a href="#4-sosedstvo">4-sosedstvo</a></li>
+                    <li><a href="#8-sosedstvo">8-sosedstvo</a></li>
+                  </ul>
+                </li>
+                <li><a href="#slabost-algoritma-sledenja-meji">Slabost algoritma sledenja meji</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#ujemanje-šablon">Ujemanje šablon</a></li>
       </ul>
     </li>
     <li><a href="#zaporedje-slik-in-sledenje-gibanja">Zaporedje slik in sledenje gibanja</a>
       <ul>
-        <li><a href="#osnovni-pojmi-1">Osnovni pojmi</a></li>
+        <li><a href="#osnovni-pojmi-1">Osnovni pojmi</a>
+          <ul>
+            <li><a href="#zaporedje-slik">Zaporedje slik</a></li>
+          </ul>
+        </li>
         <li><a href="#slike-razlik">Slike razlik</a></li>
-        <li><a href="#statično-ozadje">Statično ozadje</a></li>
-        <li><a href="#optični-pretok">Optični pretok</a></li>
+        <li><a href="#statično-ozadje">Statično ozadje</a>
+          <ul>
+            <li><a href="#postopki-tvorjenja-statičnega-ozadja">Postopki tvorjenja statičnega ozadja</a>
+              <ul>
+                <li><a href="#1-metoda---povprečenje-celotnega-zaporedja-slik">1. Metoda - Povprečenje celotnega zaporedja slik</a></li>
+                <li><a href="#2-metoda---iskanje-skokov-robov-v-časovni-funkciji-piksla">2. Metoda - Iskanje skokov (robov) v časovni funkciji piksla</a></li>
+                <li><a href="#3-metoda---z-drsečim-oknom-skozi-čas">3. Metoda - Z drsečim oknom skozi čas</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#optični-pretok">Optični pretok</a>
+          <ul>
+            <li><a href="#oblikovanje-sistema-enačb---kako-določimo-vektor-premika--za-en-piksel">Oblikovanje sistema enačb - Kako določimo vektor premika  za en piksel?</a>
+              <ul>
+                <li><a href="#korak-1-izberemo-okolico">Korak 1: Izberemo okolico</a></li>
+                <li><a href="#korak-2-izračun-parcialnih-odvodov">Korak 2: Izračun parcialnih odvodov</a></li>
+                <li><a href="#korak-3-matrika-a">Korak 3: Matrika A</a></li>
+                <li><a href="#korak-4-stolpec-b">Korak 4: Stolpec b</a></li>
+                <li><a href="#korak-5-reševanje-sistema">Korak 5: Reševanje sistema</a></li>
+              </ul>
+            </li>
+            <li><a href="#psevdokod-algoritma">Psevdokod algoritma</a>
+              <ul>
+                <li><a href="#izbira-okolice">Izbira okolice</a></li>
+                <li><a href="#opcijska-koraka-predobdelava">Opcijska koraka (predobdelava)</a></li>
+                <li><a href="#ključni-koraki">Ključni koraki</a>
+                  <ul>
+                    <li><a href="#ocenitev-optičnega-toka">Ocenitev optičnega toka</a></li>
+                  </ul>
+                </li>
+                <li><a href="#kaj-dobimo-z-optičnim-tokom">Kaj dobimo z optičnim tokom?</a></li>
+                <li><a href="#primer--optični-pretok">Primer – Optični pretok</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#sledenje-objektom">Sledenje objektom</a></li>
       </ul>
     </li>
     <li><a href="#geometrija-več-pogledov">Geometrija več pogledov</a>
       <ul>
-        <li><a href="#dva-pogleda-splošno">Dva pogleda (splošno)</a></li>
+        <li><a href="#dva-pogleda-splošno">Dva pogleda (splošno)</a>
+          <ul>
+            <li><a href="#geometrija-dveh-kamer">Geometrija dveh kamer</a>
+              <ul>
+                <li><a href="#prva-varianta--kalibrirane-razmere">PRVA VARIANTA – Kalibrirane razmere</a></li>
+                <li><a href="#druga-varianta--neurejene-oz-nekalibrirane-razmere">DRUGA VARIANTA – Neurejene oz. nekalibrirane razmere</a>
+                  <ul>
+                    <li><a href="#kalibracija-sistema-kamer">Kalibracija sistema kamer</a></li>
+                    <li><a href="#algoritem-osmih-točk">Algoritem osmih točk</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#trije-pogledi">Trije pogledi</a></li>
-        <li><a href="#določanje-položaja-točk-v-3d">Določanje položaja točk v 3D</a></li>
-        <li><a href="#stereo-vid">Stereo vid</a></li>
+        <li><a href="#določanje-položaja-točk-v-3d">Določanje položaja točk v 3D</a>
+          <ul>
+            <li><a href="#postopek-za-2-pogleda">Postopek za 2 pogleda?</a></li>
+            <li><a href="#postopek-za-3-poglede">Postopek za 3 poglede</a></li>
+          </ul>
+        </li>
+        <li><a href="#stereo-vid">Stereo vid</a>
+          <ul>
+            <li><a href="#rekonstrukcija">Rekonstrukcija</a></li>
+            <li><a href="#primer-paralelnih-kamer">Primer paralelnih kamer</a></li>
+            <li><a href="#rektifikacija-oz-izravnavanje-slik">Rektifikacija oz. izravnavanje slik</a></li>
+            <li><a href="#ujemanje-stereo-slik-paralelne-kamere">Ujemanje stereo slik (paralelne kamere)</a>
+              <ul>
+                <li><a href="#1-metode-na-osnovi-sivin">1. Metode na osnovi sivin</a></li>
+                <li><a href="#2-metode-na-osnovi-značilnic">2. Metode na osnovi značilnic</a></li>
+                <li><a href="#omejitve-pri-ujemanju">Omejitve pri ujemanju</a>
+                  <ul>
+                    <li><a href="#1-podobnost">1. Podobnost</a></li>
+                    <li><a href="#2-enoličnost">2. Enoličnost</a></li>
+                    <li><a href="#3-zveznost-smoothness">3. Zveznost (Smoothness)</a></li>
+                    <li><a href="#4-urejanje-ordering-constraint">4. Urejanje (Ordering constraint)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#5-epipolarna-omejitev">5. Epipolarna omejitev</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#uvod-v-razpoznavanje-vzorcev">Uvod v razpoznavanje vzorcev</a>
       <ul>
-        <li><a href="#definicije-in-osnovni-pojmi">Definicije in osnovni pojmi</a></li>
-        <li><a href="#model-razvrščevalnika-vzorcev">Model razvrščevalnika vzorcev</a></li>
-        <li><a href="#zapisi-vzorcev">Zapisi vzorcev</a></li>
-        <li><a href="#spoznavanje-področja-uporabe">Spoznavanje področja uporabe</a></li>
-        <li><a href="#razvrščanje-vzorcev">Razvrščanje vzorcev</a></li>
-        <li><a href="#preizkušanje-razvrščevalnika-vzorcev">Preizkušanje razvrščevalnika vzorcev</a></li>
+        <li><a href="#definicije-in-osnovni-pojmi">Definicije in osnovni pojmi</a>
+          <ul>
+            <li><a href="#koraki-preobdelave">Koraki preobdelave</a>
+              <ul>
+                <li><a href="#1-manjkajoče-vrednosti">1. Manjkajoče vrednosti</a></li>
+                <li><a href="#2-odstopanja-outlierji">2. Odstopanja (outlierji)</a></li>
+              </ul>
+            </li>
+            <li><a href="#proces-razvoja-sistema">Proces razvoja sistema</a>
+              <ul>
+                <li><a href="#1-objekti--vzorci">1. Objekti → vzorci</a></li>
+                <li><a href="#2-rojanje">2. Rojanje</a></li>
+                <li><a href="#3-učna-množica">3. Učna množica</a></li>
+              </ul>
+            </li>
+            <li><a href="#razvrščanje-in-razpoznavanje-vzorcev">Razvrščanje in razpoznavanje vzorcev</a>
+              <ul>
+                <li><a href="#razvrščanje-klasifikacija">Razvrščanje (klasifikacija)</a></li>
+                <li><a href="#razpoznavanje">Razpoznavanje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#model-razvrščevalnika-vzorcev">Model razvrščevalnika vzorcev</a>
+          <ul>
+            <li><a href="#1-sistem-za-zajemanje-vzorcev">1. Sistem za zajemanje vzorcev</a></li>
+            <li><a href="#2-določitev-vrednosti-značilnic-feature-extraction">2. Določitev vrednosti značilnic (feature extraction)</a></li>
+            <li><a href="#3-faza-učenja-pozicija-1">3. Faza učenja (pozicija 1)</a></li>
+            <li><a href="#4-faza-razvrščanja-pozicija-2">4. Faza razvrščanja (pozicija 2)</a>
+              <ul>
+                <li><a href="#faza-2a--testiranje">Faza 2a – testiranje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#zapisi-vzorcev">Zapisi vzorcev</a>
+          <ul>
+            <li><a href="#1-hevristični-pristop">1. Hevristični pristop</a></li>
+            <li><a href="#2-matematični-pristop">2. Matematični pristop</a></li>
+            <li><a href="#postopki-izbire-značilnic">Postopki izbire značilnic</a></li>
+            <li><a href="#izpeljava-značilnic-feature-extraction">Izpeljava značilnic (Feature Extraction)</a>
+              <ul>
+                <li><a href="#znani-metodi">Znani metodi</a>
+                  <ul>
+                    <li><a href="#1-pca--analiza-glavnih-komponent-podatkov-svd-razcep">1. PCA – analiza glavnih komponent podatkov (SVD razcep)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#2-analiza-neodvisnih-komponent-ica">2. Analiza neodvisnih komponent (ICA)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#spoznavanje-področja-uporabe">Spoznavanje področja uporabe</a>
+          <ul>
+            <li><a href="#normiranje-značilnic">Normiranje značilnic</a>
+              <ul>
+                <li><a href="#simetrične-značilnice---linearna-transformacija">Simetrične značilnice - linearna transformacija</a></li>
+                <li><a href="#nesimetrične-značilnice---nelinearna-transformacija">Nesimetrične značilnice - nelinearna transformacija</a></li>
+              </ul>
+            </li>
+            <li><a href="#postopek-rojenja-clustering">Postopek rojenja (clustering)</a>
+              <ul>
+                <li><a href="#postopek-k-povprečij--prvi-postopek-rojenja-k-means">Postopek K povprečij – prvi postopek rojenja (k-means)</a></li>
+              </ul>
+            </li>
+            <li><a href="#postopek-učenja">Postopek učenja</a></li>
+          </ul>
+        </li>
+        <li><a href="#razvrščanje-vzorcev">Razvrščanje vzorcev</a>
+          <ul>
+            <li><a href="#1-razvrščanje-po-pravilu-najbližjega-soseda-k-nn">1. Razvrščanje po pravilu najbližjega soseda (k-NN)</a>
+              <ul>
+                <li><a href="#prva-varianta---znanje-o-posameznem-razredu-shranjeno-v-obliki-vseh-vzorcev">Prva varianta - Znanje o posameznem razredu shranjeno v obliki vseh vzorcev</a></li>
+                <li><a href="#druga-varianta---znanje-shranjeno-v-obliki-centrov-razredov">Druga varianta - Znanje shranjeno v obliki centrov razredov**</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-razvrščanje-z-odločitvenimi-funkcijami">2. Razvrščanje z odločitvenimi funkcijami</a></li>
+          </ul>
+        </li>
+        <li><a href="#preizkušanje-razvrščevalnika-vzorcev">Preizkušanje razvrščevalnika vzorcev</a>
+          <ul>
+            <li><a href="#spodnja-meja-predikcijske-napake">Spodnja meja predikcijske napake</a></li>
+            <li><a href="#zgornja-meja-napake--leave-one-out">Zgornja meja napake – Leave-One-Out</a>
+              <ul>
+                <li><a href="#k-fold-validacija">K-Fold validacija</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#osnovni-pojmi-o-nevronskih-mrežah">Osnovni pojmi o nevronskih mrežah</a>
       <ul>
-        <li><a href="#razlika-med-delovanjem-računalnikov-in-možganov">Razlika med delovanjem računalnikov in možganov</a></li>
+        <li><a href="#razlika-med-delovanjem-računalnikov-in-možganov">Razlika med delovanjem računalnikov in možganov</a>
+          <ul>
+            <li><a href="#1-postopek-razpoznavanja">1. Postopek razpoznavanja</a></li>
+            <li><a href="#2-čas-potreben-za-izvrševanje-nalog-razpoznavanje--razvrščanje-vzorcev">2. Čas potreben za izvrševanje nalog (razpoznavanje / razvrščanje vzorcev)</a></li>
+            <li><a href="#3-zgradba-in-način-izračunavanja">3. Zgradba in način izračunavanja</a></li>
+          </ul>
+        </li>
         <li><a href="#organski-nevron">Organski nevron</a></li>
-        <li><a href="#model-umetnega-nevrona">Model umetnega nevrona</a></li>
+        <li><a href="#model-umetnega-nevrona">Model umetnega nevrona</a>
+          <ul>
+            <li><a href="#aktivacijske-funkcije">Aktivacijske funkcije</a></li>
+          </ul>
+        </li>
         <li><a href="#umetne-nevronske-mreže">Umetne nevronske mreže</a></li>
-        <li><a href="#razdelitev-nevronskih-mrež">Razdelitev nevronskih mrež</a></li>
+        <li><a href="#razdelitev-nevronskih-mrež">Razdelitev nevronskih mrež</a>
+          <ul>
+            <li><a href="#glede-na-izhodne-vrednosti">Glede na izhodne vrednosti</a></li>
+            <li><a href="#glede-na-povezave">Glede na povezave</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#zvezni-večplastni-perceptroni">Zvezni večplastni perceptroni</a>
       <ul>
         <li><a href="#osnovni-pojmi-2">Osnovni pojmi</a></li>
-        <li><a href="#splošni-zvezni-večplastni-perceptroni">Splošni zvezni večplastni perceptroni</a></li>
-        <li><a href="#učno-pravilo-gradientnega-sestopa">Učno pravilo gradientnega sestopa</a></li>
-        <li><a href="#enonevronski-zvezni-perceptroni">Enonevronski zvezni perceptroni</a></li>
-        <li><a href="#dvoplastni-zvezni-perceptroni">Dvoplastni zvezni perceptroni</a></li>
-        <li><a href="#hitrost-učenja-in-inicializacija-sinaptičnih-uteži">Hitrost učenja in inicializacija sinaptičnih uteži</a></li>
+        <li><a href="#splošni-zvezni-večplastni-perceptroni">Splošni zvezni večplastni perceptroni</a>
+          <ul>
+            <li><a href="#aktivacijske-prenosne-funkcije">Aktivacijske (prenosne) funkcije</a>
+              <ul>
+                <li><a href="#1-linearna-prenosna-funkcija">1. Linearna prenosna funkcija</a></li>
+                <li><a href="#2-rectified-linear-unit-relu">2. Rectified Linear Unit (ReLU)</a></li>
+                <li><a href="#3-sigmoidna-funkcija">3. Sigmoidna funkcija</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#učno-pravilo-gradientnega-sestopa">Učno pravilo gradientnega sestopa</a>
+          <ul>
+            <li><a href="#učno-pravilo-gradientnega-sestopa-vzvratno-učenje">Učno pravilo gradientnega sestopa (vzvratno učenje)</a></li>
+            <li><a href="#globalno-in-lokalno-učenje">Globalno in lokalno učenje</a>
+              <ul>
+                <li><a href="#1-globalno-učenje">1. Globalno učenje</a></li>
+                <li><a href="#2-lokalno-inkrementalno-učenje">2. Lokalno (inkrementalno) učenje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#enonevronski-zvezni-perceptroni">Enonevronski zvezni perceptroni</a>
+          <ul>
+            <li><a href="#1-pristop--razvrščanje-s-hiperravninsko-ločilno-mejo-z-ena-in-nič-označevanjem">1. Pristop – Razvrščanje s hiperravninsko ločilno mejo z ena in nič označevanjem</a>
+              <ul>
+                <li><a href="#1-učenje">1. Učenje</a></li>
+                <li><a href="#2-razvrščanje">2. Razvrščanje</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-pristop--razvrščanje-s-hiperravninsko-ločilno-mejo-z-označevanjem-z-dvojmim-pragom">2. Pristop – Razvrščanje s hiperravninsko ločilno mejo z označevanjem z dvojmim pragom</a></li>
+            <li><a href="#3-pristop--razvrščanje-s-hiperravninsko-ločilno-mejo-z-označevanjem-z-enojnim-pragom">3. Pristop – Razvrščanje s hiperravninsko ločilno mejo z označevanjem z enojnim pragom</a>
+              <ul>
+                <li><a href="#1-učenje-1">1. Učenje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#dvoplastni-zvezni-perceptroni">Dvoplastni zvezni perceptroni</a>
+          <ul>
+            <li><a href="#dvoplstni-perceptron">Dvoplstni perceptron</a></li>
+            <li><a href="#dvoplastni-trinevronski-perceptron">Dvoplastni, trinevronski perceptron</a></li>
+            <li><a href="#preverjanje-naučenosti-mreže">Preverjanje naučenosti mreže</a>
+              <ul>
+                <li><a href="#prvi-graf">Prvi graf</a></li>
+                <li><a href="#drugi-graf">Drugi graf</a>
+                  <ul>
+                    <li><a href="#tretji-graf">Tretji graf</a></li>
+                  </ul>
+                </li>
+                <li><a href="#analiza-rezultatov">Analiza rezultatov</a></li>
+              </ul>
+            </li>
+            <li><a href="#podprileganja-underfitting">podprileganja (underfitting)**</a></li>
+            <li><a href="#nadprileganje-overfitting">Nadprileganje (Overfitting)</a></li>
+            <li><a href="#teorem-univerzalne-aproksimacije">Teorem univerzalne aproksimacije</a></li>
+          </ul>
+        </li>
+        <li><a href="#hitrost-učenja-in-inicializacija-sinaptičnih-uteži">Hitrost učenja in inicializacija sinaptičnih uteži</a>
+          <ul>
+            <li><a href="#1-metoda-momenta-momentum">1. Metoda momenta (Momentum)</a></li>
+            <li><a href="#skaliranje-vhodov-in-izhodov">Skaliranje vhodov in izhodov</a>
+              <ul>
+                <li><a href="#skaliranje-vhodov">Skaliranje vhodov</a></li>
+                <li><a href="#skaliranje-izhodov">Skaliranje izhodov</a>
+                  <ul>
+                    <li><a href="#če-je-izhodna-funkcija-linearna">Če je izhodna funkcija linearna:</a></li>
+                    <li><a href="#če-je-izhodna-funkcija-sigmoidna">Če je izhodna funkcija sigmoidna:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#inicializacija-uteži">Inicializacija uteži</a>
+              <ul>
+                <li><a href="#napačne-izbire">Napačne izbire:</a></li>
+                <li><a href="#boljša-izbira">Boljša izbira:</a></li>
+              </ul>
+            </li>
+            <li><a href="#inicializacija-praga-bias">Inicializacija praga (bias)</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#samoorganizirajoče-se-nevronske-mreže">Samoorganizirajoče se nevronske mreže</a>
       <ul>
         <li><a href="#topologija-in-obnašanje">Topologija in obnašanje</a></li>
-        <li><a href="#ekvivalentni-algoritem-in-spreminajnje-sinaptičnih-uteži">Ekvivalentni algoritem in spreminajnje sinaptičnih uteži</a></li>
-        <li><a href="#ekvivalentni-algoritem-in-postopek-učenja">Ekvivalentni algoritem in postopek učenja</a></li>
-        <li><a href="#napotki-za-uporabo-ekvivalentnega-algoritma">Napotki za uporabo ekvivalentnega algoritma</a></li>
+        <li><a href="#ekvivalentni-algoritem-in-spreminajnje-sinaptičnih-uteži">Ekvivalentni algoritem in spreminajnje sinaptičnih uteži</a>
+          <ul>
+            <li><a href="#1-korak--iskanje-zmagovalnega-nevrona">1. korak – Iskanje zmagovalnega nevrona</a></li>
+            <li><a href="#2-korak--adaptacija-uteži">2. korak – Adaptacija uteži</a>
+              <ul>
+                <li><a href="#funkcija-g">Funkcija g</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#ekvivalentni-algoritem-in-postopek-učenja">Ekvivalentni algoritem in postopek učenja</a>
+          <ul>
+            <li><a href="#1-faza-urejanja-sinaptičnih-uteži-začetna-faza">1. Faza urejanja sinaptičnih uteži (začetna faza)</a></li>
+            <li><a href="#2-kvantizacijska-faza-končna-faza">2. Kvantizacijska faza (končna faza)</a></li>
+          </ul>
+        </li>
+        <li><a href="#napotki-za-uporabo-ekvivalentnega-algoritma">Napotki za uporabo ekvivalentnega algoritma</a>
+          <ul>
+            <li><a href="#1-faza-učenja">1. Faza učenja</a></li>
+            <li><a href="#2-faza-razvrščanja">2. Faza razvrščanja</a></li>
+            <li><a href="#merjenje-učinkovitosti-ekvivalentnega-algoritma">Merjenje učinkovitosti ekvivalentnega algoritma</a></li>
+            <li><a href="#energija-kvantizacijskega-šuma">Energija kvantizacijskega šuma</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -269,7 +764,7 @@ This article does not have a corresponding language version
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div>Posts</div><div class="sidebar-state-number">7</div>
+    <div>Posts</div><div class="sidebar-state-number">8</div>
   </div>
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>Categories</div>
@@ -5799,10 +6294,10 @@ Energija kvantizacijskega šuma
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;87.9k</span
+          >&nbsp;108.1k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;06:56</span>
+        <span class="icon-coffee">&nbsp;08:32</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -5830,86 +6325,581 @@ Energija kvantizacijskega šuma
   <ul>
     <li><a href="#uvod-v-računalniški-vid">Uvod v računalniški vid</a>
       <ul>
-        <li><a href="#osnovni-pojmi">Osnovni pojmi</a></li>
+        <li><a href="#osnovni-pojmi">Osnovni pojmi</a>
+          <ul>
+            <li><a href="#zvezna-in-diskretna-predstavitev-signalov">Zvezna in diskretna predstavitev signalov</a>
+              <ul>
+                <li><a href="#2d-slika">2D-slika</a></li>
+                <li><a href="#video">Video</a></li>
+              </ul>
+            </li>
+            <li><a href="#kontrastna-in-prostorska-ločljivost-slike">Kontrastna in prostorska ločljivost slike</a>
+              <ul>
+                <li><a href="#kontrastna-ločljivost">Kontrastna ločljivost</a>
+                  <ul>
+                    <li><a href="#teoretična-kontrastna-ločljivost">Teoretična kontrastna ločljivost</a></li>
+                    <li><a href="#dejanska-kontrastna-ločljivost">Dejanska kontrastna ločljivost</a></li>
+                    <li><a href="#vpliv-kontrastne-ločljivosti-na-analizo-slike">Vpliv kontrastne ločljivosti na analizo slike</a></li>
+                  </ul>
+                </li>
+                <li><a href="#prostorska-ločljivost">Prostorska ločljivost</a>
+                  <ul>
+                    <li><a href="#prostorska-ločljivost-z-vidika-obdelave-slik">Prostorska ločljivost z vidika obdelave slik</a></li>
+                    <li><a href="#pomen-prostorske-ločljivosti-v-praksi">Pomen prostorske ločljivosti v praksi</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#uporabljene-oznake">Uporabljene oznake</a></li>
         <li><a href="#operacije-nad-slikami">Operacije nad slikami</a></li>
       </ul>
     </li>
     <li><a href="#model-kamere-in-zajemanje-slik">Model kamere in zajemanje slik</a>
       <ul>
-        <li><a href="#zajemanje-slik-s-kamerami-ccd">Zajemanje slik s kamerami CCD</a></li>
-        <li><a href="#modeli-kamer">Modeli kamer</a></li>
-        <li><a href="#parametri-kamere">Parametri kamere</a></li>
-        <li><a href="#geometrijsko-kalibriranje-kamer">Geometrijsko kalibriranje kamer</a></li>
+        <li><a href="#zajemanje-slik-s-kamerami-ccd">Zajemanje slik s kamerami CCD</a>
+          <ul>
+            <li><a href="#proces-formiranja-slike">Proces formiranja slike</a>
+              <ul>
+                <li><a href="#senzor-ccd">Senzor CCD</a></li>
+                <li><a href="#svetloba-in-fotoni">Svetloba in fotoni</a></li>
+                <li><a href="#pretvorba-svetlobnega-naboja-v-sliko">Pretvorba svetlobnega naboja v sliko</a></li>
+                <li><a href="#diskretizacija-in-ad-analogno-digitalna-pretvorba">Diskretizacija in AD (analogno-digitalna) pretvorba</a></li>
+                <li><a href="#shranjevanje-slike">Shranjevanje slike</a></li>
+              </ul>
+            </li>
+            <li><a href="#kako-pridemo-do-barvnih-digitalnih-slik">Kako pridemo do barvnih digitalnih slik?</a>
+              <ul>
+                <li><a href="#single-shot">Single-shot</a>
+                  <ul>
+                    <li><a href="#single-shot--cenejša-rešitev">Single-shot – cenejša rešitev</a></li>
+                    <li><a href="#single-shot--dražja-rešitev">Single-shot – dražja rešitev</a></li>
+                  </ul>
+                </li>
+                <li><a href="#multi-shot">Multi-shot</a>
+                  <ul>
+                    <li><a href="#multi-shot-pristop">Multi-shot pristop</a></li>
+                  </ul>
+                </li>
+                <li><a href="#velikost-senzorjev">Velikost senzorjev</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#modeli-kamer">Modeli kamer</a>
+          <ul>
+            <li><a href="#kamera-na-luknjico-camera-obscura">Kamera na luknjico (camera obscura)</a>
+              <ul>
+                <li><a href="#koordinatni-sistem-kamere-na-luknjico">Koordinatni sistem kamere na luknjico</a></li>
+                <li><a href="#kako-določimo-za-točko-v-sceni-njen-položaj-na-sliki">Kako določimo za točko v sceni njen položaj na sliki?</a></li>
+                <li><a href="#omejitve-modela-kamere-na-luknjico">Omejitve modela kamere na luknjico</a></li>
+              </ul>
+            </li>
+            <li><a href="#kamera-s-tankimi-lečami">Kamera s tankimi lečami</a>
+              <ul>
+                <li><a href="#koordinatni-sistem-modela-s-tankimi-lečami">Koordinatni sistem modela s tankimi lečami</a></li>
+                <li><a href="#omejitve-modela">Omejitve modela</a></li>
+              </ul>
+            </li>
+            <li><a href="#kamera-z-debelimi-lečami">Kamera z debelimi lečami</a>
+              <ul>
+                <li><a href="#koordinatni-sistem-modela-z-debelimi-lečami">Koordinatni sistem modela z debelimi lečami</a></li>
+                <li><a href="#omejitve-modela-1">Omejitve modela</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#parametri-kamere">Parametri kamere</a>
+          <ul>
+            <li><a href="#notranji-parametri-kamere">Notranji parametri kamere</a>
+              <ul>
+                <li><a href="#glavna-točka--parametra--in">Glavna točka – parametra  in </a></li>
+                <li><a href="#parametra--in">Parametra  in </a></li>
+                <li><a href="#kot-theta">Kot theta </a></li>
+                <li><a href="#pet-notranjih-parametrov-kamere">Pet notranjih parametrov kamere</a></li>
+                <li><a href="#kalibracijska-matrika">Kalibracijska matrika </a></li>
+                <li><a href="#projekcijska-matrika">Projekcijska matrika </a></li>
+                <li><a href="#model-kamere--matrična-enačba">Model kamere – matrična enačba</a></li>
+                <li><a href="#homogene-koordinate">Homogene koordinate</a></li>
+                <li><a href="#projekcija">Projekcija</a></li>
+              </ul>
+            </li>
+            <li><a href="#zunanji-parametri-kamere">Zunanji parametri kamere</a>
+              <ul>
+                <li><a href="#povezava-koordinatnih-sistemov">Povezava koordinatnih sistemov</a>
+                  <ul>
+                    <li><a href="#translacija">Translacija</a></li>
+                    <li><a href="#rotacija">Rotacija</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#geometrijsko-kalibriranje-kamer">Geometrijsko kalibriranje kamer</a>
+          <ul>
+            <li><a href="#parametri-kamere-in-kalibracija">Parametri kamere in kalibracija</a></li>
+            <li><a href="#linearni-postopek-kalibriranja">Linearni postopek kalibriranja</a>
+              <ul>
+                <li><a href="#postopek">Postopek</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#predobdelava-slik">Predobdelava slik</a>
       <ul>
-        <li><a href="#spreminajnje-kontrasta">Spreminajnje kontrasta</a></li>
-        <li><a href="#lokalne-operacije-oz-filtriranje-slik">Lokalne operacije oz. filtriranje slik</a></li>
-        <li><a href="#odstranjevanje-šuma-z-lokalnimi-operatorji">Odstranjevanje šuma z lokalnimi operatorji</a></li>
-        <li><a href="#detektorji-robov">Detektorji robov</a></li>
+        <li><a href="#spreminajnje-kontrasta">Spreminajnje kontrasta</a>
+          <ul>
+            <li><a href="#linearizacija-sivin">Linearizacija sivin</a></li>
+            <li><a href="#histogram-sivin">Histogram sivin</a>
+              <ul>
+                <li><a href="#metoda-izenačitev-histograma">Metoda: Izenačitev histograma</a></li>
+                <li><a href="#prenosne-funkcije">Prenosne funkcije</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#lokalne-operacije-oz-filtriranje-slik">Lokalne operacije oz. filtriranje slik</a>
+          <ul>
+            <li><a href="#točkovne-operacije">Točkovne operacije</a></li>
+            <li><a href="#filtriranje">Filtriranje</a>
+              <ul>
+                <li><a href="#1-linearnost">1. Linearnost</a></li>
+                <li><a href="#2-premična-neodvisnost">2. Premična neodvisnost</a></li>
+              </ul>
+            </li>
+            <li><a href="#kako-filtriramo-sliko">Kako filtriramo sliko?</a>
+              <ul>
+                <li><a href="#1-določitev--obnašanja-filtra">1. Določitev  obnašanja filtra</a>
+                  <ul>
+                    <li><a href="#dimenzija-filtra">Dimenzija filtra</a></li>
+                    <li><a href="#vrednosti-uteži-koeficientov">Vrednosti uteži (koeficientov)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#2-izračun-konvolucije-med-masko--in-sliko">2. Izračun konvolucije med masko  in sliko </a></li>
+                <li><a href="#problemi-pri-konvoluciji">Problemi pri konvoluciji</a>
+                  <ul>
+                    <li><a href="#problem-robnih-pikslov">Problem robnih pikslov</a></li>
+                    <li><a href="#problem-vrednosti-po-filtriranju">Problem vrednosti po filtriranju</a></li>
+                    <li><a href="#še-ena-dilema-kje-je-sredina-maske">Še ena dilema: Kje je sredina maske?</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#odstranjevanje-šuma-z-lokalnimi-operatorji">Odstranjevanje šuma z lokalnimi operatorji</a>
+          <ul>
+            <li><a href="#nizko-sito-low-pass-filter">Nizko sito (Low-pass filter)</a>
+              <ul>
+                <li><a href="#kaj-pomeni-nizka-frekvenca">Kaj pomeni nizka frekvenca</a></li>
+                <li><a href="#kaj-pomeni-visoka-frekvenca">Kaj pomeni visoka frekvenca?</a></li>
+                <li><a href="#maska-nizkega-sita">Maska nizkega sita</a></li>
+              </ul>
+            </li>
+            <li><a href="#visoko-sito-high-pass-filter">Visoko sito (High-pass filter)</a></li>
+            <li><a href="#gaussov-filter">Gaussov filter</a></li>
+            <li><a href="#mediani-filter">Mediani filter</a></li>
+          </ul>
+        </li>
+        <li><a href="#detektorji-robov">Detektorji robov</a>
+          <ul>
+            <li><a href="#velikost-jakost-roba">Velikost (jakost) roba</a></li>
+            <li><a href="#smer-roba">Smer roba</a></li>
+            <li><a href="#gradient-za-zvezno-slikovno-funkcijo">Gradient za zvezno slikovno funkcijo</a></li>
+            <li><a href="#aproksimacija-parcialnih-odvodov-v-digitalnih-slikah">Aproksimacija parcialnih odvodov v digitalnih slikah</a>
+              <ul>
+                <li><a href="#aproksimacija-odvoda-po-x">Aproksimacija odvoda po x</a></li>
+              </ul>
+            </li>
+            <li><a href="#laplaceov-operator">Laplaceov operator</a></li>
+            <li><a href="#sobelov-operator">Sobelov operator</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#segmentacija-slik">Segmentacija slik</a>
       <ul>
-        <li><a href="#pragovna-operacija">Pragovna operacija</a></li>
-        <li><a href="#pragovna-operacija-na-sliki-robov">Pragovna operacija na sliki robov</a></li>
+        <li><a href="#pragovna-operacija">Pragovna operacija</a>
+          <ul>
+            <li><a href="#segmentacija">Segmentacija</a></li>
+            <li><a href="#segmentacijske-metode">Segmentacijske metode</a></li>
+            <li><a href="#thresholding-pragovna-operacija">Thresholding (Pragovna operacija)</a>
+              <ul>
+                <li><a href="#enopragovne-operacije">Enopragovne operacije</a>
+                  <ul>
+                    <li><a href="#konstantni-prag">Konstantni prag</a></li>
+                    <li><a href="#variabilni-prag-lokalni-thresholding">Variabilni prag (lokalni thresholding)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#večpragovne-operacije">Večpragovne operacije</a></li>
+                <li><a href="#metode-za-določanje-globalnih-pragov">Metode za določanje globalnih pragov</a>
+                  <ul>
+                    <li><a href="#1-eksperimentalna-določitev">1. Eksperimentalna določitev</a></li>
+                    <li><a href="#2-polovica-med-minimalno-in-maksimalno-sivino-na-sliki">2. Polovica med minimalno in maksimalno sivino na sliki</a></li>
+                    <li><a href="#3prag-kot-povprečje-slike-mean">3.Prag kot povprečje slike (MEAN)</a></li>
+                    <li><a href="#4-prag-kot-mediana-median">4. Prag kot mediana (MEDIAN)</a></li>
+                    <li><a href="#5-globalni-optimalni-prag-optimal">5. Globalni optimalni prag (OPTIMAL)</a></li>
+                    <li><a href="#6-globalni-prag-določen-z-entropijo-kapurjev-prag---kapur">6. Globalni prag določen z entropijo (Kapurjev prag - KAPUR)</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#pragovna-operacija-na-sliki-robov">Pragovna operacija na sliki robov</a>
+          <ul>
+            <li><a href="#sledenje-meji">Sledenje meji</a>
+              <ul>
+                <li><a href="#notranja-in-zunanja-meja-regije">Notranja in zunanja meja regije</a>
+                  <ul>
+                    <li><a href="#notranja-meja">Notranja meja</a></li>
+                    <li><a href="#zunanja-meja">Zunanja meja</a></li>
+                  </ul>
+                </li>
+                <li><a href="#kako-deluje-algoritem-sledenja-meji">Kako deluje algoritem sledenja meji?</a>
+                  <ul>
+                    <li><a href="#4-sosedstvo">4-sosedstvo</a></li>
+                    <li><a href="#8-sosedstvo">8-sosedstvo</a></li>
+                  </ul>
+                </li>
+                <li><a href="#slabost-algoritma-sledenja-meji">Slabost algoritma sledenja meji</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#ujemanje-šablon">Ujemanje šablon</a></li>
       </ul>
     </li>
     <li><a href="#zaporedje-slik-in-sledenje-gibanja">Zaporedje slik in sledenje gibanja</a>
       <ul>
-        <li><a href="#osnovni-pojmi-1">Osnovni pojmi</a></li>
+        <li><a href="#osnovni-pojmi-1">Osnovni pojmi</a>
+          <ul>
+            <li><a href="#zaporedje-slik">Zaporedje slik</a></li>
+          </ul>
+        </li>
         <li><a href="#slike-razlik">Slike razlik</a></li>
-        <li><a href="#statično-ozadje">Statično ozadje</a></li>
-        <li><a href="#optični-pretok">Optični pretok</a></li>
+        <li><a href="#statično-ozadje">Statično ozadje</a>
+          <ul>
+            <li><a href="#postopki-tvorjenja-statičnega-ozadja">Postopki tvorjenja statičnega ozadja</a>
+              <ul>
+                <li><a href="#1-metoda---povprečenje-celotnega-zaporedja-slik">1. Metoda - Povprečenje celotnega zaporedja slik</a></li>
+                <li><a href="#2-metoda---iskanje-skokov-robov-v-časovni-funkciji-piksla">2. Metoda - Iskanje skokov (robov) v časovni funkciji piksla</a></li>
+                <li><a href="#3-metoda---z-drsečim-oknom-skozi-čas">3. Metoda - Z drsečim oknom skozi čas</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#optični-pretok">Optični pretok</a>
+          <ul>
+            <li><a href="#oblikovanje-sistema-enačb---kako-določimo-vektor-premika--za-en-piksel">Oblikovanje sistema enačb - Kako določimo vektor premika  za en piksel?</a>
+              <ul>
+                <li><a href="#korak-1-izberemo-okolico">Korak 1: Izberemo okolico</a></li>
+                <li><a href="#korak-2-izračun-parcialnih-odvodov">Korak 2: Izračun parcialnih odvodov</a></li>
+                <li><a href="#korak-3-matrika-a">Korak 3: Matrika A</a></li>
+                <li><a href="#korak-4-stolpec-b">Korak 4: Stolpec b</a></li>
+                <li><a href="#korak-5-reševanje-sistema">Korak 5: Reševanje sistema</a></li>
+              </ul>
+            </li>
+            <li><a href="#psevdokod-algoritma">Psevdokod algoritma</a>
+              <ul>
+                <li><a href="#izbira-okolice">Izbira okolice</a></li>
+                <li><a href="#opcijska-koraka-predobdelava">Opcijska koraka (predobdelava)</a></li>
+                <li><a href="#ključni-koraki">Ključni koraki</a>
+                  <ul>
+                    <li><a href="#ocenitev-optičnega-toka">Ocenitev optičnega toka</a></li>
+                  </ul>
+                </li>
+                <li><a href="#kaj-dobimo-z-optičnim-tokom">Kaj dobimo z optičnim tokom?</a></li>
+                <li><a href="#primer--optični-pretok">Primer – Optični pretok</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#sledenje-objektom">Sledenje objektom</a></li>
       </ul>
     </li>
     <li><a href="#geometrija-več-pogledov">Geometrija več pogledov</a>
       <ul>
-        <li><a href="#dva-pogleda-splošno">Dva pogleda (splošno)</a></li>
+        <li><a href="#dva-pogleda-splošno">Dva pogleda (splošno)</a>
+          <ul>
+            <li><a href="#geometrija-dveh-kamer">Geometrija dveh kamer</a>
+              <ul>
+                <li><a href="#prva-varianta--kalibrirane-razmere">PRVA VARIANTA – Kalibrirane razmere</a></li>
+                <li><a href="#druga-varianta--neurejene-oz-nekalibrirane-razmere">DRUGA VARIANTA – Neurejene oz. nekalibrirane razmere</a>
+                  <ul>
+                    <li><a href="#kalibracija-sistema-kamer">Kalibracija sistema kamer</a></li>
+                    <li><a href="#algoritem-osmih-točk">Algoritem osmih točk</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#trije-pogledi">Trije pogledi</a></li>
-        <li><a href="#določanje-položaja-točk-v-3d">Določanje položaja točk v 3D</a></li>
-        <li><a href="#stereo-vid">Stereo vid</a></li>
+        <li><a href="#določanje-položaja-točk-v-3d">Določanje položaja točk v 3D</a>
+          <ul>
+            <li><a href="#postopek-za-2-pogleda">Postopek za 2 pogleda?</a></li>
+            <li><a href="#postopek-za-3-poglede">Postopek za 3 poglede</a></li>
+          </ul>
+        </li>
+        <li><a href="#stereo-vid">Stereo vid</a>
+          <ul>
+            <li><a href="#rekonstrukcija">Rekonstrukcija</a></li>
+            <li><a href="#primer-paralelnih-kamer">Primer paralelnih kamer</a></li>
+            <li><a href="#rektifikacija-oz-izravnavanje-slik">Rektifikacija oz. izravnavanje slik</a></li>
+            <li><a href="#ujemanje-stereo-slik-paralelne-kamere">Ujemanje stereo slik (paralelne kamere)</a>
+              <ul>
+                <li><a href="#1-metode-na-osnovi-sivin">1. Metode na osnovi sivin</a></li>
+                <li><a href="#2-metode-na-osnovi-značilnic">2. Metode na osnovi značilnic</a></li>
+                <li><a href="#omejitve-pri-ujemanju">Omejitve pri ujemanju</a>
+                  <ul>
+                    <li><a href="#1-podobnost">1. Podobnost</a></li>
+                    <li><a href="#2-enoličnost">2. Enoličnost</a></li>
+                    <li><a href="#3-zveznost-smoothness">3. Zveznost (Smoothness)</a></li>
+                    <li><a href="#4-urejanje-ordering-constraint">4. Urejanje (Ordering constraint)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#5-epipolarna-omejitev">5. Epipolarna omejitev</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#uvod-v-razpoznavanje-vzorcev">Uvod v razpoznavanje vzorcev</a>
       <ul>
-        <li><a href="#definicije-in-osnovni-pojmi">Definicije in osnovni pojmi</a></li>
-        <li><a href="#model-razvrščevalnika-vzorcev">Model razvrščevalnika vzorcev</a></li>
-        <li><a href="#zapisi-vzorcev">Zapisi vzorcev</a></li>
-        <li><a href="#spoznavanje-področja-uporabe">Spoznavanje področja uporabe</a></li>
-        <li><a href="#razvrščanje-vzorcev">Razvrščanje vzorcev</a></li>
-        <li><a href="#preizkušanje-razvrščevalnika-vzorcev">Preizkušanje razvrščevalnika vzorcev</a></li>
+        <li><a href="#definicije-in-osnovni-pojmi">Definicije in osnovni pojmi</a>
+          <ul>
+            <li><a href="#koraki-preobdelave">Koraki preobdelave</a>
+              <ul>
+                <li><a href="#1-manjkajoče-vrednosti">1. Manjkajoče vrednosti</a></li>
+                <li><a href="#2-odstopanja-outlierji">2. Odstopanja (outlierji)</a></li>
+              </ul>
+            </li>
+            <li><a href="#proces-razvoja-sistema">Proces razvoja sistema</a>
+              <ul>
+                <li><a href="#1-objekti--vzorci">1. Objekti → vzorci</a></li>
+                <li><a href="#2-rojanje">2. Rojanje</a></li>
+                <li><a href="#3-učna-množica">3. Učna množica</a></li>
+              </ul>
+            </li>
+            <li><a href="#razvrščanje-in-razpoznavanje-vzorcev">Razvrščanje in razpoznavanje vzorcev</a>
+              <ul>
+                <li><a href="#razvrščanje-klasifikacija">Razvrščanje (klasifikacija)</a></li>
+                <li><a href="#razpoznavanje">Razpoznavanje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#model-razvrščevalnika-vzorcev">Model razvrščevalnika vzorcev</a>
+          <ul>
+            <li><a href="#1-sistem-za-zajemanje-vzorcev">1. Sistem za zajemanje vzorcev</a></li>
+            <li><a href="#2-določitev-vrednosti-značilnic-feature-extraction">2. Določitev vrednosti značilnic (feature extraction)</a></li>
+            <li><a href="#3-faza-učenja-pozicija-1">3. Faza učenja (pozicija 1)</a></li>
+            <li><a href="#4-faza-razvrščanja-pozicija-2">4. Faza razvrščanja (pozicija 2)</a>
+              <ul>
+                <li><a href="#faza-2a--testiranje">Faza 2a – testiranje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#zapisi-vzorcev">Zapisi vzorcev</a>
+          <ul>
+            <li><a href="#1-hevristični-pristop">1. Hevristični pristop</a></li>
+            <li><a href="#2-matematični-pristop">2. Matematični pristop</a></li>
+            <li><a href="#postopki-izbire-značilnic">Postopki izbire značilnic</a></li>
+            <li><a href="#izpeljava-značilnic-feature-extraction">Izpeljava značilnic (Feature Extraction)</a>
+              <ul>
+                <li><a href="#znani-metodi">Znani metodi</a>
+                  <ul>
+                    <li><a href="#1-pca--analiza-glavnih-komponent-podatkov-svd-razcep">1. PCA – analiza glavnih komponent podatkov (SVD razcep)</a></li>
+                  </ul>
+                </li>
+                <li><a href="#2-analiza-neodvisnih-komponent-ica">2. Analiza neodvisnih komponent (ICA)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#spoznavanje-področja-uporabe">Spoznavanje področja uporabe</a>
+          <ul>
+            <li><a href="#normiranje-značilnic">Normiranje značilnic</a>
+              <ul>
+                <li><a href="#simetrične-značilnice---linearna-transformacija">Simetrične značilnice - linearna transformacija</a></li>
+                <li><a href="#nesimetrične-značilnice---nelinearna-transformacija">Nesimetrične značilnice - nelinearna transformacija</a></li>
+              </ul>
+            </li>
+            <li><a href="#postopek-rojenja-clustering">Postopek rojenja (clustering)</a>
+              <ul>
+                <li><a href="#postopek-k-povprečij--prvi-postopek-rojenja-k-means">Postopek K povprečij – prvi postopek rojenja (k-means)</a></li>
+              </ul>
+            </li>
+            <li><a href="#postopek-učenja">Postopek učenja</a></li>
+          </ul>
+        </li>
+        <li><a href="#razvrščanje-vzorcev">Razvrščanje vzorcev</a>
+          <ul>
+            <li><a href="#1-razvrščanje-po-pravilu-najbližjega-soseda-k-nn">1. Razvrščanje po pravilu najbližjega soseda (k-NN)</a>
+              <ul>
+                <li><a href="#prva-varianta---znanje-o-posameznem-razredu-shranjeno-v-obliki-vseh-vzorcev">Prva varianta - Znanje o posameznem razredu shranjeno v obliki vseh vzorcev</a></li>
+                <li><a href="#druga-varianta---znanje-shranjeno-v-obliki-centrov-razredov">Druga varianta - Znanje shranjeno v obliki centrov razredov**</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-razvrščanje-z-odločitvenimi-funkcijami">2. Razvrščanje z odločitvenimi funkcijami</a></li>
+          </ul>
+        </li>
+        <li><a href="#preizkušanje-razvrščevalnika-vzorcev">Preizkušanje razvrščevalnika vzorcev</a>
+          <ul>
+            <li><a href="#spodnja-meja-predikcijske-napake">Spodnja meja predikcijske napake</a></li>
+            <li><a href="#zgornja-meja-napake--leave-one-out">Zgornja meja napake – Leave-One-Out</a>
+              <ul>
+                <li><a href="#k-fold-validacija">K-Fold validacija</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#osnovni-pojmi-o-nevronskih-mrežah">Osnovni pojmi o nevronskih mrežah</a>
       <ul>
-        <li><a href="#razlika-med-delovanjem-računalnikov-in-možganov">Razlika med delovanjem računalnikov in možganov</a></li>
+        <li><a href="#razlika-med-delovanjem-računalnikov-in-možganov">Razlika med delovanjem računalnikov in možganov</a>
+          <ul>
+            <li><a href="#1-postopek-razpoznavanja">1. Postopek razpoznavanja</a></li>
+            <li><a href="#2-čas-potreben-za-izvrševanje-nalog-razpoznavanje--razvrščanje-vzorcev">2. Čas potreben za izvrševanje nalog (razpoznavanje / razvrščanje vzorcev)</a></li>
+            <li><a href="#3-zgradba-in-način-izračunavanja">3. Zgradba in način izračunavanja</a></li>
+          </ul>
+        </li>
         <li><a href="#organski-nevron">Organski nevron</a></li>
-        <li><a href="#model-umetnega-nevrona">Model umetnega nevrona</a></li>
+        <li><a href="#model-umetnega-nevrona">Model umetnega nevrona</a>
+          <ul>
+            <li><a href="#aktivacijske-funkcije">Aktivacijske funkcije</a></li>
+          </ul>
+        </li>
         <li><a href="#umetne-nevronske-mreže">Umetne nevronske mreže</a></li>
-        <li><a href="#razdelitev-nevronskih-mrež">Razdelitev nevronskih mrež</a></li>
+        <li><a href="#razdelitev-nevronskih-mrež">Razdelitev nevronskih mrež</a>
+          <ul>
+            <li><a href="#glede-na-izhodne-vrednosti">Glede na izhodne vrednosti</a></li>
+            <li><a href="#glede-na-povezave">Glede na povezave</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#zvezni-večplastni-perceptroni">Zvezni večplastni perceptroni</a>
       <ul>
         <li><a href="#osnovni-pojmi-2">Osnovni pojmi</a></li>
-        <li><a href="#splošni-zvezni-večplastni-perceptroni">Splošni zvezni večplastni perceptroni</a></li>
-        <li><a href="#učno-pravilo-gradientnega-sestopa">Učno pravilo gradientnega sestopa</a></li>
-        <li><a href="#enonevronski-zvezni-perceptroni">Enonevronski zvezni perceptroni</a></li>
-        <li><a href="#dvoplastni-zvezni-perceptroni">Dvoplastni zvezni perceptroni</a></li>
-        <li><a href="#hitrost-učenja-in-inicializacija-sinaptičnih-uteži">Hitrost učenja in inicializacija sinaptičnih uteži</a></li>
+        <li><a href="#splošni-zvezni-večplastni-perceptroni">Splošni zvezni večplastni perceptroni</a>
+          <ul>
+            <li><a href="#aktivacijske-prenosne-funkcije">Aktivacijske (prenosne) funkcije</a>
+              <ul>
+                <li><a href="#1-linearna-prenosna-funkcija">1. Linearna prenosna funkcija</a></li>
+                <li><a href="#2-rectified-linear-unit-relu">2. Rectified Linear Unit (ReLU)</a></li>
+                <li><a href="#3-sigmoidna-funkcija">3. Sigmoidna funkcija</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#učno-pravilo-gradientnega-sestopa">Učno pravilo gradientnega sestopa</a>
+          <ul>
+            <li><a href="#učno-pravilo-gradientnega-sestopa-vzvratno-učenje">Učno pravilo gradientnega sestopa (vzvratno učenje)</a></li>
+            <li><a href="#globalno-in-lokalno-učenje">Globalno in lokalno učenje</a>
+              <ul>
+                <li><a href="#1-globalno-učenje">1. Globalno učenje</a></li>
+                <li><a href="#2-lokalno-inkrementalno-učenje">2. Lokalno (inkrementalno) učenje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#enonevronski-zvezni-perceptroni">Enonevronski zvezni perceptroni</a>
+          <ul>
+            <li><a href="#1-pristop--razvrščanje-s-hiperravninsko-ločilno-mejo-z-ena-in-nič-označevanjem">1. Pristop – Razvrščanje s hiperravninsko ločilno mejo z ena in nič označevanjem</a>
+              <ul>
+                <li><a href="#1-učenje">1. Učenje</a></li>
+                <li><a href="#2-razvrščanje">2. Razvrščanje</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-pristop--razvrščanje-s-hiperravninsko-ločilno-mejo-z-označevanjem-z-dvojmim-pragom">2. Pristop – Razvrščanje s hiperravninsko ločilno mejo z označevanjem z dvojmim pragom</a></li>
+            <li><a href="#3-pristop--razvrščanje-s-hiperravninsko-ločilno-mejo-z-označevanjem-z-enojnim-pragom">3. Pristop – Razvrščanje s hiperravninsko ločilno mejo z označevanjem z enojnim pragom</a>
+              <ul>
+                <li><a href="#1-učenje-1">1. Učenje</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#dvoplastni-zvezni-perceptroni">Dvoplastni zvezni perceptroni</a>
+          <ul>
+            <li><a href="#dvoplstni-perceptron">Dvoplstni perceptron</a></li>
+            <li><a href="#dvoplastni-trinevronski-perceptron">Dvoplastni, trinevronski perceptron</a></li>
+            <li><a href="#preverjanje-naučenosti-mreže">Preverjanje naučenosti mreže</a>
+              <ul>
+                <li><a href="#prvi-graf">Prvi graf</a></li>
+                <li><a href="#drugi-graf">Drugi graf</a>
+                  <ul>
+                    <li><a href="#tretji-graf">Tretji graf</a></li>
+                  </ul>
+                </li>
+                <li><a href="#analiza-rezultatov">Analiza rezultatov</a></li>
+              </ul>
+            </li>
+            <li><a href="#podprileganja-underfitting">podprileganja (underfitting)**</a></li>
+            <li><a href="#nadprileganje-overfitting">Nadprileganje (Overfitting)</a></li>
+            <li><a href="#teorem-univerzalne-aproksimacije">Teorem univerzalne aproksimacije</a></li>
+          </ul>
+        </li>
+        <li><a href="#hitrost-učenja-in-inicializacija-sinaptičnih-uteži">Hitrost učenja in inicializacija sinaptičnih uteži</a>
+          <ul>
+            <li><a href="#1-metoda-momenta-momentum">1. Metoda momenta (Momentum)</a></li>
+            <li><a href="#skaliranje-vhodov-in-izhodov">Skaliranje vhodov in izhodov</a>
+              <ul>
+                <li><a href="#skaliranje-vhodov">Skaliranje vhodov</a></li>
+                <li><a href="#skaliranje-izhodov">Skaliranje izhodov</a>
+                  <ul>
+                    <li><a href="#če-je-izhodna-funkcija-linearna">Če je izhodna funkcija linearna:</a></li>
+                    <li><a href="#če-je-izhodna-funkcija-sigmoidna">Če je izhodna funkcija sigmoidna:</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#inicializacija-uteži">Inicializacija uteži</a>
+              <ul>
+                <li><a href="#napačne-izbire">Napačne izbire:</a></li>
+                <li><a href="#boljša-izbira">Boljša izbira:</a></li>
+              </ul>
+            </li>
+            <li><a href="#inicializacija-praga-bias">Inicializacija praga (bias)</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#samoorganizirajoče-se-nevronske-mreže">Samoorganizirajoče se nevronske mreže</a>
       <ul>
         <li><a href="#topologija-in-obnašanje">Topologija in obnašanje</a></li>
-        <li><a href="#ekvivalentni-algoritem-in-spreminajnje-sinaptičnih-uteži">Ekvivalentni algoritem in spreminajnje sinaptičnih uteži</a></li>
-        <li><a href="#ekvivalentni-algoritem-in-postopek-učenja">Ekvivalentni algoritem in postopek učenja</a></li>
-        <li><a href="#napotki-za-uporabo-ekvivalentnega-algoritma">Napotki za uporabo ekvivalentnega algoritma</a></li>
+        <li><a href="#ekvivalentni-algoritem-in-spreminajnje-sinaptičnih-uteži">Ekvivalentni algoritem in spreminajnje sinaptičnih uteži</a>
+          <ul>
+            <li><a href="#1-korak--iskanje-zmagovalnega-nevrona">1. korak – Iskanje zmagovalnega nevrona</a></li>
+            <li><a href="#2-korak--adaptacija-uteži">2. korak – Adaptacija uteži</a>
+              <ul>
+                <li><a href="#funkcija-g">Funkcija g</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#ekvivalentni-algoritem-in-postopek-učenja">Ekvivalentni algoritem in postopek učenja</a>
+          <ul>
+            <li><a href="#1-faza-urejanja-sinaptičnih-uteži-začetna-faza">1. Faza urejanja sinaptičnih uteži (začetna faza)</a></li>
+            <li><a href="#2-kvantizacijska-faza-končna-faza">2. Kvantizacijska faza (končna faza)</a></li>
+          </ul>
+        </li>
+        <li><a href="#napotki-za-uporabo-ekvivalentnega-algoritma">Napotki za uporabo ekvivalentnega algoritma</a>
+          <ul>
+            <li><a href="#1-faza-učenja">1. Faza učenja</a></li>
+            <li><a href="#2-faza-razvrščanja">2. Faza razvrščanja</a></li>
+            <li><a href="#merjenje-učinkovitosti-ekvivalentnega-algoritma">Merjenje učinkovitosti ekvivalentnega algoritma</a></li>
+            <li><a href="#energija-kvantizacijskega-šuma">Energija kvantizacijskega šuma</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -5927,7 +6917,7 @@ Energija kvantizacijskega šuma
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div>Posts</div><div class="sidebar-state-number">7</div>
+    <div>Posts</div><div class="sidebar-state-number">8</div>
   </div>
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>Categories</div>

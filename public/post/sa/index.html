@@ -173,34 +173,431 @@ This article does not have a corresponding language version
     <li><a href="#uvod">Uvod</a>
       <ul>
         <li><a href="#kaj-je-sistemska-administracija">Kaj je sistemska administracija</a></li>
-        <li><a href="#operacijski-sistemi">Operacijski sistemi</a></li>
+        <li><a href="#operacijski-sistemi">Operacijski sistemi</a>
+          <ul>
+            <li><a href="#osnove-sistema-unix-tudi-linux">Osnove sistema UNIX (tudi Linux)</a></li>
+            <li><a href="#osnovne-lastnosti-sistema-unix-in-večine-sodobnih-operacijskih-sistemov">Osnovne lastnosti sistema UNIX (in večine sodobnih operacijskih sistemov)</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#disk-datotečni-sistem">Disk, datotečni sistem</a>
       <ul>
-        <li><a href="#osnovni-ukazi">Osnovni ukazi</a></li>
-        <li><a href="#superuporabnik-superuser">Superuporabnik (Superuser)</a></li>
-        <li><a href="#ukazi-za-delo-s-sistemom">Ukazi za delo s sistemom</a></li>
-        <li><a href="#signali-v-sistemu">Signali v sistemu</a></li>
-        <li><a href="#datoteke-uporabnikov-in-gesel">Datoteke uporabnikov in gesel</a></li>
-        <li><a href="#ukazni-interpreter-in-ukazne-lupine">Ukazni interpreter in ukazne lupine</a></li>
-        <li><a href="#datoteke-za-shranjevanje-gesel">Datoteke za shranjevanje gesel</a></li>
-        <li><a href="#identifikacija-uporabnikov-in-skupin">Identifikacija uporabnikov in skupin</a></li>
-        <li><a href="#upravljanje-diskov-in-particij">Upravljanje diskov in particij</a></li>
-        <li><a href="#delo-z-oddaljenimi-računalniki">Delo z oddaljenimi računalniki</a></li>
-        <li><a href="#pregled-procesov">Pregled procesov</a></li>
-        <li><a href="#tipi-datotek-datotečni-sistem">Tipi datotek (datotečni sistem)</a></li>
-        <li><a href="#datotečni-sistem-linux--dodatni-direktoriji">Datotečni sistem Linux — dodatni direktoriji</a></li>
-        <li><a href="#datotečni-sistem--osnovni-ukazi">Datotečni sistem — osnovni ukazi</a></li>
-        <li><a href="#osnovni-ukazi-za-pregled-tekstovnih-datotek">Osnovni ukazi za pregled tekstovnih datotek</a></li>
-        <li><a href="#brisanje-datotek-in-direktorijev">Brisanje datotek in direktorijev</a></li>
-        <li><a href="#ukazi-za-delo-z-datotekami-in-skriptami">Ukazi za delo z datotekami in skriptami</a></li>
-        <li><a href="#datotečni-sistem">Datotečni sistem</a></li>
-        <li><a href="#inode">Inode</a></li>
-        <li><a href="#sticky-bit-t-bit">Sticky bit (<code>t</code> bit)</a></li>
-        <li><a href="#namestitev-paketov-v-različnih-sistemih">Namestitev paketov v različnih sistemih</a></li>
-        <li><a href="#ukazi-v-bash-skriptah">Ukazi v bash skriptah</a></li>
-        <li><a href="#informacije-o-sistemu">Informacije o sistemu</a></li>
+        <li><a href="#osnovni-ukazi">Osnovni ukazi</a>
+          <ul>
+            <li><a href="#delo-z-datotekami">Delo z datotekami</a>
+              <ul>
+                <li><a href="#ls-list"><code>ls</code> (list)</a></li>
+                <li><a href="#cp-copy"><code>cp</code> (copy)</a></li>
+                <li><a href="#mv-move"><code>mv</code> (move)</a></li>
+                <li><a href="#rm-remove"><code>rm</code> (remove)</a></li>
+                <li><a href="#find"><code>find</code></a></li>
+                <li><a href="#more"><code>more</code></a></li>
+                <li><a href="#tail"><code>tail</code></a></li>
+                <li><a href="#wc-word-count"><code>wc</code> (word count)</a></li>
+                <li><a href="#grep"><code>grep</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#dovoljenja-in-lastništvo">Dovoljenja in lastništvo</a>
+              <ul>
+                <li><a href="#chmod-change-mode"><code>chmod</code> (change mode)</a></li>
+                <li><a href="#chown-change-owner"><code>chown</code> (change owner)</a></li>
+                <li><a href="#sudo"><code>sudo</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#delo-z-uporabniki">Delo z uporabniki</a>
+              <ul>
+                <li><a href="#useradd"><code>useradd</code></a></li>
+                <li><a href="#usermod"><code>usermod</code></a></li>
+                <li><a href="#userdel"><code>userdel</code></a></li>
+                <li><a href="#passwd"><code>passwd</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#delo-s-procesi">Delo s procesi</a>
+              <ul>
+                <li><a href="#ps"><code>ps</code></a></li>
+                <li><a href="#top"><code>top</code></a></li>
+                <li><a href="#kill"><code>kill</code></a></li>
+                <li><a href="#nice"><code>nice</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#delo-z-diski">Delo z diski</a>
+              <ul>
+                <li><a href="#df"><code>df</code></a></li>
+                <li><a href="#fdisk"><code>fdisk</code></a></li>
+                <li><a href="#du"><code>du</code></a></li>
+                <li><a href="#mount"><code>mount</code></a></li>
+                <li><a href="#umount"><code>umount</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#tiskanje">Tiskanje</a>
+              <ul>
+                <li><a href="#lpr"><code>lpr</code></a></li>
+                <li><a href="#lpq"><code>lpq</code></a></li>
+                <li><a href="#lprm"><code>lprm</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#ostali-pomembni-ukazi">Ostali pomembni ukazi</a>
+              <ul>
+                <li><a href="#man"><code>man</code></a></li>
+                <li><a href="#date"><code>date</code></a></li>
+                <li><a href="#who"><code>who</code></a></li>
+                <li><a href="#telnet"><code>telnet</code></a></li>
+                <li><a href="#rlogin"><code>rlogin</code></a></li>
+                <li><a href="#ssh-secure-shell"><code>ssh</code> (Secure Shell)</a></li>
+              </ul>
+            </li>
+            <li><a href="#urejevalniki-besedilnih-datotek">Urejevalniki besedilnih datotek</a></li>
+          </ul>
+        </li>
+        <li><a href="#superuporabnik-superuser">Superuporabnik (Superuser)</a>
+          <ul>
+            <li><a href="#root">Root</a></li>
+            <li><a href="#sudo-1"><code>sudo</code></a></li>
+            <li><a href="#su-switch-user"><code>su</code> (Switch User)</a></li>
+            <li><a href="#poziv-ukazne-vrstice">Poziv ukazne vrstice</a></li>
+            <li><a href="#varnost-superuporabniškega-računa">Varnost superuporabniškega računa</a></li>
+            <li><a href="#identifikacija-uporabnikov-uid">Identifikacija uporabnikov (UID)</a></li>
+            <li><a href="#povzetek">Povzetek</a></li>
+            <li><a href="#o-sistemu--nekaj-uporabnih-ukazov">O sistemu — nekaj uporabnih ukazov</a>
+              <ul>
+                <li><a href="#preklop-uporabnika-su">Preklop uporabnika (<code>su</code>)</a></li>
+                <li><a href="#ukaz-id">Ukaz <code>id</code></a></li>
+                <li><a href="#ukaz-uname">Ukaz <code>uname</code></a></li>
+                <li><a href="#razlika-med-uname-in-uname--a">Razlika med <code>uname</code> in <code>uname -a</code></a></li>
+                <li><a href="#ukaz-pwd">Ukaz <code>pwd</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#osnovni-koncepti-sistema">Osnovni koncepti sistema</a>
+              <ul>
+                <li><a href="#datoteke-in-direktoriji">Datoteke in direktoriji</a></li>
+                <li><a href="#pregled-osnovnih-ukazov">Pregled osnovnih ukazov</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#ukazi-za-delo-s-sistemom">Ukazi za delo s sistemom</a>
+          <ul>
+            <li><a href="#ukaz-who">Ukaz <code>who</code></a></li>
+            <li><a href="#odjava-uporabnika-exit">Odjava uporabnika (<code>exit</code>)</a></li>
+            <li><a href="#ukaz-which">Ukaz <code>which</code></a></li>
+            <li><a href="#ukaz-man">Ukaz <code>man</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#signali-v-sistemu">Signali v sistemu</a>
+          <ul>
+            <li><a href="#ukaz-ls">Ukaz <code>ls</code></a>
+              <ul>
+                <li><a href="#možnosti-ukaza-ls">Možnosti ukaza <code>ls</code></a>
+                  <ul>
+                    <li><a href="#dolg-izpis-ls--l">Dolg izpis (<code>ls -l</code>)</a></li>
+                    <li><a href="#izpis-po-času-spremembe-ls--lt">Izpis po času spremembe (<code>ls -lt</code>)</a></li>
+                    <li><a href="#rekurzivni-izpis-ls--r">Rekurzivni izpis (<code>ls -r</code>)</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#ukaz-which-1">Ukaz <code>which</code></a></li>
+            <li><a href="#ukaz-man-1">Ukaz <code>man</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#datoteke-uporabnikov-in-gesel">Datoteke uporabnikov in gesel</a>
+          <ul>
+            <li><a href="#datoteka-etcpasswd">Datoteka <code>/etc/passwd</code></a></li>
+            <li><a href="#datotečna-struktura-sistema-linux">Datotečna struktura sistema Linux</a></li>
+          </ul>
+        </li>
+        <li><a href="#ukazni-interpreter-in-ukazne-lupine">Ukazni interpreter in ukazne lupine</a>
+          <ul>
+            <li><a href="#c-shell-csh">C Shell (<code>csh</code>)</a></li>
+            <li><a href="#shell-v-sistemu-windows">Shell v sistemu Windows</a></li>
+          </ul>
+        </li>
+        <li><a href="#datoteke-za-shranjevanje-gesel">Datoteke za shranjevanje gesel</a>
+          <ul>
+            <li><a href="#datoteka-etcpasswd-1">Datoteka <code>/etc/passwd</code></a></li>
+            <li><a href="#datoteka-etcshadow">Datoteka <code>/etc/shadow</code></a></li>
+            <li><a href="#ukaz-sudo">Ukaz <code>sudo</code></a></li>
+            <li><a href="#ukaz-passwd">Ukaz <code>passwd</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#identifikacija-uporabnikov-in-skupin">Identifikacija uporabnikov in skupin</a>
+          <ul>
+            <li><a href="#uid">UID</a></li>
+            <li><a href="#gid">GID</a></li>
+            <li><a href="#kako-je-kriptirano-geslo">Kako je kriptirano geslo?</a></li>
+            <li><a href="#hash-algoritmi-za-gesla">Hash algoritmi za gesla</a></li>
+            <li><a href="#sekljalni-algoritmi-hash">Sekljalni algoritmi (<em>Hash</em>)</a></li>
+            <li><a href="#kode-algoritmov-za-gesla">Kode algoritmov za gesla</a></li>
+          </ul>
+        </li>
+        <li><a href="#upravljanje-diskov-in-particij">Upravljanje diskov in particij</a>
+          <ul>
+            <li><a href="#ukaz-fdisk">Ukaz <code>fdisk</code></a></li>
+            <li><a href="#ukaz-fdisk--l">Ukaz <code>fdisk -l</code></a></li>
+            <li><a href="#ukaz-df">Ukaz <code>df</code></a></li>
+            <li><a href="#priklopne-točke-mount-points">Priklopne točke (<em>Mount points</em>)</a></li>
+            <li><a href="#premikanje-datotek-move">Premikanje datotek (<code>move</code>)</a></li>
+            <li><a href="#premik-datoteke-znotraj-iste-particije">Premik datoteke znotraj iste particije</a></li>
+            <li><a href="#premik-datoteke-med-različnimi-particijami">Premik datoteke med različnimi particijami</a></li>
+          </ul>
+        </li>
+        <li><a href="#delo-z-oddaljenimi-računalniki">Delo z oddaljenimi računalniki</a>
+          <ul>
+            <li><a href="#ukaz-ssh">Ukaz <code>ssh</code></a></li>
+            <li><a href="#odjava-iz-oddaljenega-računalnika">Odjava iz oddaljenega računalnika</a></li>
+            <li><a href="#primer-povezava-na-oddaljeni-računalnik">Primer: povezava na oddaljeni računalnik</a></li>
+            <li><a href="#primer-prijava-na-hpc-rivr">Primer: prijava na HPC-RIVR</a></li>
+          </ul>
+        </li>
+        <li><a href="#pregled-procesov">Pregled procesov</a>
+          <ul>
+            <li><a href="#ukaz-ps">Ukaz <code>ps</code></a></li>
+            <li><a href="#ukaz-top">Ukaz <code>top</code></a></li>
+            <li><a href="#ukaz-htop">Ukaz <code>htop</code></a></li>
+            <li><a href="#oddaljeni-dostop-v-sistemu-windows">Oddaljeni dostop v sistemu Windows</a></li>
+          </ul>
+        </li>
+        <li><a href="#tipi-datotek-datotečni-sistem">Tipi datotek (datotečni sistem)</a>
+          <ul>
+            <li><a href="#datotečni-sistem-linux">Datotečni sistem Linux</a></li>
+            <li><a href="#pomembni-direktoriji-v-linux-sistemu">Pomembni direktoriji v Linux sistemu</a>
+              <ul>
+                <li><a href="#etc"><code>/etc</code></a></li>
+                <li><a href="#bin"><code>/bin</code></a></li>
+                <li><a href="#dev"><code>/dev</code></a></li>
+                <li><a href="#usr"><code>/usr</code></a></li>
+                <li><a href="#home"><code>/home</code></a></li>
+                <li><a href="#uporabniški-direktoriji">Uporabniški direktoriji</a></li>
+                <li><a href="#proc"><code>/proc</code></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#datotečni-sistem-linux--dodatni-direktoriji">Datotečni sistem Linux — dodatni direktoriji</a>
+          <ul>
+            <li><a href="#var"><code>/var</code></a></li>
+            <li><a href="#lib"><code>/lib</code></a></li>
+            <li><a href="#lib64"><code>/lib64</code></a></li>
+            <li><a href="#boot"><code>/boot</code></a></li>
+            <li><a href="#root-1"><code>/root</code></a></li>
+            <li><a href="#media"><code>/media</code></a></li>
+            <li><a href="#sbin"><code>/sbin</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#datotečni-sistem--osnovni-ukazi">Datotečni sistem — osnovni ukazi</a>
+          <ul>
+            <li><a href="#ukaz-cd">Ukaz <code>cd</code></a></li>
+            <li><a href="#domači-direktorij">Domači direktorij</a></li>
+            <li><a href="#ukaz-ls-1">Ukaz <code>ls</code></a></li>
+            <li><a href="#ukaz-find">Ukaz <code>find</code></a></li>
+            <li><a href="#tilda---domači-direktorij">Tilda (<code>~</code>) — domači direktorij</a></li>
+            <li><a href="#relativne-in-absolutne-poti">Relativne in absolutne poti</a>
+              <ul>
+                <li><a href="#absolutna-pot">Absolutna pot</a></li>
+                <li><a href="#relativna-pot">Relativna pot</a></li>
+              </ul>
+            </li>
+            <li><a href="#primeri-poti">Primeri poti</a></li>
+            <li><a href="#absolutna-pot-1">Absolutna pot</a></li>
+            <li><a href="#trenutni-direktorij-">Trenutni direktorij (<code>.</code>)</a></li>
+            <li><a href="#nadrejeni-direktorij-">Nadrejeni direktorij (<code>..</code>)</a></li>
+            <li><a href="#skriti-direktoriji">Skriti direktoriji</a></li>
+            <li><a href="#okoljske-spremenljivke-environment-variables">Okoljske spremenljivke (<em>Environment variables</em>)</a></li>
+          </ul>
+        </li>
+        <li><a href="#osnovni-ukazi-za-pregled-tekstovnih-datotek">Osnovni ukazi za pregled tekstovnih datotek</a>
+          <ul>
+            <li><a href="#ukaz-cat">Ukaz <code>cat</code></a></li>
+            <li><a href="#ukaz-more">Ukaz <code>more</code></a></li>
+            <li><a href="#ukaz-less">Ukaz <code>less</code></a></li>
+            <li><a href="#imena-datotek-v-linuxu">Imena datotek v Linuxu</a></li>
+          </ul>
+        </li>
+        <li><a href="#brisanje-datotek-in-direktorijev">Brisanje datotek in direktorijev</a>
+          <ul>
+            <li><a href="#ukaz-rm">Ukaz <code>rm</code></a></li>
+            <li><a href="#brisanje-več-datotek">Brisanje več datotek</a></li>
+            <li><a href="#rekurzivno-brisanje-rm--r">Rekurzivno brisanje (<code>rm -r</code>)</a></li>
+            <li><a href="#opozorilo-pri-ukazu-rm">Opozorilo pri ukazu <code>rm</code></a></li>
+            <li><a href="#izpis-datotek-in-direktorijev-z-ukazom-ls">Izpis datotek in direktorijev z ukazom <code>ls</code></a></li>
+            <li><a href="#razlaga-izpisa-ls--l">Razlaga izpisa <code>ls -l</code></a></li>
+            <li><a href="#pravice-dostopa-rwx">Pravice dostopa (<code>rwx</code>)</a></li>
+            <li><a href="#primer-zaščite-datoteke">Primer zaščite datoteke</a></li>
+            <li><a href="#dodatni-podatki-pri-ls--l">Dodatni podatki pri <code>ls -l</code></a></li>
+            <li><a href="#povezave-in-simbolični-linki">Povezave in simbolični linki</a></li>
+            <li><a href="#dodatne-možnosti-ukaza-ls">Dodatne možnosti ukaza <code>ls</code></a></li>
+            <li><a href="#izpis-po-času">Izpis po času</a></li>
+            <li><a href="#iskanje-po-vzorcih">Iskanje po vzorcih</a></li>
+            <li><a href="#zaščita-datotek-in-direktorijev">Zaščita datotek in direktorijev</a></li>
+            <li><a href="#lastnik-skupina-in-ostali">Lastnik, skupina in ostali</a></li>
+            <li><a href="#spreminjanje-pravic-z-ukazom-chmod">Spreminjanje pravic z ukazom <code>chmod</code></a></li>
+            <li><a href="#dodajanje-pravice-izvajanja">Dodajanje pravice izvajanja</a></li>
+            <li><a href="#odstranjevanje-pravice-pisanja">Odstranjevanje pravice pisanja</a></li>
+            <li><a href="#razlika-med-zaščito-datotek-in-direktorijev">Razlika med zaščito datotek in direktorijev</a></li>
+            <li><a href="#izvajanje-programov">Izvajanje programov</a></li>
+            <li><a href="#interpretiranje-ukazov">Interpretiranje ukazov</a></li>
+            <li><a href="#brisanje-zagnanega-programa">Brisanje zagnanega programa</a></li>
+            <li><a href="#privzete-pravice-in-ukaz-umask">Privzete pravice in ukaz <code>umask</code></a></li>
+            <li><a href="#kaj-pomeni-umask">Kaj pomeni <code>umask</code>?</a></li>
+            <li><a href="#primer-pravic-pri-umask-0002">Primer pravic pri <code>umask 0002</code></a></li>
+            <li><a href="#nove-datoteke">Nove datoteke:</a></li>
+            <li><a href="#novi-direktoriji">Novi direktoriji:</a></li>
+            <li><a href="#zaščita-direktorijev">Zaščita direktorijev</a></li>
+          </ul>
+        </li>
+        <li><a href="#ukazi-za-delo-z-datotekami-in-skriptami">Ukazi za delo z datotekami in skriptami</a>
+          <ul>
+            <li><a href="#primer-uporabe-ukaza-ls">Primer uporabe ukaza <code>ls</code></a></li>
+            <li><a href="#povezovanje-ukazov-s-cevjo-pipe">Povezovanje ukazov s cevjo (<code>pipe</code>)</a></li>
+            <li><a href="#pipe-">Pipe (<code>|</code>)</a></li>
+            <li><a href="#primer-izpis-števila-datotek-v-direktoriju">Primer: izpis števila datotek v direktoriju</a></li>
+            <li><a href="#ukaz-awk">Ukaz <code>awk</code></a></li>
+            <li><a href="#bash-skripte">Bash skripte</a></li>
+            <li><a href="#zagon-bash-skripte">Zagon bash skripte</a></li>
+            <li><a href="#ukaz-set">Ukaz <code>set</code></a></li>
+            <li><a href="#prikaz-izvajanja-ukazov-set--x">Prikaz izvajanja ukazov (<code>set -x</code>)</a></li>
+            <li><a href="#izklop-izpisa-set-x">Izklop izpisa (<code>set +x</code>)</a></li>
+            <li><a href="#ukaz-file">Ukaz <code>file</code></a></li>
+            <li><a href="#ukaz-cat-1">Ukaz <code>cat</code></a></li>
+            <li><a href="#uporaba-ukaza-cat">Uporaba ukaza <code>cat</code></a></li>
+            <li><a href="#prva-vrstica-bash-skripte">Prva vrstica bash skripte</a></li>
+            <li><a href="#primer-bash-skripte">Primer bash skripte</a></li>
+          </ul>
+        </li>
+        <li><a href="#datotečni-sistem">Datotečni sistem</a>
+          <ul>
+            <li><a href="#hierarhični-datotečni-sistem">Hierarhični datotečni sistem</a>
+              <ul>
+                <li><a href="#particije-in-priklop">Particije in priklop</a></li>
+                <li><a href="#korenska-particija-root">Korenska particija (<code>root</code>)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#inode">Inode</a>
+          <ul>
+            <li><a href="#kaj-je-inode">Kaj je inode?</a></li>
+            <li><a href="#prikaz-inode-podatkov">Prikaz inode podatkov</a></li>
+            <li><a href="#uporaba-inode">Uporaba inode</a></li>
+            <li><a href="#priklop-datotečnih-sistemov-mount">Priklop datotečnih sistemov (<em>mount</em>)</a>
+              <ul>
+                <li><a href="#ukaz-mount">Ukaz <code>mount</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#priklop-ob-zagonu-sistema">Priklop ob zagonu sistema</a></li>
+            <li><a href="#datoteka-etcfstab">Datoteka <code>/etc/fstab</code></a></li>
+            <li><a href="#ukaz-umount">Ukaz <code>umount</code></a></li>
+            <li><a href="#ukaz-findmnt">Ukaz <code>findmnt</code></a></li>
+            <li><a href="#standardni-vhodi-in-izhodi">Standardni vhodi in izhodi</a>
+              <ul>
+                <li><a href="#stdin"><code>stdin</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#dovoljenja-in-pravice-datotek">Dovoljenja in pravice datotek</a></li>
+            <li><a href="#simbolične-povezave">Simbolične povezave</a></li>
+            <li><a href="#posebne-pravice-set-user-id">Posebne pravice (<code>set-user-id</code>)</a>
+              <ul>
+                <li><a href="#posebne-vrste-datotek">Posebne vrste datotek</a></li>
+                <li><a href="#znak-c">Znak <code>c</code></a></li>
+                <li><a href="#znak-b">Znak <code>b</code></a></li>
+                <li><a href="#povzetek-pomembnih-ukazov">Povzetek pomembnih ukazov</a></li>
+              </ul>
+            </li>
+            <li><a href="#podatkovna-struktura-inode">Podatkovna struktura inode</a>
+              <ul>
+                <li><a href="#kaj-vsebuje-inode">Kaj vsebuje inode?</a></li>
+                <li><a href="#podatki-v-inode">Podatki v inode</a></li>
+              </ul>
+            </li>
+            <li><a href="#struktura-stat">Struktura <code>stat</code></a></li>
+            <li><a href="#pomen-elementov-strukture-stat">Pomen elementov strukture <code>stat</code></a></li>
+            <li><a href="#številke-inode">Številke inode</a></li>
+            <li><a href="#preverjanje-pravic-pred-izvedbo-ukaza">Preverjanje pravic pred izvedbo ukaza</a></li>
+            <li><a href="#časi-datotek">Časi datotek</a></li>
+            <li><a href="#atime--čas-dostopa"><code>atime</code> — čas dostopa</a></li>
+            <li><a href="#mtime--čas-spremembe"><code>mtime</code> — čas spremembe</a></li>
+            <li><a href="#ctime--čas-spremembe-statusa"><code>ctime</code> — čas spremembe statusa</a></li>
+            <li><a href="#indirektni-bloki-v-inode">Indirektni bloki v inode</a></li>
+            <li><a href="#neposredni-kazalci">Neposredni kazalci</a></li>
+            <li><a href="#indirektni-kazalci">Indirektni kazalci</a></li>
+            <li><a href="#zelo-velike-datoteke">Zelo velike datoteke</a></li>
+            <li><a href="#tipi-datotek">Tipi datotek</a></li>
+            <li><a href="#posebne-pravice-datotek--suid-bit">Posebne pravice datotek — SUID bit</a></li>
+            <li><a href="#primer-suid">Primer SUID</a>
+              <ul>
+                <li><a href="#zakaj-uporablja-ukaz-passwd-suid">Zakaj uporablja ukaz <code>passwd</code> SUID?</a></li>
+              </ul>
+            </li>
+            <li><a href="#setuid">Setuid</a></li>
+            <li><a href="#varnost-suid-datotek">Varnost SUID datotek</a></li>
+            <li><a href="#setgid-sgid">Setgid (SGID)</a>
+              <ul>
+                <li><a href="#sgid-na-datotekah">SGID na datotekah</a></li>
+                <li><a href="#sgid-na-direktorijih">SGID na direktorijih</a></li>
+              </ul>
+            </li>
+            <li><a href="#primer-ukaza-chmod-za-suid">Primer ukaza chmod za SUID</a></li>
+            <li><a href="#ukaz-whoami">Ukaz <code>whoami</code></a></li>
+            <li><a href="#povzetek-posebnih-bitov">Povzetek posebnih bitov</a></li>
+            <li><a href="#varnostno-opozorilo">Varnostno opozorilo</a></li>
+            <li><a href="#delo-z-direktoriji-in-posebne-pravice">Delo z direktoriji in posebne pravice</a>
+              <ul>
+                <li><a href="#primeri-ukaza-ls">Primeri ukaza <code>ls</code></a></li>
+                <li><a href="#izpis-informacij-o-direktoriju">Izpis informacij o direktoriju</a></li>
+                <li><a href="#ukaz-cd--">Ukaz <code>cd -</code></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#sticky-bit-t-bit">Sticky bit (<code>t</code> bit)</a>
+          <ul>
+            <li><a href="#kaj-je-sticky-bit">Kaj je sticky bit?</a></li>
+            <li><a href="#primer-direktorij-tmp">Primer: direktorij <code>/tmp</code></a></li>
+            <li><a href="#namen-sticky-bita">Namen sticky bita</a></li>
+            <li><a href="#primer-uporabe">Primer uporabe</a></li>
+            <li><a href="#primer-sticky-bita">Primer sticky bita</a></li>
+          </ul>
+        </li>
+        <li><a href="#namestitev-paketov-v-različnih-sistemih">Namestitev paketov v različnih sistemih</a>
+          <ul>
+            <li><a href="#pogosti-ukazi-gnulinux-in-unix">Pogosti ukazi GNU/Linux in Unix</a>
+              <ul>
+                <li><a href="#navadni-uporabnik">Navadni uporabnik</a></li>
+                <li><a href="#ukaz-lsof">Ukaz <code>lsof</code></a>
+                  <ul>
+                    <li><a href="#list-open-files">List Open Files</a></li>
+                  </ul>
+                </li>
+                <li><a href="#proces-id-pid">Proces ID (<code>PID</code>)</a></li>
+                <li><a href="#primer-uporabe-1">Primer uporabe</a></li>
+                <li><a href="#primerjava-izvajanja-programa-in-brisanja-datoteke">Primerjava izvajanja programa in brisanja datoteke</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#ukazi-v-bash-skriptah">Ukazi v bash skriptah</a>
+          <ul>
+            <li><a href="#izvajanje-ukaza-znotraj-spremenljivke">Izvajanje ukaza znotraj spremenljivke</a></li>
+            <li><a href="#pid-trenutnega-procesa">PID trenutnega procesa</a></li>
+            <li><a href="#dodatne-možnosti-ukaza-lsof">Dodatne možnosti ukaza <code>lsof</code></a>
+              <ul>
+                <li><a href="#datoteke-uporabnika">Datoteke uporabnika</a></li>
+                <li><a href="#omrežne-povezave">Omrežne povezave</a></li>
+                <li><a href="#prikaz-pid-procesov">Prikaz PID procesov</a></li>
+                <li><a href="#direktorij">Direktorij</a></li>
+              </ul>
+            </li>
+            <li><a href="#ukaz-awk-1">Ukaz <code>awk</code></a></li>
+            <li><a href="#prednosti-ukaza-awk">Prednosti ukaza <code>awk</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#informacije-o-sistemu">Informacije o sistemu</a>
+          <ul>
+            <li><a href="#ukaz-dmesg">Ukaz <code>dmesg</code></a></li>
+            <li><a href="#ukaz-inxi">Ukaz <code>inxi</code></a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#instalacija-programske-opreme">Instalacija programske opreme</a>
@@ -208,19 +605,67 @@ This article does not have a corresponding language version
         <li><a href="#pregled-poglavja">Pregled poglavja</a></li>
         <li><a href="#instalacija-operacijskega-sistema-os">Instalacija operacijskega sistema (OS)</a></li>
         <li><a href="#namen-sistema">Namen sistema</a></li>
-        <li><a href="#medij-instalacije">Medij instalacije</a></li>
+        <li><a href="#medij-instalacije">Medij instalacije</a>
+          <ul>
+            <li><a href="#razvoj-skozi-čas">Razvoj skozi čas</a></li>
+          </ul>
+        </li>
         <li><a href="#razvoj-jedra-operacijskega-sistema">Razvoj jedra operacijskega sistema</a></li>
         <li><a href="#instalacija-sistema">Instalacija sistema</a></li>
-        <li><a href="#virtualni-računalniki-virtual-machine---vm">Virtualni računalniki (Virtual Machine - VM)</a></li>
+        <li><a href="#virtualni-računalniki-virtual-machine---vm">Virtualni računalniki (Virtual Machine - VM)</a>
+          <ul>
+            <li><a href="#vrste-virtualnih-računalnikov">Vrste virtualnih računalnikov</a>
+              <ul>
+                <li><a href="#sistemski-virtualni-računalniki">Sistemski virtualni računalniki</a></li>
+                <li><a href="#procesni-virtualni-računalniki">Procesni virtualni računalniki</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#virtualni-sistemi">Virtualni sistemi</a></li>
         <li><a href="#opravila-po-instalaciji">Opravila po instalaciji</a></li>
         <li><a href="#hierarhija-datotečnega-sistema">Hierarhija datotečnega sistema</a></li>
-        <li><a href="#deljeni-in-nedeljeni-podatki">Deljeni in nedeljeni podatki</a></li>
-        <li><a href="#statični-in-dinamični-podatki">Statični in dinamični podatki</a></li>
-        <li><a href="#pogosti-imeniki">Pogosti imeniki</a></li>
-        <li><a href="#izbira-programske-opreme">Izbira programske opreme</a></li>
-        <li><a href="#instalacija-binarnih-paketov">Instalacija binarnih paketov</a></li>
-        <li><a href="#instalacija-iz-izvorne-kode">Instalacija iz izvorne kode</a></li>
+        <li><a href="#deljeni-in-nedeljeni-podatki">Deljeni in nedeljeni podatki</a>
+          <ul>
+            <li><a href="#deljeni-shareable">Deljeni (shareable)</a></li>
+            <li><a href="#nedeljeni-unshareable">Nedeljeni (unshareable)</a></li>
+          </ul>
+        </li>
+        <li><a href="#statični-in-dinamični-podatki">Statični in dinamični podatki</a>
+          <ul>
+            <li><a href="#statični-podatki">Statični podatki</a></li>
+            <li><a href="#dinamični-podatki">Dinamični podatki</a></li>
+          </ul>
+        </li>
+        <li><a href="#pogosti-imeniki">Pogosti imeniki</a>
+          <ul>
+            <li><a href="#korenski-imenik">Korenski imenik</a></li>
+            <li><a href="#usr-1"><code>/usr</code></a></li>
+            <li><a href="#usrlocal"><code>/usr/local</code></a></li>
+            <li><a href="#var-1"><code>/var</code></a></li>
+            <li><a href="#kaj-je-spooling">Kaj je spooling?</a></li>
+          </ul>
+        </li>
+        <li><a href="#izbira-programske-opreme">Izbira programske opreme</a>
+          <ul>
+            <li><a href="#konfiguracijske-datoteke">Konfiguracijske datoteke</a></li>
+            <li><a href="#odvisnosti-dependencies">Odvisnosti (Dependencies)</a></li>
+          </ul>
+        </li>
+        <li><a href="#instalacija-binarnih-paketov">Instalacija binarnih paketov</a>
+          <ul>
+            <li><a href="#prednosti">Prednosti</a></li>
+            <li><a href="#slabosti">Slabosti</a></li>
+            <li><a href="#opombe">Opombe</a></li>
+          </ul>
+        </li>
+        <li><a href="#instalacija-iz-izvorne-kode">Instalacija iz izvorne kode</a>
+          <ul>
+            <li><a href="#prednosti-1">Prednosti</a></li>
+            <li><a href="#slabosti-1">Slabosti</a></li>
+            <li><a href="#opomba">Opomba</a></li>
+          </ul>
+        </li>
         <li><a href="#zakaj-uporabljati-upravljalca-paketov">Zakaj uporabljati upravljalca paketov?</a></li>
         <li><a href="#varnostni-popravki">Varnostni popravki</a></li>
         <li><a href="#pregled-sistemov-za-nameščanje-paketov">Pregled sistemov za nameščanje paketov</a></li>
@@ -234,20 +679,46 @@ This article does not have a corresponding language version
         <li><a href="#večuporabniški-operacijski-sistemi">Večuporabniški operacijski sistemi</a></li>
         <li><a href="#uporabniški-računi-v-sistemih-unix">Uporabniški računi v sistemih UNIX</a></li>
         <li><a href="#skupine-v-sistemih-unix">Skupine v sistemih UNIX</a></li>
-        <li><a href="#primer-zaščite-direktorijev">Primer zaščite direktorijev</a></li>
+        <li><a href="#primer-zaščite-direktorijev">Primer zaščite direktorijev</a>
+          <ul>
+            <li><a href="#opombe-1">Opombe</a></li>
+          </ul>
+        </li>
         <li><a href="#pravila-uporabe-sistema">Pravila uporabe sistema</a></li>
-        <li><a href="#pravila-za-sistemske-administratorje">Pravila za sistemske administratorje</a></li>
+        <li><a href="#pravila-za-sistemske-administratorje">Pravila za sistemske administratorje</a>
+          <ul>
+            <li><a href="#pravila-za-zagotavljanje-storitev">Pravila za zagotavljanje storitev</a></li>
+            <li><a href="#opombe-2">Opombe</a></li>
+          </ul>
+        </li>
         <li><a href="#splošna-pravila-za-uporabnike">Splošna pravila za uporabnike</a></li>
-        <li><a href="#uveljavljanje-pravil">Uveljavljanje pravil</a></li>
+        <li><a href="#uveljavljanje-pravil">Uveljavljanje pravil</a>
+          <ul>
+            <li><a href="#opomba-1">Opomba</a></li>
+          </ul>
+        </li>
         <li><a href="#ustvarjanje-uporabniškega-računa">Ustvarjanje uporabniškega računa</a></li>
         <li><a href="#onemogočanje-oziroma-brisanje-uporabniškega-računa">Onemogočanje oziroma brisanje uporabniškega računa</a></li>
         <li><a href="#ukaz-useradd">Ukaz <code>useradd</code></a></li>
         <li><a href="#ukaz-userdel">Ukaz <code>userdel</code></a></li>
-        <li><a href="#licence-programske-opreme">Licence programske opreme</a></li>
+        <li><a href="#licence-programske-opreme">Licence programske opreme</a>
+          <ul>
+            <li><a href="#primer">Primer</a></li>
+          </ul>
+        </li>
         <li><a href="#etika-sistemskega-administratorja">Etika sistemskega administratorja</a></li>
         <li><a href="#primeri-etičnih-dilem">Primeri etičnih dilem</a></li>
-        <li><a href="#dodatno-gradivo">Dodatno gradivo</a></li>
-        <li><a href="#upravljanje-uporabnikov--dodatne-opombe">Upravljanje uporabnikov – dodatne opombe</a></li>
+        <li><a href="#dodatno-gradivo">Dodatno gradivo</a>
+          <ul>
+            <li><a href="#upravljanje-uporabnikov">Upravljanje uporabnikov</a></li>
+          </ul>
+        </li>
+        <li><a href="#upravljanje-uporabnikov--dodatne-opombe">Upravljanje uporabnikov – dodatne opombe</a>
+          <ul>
+            <li><a href="#passwdconf"><code>passwd.conf</code></a></li>
+            <li><a href="#vipw"><code>vipw</code></a></li>
+          </ul>
+        </li>
         <li><a href="#dodatno-gradivo-o-licencah">Dodatno gradivo o licencah</a></li>
       </ul>
     </li>
@@ -256,26 +727,115 @@ This article does not have a corresponding language version
         <li><a href="#zakaj-avtomatizirati-opravila">Zakaj avtomatizirati opravila?</a></li>
         <li><a href="#prednosti-avtomatizacije">Prednosti avtomatizacije</a></li>
         <li><a href="#lastnosti-dobrega-sistemskega-administratorja">Lastnosti dobrega sistemskega administratorja</a></li>
-        <li><a href="#programi-za-razvrščanje-opravil-cron">Programi za razvrščanje opravil (cron)</a></li>
-        <li><a href="#ukaz-find-1">Ukaz find</a></li>
+        <li><a href="#programi-za-razvrščanje-opravil-cron">Programi za razvrščanje opravil (cron)</a>
+          <ul>
+            <li><a href="#struktura-cron-izraza">Struktura cron izraza</a></li>
+            <li><a href="#primeri-cron-izrazov">Primeri cron izrazov</a></li>
+            <li><a href="#absolutna-pot-pri-cron-u">Absolutna pot pri cron-u</a></li>
+          </ul>
+        </li>
+        <li><a href="#ukaz-find-1">Ukaz find</a>
+          <ul>
+            <li><a href="#iskanje-navadnih-datotek">Iskanje navadnih datotek</a></li>
+            <li><a href="#časovni-parametri">Časovni parametri</a>
+              <ul>
+                <li><a href="#-mtime"><code>-mtime</code></a></li>
+                <li><a href="#-atime"><code>-atime</code></a></li>
+                <li><a href="#-ctime"><code>-ctime</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#parameter--exec">Parameter <code>-exec</code></a></li>
+            <li><a href="#primeri-uporabe-ukaza-find">Primeri uporabe ukaza find</a>
+              <ul>
+                <li><a href="#iskanje-vseh-cpp-datotek">Iskanje vseh <code>.cpp</code> datotek</a></li>
+                <li><a href="#iskanje-datotek-z-dovoljenji-0777">Iskanje datotek z dovoljenji 0777</a></li>
+                <li><a href="#sprememba-dovoljenj-vseh-najdenih-datotek">Sprememba dovoljenj vseh najdenih datotek</a></li>
+                <li><a href="#iskanje-več-končnic">Iskanje več končnic</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#ukaz-locate">Ukaz locate</a></li>
         <li><a href="#primerjava-datotek">Primerjava datotek</a></li>
-        <li><a href="#osnove-lupine-shell">Osnove lupine (Shell)</a></li>
+        <li><a href="#osnove-lupine-shell">Osnove lupine (Shell)</a>
+          <ul>
+            <li><a href="#vgrajeni-ukazi">Vgrajeni ukazi</a></li>
+            <li><a href="#primer-1">Primer</a></li>
+          </ul>
+        </li>
         <li><a href="#ukaz-sed">Ukaz sed</a></li>
         <li><a href="#ukaz-nohup">Ukaz nohup</a></li>
-        <li><a href="#osnovna-orodja">Osnovna orodja</a></li>
-        <li><a href="#regularni-izrazi-regular-expressions">Regularni izrazi (Regular Expressions)</a></li>
-        <li><a href="#osnovni-vzorci-regularnih-izrazov">Osnovni vzorci regularnih izrazov</a></li>
-        <li><a href="#kvantifikatorji">Kvantifikatorji</a></li>
+        <li><a href="#osnovna-orodja">Osnovna orodja</a>
+          <ul>
+            <li><a href="#koristna-dokumentacija">Koristna dokumentacija</a>
+              <ul>
+                <li><a href="#gnu-sed">GNU sed</a></li>
+                <li><a href="#gnu-awk">GNU awk</a></li>
+                <li><a href="#primeri-uporabe-awk">Primeri uporabe awk</a></li>
+                <li><a href="#pomoč-man-pages">Pomoč (man pages)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#regularni-izrazi-regular-expressions">Regularni izrazi (Regular Expressions)</a>
+          <ul>
+            <li><a href="#primer-uporabe-2">Primer uporabe</a></li>
+          </ul>
+        </li>
+        <li><a href="#osnovni-vzorci-regularnih-izrazov">Osnovni vzorci regularnih izrazov</a>
+          <ul>
+            <li><a href="#posamezen-znak">Posamezen znak</a></li>
+            <li><a href="#seznam-znakov">Seznam znakov</a></li>
+            <li><a href="#interval-znakov">Interval znakov</a></li>
+            <li><a href="#negiran-izraz">Negiran izraz</a></li>
+            <li><a href="#posebni-znaki">Posebni znaki</a></li>
+          </ul>
+        </li>
+        <li><a href="#kvantifikatorji">Kvantifikatorji</a>
+          <ul>
+            <li><a href="#prva-možnost">Prva možnost</a></li>
+            <li><a href="#druga-možnost">Druga možnost</a></li>
+          </ul>
+        </li>
         <li><a href="#skripte">Skripte</a></li>
-        <li><a href="#zagonske-datoteke-in-okolje">Zagonske datoteke in okolje</a></li>
-        <li><a href="#dedovanje-okolja">Dedovanje okolja</a></li>
+        <li><a href="#zagonske-datoteke-in-okolje">Zagonske datoteke in okolje</a>
+          <ul>
+            <li><a href="#interaktivna-lupina-in-interpreter-ukazov">Interaktivna lupina in interpreter ukazov</a>
+              <ul>
+                <li><a href="#interpreter-ukazov">Interpreter ukazov</a></li>
+                <li><a href="#interaktivna-lupina">Interaktivna lupina</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#dedovanje-okolja">Dedovanje okolja</a>
+          <ul>
+            <li><a href="#primer-brez-oklepajev">Primer brez oklepajev</a></li>
+            <li><a href="#primer-z-oklepaji">Primer z oklepaji</a></li>
+          </ul>
+        </li>
         <li><a href="#primer-napake">Primer napake</a></li>
         <li><a href="#primer-uporabe-več-pipe-ov">Primer uporabe več pipe-ov</a></li>
-        <li><a href="#krmiljenje-tokov">Krmiljenje tokov</a></li>
-        <li><a href="#krmiljenje-izvajanja">Krmiljenje izvajanja</a></li>
+        <li><a href="#krmiljenje-tokov">Krmiljenje tokov</a>
+          <ul>
+            <li><a href="#ukaz-tee">Ukaz tee</a></li>
+            <li><a href="#ukaz-xargs">Ukaz xargs</a></li>
+          </ul>
+        </li>
+        <li><a href="#krmiljenje-izvajanja">Krmiljenje izvajanja</a>
+          <ul>
+            <li><a href="#pogoji">Pogoji</a></li>
+            <li><a href="#zanke">Zanke</a></li>
+            <li><a href="#krmiljenje-zank">Krmiljenje zank</a></li>
+          </ul>
+        </li>
         <li><a href="#vgrajeni-ukazi-funkcije-in-signali">Vgrajeni ukazi, funkcije in signali</a></li>
-        <li><a href="#perl">Perl</a></li>
+        <li><a href="#perl">Perl</a>
+          <ul>
+            <li><a href="#prednosti-2">Prednosti</a></li>
+            <li><a href="#slabosti-2">Slabosti</a></li>
+          </ul>
+        </li>
         <li><a href="#python">Python</a></li>
         <li><a href="#ko-pomaga-samo-c">Ko pomaga samo C</a></li>
       </ul>
@@ -295,7 +855,7 @@ This article does not have a corresponding language version
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div>Posts</div><div class="sidebar-state-number">7</div>
+    <div>Posts</div><div class="sidebar-state-number">8</div>
   </div>
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>Categories</div>
@@ -5412,10 +5972,10 @@ Ko pomaga samo C
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;87.9k</span
+          >&nbsp;108.1k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;06:56</span>
+        <span class="icon-coffee">&nbsp;08:32</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"
@@ -5444,34 +6004,431 @@ Ko pomaga samo C
     <li><a href="#uvod">Uvod</a>
       <ul>
         <li><a href="#kaj-je-sistemska-administracija">Kaj je sistemska administracija</a></li>
-        <li><a href="#operacijski-sistemi">Operacijski sistemi</a></li>
+        <li><a href="#operacijski-sistemi">Operacijski sistemi</a>
+          <ul>
+            <li><a href="#osnove-sistema-unix-tudi-linux">Osnove sistema UNIX (tudi Linux)</a></li>
+            <li><a href="#osnovne-lastnosti-sistema-unix-in-večine-sodobnih-operacijskih-sistemov">Osnovne lastnosti sistema UNIX (in večine sodobnih operacijskih sistemov)</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#disk-datotečni-sistem">Disk, datotečni sistem</a>
       <ul>
-        <li><a href="#osnovni-ukazi">Osnovni ukazi</a></li>
-        <li><a href="#superuporabnik-superuser">Superuporabnik (Superuser)</a></li>
-        <li><a href="#ukazi-za-delo-s-sistemom">Ukazi za delo s sistemom</a></li>
-        <li><a href="#signali-v-sistemu">Signali v sistemu</a></li>
-        <li><a href="#datoteke-uporabnikov-in-gesel">Datoteke uporabnikov in gesel</a></li>
-        <li><a href="#ukazni-interpreter-in-ukazne-lupine">Ukazni interpreter in ukazne lupine</a></li>
-        <li><a href="#datoteke-za-shranjevanje-gesel">Datoteke za shranjevanje gesel</a></li>
-        <li><a href="#identifikacija-uporabnikov-in-skupin">Identifikacija uporabnikov in skupin</a></li>
-        <li><a href="#upravljanje-diskov-in-particij">Upravljanje diskov in particij</a></li>
-        <li><a href="#delo-z-oddaljenimi-računalniki">Delo z oddaljenimi računalniki</a></li>
-        <li><a href="#pregled-procesov">Pregled procesov</a></li>
-        <li><a href="#tipi-datotek-datotečni-sistem">Tipi datotek (datotečni sistem)</a></li>
-        <li><a href="#datotečni-sistem-linux--dodatni-direktoriji">Datotečni sistem Linux — dodatni direktoriji</a></li>
-        <li><a href="#datotečni-sistem--osnovni-ukazi">Datotečni sistem — osnovni ukazi</a></li>
-        <li><a href="#osnovni-ukazi-za-pregled-tekstovnih-datotek">Osnovni ukazi za pregled tekstovnih datotek</a></li>
-        <li><a href="#brisanje-datotek-in-direktorijev">Brisanje datotek in direktorijev</a></li>
-        <li><a href="#ukazi-za-delo-z-datotekami-in-skriptami">Ukazi za delo z datotekami in skriptami</a></li>
-        <li><a href="#datotečni-sistem">Datotečni sistem</a></li>
-        <li><a href="#inode">Inode</a></li>
-        <li><a href="#sticky-bit-t-bit">Sticky bit (<code>t</code> bit)</a></li>
-        <li><a href="#namestitev-paketov-v-različnih-sistemih">Namestitev paketov v različnih sistemih</a></li>
-        <li><a href="#ukazi-v-bash-skriptah">Ukazi v bash skriptah</a></li>
-        <li><a href="#informacije-o-sistemu">Informacije o sistemu</a></li>
+        <li><a href="#osnovni-ukazi">Osnovni ukazi</a>
+          <ul>
+            <li><a href="#delo-z-datotekami">Delo z datotekami</a>
+              <ul>
+                <li><a href="#ls-list"><code>ls</code> (list)</a></li>
+                <li><a href="#cp-copy"><code>cp</code> (copy)</a></li>
+                <li><a href="#mv-move"><code>mv</code> (move)</a></li>
+                <li><a href="#rm-remove"><code>rm</code> (remove)</a></li>
+                <li><a href="#find"><code>find</code></a></li>
+                <li><a href="#more"><code>more</code></a></li>
+                <li><a href="#tail"><code>tail</code></a></li>
+                <li><a href="#wc-word-count"><code>wc</code> (word count)</a></li>
+                <li><a href="#grep"><code>grep</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#dovoljenja-in-lastništvo">Dovoljenja in lastništvo</a>
+              <ul>
+                <li><a href="#chmod-change-mode"><code>chmod</code> (change mode)</a></li>
+                <li><a href="#chown-change-owner"><code>chown</code> (change owner)</a></li>
+                <li><a href="#sudo"><code>sudo</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#delo-z-uporabniki">Delo z uporabniki</a>
+              <ul>
+                <li><a href="#useradd"><code>useradd</code></a></li>
+                <li><a href="#usermod"><code>usermod</code></a></li>
+                <li><a href="#userdel"><code>userdel</code></a></li>
+                <li><a href="#passwd"><code>passwd</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#delo-s-procesi">Delo s procesi</a>
+              <ul>
+                <li><a href="#ps"><code>ps</code></a></li>
+                <li><a href="#top"><code>top</code></a></li>
+                <li><a href="#kill"><code>kill</code></a></li>
+                <li><a href="#nice"><code>nice</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#delo-z-diski">Delo z diski</a>
+              <ul>
+                <li><a href="#df"><code>df</code></a></li>
+                <li><a href="#fdisk"><code>fdisk</code></a></li>
+                <li><a href="#du"><code>du</code></a></li>
+                <li><a href="#mount"><code>mount</code></a></li>
+                <li><a href="#umount"><code>umount</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#tiskanje">Tiskanje</a>
+              <ul>
+                <li><a href="#lpr"><code>lpr</code></a></li>
+                <li><a href="#lpq"><code>lpq</code></a></li>
+                <li><a href="#lprm"><code>lprm</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#ostali-pomembni-ukazi">Ostali pomembni ukazi</a>
+              <ul>
+                <li><a href="#man"><code>man</code></a></li>
+                <li><a href="#date"><code>date</code></a></li>
+                <li><a href="#who"><code>who</code></a></li>
+                <li><a href="#telnet"><code>telnet</code></a></li>
+                <li><a href="#rlogin"><code>rlogin</code></a></li>
+                <li><a href="#ssh-secure-shell"><code>ssh</code> (Secure Shell)</a></li>
+              </ul>
+            </li>
+            <li><a href="#urejevalniki-besedilnih-datotek">Urejevalniki besedilnih datotek</a></li>
+          </ul>
+        </li>
+        <li><a href="#superuporabnik-superuser">Superuporabnik (Superuser)</a>
+          <ul>
+            <li><a href="#root">Root</a></li>
+            <li><a href="#sudo-1"><code>sudo</code></a></li>
+            <li><a href="#su-switch-user"><code>su</code> (Switch User)</a></li>
+            <li><a href="#poziv-ukazne-vrstice">Poziv ukazne vrstice</a></li>
+            <li><a href="#varnost-superuporabniškega-računa">Varnost superuporabniškega računa</a></li>
+            <li><a href="#identifikacija-uporabnikov-uid">Identifikacija uporabnikov (UID)</a></li>
+            <li><a href="#povzetek">Povzetek</a></li>
+            <li><a href="#o-sistemu--nekaj-uporabnih-ukazov">O sistemu — nekaj uporabnih ukazov</a>
+              <ul>
+                <li><a href="#preklop-uporabnika-su">Preklop uporabnika (<code>su</code>)</a></li>
+                <li><a href="#ukaz-id">Ukaz <code>id</code></a></li>
+                <li><a href="#ukaz-uname">Ukaz <code>uname</code></a></li>
+                <li><a href="#razlika-med-uname-in-uname--a">Razlika med <code>uname</code> in <code>uname -a</code></a></li>
+                <li><a href="#ukaz-pwd">Ukaz <code>pwd</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#osnovni-koncepti-sistema">Osnovni koncepti sistema</a>
+              <ul>
+                <li><a href="#datoteke-in-direktoriji">Datoteke in direktoriji</a></li>
+                <li><a href="#pregled-osnovnih-ukazov">Pregled osnovnih ukazov</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#ukazi-za-delo-s-sistemom">Ukazi za delo s sistemom</a>
+          <ul>
+            <li><a href="#ukaz-who">Ukaz <code>who</code></a></li>
+            <li><a href="#odjava-uporabnika-exit">Odjava uporabnika (<code>exit</code>)</a></li>
+            <li><a href="#ukaz-which">Ukaz <code>which</code></a></li>
+            <li><a href="#ukaz-man">Ukaz <code>man</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#signali-v-sistemu">Signali v sistemu</a>
+          <ul>
+            <li><a href="#ukaz-ls">Ukaz <code>ls</code></a>
+              <ul>
+                <li><a href="#možnosti-ukaza-ls">Možnosti ukaza <code>ls</code></a>
+                  <ul>
+                    <li><a href="#dolg-izpis-ls--l">Dolg izpis (<code>ls -l</code>)</a></li>
+                    <li><a href="#izpis-po-času-spremembe-ls--lt">Izpis po času spremembe (<code>ls -lt</code>)</a></li>
+                    <li><a href="#rekurzivni-izpis-ls--r">Rekurzivni izpis (<code>ls -r</code>)</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#ukaz-which-1">Ukaz <code>which</code></a></li>
+            <li><a href="#ukaz-man-1">Ukaz <code>man</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#datoteke-uporabnikov-in-gesel">Datoteke uporabnikov in gesel</a>
+          <ul>
+            <li><a href="#datoteka-etcpasswd">Datoteka <code>/etc/passwd</code></a></li>
+            <li><a href="#datotečna-struktura-sistema-linux">Datotečna struktura sistema Linux</a></li>
+          </ul>
+        </li>
+        <li><a href="#ukazni-interpreter-in-ukazne-lupine">Ukazni interpreter in ukazne lupine</a>
+          <ul>
+            <li><a href="#c-shell-csh">C Shell (<code>csh</code>)</a></li>
+            <li><a href="#shell-v-sistemu-windows">Shell v sistemu Windows</a></li>
+          </ul>
+        </li>
+        <li><a href="#datoteke-za-shranjevanje-gesel">Datoteke za shranjevanje gesel</a>
+          <ul>
+            <li><a href="#datoteka-etcpasswd-1">Datoteka <code>/etc/passwd</code></a></li>
+            <li><a href="#datoteka-etcshadow">Datoteka <code>/etc/shadow</code></a></li>
+            <li><a href="#ukaz-sudo">Ukaz <code>sudo</code></a></li>
+            <li><a href="#ukaz-passwd">Ukaz <code>passwd</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#identifikacija-uporabnikov-in-skupin">Identifikacija uporabnikov in skupin</a>
+          <ul>
+            <li><a href="#uid">UID</a></li>
+            <li><a href="#gid">GID</a></li>
+            <li><a href="#kako-je-kriptirano-geslo">Kako je kriptirano geslo?</a></li>
+            <li><a href="#hash-algoritmi-za-gesla">Hash algoritmi za gesla</a></li>
+            <li><a href="#sekljalni-algoritmi-hash">Sekljalni algoritmi (<em>Hash</em>)</a></li>
+            <li><a href="#kode-algoritmov-za-gesla">Kode algoritmov za gesla</a></li>
+          </ul>
+        </li>
+        <li><a href="#upravljanje-diskov-in-particij">Upravljanje diskov in particij</a>
+          <ul>
+            <li><a href="#ukaz-fdisk">Ukaz <code>fdisk</code></a></li>
+            <li><a href="#ukaz-fdisk--l">Ukaz <code>fdisk -l</code></a></li>
+            <li><a href="#ukaz-df">Ukaz <code>df</code></a></li>
+            <li><a href="#priklopne-točke-mount-points">Priklopne točke (<em>Mount points</em>)</a></li>
+            <li><a href="#premikanje-datotek-move">Premikanje datotek (<code>move</code>)</a></li>
+            <li><a href="#premik-datoteke-znotraj-iste-particije">Premik datoteke znotraj iste particije</a></li>
+            <li><a href="#premik-datoteke-med-različnimi-particijami">Premik datoteke med različnimi particijami</a></li>
+          </ul>
+        </li>
+        <li><a href="#delo-z-oddaljenimi-računalniki">Delo z oddaljenimi računalniki</a>
+          <ul>
+            <li><a href="#ukaz-ssh">Ukaz <code>ssh</code></a></li>
+            <li><a href="#odjava-iz-oddaljenega-računalnika">Odjava iz oddaljenega računalnika</a></li>
+            <li><a href="#primer-povezava-na-oddaljeni-računalnik">Primer: povezava na oddaljeni računalnik</a></li>
+            <li><a href="#primer-prijava-na-hpc-rivr">Primer: prijava na HPC-RIVR</a></li>
+          </ul>
+        </li>
+        <li><a href="#pregled-procesov">Pregled procesov</a>
+          <ul>
+            <li><a href="#ukaz-ps">Ukaz <code>ps</code></a></li>
+            <li><a href="#ukaz-top">Ukaz <code>top</code></a></li>
+            <li><a href="#ukaz-htop">Ukaz <code>htop</code></a></li>
+            <li><a href="#oddaljeni-dostop-v-sistemu-windows">Oddaljeni dostop v sistemu Windows</a></li>
+          </ul>
+        </li>
+        <li><a href="#tipi-datotek-datotečni-sistem">Tipi datotek (datotečni sistem)</a>
+          <ul>
+            <li><a href="#datotečni-sistem-linux">Datotečni sistem Linux</a></li>
+            <li><a href="#pomembni-direktoriji-v-linux-sistemu">Pomembni direktoriji v Linux sistemu</a>
+              <ul>
+                <li><a href="#etc"><code>/etc</code></a></li>
+                <li><a href="#bin"><code>/bin</code></a></li>
+                <li><a href="#dev"><code>/dev</code></a></li>
+                <li><a href="#usr"><code>/usr</code></a></li>
+                <li><a href="#home"><code>/home</code></a></li>
+                <li><a href="#uporabniški-direktoriji">Uporabniški direktoriji</a></li>
+                <li><a href="#proc"><code>/proc</code></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#datotečni-sistem-linux--dodatni-direktoriji">Datotečni sistem Linux — dodatni direktoriji</a>
+          <ul>
+            <li><a href="#var"><code>/var</code></a></li>
+            <li><a href="#lib"><code>/lib</code></a></li>
+            <li><a href="#lib64"><code>/lib64</code></a></li>
+            <li><a href="#boot"><code>/boot</code></a></li>
+            <li><a href="#root-1"><code>/root</code></a></li>
+            <li><a href="#media"><code>/media</code></a></li>
+            <li><a href="#sbin"><code>/sbin</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#datotečni-sistem--osnovni-ukazi">Datotečni sistem — osnovni ukazi</a>
+          <ul>
+            <li><a href="#ukaz-cd">Ukaz <code>cd</code></a></li>
+            <li><a href="#domači-direktorij">Domači direktorij</a></li>
+            <li><a href="#ukaz-ls-1">Ukaz <code>ls</code></a></li>
+            <li><a href="#ukaz-find">Ukaz <code>find</code></a></li>
+            <li><a href="#tilda---domači-direktorij">Tilda (<code>~</code>) — domači direktorij</a></li>
+            <li><a href="#relativne-in-absolutne-poti">Relativne in absolutne poti</a>
+              <ul>
+                <li><a href="#absolutna-pot">Absolutna pot</a></li>
+                <li><a href="#relativna-pot">Relativna pot</a></li>
+              </ul>
+            </li>
+            <li><a href="#primeri-poti">Primeri poti</a></li>
+            <li><a href="#absolutna-pot-1">Absolutna pot</a></li>
+            <li><a href="#trenutni-direktorij-">Trenutni direktorij (<code>.</code>)</a></li>
+            <li><a href="#nadrejeni-direktorij-">Nadrejeni direktorij (<code>..</code>)</a></li>
+            <li><a href="#skriti-direktoriji">Skriti direktoriji</a></li>
+            <li><a href="#okoljske-spremenljivke-environment-variables">Okoljske spremenljivke (<em>Environment variables</em>)</a></li>
+          </ul>
+        </li>
+        <li><a href="#osnovni-ukazi-za-pregled-tekstovnih-datotek">Osnovni ukazi za pregled tekstovnih datotek</a>
+          <ul>
+            <li><a href="#ukaz-cat">Ukaz <code>cat</code></a></li>
+            <li><a href="#ukaz-more">Ukaz <code>more</code></a></li>
+            <li><a href="#ukaz-less">Ukaz <code>less</code></a></li>
+            <li><a href="#imena-datotek-v-linuxu">Imena datotek v Linuxu</a></li>
+          </ul>
+        </li>
+        <li><a href="#brisanje-datotek-in-direktorijev">Brisanje datotek in direktorijev</a>
+          <ul>
+            <li><a href="#ukaz-rm">Ukaz <code>rm</code></a></li>
+            <li><a href="#brisanje-več-datotek">Brisanje več datotek</a></li>
+            <li><a href="#rekurzivno-brisanje-rm--r">Rekurzivno brisanje (<code>rm -r</code>)</a></li>
+            <li><a href="#opozorilo-pri-ukazu-rm">Opozorilo pri ukazu <code>rm</code></a></li>
+            <li><a href="#izpis-datotek-in-direktorijev-z-ukazom-ls">Izpis datotek in direktorijev z ukazom <code>ls</code></a></li>
+            <li><a href="#razlaga-izpisa-ls--l">Razlaga izpisa <code>ls -l</code></a></li>
+            <li><a href="#pravice-dostopa-rwx">Pravice dostopa (<code>rwx</code>)</a></li>
+            <li><a href="#primer-zaščite-datoteke">Primer zaščite datoteke</a></li>
+            <li><a href="#dodatni-podatki-pri-ls--l">Dodatni podatki pri <code>ls -l</code></a></li>
+            <li><a href="#povezave-in-simbolični-linki">Povezave in simbolični linki</a></li>
+            <li><a href="#dodatne-možnosti-ukaza-ls">Dodatne možnosti ukaza <code>ls</code></a></li>
+            <li><a href="#izpis-po-času">Izpis po času</a></li>
+            <li><a href="#iskanje-po-vzorcih">Iskanje po vzorcih</a></li>
+            <li><a href="#zaščita-datotek-in-direktorijev">Zaščita datotek in direktorijev</a></li>
+            <li><a href="#lastnik-skupina-in-ostali">Lastnik, skupina in ostali</a></li>
+            <li><a href="#spreminjanje-pravic-z-ukazom-chmod">Spreminjanje pravic z ukazom <code>chmod</code></a></li>
+            <li><a href="#dodajanje-pravice-izvajanja">Dodajanje pravice izvajanja</a></li>
+            <li><a href="#odstranjevanje-pravice-pisanja">Odstranjevanje pravice pisanja</a></li>
+            <li><a href="#razlika-med-zaščito-datotek-in-direktorijev">Razlika med zaščito datotek in direktorijev</a></li>
+            <li><a href="#izvajanje-programov">Izvajanje programov</a></li>
+            <li><a href="#interpretiranje-ukazov">Interpretiranje ukazov</a></li>
+            <li><a href="#brisanje-zagnanega-programa">Brisanje zagnanega programa</a></li>
+            <li><a href="#privzete-pravice-in-ukaz-umask">Privzete pravice in ukaz <code>umask</code></a></li>
+            <li><a href="#kaj-pomeni-umask">Kaj pomeni <code>umask</code>?</a></li>
+            <li><a href="#primer-pravic-pri-umask-0002">Primer pravic pri <code>umask 0002</code></a></li>
+            <li><a href="#nove-datoteke">Nove datoteke:</a></li>
+            <li><a href="#novi-direktoriji">Novi direktoriji:</a></li>
+            <li><a href="#zaščita-direktorijev">Zaščita direktorijev</a></li>
+          </ul>
+        </li>
+        <li><a href="#ukazi-za-delo-z-datotekami-in-skriptami">Ukazi za delo z datotekami in skriptami</a>
+          <ul>
+            <li><a href="#primer-uporabe-ukaza-ls">Primer uporabe ukaza <code>ls</code></a></li>
+            <li><a href="#povezovanje-ukazov-s-cevjo-pipe">Povezovanje ukazov s cevjo (<code>pipe</code>)</a></li>
+            <li><a href="#pipe-">Pipe (<code>|</code>)</a></li>
+            <li><a href="#primer-izpis-števila-datotek-v-direktoriju">Primer: izpis števila datotek v direktoriju</a></li>
+            <li><a href="#ukaz-awk">Ukaz <code>awk</code></a></li>
+            <li><a href="#bash-skripte">Bash skripte</a></li>
+            <li><a href="#zagon-bash-skripte">Zagon bash skripte</a></li>
+            <li><a href="#ukaz-set">Ukaz <code>set</code></a></li>
+            <li><a href="#prikaz-izvajanja-ukazov-set--x">Prikaz izvajanja ukazov (<code>set -x</code>)</a></li>
+            <li><a href="#izklop-izpisa-set-x">Izklop izpisa (<code>set +x</code>)</a></li>
+            <li><a href="#ukaz-file">Ukaz <code>file</code></a></li>
+            <li><a href="#ukaz-cat-1">Ukaz <code>cat</code></a></li>
+            <li><a href="#uporaba-ukaza-cat">Uporaba ukaza <code>cat</code></a></li>
+            <li><a href="#prva-vrstica-bash-skripte">Prva vrstica bash skripte</a></li>
+            <li><a href="#primer-bash-skripte">Primer bash skripte</a></li>
+          </ul>
+        </li>
+        <li><a href="#datotečni-sistem">Datotečni sistem</a>
+          <ul>
+            <li><a href="#hierarhični-datotečni-sistem">Hierarhični datotečni sistem</a>
+              <ul>
+                <li><a href="#particije-in-priklop">Particije in priklop</a></li>
+                <li><a href="#korenska-particija-root">Korenska particija (<code>root</code>)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#inode">Inode</a>
+          <ul>
+            <li><a href="#kaj-je-inode">Kaj je inode?</a></li>
+            <li><a href="#prikaz-inode-podatkov">Prikaz inode podatkov</a></li>
+            <li><a href="#uporaba-inode">Uporaba inode</a></li>
+            <li><a href="#priklop-datotečnih-sistemov-mount">Priklop datotečnih sistemov (<em>mount</em>)</a>
+              <ul>
+                <li><a href="#ukaz-mount">Ukaz <code>mount</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#priklop-ob-zagonu-sistema">Priklop ob zagonu sistema</a></li>
+            <li><a href="#datoteka-etcfstab">Datoteka <code>/etc/fstab</code></a></li>
+            <li><a href="#ukaz-umount">Ukaz <code>umount</code></a></li>
+            <li><a href="#ukaz-findmnt">Ukaz <code>findmnt</code></a></li>
+            <li><a href="#standardni-vhodi-in-izhodi">Standardni vhodi in izhodi</a>
+              <ul>
+                <li><a href="#stdin"><code>stdin</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#dovoljenja-in-pravice-datotek">Dovoljenja in pravice datotek</a></li>
+            <li><a href="#simbolične-povezave">Simbolične povezave</a></li>
+            <li><a href="#posebne-pravice-set-user-id">Posebne pravice (<code>set-user-id</code>)</a>
+              <ul>
+                <li><a href="#posebne-vrste-datotek">Posebne vrste datotek</a></li>
+                <li><a href="#znak-c">Znak <code>c</code></a></li>
+                <li><a href="#znak-b">Znak <code>b</code></a></li>
+                <li><a href="#povzetek-pomembnih-ukazov">Povzetek pomembnih ukazov</a></li>
+              </ul>
+            </li>
+            <li><a href="#podatkovna-struktura-inode">Podatkovna struktura inode</a>
+              <ul>
+                <li><a href="#kaj-vsebuje-inode">Kaj vsebuje inode?</a></li>
+                <li><a href="#podatki-v-inode">Podatki v inode</a></li>
+              </ul>
+            </li>
+            <li><a href="#struktura-stat">Struktura <code>stat</code></a></li>
+            <li><a href="#pomen-elementov-strukture-stat">Pomen elementov strukture <code>stat</code></a></li>
+            <li><a href="#številke-inode">Številke inode</a></li>
+            <li><a href="#preverjanje-pravic-pred-izvedbo-ukaza">Preverjanje pravic pred izvedbo ukaza</a></li>
+            <li><a href="#časi-datotek">Časi datotek</a></li>
+            <li><a href="#atime--čas-dostopa"><code>atime</code> — čas dostopa</a></li>
+            <li><a href="#mtime--čas-spremembe"><code>mtime</code> — čas spremembe</a></li>
+            <li><a href="#ctime--čas-spremembe-statusa"><code>ctime</code> — čas spremembe statusa</a></li>
+            <li><a href="#indirektni-bloki-v-inode">Indirektni bloki v inode</a></li>
+            <li><a href="#neposredni-kazalci">Neposredni kazalci</a></li>
+            <li><a href="#indirektni-kazalci">Indirektni kazalci</a></li>
+            <li><a href="#zelo-velike-datoteke">Zelo velike datoteke</a></li>
+            <li><a href="#tipi-datotek">Tipi datotek</a></li>
+            <li><a href="#posebne-pravice-datotek--suid-bit">Posebne pravice datotek — SUID bit</a></li>
+            <li><a href="#primer-suid">Primer SUID</a>
+              <ul>
+                <li><a href="#zakaj-uporablja-ukaz-passwd-suid">Zakaj uporablja ukaz <code>passwd</code> SUID?</a></li>
+              </ul>
+            </li>
+            <li><a href="#setuid">Setuid</a></li>
+            <li><a href="#varnost-suid-datotek">Varnost SUID datotek</a></li>
+            <li><a href="#setgid-sgid">Setgid (SGID)</a>
+              <ul>
+                <li><a href="#sgid-na-datotekah">SGID na datotekah</a></li>
+                <li><a href="#sgid-na-direktorijih">SGID na direktorijih</a></li>
+              </ul>
+            </li>
+            <li><a href="#primer-ukaza-chmod-za-suid">Primer ukaza chmod za SUID</a></li>
+            <li><a href="#ukaz-whoami">Ukaz <code>whoami</code></a></li>
+            <li><a href="#povzetek-posebnih-bitov">Povzetek posebnih bitov</a></li>
+            <li><a href="#varnostno-opozorilo">Varnostno opozorilo</a></li>
+            <li><a href="#delo-z-direktoriji-in-posebne-pravice">Delo z direktoriji in posebne pravice</a>
+              <ul>
+                <li><a href="#primeri-ukaza-ls">Primeri ukaza <code>ls</code></a></li>
+                <li><a href="#izpis-informacij-o-direktoriju">Izpis informacij o direktoriju</a></li>
+                <li><a href="#ukaz-cd--">Ukaz <code>cd -</code></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#sticky-bit-t-bit">Sticky bit (<code>t</code> bit)</a>
+          <ul>
+            <li><a href="#kaj-je-sticky-bit">Kaj je sticky bit?</a></li>
+            <li><a href="#primer-direktorij-tmp">Primer: direktorij <code>/tmp</code></a></li>
+            <li><a href="#namen-sticky-bita">Namen sticky bita</a></li>
+            <li><a href="#primer-uporabe">Primer uporabe</a></li>
+            <li><a href="#primer-sticky-bita">Primer sticky bita</a></li>
+          </ul>
+        </li>
+        <li><a href="#namestitev-paketov-v-različnih-sistemih">Namestitev paketov v različnih sistemih</a>
+          <ul>
+            <li><a href="#pogosti-ukazi-gnulinux-in-unix">Pogosti ukazi GNU/Linux in Unix</a>
+              <ul>
+                <li><a href="#navadni-uporabnik">Navadni uporabnik</a></li>
+                <li><a href="#ukaz-lsof">Ukaz <code>lsof</code></a>
+                  <ul>
+                    <li><a href="#list-open-files">List Open Files</a></li>
+                  </ul>
+                </li>
+                <li><a href="#proces-id-pid">Proces ID (<code>PID</code>)</a></li>
+                <li><a href="#primer-uporabe-1">Primer uporabe</a></li>
+                <li><a href="#primerjava-izvajanja-programa-in-brisanja-datoteke">Primerjava izvajanja programa in brisanja datoteke</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#ukazi-v-bash-skriptah">Ukazi v bash skriptah</a>
+          <ul>
+            <li><a href="#izvajanje-ukaza-znotraj-spremenljivke">Izvajanje ukaza znotraj spremenljivke</a></li>
+            <li><a href="#pid-trenutnega-procesa">PID trenutnega procesa</a></li>
+            <li><a href="#dodatne-možnosti-ukaza-lsof">Dodatne možnosti ukaza <code>lsof</code></a>
+              <ul>
+                <li><a href="#datoteke-uporabnika">Datoteke uporabnika</a></li>
+                <li><a href="#omrežne-povezave">Omrežne povezave</a></li>
+                <li><a href="#prikaz-pid-procesov">Prikaz PID procesov</a></li>
+                <li><a href="#direktorij">Direktorij</a></li>
+              </ul>
+            </li>
+            <li><a href="#ukaz-awk-1">Ukaz <code>awk</code></a></li>
+            <li><a href="#prednosti-ukaza-awk">Prednosti ukaza <code>awk</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#informacije-o-sistemu">Informacije o sistemu</a>
+          <ul>
+            <li><a href="#ukaz-dmesg">Ukaz <code>dmesg</code></a></li>
+            <li><a href="#ukaz-inxi">Ukaz <code>inxi</code></a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#instalacija-programske-opreme">Instalacija programske opreme</a>
@@ -5479,19 +6436,67 @@ Ko pomaga samo C
         <li><a href="#pregled-poglavja">Pregled poglavja</a></li>
         <li><a href="#instalacija-operacijskega-sistema-os">Instalacija operacijskega sistema (OS)</a></li>
         <li><a href="#namen-sistema">Namen sistema</a></li>
-        <li><a href="#medij-instalacije">Medij instalacije</a></li>
+        <li><a href="#medij-instalacije">Medij instalacije</a>
+          <ul>
+            <li><a href="#razvoj-skozi-čas">Razvoj skozi čas</a></li>
+          </ul>
+        </li>
         <li><a href="#razvoj-jedra-operacijskega-sistema">Razvoj jedra operacijskega sistema</a></li>
         <li><a href="#instalacija-sistema">Instalacija sistema</a></li>
-        <li><a href="#virtualni-računalniki-virtual-machine---vm">Virtualni računalniki (Virtual Machine - VM)</a></li>
+        <li><a href="#virtualni-računalniki-virtual-machine---vm">Virtualni računalniki (Virtual Machine - VM)</a>
+          <ul>
+            <li><a href="#vrste-virtualnih-računalnikov">Vrste virtualnih računalnikov</a>
+              <ul>
+                <li><a href="#sistemski-virtualni-računalniki">Sistemski virtualni računalniki</a></li>
+                <li><a href="#procesni-virtualni-računalniki">Procesni virtualni računalniki</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#virtualni-sistemi">Virtualni sistemi</a></li>
         <li><a href="#opravila-po-instalaciji">Opravila po instalaciji</a></li>
         <li><a href="#hierarhija-datotečnega-sistema">Hierarhija datotečnega sistema</a></li>
-        <li><a href="#deljeni-in-nedeljeni-podatki">Deljeni in nedeljeni podatki</a></li>
-        <li><a href="#statični-in-dinamični-podatki">Statični in dinamični podatki</a></li>
-        <li><a href="#pogosti-imeniki">Pogosti imeniki</a></li>
-        <li><a href="#izbira-programske-opreme">Izbira programske opreme</a></li>
-        <li><a href="#instalacija-binarnih-paketov">Instalacija binarnih paketov</a></li>
-        <li><a href="#instalacija-iz-izvorne-kode">Instalacija iz izvorne kode</a></li>
+        <li><a href="#deljeni-in-nedeljeni-podatki">Deljeni in nedeljeni podatki</a>
+          <ul>
+            <li><a href="#deljeni-shareable">Deljeni (shareable)</a></li>
+            <li><a href="#nedeljeni-unshareable">Nedeljeni (unshareable)</a></li>
+          </ul>
+        </li>
+        <li><a href="#statični-in-dinamični-podatki">Statični in dinamični podatki</a>
+          <ul>
+            <li><a href="#statični-podatki">Statični podatki</a></li>
+            <li><a href="#dinamični-podatki">Dinamični podatki</a></li>
+          </ul>
+        </li>
+        <li><a href="#pogosti-imeniki">Pogosti imeniki</a>
+          <ul>
+            <li><a href="#korenski-imenik">Korenski imenik</a></li>
+            <li><a href="#usr-1"><code>/usr</code></a></li>
+            <li><a href="#usrlocal"><code>/usr/local</code></a></li>
+            <li><a href="#var-1"><code>/var</code></a></li>
+            <li><a href="#kaj-je-spooling">Kaj je spooling?</a></li>
+          </ul>
+        </li>
+        <li><a href="#izbira-programske-opreme">Izbira programske opreme</a>
+          <ul>
+            <li><a href="#konfiguracijske-datoteke">Konfiguracijske datoteke</a></li>
+            <li><a href="#odvisnosti-dependencies">Odvisnosti (Dependencies)</a></li>
+          </ul>
+        </li>
+        <li><a href="#instalacija-binarnih-paketov">Instalacija binarnih paketov</a>
+          <ul>
+            <li><a href="#prednosti">Prednosti</a></li>
+            <li><a href="#slabosti">Slabosti</a></li>
+            <li><a href="#opombe">Opombe</a></li>
+          </ul>
+        </li>
+        <li><a href="#instalacija-iz-izvorne-kode">Instalacija iz izvorne kode</a>
+          <ul>
+            <li><a href="#prednosti-1">Prednosti</a></li>
+            <li><a href="#slabosti-1">Slabosti</a></li>
+            <li><a href="#opomba">Opomba</a></li>
+          </ul>
+        </li>
         <li><a href="#zakaj-uporabljati-upravljalca-paketov">Zakaj uporabljati upravljalca paketov?</a></li>
         <li><a href="#varnostni-popravki">Varnostni popravki</a></li>
         <li><a href="#pregled-sistemov-za-nameščanje-paketov">Pregled sistemov za nameščanje paketov</a></li>
@@ -5505,20 +6510,46 @@ Ko pomaga samo C
         <li><a href="#večuporabniški-operacijski-sistemi">Večuporabniški operacijski sistemi</a></li>
         <li><a href="#uporabniški-računi-v-sistemih-unix">Uporabniški računi v sistemih UNIX</a></li>
         <li><a href="#skupine-v-sistemih-unix">Skupine v sistemih UNIX</a></li>
-        <li><a href="#primer-zaščite-direktorijev">Primer zaščite direktorijev</a></li>
+        <li><a href="#primer-zaščite-direktorijev">Primer zaščite direktorijev</a>
+          <ul>
+            <li><a href="#opombe-1">Opombe</a></li>
+          </ul>
+        </li>
         <li><a href="#pravila-uporabe-sistema">Pravila uporabe sistema</a></li>
-        <li><a href="#pravila-za-sistemske-administratorje">Pravila za sistemske administratorje</a></li>
+        <li><a href="#pravila-za-sistemske-administratorje">Pravila za sistemske administratorje</a>
+          <ul>
+            <li><a href="#pravila-za-zagotavljanje-storitev">Pravila za zagotavljanje storitev</a></li>
+            <li><a href="#opombe-2">Opombe</a></li>
+          </ul>
+        </li>
         <li><a href="#splošna-pravila-za-uporabnike">Splošna pravila za uporabnike</a></li>
-        <li><a href="#uveljavljanje-pravil">Uveljavljanje pravil</a></li>
+        <li><a href="#uveljavljanje-pravil">Uveljavljanje pravil</a>
+          <ul>
+            <li><a href="#opomba-1">Opomba</a></li>
+          </ul>
+        </li>
         <li><a href="#ustvarjanje-uporabniškega-računa">Ustvarjanje uporabniškega računa</a></li>
         <li><a href="#onemogočanje-oziroma-brisanje-uporabniškega-računa">Onemogočanje oziroma brisanje uporabniškega računa</a></li>
         <li><a href="#ukaz-useradd">Ukaz <code>useradd</code></a></li>
         <li><a href="#ukaz-userdel">Ukaz <code>userdel</code></a></li>
-        <li><a href="#licence-programske-opreme">Licence programske opreme</a></li>
+        <li><a href="#licence-programske-opreme">Licence programske opreme</a>
+          <ul>
+            <li><a href="#primer">Primer</a></li>
+          </ul>
+        </li>
         <li><a href="#etika-sistemskega-administratorja">Etika sistemskega administratorja</a></li>
         <li><a href="#primeri-etičnih-dilem">Primeri etičnih dilem</a></li>
-        <li><a href="#dodatno-gradivo">Dodatno gradivo</a></li>
-        <li><a href="#upravljanje-uporabnikov--dodatne-opombe">Upravljanje uporabnikov – dodatne opombe</a></li>
+        <li><a href="#dodatno-gradivo">Dodatno gradivo</a>
+          <ul>
+            <li><a href="#upravljanje-uporabnikov">Upravljanje uporabnikov</a></li>
+          </ul>
+        </li>
+        <li><a href="#upravljanje-uporabnikov--dodatne-opombe">Upravljanje uporabnikov – dodatne opombe</a>
+          <ul>
+            <li><a href="#passwdconf"><code>passwd.conf</code></a></li>
+            <li><a href="#vipw"><code>vipw</code></a></li>
+          </ul>
+        </li>
         <li><a href="#dodatno-gradivo-o-licencah">Dodatno gradivo o licencah</a></li>
       </ul>
     </li>
@@ -5527,26 +6558,115 @@ Ko pomaga samo C
         <li><a href="#zakaj-avtomatizirati-opravila">Zakaj avtomatizirati opravila?</a></li>
         <li><a href="#prednosti-avtomatizacije">Prednosti avtomatizacije</a></li>
         <li><a href="#lastnosti-dobrega-sistemskega-administratorja">Lastnosti dobrega sistemskega administratorja</a></li>
-        <li><a href="#programi-za-razvrščanje-opravil-cron">Programi za razvrščanje opravil (cron)</a></li>
-        <li><a href="#ukaz-find-1">Ukaz find</a></li>
+        <li><a href="#programi-za-razvrščanje-opravil-cron">Programi za razvrščanje opravil (cron)</a>
+          <ul>
+            <li><a href="#struktura-cron-izraza">Struktura cron izraza</a></li>
+            <li><a href="#primeri-cron-izrazov">Primeri cron izrazov</a></li>
+            <li><a href="#absolutna-pot-pri-cron-u">Absolutna pot pri cron-u</a></li>
+          </ul>
+        </li>
+        <li><a href="#ukaz-find-1">Ukaz find</a>
+          <ul>
+            <li><a href="#iskanje-navadnih-datotek">Iskanje navadnih datotek</a></li>
+            <li><a href="#časovni-parametri">Časovni parametri</a>
+              <ul>
+                <li><a href="#-mtime"><code>-mtime</code></a></li>
+                <li><a href="#-atime"><code>-atime</code></a></li>
+                <li><a href="#-ctime"><code>-ctime</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#parameter--exec">Parameter <code>-exec</code></a></li>
+            <li><a href="#primeri-uporabe-ukaza-find">Primeri uporabe ukaza find</a>
+              <ul>
+                <li><a href="#iskanje-vseh-cpp-datotek">Iskanje vseh <code>.cpp</code> datotek</a></li>
+                <li><a href="#iskanje-datotek-z-dovoljenji-0777">Iskanje datotek z dovoljenji 0777</a></li>
+                <li><a href="#sprememba-dovoljenj-vseh-najdenih-datotek">Sprememba dovoljenj vseh najdenih datotek</a></li>
+                <li><a href="#iskanje-več-končnic">Iskanje več končnic</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#ukaz-locate">Ukaz locate</a></li>
         <li><a href="#primerjava-datotek">Primerjava datotek</a></li>
-        <li><a href="#osnove-lupine-shell">Osnove lupine (Shell)</a></li>
+        <li><a href="#osnove-lupine-shell">Osnove lupine (Shell)</a>
+          <ul>
+            <li><a href="#vgrajeni-ukazi">Vgrajeni ukazi</a></li>
+            <li><a href="#primer-1">Primer</a></li>
+          </ul>
+        </li>
         <li><a href="#ukaz-sed">Ukaz sed</a></li>
         <li><a href="#ukaz-nohup">Ukaz nohup</a></li>
-        <li><a href="#osnovna-orodja">Osnovna orodja</a></li>
-        <li><a href="#regularni-izrazi-regular-expressions">Regularni izrazi (Regular Expressions)</a></li>
-        <li><a href="#osnovni-vzorci-regularnih-izrazov">Osnovni vzorci regularnih izrazov</a></li>
-        <li><a href="#kvantifikatorji">Kvantifikatorji</a></li>
+        <li><a href="#osnovna-orodja">Osnovna orodja</a>
+          <ul>
+            <li><a href="#koristna-dokumentacija">Koristna dokumentacija</a>
+              <ul>
+                <li><a href="#gnu-sed">GNU sed</a></li>
+                <li><a href="#gnu-awk">GNU awk</a></li>
+                <li><a href="#primeri-uporabe-awk">Primeri uporabe awk</a></li>
+                <li><a href="#pomoč-man-pages">Pomoč (man pages)</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#regularni-izrazi-regular-expressions">Regularni izrazi (Regular Expressions)</a>
+          <ul>
+            <li><a href="#primer-uporabe-2">Primer uporabe</a></li>
+          </ul>
+        </li>
+        <li><a href="#osnovni-vzorci-regularnih-izrazov">Osnovni vzorci regularnih izrazov</a>
+          <ul>
+            <li><a href="#posamezen-znak">Posamezen znak</a></li>
+            <li><a href="#seznam-znakov">Seznam znakov</a></li>
+            <li><a href="#interval-znakov">Interval znakov</a></li>
+            <li><a href="#negiran-izraz">Negiran izraz</a></li>
+            <li><a href="#posebni-znaki">Posebni znaki</a></li>
+          </ul>
+        </li>
+        <li><a href="#kvantifikatorji">Kvantifikatorji</a>
+          <ul>
+            <li><a href="#prva-možnost">Prva možnost</a></li>
+            <li><a href="#druga-možnost">Druga možnost</a></li>
+          </ul>
+        </li>
         <li><a href="#skripte">Skripte</a></li>
-        <li><a href="#zagonske-datoteke-in-okolje">Zagonske datoteke in okolje</a></li>
-        <li><a href="#dedovanje-okolja">Dedovanje okolja</a></li>
+        <li><a href="#zagonske-datoteke-in-okolje">Zagonske datoteke in okolje</a>
+          <ul>
+            <li><a href="#interaktivna-lupina-in-interpreter-ukazov">Interaktivna lupina in interpreter ukazov</a>
+              <ul>
+                <li><a href="#interpreter-ukazov">Interpreter ukazov</a></li>
+                <li><a href="#interaktivna-lupina">Interaktivna lupina</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#dedovanje-okolja">Dedovanje okolja</a>
+          <ul>
+            <li><a href="#primer-brez-oklepajev">Primer brez oklepajev</a></li>
+            <li><a href="#primer-z-oklepaji">Primer z oklepaji</a></li>
+          </ul>
+        </li>
         <li><a href="#primer-napake">Primer napake</a></li>
         <li><a href="#primer-uporabe-več-pipe-ov">Primer uporabe več pipe-ov</a></li>
-        <li><a href="#krmiljenje-tokov">Krmiljenje tokov</a></li>
-        <li><a href="#krmiljenje-izvajanja">Krmiljenje izvajanja</a></li>
+        <li><a href="#krmiljenje-tokov">Krmiljenje tokov</a>
+          <ul>
+            <li><a href="#ukaz-tee">Ukaz tee</a></li>
+            <li><a href="#ukaz-xargs">Ukaz xargs</a></li>
+          </ul>
+        </li>
+        <li><a href="#krmiljenje-izvajanja">Krmiljenje izvajanja</a>
+          <ul>
+            <li><a href="#pogoji">Pogoji</a></li>
+            <li><a href="#zanke">Zanke</a></li>
+            <li><a href="#krmiljenje-zank">Krmiljenje zank</a></li>
+          </ul>
+        </li>
         <li><a href="#vgrajeni-ukazi-funkcije-in-signali">Vgrajeni ukazi, funkcije in signali</a></li>
-        <li><a href="#perl">Perl</a></li>
+        <li><a href="#perl">Perl</a>
+          <ul>
+            <li><a href="#prednosti-2">Prednosti</a></li>
+            <li><a href="#slabosti-2">Slabosti</a></li>
+          </ul>
+        </li>
         <li><a href="#python">Python</a></li>
         <li><a href="#ko-pomaga-samo-c">Ko pomaga samo C</a></li>
       </ul>
@@ -5566,7 +6686,7 @@ Ko pomaga samo C
 </div>
 <div class="sidebar-state">
   <div class="sidebar-state-article">
-    <div>Posts</div><div class="sidebar-state-number">7</div>
+    <div>Posts</div><div class="sidebar-state-number">8</div>
   </div>
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>Categories</div>

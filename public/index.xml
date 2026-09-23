@@ -130,6 +130,24 @@
     
 
     <item>
+      <title>Komunikološke raziskovalne metode</title>
+      <link>https://example.org/post/krm/</link>
+      <pubDate>Fri, 06 Oct 2023 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>https://example.org/post/krm/</guid>
+      <description>
+        <![CDATA[<h1>Komunikološke raziskovalne metode</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Komunikološke raziskovalne metode za zimski semester prvega letnika FERI MK MAGISTERIJ.
+        
+        <hr><p>Published on 2023-10-06 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2023-10-06</p>]]>
+      </description>
+      
+    </item>
+    
+    
+
+    <item>
       <title>Hello World</title>
       <link>https://example.org/post/hello/</link>
       <pubDate>Wed, 15 Mar 2023 11:00:00 -0700</pubDate>

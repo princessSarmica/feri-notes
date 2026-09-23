@@ -11,3 +11,7 @@ delimiters.inline = [["\\(", "\\)"], ["$", "$"]]
 [markup.highlight]
 guessSyntax = true
 noClasses = false
+
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 6
