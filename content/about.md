@@ -38,3 +38,7 @@ Stran je bila narejena z [**Hugo**](https://gohugo.io/) static site generatorjem
 {{< youtube id="U9jR6d7O7k4" start="82" >}}
 
 Okej, malo za hec ... ampak iskreno: šlo je predvsem za željo preizkusiti novo tehnologijo, tema, uporabljena s tem generatorjem, pa se je presenetljivo dobro ujemala s prvotnimi zapiski, ki so bili pisani v PDF formatu in so na koncu pogosto imeli še kakšno sliko waifuja 😉.
+
+### Podpora
+
+Če bi me slučajno želeli podpreti na kakršen koli način, prosim dajte temu projektu zvezdico na mojem [GitHubu](https://github.com/princessSarmica/feri-notes) - tako bodo moji potencialni delodajalci dobili občutek, da imam na GitHubu kakšen "high-level" tech projekt ;)
