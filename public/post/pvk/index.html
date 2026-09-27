@@ -535,12 +535,492 @@ Dejavniki nakupnega vedenja
 <li><strong>Potrebe</strong> so razlog za začetek nakupnega procesa. Poznamo primarne biološke potrebe (hrana, voda, spanje, spolnost), primarne socialne potrebe (varnost, druženje, estetske potrebe, priznanje) ter sekundarne socialne potrebe (naši interesi, hobiji, navade in razvade, kot so priboljški ali cigareti).</li>
 <li><strong>Motivi</strong> - motivacija je želja oz. razlog, da nekaj naredimo. Je glavni dejavnik postavljanja in doseganja ciljev - cilje si zastavimo, če imamo motivacijo. Glavni sprožilci motivacije so potreba po moči, potreba po dosežkih ter potreba po pripadnosti. Motivacija je lahko notranja ali zunanja: zunanji motivi izvirajo iz zunanjega sveta (npr. nagrade, kot sta diploma ali plača), notranji motivi pa iz naše notranjosti, iz notranjega zadovoljstva, če nekaj dosežemo. V psihologiji govorimo tudi o povezanosti motivacije z vpletenostjo - pri potrošnikih je vpletenost velika npr. pri nakupu daril ali kozmetičnih in modnih izdelkov, kjer se pri nakupu prepleta več motivov (recimo pri nakupu kozmetičnega izdelka, kot je krema).</li>
 </ul>
-<p>image1 and image2</p>
+<div class="gallery-wall" id="photoWall-0efff7335"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_1.webp\",\"/images/pvk/pvk_image_2.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-0efff7335';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 <ul>
 <li><strong>Samopodoba</strong> je stališče oz. odnos do samega sebe. Tu ločimo dva jaza - dejanski jaz (kar dejansko smo) in idealni jaz (kar bi želeli biti). Samopodoba je za tržnike ključna, saj želijo ustvariti blagovne znamke, s katerimi bi se potrošniki poistovetili (npr. ure Longines, ki naj bi žensko naredile elegantno).</li>
 </ul>
-<p>image3 and image4</p>
-<p>image5 and image6</p>
+<div class="gallery-wall" id="photoWall-692b26185"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_3.webp\",\"/images/pvk/pvk_image_4.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-692b26185';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
+<div class="gallery-wall" id="photoWall-8763c16a3"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_5.webp\",\"/images/pvk/pvk_image_6.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-8763c16a3';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 <ul>
 <li><strong>Osebnost</strong> opredeljujejo telesna zgradba, temperament, interesi, stališča, sposobnosti, vrednote in značaj. Karizmatična oseba je npr. Tadej Toš.</li>
 <li><strong>Duševni procesi</strong> so vsi notranji procesi, ki potekajo v določenem časovnem zaporedju in vodijo k določenemu izidu - pri človeku se kažejo navzven, čeprav jih pogosto ni mogoče neposredno opaziti. V psihologiji jih delimo na čustvene, motivacijske in kognitivne. Kognitivni procesi se nadalje delijo na zaznavanje, učenje in mišljenje - mišljenje je najvišji duševni proces.</li>
@@ -580,7 +1060,167 @@ Dejavniki nakupnega vedenja
 <p><strong>Družino</strong> ločimo na primarno družino (tisto, v kateri se rodimo) in družino, ki si jo ustvarimo sami.</p>
 <p><strong>Referenčne skupine</strong> so tiste, s katerimi se poistovetimo in sprejemamo njihova stališča - to so npr. naši kolegi ali naš razred.</p>
 <p><strong>Mnenjski vodje</strong> so posamezniki, ki vplivajo na nakupne odločitve - to je lahko kakšen strokovni prodajalec, partner, prijatelj ipd.</p>
-<p>image7 and image8</p>
+<div class="gallery-wall" id="photoWall-748ecdd0a"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_7.webp\",\"/images/pvk/pvk_image_8.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-748ecdd0a';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 <blockquote class="alert-blockquote info">
   <p class="alert-heading">
     Info
@@ -669,7 +1309,167 @@ Primer globalnega oglasa
 <ul>
 <li>Velika napihljiva <strong>pločevinka Coca-Cole</strong> in <strong>Sprite-ov &ldquo;tuš&rdquo;</strong> na plaži v Riu de Janeiru - primera, kako lahko situacija oz. okolje, v katerem je izdelek postavljen, vpliva na nakupno odločitev posameznika.</li>
 </ul>
-<p>image9 and image10</p>
+<div class="gallery-wall" id="photoWall-0d344ee25"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_9.webp\",\"/images/pvk/pvk_image_10.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-0d344ee25';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 <ul>
 <li><strong>Lenny Kravitz</strong> v kampanji za Yves Saint Laurent razkrije svoje &ldquo;zatočišče&rdquo; - primer, kako je izdelek (dišava) umeščen v specifično, sanjsko okolje in situacijo.</li>
 </ul>
@@ -832,11 +1632,171 @@ Pasivna in aktivna pozornost
 <ul>
 <li><strong>McDonald&rsquo;s</strong> - <em>&ldquo;Eyes on the fries.&rdquo;</em> - kampanja za varnost v prometu (Don&rsquo;t eat and drive. Take a break.).</li>
 </ul>
-<p>image12</p>
+<p><img src="/images/pvk/pvk_image_12.webp" alt="McDonald&rsquo;s – &ldquo;Eyes on the fries. Don&rsquo;t eat and drive. Take a break.&rdquo;"></p>
 <ul>
 <li><strong>Colgate</strong> - oglasi za zobno nitko, kjer so hoteli dokazati, da bo hrana, ki bo ostala med zobmi, pritegnila dosti več pozornosti kot katera koli druga napaka (serija oglasov s pari, kjer eden od njiju v zobeh drži kos zobne nitke).</li>
 </ul>
-<p>image13 14 15</p>
+<div class="gallery-wall" id="photoWall-586cd30a6"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_13.webp\",\"/images/pvk/pvk_image_14.webp\",\"/images/pvk/pvk_image_15.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-586cd30a6';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 <h3 id="primeri-nenavadne-pozornosti">
 <a class="header-anchor" href="#primeri-nenavadne-pozornosti"></a>
 Primeri (ne)navadne pozornosti
@@ -885,7 +1845,7 @@ Primeri (ne)navadne pozornosti
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oscar Mayer - <em>&ldquo;This summer, all legs are #HotDogsForLegs.&rdquo;</em> - billboard, kjer so noge kopalcev ob bazenu oblikovane tako, da iz daleč spominjajo na hrenovke.</p>
-<p>image11</p>
+<p><img src="/images/pvk/pvk_image_11.webp" alt="Oscar Mayer – &ldquo;This summer, your legs are #HotDogsForLegs.&rdquo;"></p>
 </blockquote>
 <h3 id="oblike-pozornosti">
 <a class="header-anchor" href="#oblike-pozornosti"></a>
@@ -937,15 +1897,15 @@ Oblike pozornosti
 <ul>
 <li>Oglaševalska akcija <em>&ldquo;Všeč mi je, da lahko grem zvečer sama po mestu&rdquo;</em> - teaser kampanja, ki bo imela finalno razkritje. Želijo, da se stvar začne širiti, na koncu pa se bo razkrilo, kdo je naročnik oglasa.</li>
 </ul>
-<p>image16</p>
+<p><img src="/images/pvk/pvk_image_16.webp" alt="&ldquo;Všeč mi je, da lahko grem zvečer sama po mestu&rdquo; – teaser kampanja"></p>
 <ul>
 <li>Kampanja <em>&ldquo;Should you have to hide the real you to be accepted?&rdquo;</em> (discriminatie.nl) - ozavešča o diskriminaciji.</li>
 </ul>
-<p>image17</p>
+<p><img src="/images/pvk/pvk_image_17.webp" alt="discriminatie.nl – &ldquo;Should you have to hide the real you to be accepted?&rdquo;"></p>
 <ul>
 <li>Oglas za kruh <em>&ldquo;Bread is life.&rdquo;</em></li>
 </ul>
-<p>image18</p>
+<p><img src="/images/pvk/pvk_image_18.webp" alt="&ldquo;Bread is life.&rdquo;"></p>
 <h3 id="dražljaji">
 <a class="header-anchor" href="#dra%c5%beljaji"></a>
 Dražljaji
@@ -960,8 +1920,8 @@ Dražljaji
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Udarna rdeča barva in postavitev dlani pritegneta pozornost v Calvin Kleinovem oglasu, kjer avtor ni izpisal polnega imena znamke - podobno je bil zasnovan tudi oglas za Durex, kjer ne veš takoj, kdo je naročnik, zato smo nanj dosti bolj pozorni.</p>
-<p>image19</p>
-<p>image20</p>
+<p><img src="/images/pvk/pvk_image_19.webp" alt="Calvin Klein – oglas z udarno rdečo barvo in postavitvijo dlani"></p>
+<p><img src="/images/pvk/pvk_image_20.webp" alt="Durex – &ldquo;chocolate flavoured condoms&rdquo;"></p>
 </blockquote>
 <h3 id="zunanji-dejavniki-pozornosti">
 <a class="header-anchor" href="#zunanji-dejavniki-pozornosti"></a>
@@ -986,7 +1946,7 @@ Zunanji dejavniki pozornosti
 <ul>
 <li><strong>Kraš</strong> je s prenovljenimi izložbenimi okni v Ljubljani (<em>&ldquo;Leti, leti &hellip; Bajadera velikanka?&rdquo;</em>) poskušal pritegniti pozornost tako, da je izgledalo, kot da je okno zlomljeno.</li>
 </ul>
-<p>image21</p>
+<p><img src="/images/pvk/pvk_image_21.webp" alt="Kraš – prenovljena izložba (&ldquo;razbito&rdquo; okno) v Ljubljani"></p>
 <ul>
 <li><strong>Hyundai Veloster</strong> - oglas so prepovedali, ker je znamka želela oglaševati, da ima avto vrata samo na eni strani.</li>
 </ul>
@@ -998,7 +1958,7 @@ Zunanji dejavniki pozornosti
 <ul>
 <li>Maybelline - v oglasu je edina barvna stvar šminka, kar pritegne pozornost.</li>
 </ul>
-<p>image22</p>
+<p><img src="/images/pvk/pvk_image_22.webp" alt="Maybelline – edina barvna stvar v oglasu je šminka"></p>
 <ul>
 <li>Coca-Cola - v črno-belem oglasu z Drakulo je edina barvna stvar rdeča pločevinka Coca-Cole, kar pritegne pozornost.</li>
 </ul>
@@ -1025,7 +1985,7 @@ Zunanji dejavniki pozornosti
 <ul>
 <li><strong>Nika Križnar</strong> (slovenska smučarska skakalka) je obraz kampanje Zlatarne Celje 2024.</li>
 </ul>
-<p>image23</p>
+<p><img src="/images/pvk/pvk_image_23.webp" alt="Nika Križnar – obraz kampanje Zlatarne Celje 2024"></p>
 <h3 id="notranji-dejavniki-pozornosti">
 <a class="header-anchor" href="#notranji-dejavniki-pozornosti"></a>
 Notranji dejavniki pozornosti
@@ -1034,12 +1994,12 @@ Notranji dejavniki pozornosti
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Organizacija Innocence in Danger z oglasom ozavešča o problematiki pedofilije - o tej temi se v medijih pogosto malo govori, med drugim tudi zato, ker se želi zaščititi identiteto žrtev.</p>
-<p>image24</p>
+<p><img src="/images/pvk/pvk_image_24.webp" alt="Innocence in Danger – ozaveščanje o pedofiliji"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Kampanja BabyCanWait.com ozavešča o problematiki prezgodnje nosečnosti pri mladostnikih - organizacija je s tem želela izpostaviti tematiko, o kateri se v medijih dosti ne poroča. Pomembna so tu stališča.</p>
-<p>image25</p>
+<p><img src="/images/pvk/pvk_image_25.webp" alt="BabyCanWait.com – &ldquo;Have a baby too young and it&rsquo;ll control your life.&rdquo;"></p>
 </blockquote>
 <p>Poleg čustev na pozornost vplivajo tudi <strong>potrebe in motivi</strong>, naše <strong>izkušnje</strong> ter <strong>znanje</strong>.</p>
 <h3 id="primeri-uspešnih-oglasov-ki-pritegnejo-pozornost-iz-super-bowla">
@@ -1101,15 +2061,15 @@ Zaznavanje ali percepcija
 <ul>
 <li><strong>Crocs x Coca-Cola</strong> - na natikače Crocs so natisnili logotip Coca-Cole, da bi gledalca &ldquo;postali žejni&rdquo;.</li>
 </ul>
-<p>image26</p>
+<p><img src="/images/pvk/pvk_image_26.webp" alt="Crocs x Coca-Cola natikači z logotipom Coca-Cole"></p>
 <ul>
 <li><strong>Paloma</strong> - v sodelovanju s programom Svit (presejalni program za raka na debelem črevesu in danki) je ob 10. obletnici programa izdelala omejeno serijo WC papirja z natisnjenim logotipom in sloganom programa - toaletni papir kot nenavaden oglaševalski medij.</li>
 </ul>
-<p>image27</p>
+<p><img src="/images/pvk/pvk_image_27.webp" alt="Paloma x Svit – toaletni papir z logotipom in sloganom programa Svit"></p>
 <ul>
 <li><strong>Društvo Onkoman</strong> - nad pisoarji so postavili table, ki pozivajo moške k samopregledu za preprečevanje raka na prostati (<em>&ldquo;Ko boste doma slekli hlače, opravite samopregled mod. 30 sekund vam lahko reši življenje.&rdquo;</em>) - primer kontekstualno relevantne umestitve oglasnega sporočila.</li>
 </ul>
-<p>image28</p>
+<p><img src="/images/pvk/pvk_image_28.webp" alt="Društvo Onkoman – &ldquo;Medtem ko berete to stran, opravite samopregled mod.&rdquo;"></p>
 <h4 id="motnje-zaznavanja">
 <a class="header-anchor" href="#motnje-zaznavanja"></a>
 Motnje zaznavanja
@@ -1123,7 +2083,7 @@ Motnje zaznavanja
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglas za pivo, ki je zasnovan tako, da spominja na žensko telo.</p>
-<p>image29</p>
+<p><img src="/images/pvk/pvk_image_29.webp" alt="Oglas za pivo Ursus, zasnovan tako, da spominja na žensko telo"></p>
 </blockquote>
 <p><strong>Halucinacije:</strong></p>
 <ul>
@@ -1139,7 +2099,7 @@ Motnje zaznavanja
 <li><strong>Močna čustva</strong> ali afekti - sem sodijo tudi pričakovanja, ki sprožijo vsakdanje halucinacije (npr. vidimo, da so se odprla vrata, čeprav se sploh niso, ker nekoga pričakujemo).</li>
 <li><strong>Predsodki</strong> - nekoga podcenjujemo ali precenjujemo (npr. na podlagi etnične pripadnosti nekomu pripišemo, da je storil tatvino, čeprav za to ni nobenih dokazov - klasičen primer, kako predsodki izkrivijo zaznavo).</li>
 </ol>
-<p>image30</p>
+<p><img src="/images/pvk/pvk_image_30.webp" alt="Jim Beam – &ldquo;Guys think about sex every sex seconds. Guys never change, neither do we.&rdquo;"></p>
 <h2 id="motivacija-in-vpletenost-potrošnikov">
 <a class="header-anchor" href="#motivacija-in-vpletenost-potro%c5%a1nikov"></a>
 Motivacija in vpletenost potrošnikov
@@ -1159,7 +2119,7 @@ Motivacija
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Simbolika v izdelkih za kompromis samopodobe in superega - športni avtomobil kot zadovoljstvo moških (športni avtomobil za moške predstavlja cilj za uresničevanje superega).</p>
-<p>image31</p>
+<p><img src="/images/pvk/pvk_image_31.webp" alt="Hot Wheels – športni avtomobil kot simbol moške samopodobe"></p>
 </blockquote>
 <p><strong>Motivacija na podlagi glasbenega učinka:</strong></p>
 <ul>
@@ -1224,7 +2184,7 @@ Potrebe
 <ul>
 <li>Kozarec za vino - <em>&ldquo;I don&rsquo;t need inspirational quotes. I just need a damn glass of wine!&rdquo;</em></li>
 </ul>
-<p>image32</p>
+<p><img src="/images/pvk/pvk_image_32.webp" alt="Kozarec za vino – &ldquo;I don&rsquo;t need inspirational quotes. I just need a damn glass of wine!&rdquo;"></p>
 <ul>
 <li><strong>Elena&rsquo;s</strong> - <em>&ldquo;Adiós Amor Adiós&rdquo;</em> - mehiška znamka sladoleda, ki se oglašuje kot dodatna psihološka pomoč v primeru razhoda s partnerjem - sladoled ima toliko okusov, kolikor je faz v procesu žalovanja.</li>
 </ul>
@@ -1235,15 +2195,15 @@ Potrebe
 <ul>
 <li>Čokolada - <em>&ldquo;All you need is love. But a little chocolate now and then doesn&rsquo;t hurt.&rdquo;</em> (Charles M. Schulz)</li>
 </ul>
-<p>image33</p>
+<p><img src="/images/pvk/pvk_image_33.webp" alt="&ldquo;All you need is love. But a little chocolate now and then doesn&rsquo;t hurt.&rdquo; (Charles M. Schulz)"></p>
 <ul>
 <li><strong>Oculto</strong> (optika, Ljubljana) - vsak človek ima načeloma le en par očal, znamka pa spodbuja, da bi očala postala modni dodatek in da bi jih ljudje imeli več, vsak par s svojim &ldquo;karakterjem&rdquo;.</li>
 </ul>
-<p>image34</p>
+<p><img src="/images/pvk/pvk_image_34.webp" alt="Oculto (optika, Ljubljana) – kolaž oglasov za sončna očala z različnimi &ldquo;karakterji&rdquo;"></p>
 <ul>
 <li><strong>Ghetaldus</strong> (optika) - <em>&ldquo;Nespretna? Morda samo potrebuješ nova očala. Da zadaneš ključavnico.&rdquo;</em> - cilj kampanje je, da bi v optiki več ljudi opravilo pregled vida.</li>
 </ul>
-<p>image35</p>
+<p><img src="/images/pvk/pvk_image_35.webp" alt="Ghetaldus (optika) – &ldquo;Nespretna? Morda samo potrebuješ nova očala. Da zadaneš ključavnico.&rdquo;"></p>
 <blockquote class="alert-blockquote info">
   <p class="alert-heading">
     Info
@@ -1270,7 +2230,7 @@ Potrebe
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Primer provokativnega oglasa za britansko vojsko, ki igra na frustracijo, gre za ustanovo, ki ne podpira kreativnosti ali odstopanj, govori pa o tem, če si v vojski lahko gej ali čustven</p>
-<p>image36</p>
+<p><img src="/images/pvk/pvk_image_36.webp" alt="Oglas za britansko vojsko – &ldquo;Can I be gay in the army? What if I get emotional in the army?&rdquo;"></p>
 </blockquote>
 <p><strong>Konflikt</strong></p>
 <p>Konflikt se pojavi, ko imamo hkrati dve ali več potreb, ki jih ni mogoče hkrati zadovoljiti, med njimi pa se ne moremo odločiti (npr. <em>&ldquo;To buy or not to buy?&rdquo;</em>).</p>
@@ -1385,7 +2345,7 @@ Vpletenost potrošnika
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglasno sporočilo za luksuzne britanske avtomobile Aston Martin (rabljena vozila) - <em>&ldquo;You know you&rsquo;re not the first, but do you really care?&rdquo;</em> - močno so vpleteni potencialni kupci, ki se odločajo za nakup dražjih avtomobilov.</p>
-<p>image37</p>
+<p><img src="/images/pvk/pvk_image_37.webp" alt="Aston Martin (rabljena vozila) – &ldquo;You know you&rsquo;re not the first, but do you really care?&rdquo;"></p>
 </blockquote>
 <p><strong>Od česa je odvisna vpletenost potrošnika:</strong></p>
 <ol>
@@ -1400,7 +2360,7 @@ Vpletenost potrošnika
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Renault <em>&ldquo;Plug Inn&rdquo;</em> aplikacija, ki omogoča polnjenje električnih avtomobilov, deluje kot AirBnB za električne avtomobile, saj obstaja premalo polnilnih postaj - zdaj si lahko avto polniš tudi pri nekomu doma in mu plačaš preko aplikacije, oglas spodbuja k nakupu električnih avtomobilov.</p>
-<p>image38</p>
+<p><img src="/images/pvk/pvk_image_38.webp" alt="Renault &ldquo;Plug Inn&rdquo; – aplikacija za polnjenje električnih avtomobilov"></p>
 </blockquote>
 </li>
 <li>
@@ -1411,7 +2371,7 @@ Vpletenost potrošnika
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Tiffany&rsquo;s nakit, ki velja kot bolj luksuzen izdelek.</p>
-<p>image39</p>
+<p><img src="/images/pvk/pvk_image_39.webp" alt="Tiffany &amp; Co. – diamantni zaročni prstan"></p>
 </blockquote>
 </li>
 <li>
@@ -1419,7 +2379,7 @@ Vpletenost potrošnika
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Unicefova reklama - <em>&ldquo;He&rsquo;s starving. We&rsquo;re not. It&rsquo;s time to share.&rdquo;</em> - poziv k donacijam za lačne otroke.</p>
-<p>image40</p>
+<p><img src="/images/pvk/pvk_image_40.webp" alt="UNICEF – &ldquo;He&rsquo;s starving. We&rsquo;re not. It&rsquo;s time to share.&rdquo;"></p>
 </blockquote>
 </li>
 </ol>
@@ -1440,12 +2400,332 @@ Frekvenčna iluzija (Baader-Meinhofov fenomen)
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka <strong>Absolut Vodka</strong> je v Ameriki skozi več let izvajala kampanjo frekvenčne iluzije s serijo podobno zasnovanih oglasov (vedno z isto obliko steklenice), s čimer je pritegnila pozornost in vplivala na čustva potrošnikov. Med drugim so opozarjali na varnost v prometu (<em>Absolut Security</em>), naredili smučarsko progo v obliki steklenice vodke (<em>Absolut Aspen</em>), bazen v obliki steklenice (<em>Absolut L.A.</em>), spreminjali okus in embalažo, oblikovano kot antično steklenico (<em>Absolut Original</em>, <em>Absolut Citron</em>), ter ob podelitvi filmske nagrade steklenico, sestavljeno iz filmskih trakov (<em>Absolut Achievement</em>). Eden od oglasov (<em>Absolut Impotence</em>) je oglaševalno serijo obrnil tudi v opozorilo - izpostavil je negativen učinek alkohola na moško potenco.</p>
-<p>gallery images 41-47</p>
+<div class="gallery-wall" id="photoWall-fe05e3a4c"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_41.webp\",\"/images/pvk/pvk_image_42.webp\",\"/images/pvk/pvk_image_43.webp\",\"/images/pvk/pvk_image_44.webp\",\"/images/pvk/pvk_image_45.webp\",\"/images/pvk/pvk_image_46.webp\",\"/images/pvk/pvk_image_47.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-fe05e3a4c';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglas znamke <strong>Protein World</strong> (<em>&ldquo;Are you beach body ready?&rdquo;</em>) so zaradi vpliva na samopodobo žensk umaknili, potem ko je sprožil val protestov. Na plakatih so se kasneje začeli pojavljati tudi pripisi ljudi, ki so oglasu nasprotovali (npr. z vprašanji <em>&ldquo;Are you a human?&rdquo;</em>, <em>&ldquo;Are you going to the beach?&rdquo;</em>).</p>
-<p>image48 image49</p>
+<div class="gallery-wall" id="photoWall-68bcbfaf2"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_48.webp\",\"/images/pvk/pvk_image_49.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-68bcbfaf2';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 </blockquote>
 <p>Bolj vpleteni potrošniki so pripravljeni pogledati oglas tudi do konca, zato oglaševalci dostikrat oblikujejo sporočila, pri katerih naročnik ni takoj razviden.</p>
 <blockquote>
@@ -1486,7 +2766,7 @@ Ponavljanje v oglaševanju
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Aplikacija za zmenke <strong>OkCupid</strong> je s serijo plakatov <em>&ldquo;DTF&rdquo;</em> pritegnila pozornost z večkratnim ponavljanjem iste kratice, pri čemer je vsak plakat kratico razložil na svoj (nepričakovan) način.</p>
-<p>image50</p>
+<p><img src="/images/pvk/pvk_image_50.webp" alt="OkCupid – serija plakatov &ldquo;DTF&rdquo;"></p>
 </blockquote>
 <hr>
 <h2 id="spomin-in-učenje">
@@ -1620,7 +2900,7 @@ Teoriji učenja, pomembni za vedenje potrošnikov
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Bodyform</strong> je razbil tabu o rdeči krvi, saj je večina drugih oglasov (za higienske vložke) predstavljenih z modro barvo krvi.</p>
-<p>image51</p>
+<p><img src="/images/pvk/pvk_image_51.webp" alt="Bodyform – &ldquo;Periods are normal. Showing them should be too.&rdquo;"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
@@ -1651,20 +2931,180 @@ Priklicni nizi
 <p><strong>Primer</strong></p>
 <p>Pri <strong>Applu</strong> takoj vemo, da gre za iPhone, Steve Jobs itd. Seveda so asociacije odvisne od posameznika. Pri <strong>Oplu</strong> se spomnimo na kolo, avto, volan, pri <strong>Adidasu</strong> se spomnimo na šport, pri <strong>Good Yearu</strong> pa se spomnimo na gume.</p>
 </blockquote>
-<p>image52, 53, 54, 55</p>
+<div class="gallery-wall" id="photoWall-8cb2865f7"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_52.webp\",\"/images/pvk/pvk_image_55.webp\",\"/images/pvk/pvk_image_53.webp\",\"/images/pvk/pvk_image_54.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-8cb2865f7';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 <h4 id="priklic-informacij-za-nakupno-odločanje">
 <a class="header-anchor" href="#priklic-informacij-za-nakupno-odlo%c4%8danje"></a>
 Priklic informacij za nakupno odločanje
 </h4><blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka <strong>Peugeot</strong> je imela oglas s plakatom (<em>&ldquo;Novo mesto v garaži prihrani za osupljivo.&rdquo;</em>), da bi povečala priklic.</p>
-<p>image56</p>
+<p><img src="/images/pvk/pvk_image_56.webp" alt="Peugeot – &ldquo;Novo mesto v garaži prihrani za osupljivo.&rdquo;"></p>
 </blockquote>
 <p>Pomembno je tudi, da uporabnik sprejme novo spremembo logotipa znamke ali oglasa - dostikrat firme zato naredijo množične raziskave, da vidijo, ali so ljudje sprejeli njihove spremembe oz. ali so s tem pridobili več potrošnikov.</p>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Pepsi</strong> je predstavil nov slogan - <em>&ldquo;That&rsquo;s what I like.&rdquo;</em></p>
-<p>image57</p>
+<p><img src="/images/pvk/pvk_image_57.webp" alt="Pepsi – &ldquo;That&rsquo;s what I like.&rdquo;"></p>
 </blockquote>
 <h4 id="vpliv-slavnih-oseb-na-priklic">
 <a class="header-anchor" href="#vpliv-slavnih-oseb-na-priklic"></a>
@@ -1695,7 +3135,7 @@ Vpliv slavnih oseb na priklic
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Ilka Štuhec</strong> je ambasadorka znamke Huawei.</p>
-<p>image59</p>
+<p><img src="/images/pvk/pvk_image_59.webp" alt="Huawei – Ilka Štuhec, ambasadorka znamke"></p>
 </blockquote>
 <p>Izdelki, ki podpirajo vrhunski šport, pogosto sodelujejo s športniki:</p>
 <ul>
@@ -1756,7 +3196,7 @@ Vpliv slavnih oseb na priklic
     </div>
 
 <p>Tudi <strong>James Bond</strong> pije brezalkoholno pivo - Heineken je sklenil pogodbo z igralcem Jamesa Bonda, da so gledalcem omogočili, da lahko pijejo brezalkoholno pivo brez zadržkov.</p>
-<p>image60</p>
+<p><img src="/images/pvk/pvk_image_60.webp" alt="Heineken x James Bond – &ldquo;No Time To Die&rdquo;"></p>
 <p><strong>Mc Hammer</strong> je nastopil v oglasu za Cheetos, s čimer so uvedli dinamiko, znano osebnost in glasbo, ki bi priklicala oglas v spomin.</p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/qgQllY4GtkE?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
@@ -1811,7 +3251,7 @@ Vpliv spornih oglasov na priklic
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglas za podjetje <strong>Tom Ford</strong> je izkazal moško in žensko telo za oglaševanje svojih parfumov, npr. žensko telo za moški parfum.</p>
-<p>image61</p>
+<p><img src="/images/pvk/pvk_image_61.webp" alt="Tom Ford – prvi moški parfum, oglaševan preko ženskega telesa"></p>
 </blockquote>
 <p>Tudi če je oglas sporen, se zna zgoditi, da se o oglasu in firmi začne več govoriti in firma doživi prepoznavnost - firmi se zato bolj splača plačati kazen za sporen oglas, kot če ga ne bi bilo.</p>
 <hr>
@@ -1861,7 +3301,7 @@ Vpliv čustev in razpoloženja na vedenje potrošnikov
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglas znamke Mormonad (<em>&ldquo;Feeling sour?&rdquo;</em>) prikazuje limono z obrazom - vpliv razpoloženja na zaznavanje, pozornost in pomnjenje je zelo pomemben pri vplivanju na potrošnike.</p>
-<p>image62</p>
+<p><img src="/images/pvk/pvk_image_62.webp" alt="Mormonad – &ldquo;Feeling sour?&rdquo;"></p>
 </blockquote>
 <h3 id="čustva-in-motivacija">
 <a class="header-anchor" href="#%c4%8dustva-in-motivacija"></a>
@@ -1877,7 +3317,7 @@ Vpliv čustev in razpoloženja na vedenje potrošnikov
 
 </blockquote>
 <p>Podobno tudi oglasi proti uporabi pirotehnike opozarjajo, da zaradi petard in raket trpijo živali (<em>&ldquo;Si množični morilec?&rdquo;</em>, <em>&ldquo;Bi ubil prijatelja?&rdquo;</em>, <em>&ldquo;Zakaj povzročaš bolečino?&rdquo;</em> - zaradi petard in raket letno umre na stotine ptic, psi izgubljajo življenja, mačke pa hudo trpijo).</p>
-<p>slika63</p>
+<p><img src="/images/pvk/pvk_image_63.webp" alt="Kampanja proti pirotehniki – &ldquo;Bi ubil prijatelja?&rdquo;, &ldquo;Zakaj povzročaš bolečino?&rdquo;, &ldquo;Si množični morilec?&rdquo;"></p>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>McDonald&rsquo;s</strong> je z oglasom (t. i. <em>&ldquo;Dead Dad&rdquo;</em> oglas) prejel veliko negativnih kritik, saj je bil izdelek v oglasu nepovezan z ostalo zgodbo, kar je pri gledalcih vzbudilo negativna čustva.</p>
@@ -1939,7 +3379,7 @@ Oblikovanje stališč
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglas znamke Heinz - <em>&ldquo;No one grows Ketchup like Heinz.&rdquo;</em> - skuša zgraditi pozitivno stališče do samega oglasa.</p>
-<p>image64</p>
+<p><img src="/images/pvk/pvk_image_64.webp" alt="Heinz – &ldquo;No one grows Ketchup like Heinz.&rdquo;"></p>
 </blockquote>
 <h5 id="pomembni-dejavniki-za-oblikovanje-stališč">
 <a class="header-anchor" href="#pomembni-dejavniki-za-oblikovanje-stali%c5%a1%c4%8d"></a>
@@ -1999,7 +3439,7 @@ Kaj vpliva na spreminjanje stališč
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Negativno stališče do ubijanja živali - nemška organizacija Deutscher Tierschutzbund je z oglasom <em>&ldquo;Fühl dich wie ein Schwein.&rdquo;</em> / <em>&ldquo;Fühl dich wie ein Nerz.&rdquo;</em> / <em>&ldquo;Fühl dich wie ein Pferd&rdquo;</em> opozorila na trpljenje živali pri kastraciji prašičev brez anestezije in pri pridobivanju krzna.</p>
-<p>image65</p>
+<p><img src="/images/pvk/pvk_image_65.webp" alt="Deutscher Tierschutzbund – &ldquo;Fühl dich wie ein Pferd.&rdquo;"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
@@ -2016,11 +3456,171 @@ Kaj vpliva na spreminjanje stališč
 <ul>
 <li>Modna znamka <strong>Sisley</strong> je v oglasu <em>&ldquo;Fashion Junkie&rdquo;</em> uporabila podobo, ki spominja na uživanje drog. Znamka je s tem sicer želela dati družbeno odgovornost, da bi ljudi odvrnila od drog, po drugi strani pa lahko takšen oglas pri nekaterih vzbudi tudi ravno nasproten učinek.</li>
 </ul>
-<p>image66</p>
+<p><img src="/images/pvk/pvk_image_66.webp" alt="Sisley – &ldquo;Fashion Junkie.&rdquo;"></p>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Negativno stališče do kajenja - oglas (<em>&ldquo;Women who smoke feed more than just milk to their children.&rdquo;</em>) opozarja na posledice kajenja za doječe matere, kampanja NHS (<em>&ldquo;The average smoker needs over five thousand cigarettes a year.&rdquo;</em>) pa na to, koliko cigaret povprečen kadilec pokadi na leto.</p>
-<p>image67 and image 68</p>
+<div class="gallery-wall" id="photoWall-61d3dd784"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_67.webp\",\"/images/pvk/pvk_image_68.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-61d3dd784';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
@@ -2051,7 +3651,167 @@ Predsodki in stereotipi
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka French Connection je z oglasoma (<em>&ldquo;Man should be brave.&rdquo;</em>, <em>&ldquo;Eat meat. Dress well.&rdquo;</em>) prikazala spolne stereotipe.</p>
-<p>image69 and image70</p>
+<div class="gallery-wall" id="photoWall-a795aed88"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_69.webp\",\"/images/pvk/pvk_image_70.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-a795aed88';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 </blockquote>
 <h4 id="osnovni-tipi-občutkov-pri-predsodkih">
 <a class="header-anchor" href="#osnovni-tipi-ob%c4%8dutkov-pri-predsodkih"></a>
@@ -2088,7 +3848,7 @@ Vrste predsodkov in stereotipov
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Dolce &amp; Gabbana</strong> je z oglasom, v katerem je Madonna prikazana med pospravljanjem tal, izpostavil predsodek o spolih.</p>
-<p>image71</p>
+<p><img src="/images/pvk/pvk_image_71.webp" alt="Dolce &amp; Gabbana – Madonna med pospravljanjem tal"></p>
 </blockquote>
 <h4 id="pogoji-za-nastanek-predsodkov">
 <a class="header-anchor" href="#pogoji-za-nastanek-predsodkov"></a>
@@ -2100,10 +3860,10 @@ Pogoji za nastanek predsodkov
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Ameriški oglas Human Rights Commission (<em>&ldquo;I should have the right to rent an available apartment, without being told it&rsquo;s not available to me. You DO have the right.&rdquo;</em>) se sooča z rasizmom.</p>
-<p>image72</p>
+<p><img src="/images/pvk/pvk_image_72.webp" alt="NYC Commission on Human Rights – &ldquo;I should have the right to rent an available apartment&hellip;&rdquo;"></p>
 </blockquote>
 <p><strong>Vzroki za nastanek predsodkov:</strong> znamka <strong>Benetton</strong> je naredila oglas, ki bi poudaril problem rasnih predsodkov, kjer so pokazali s črncem, da naj ne bi mogel nič narediti in bo samo za čiščenje, bel otrok pa bo lahko zdravnik in bo uspešen.</p>
-<p>image73</p>
+<p><img src="/images/pvk/pvk_image_73.webp" alt="LICRA – &ldquo;Your skin color shouldn&rsquo;t dictate your future.&rdquo;"></p>
 <p>Predsodki nastanejo z vzgojo in socializacijo - večina predsodkov ima svoje temelje že v otroštvu. Glavni dejavniki so družina, šola, sovrstniki, družba in mediji. Predsodki nastanejo največkrat zaradi frustracij, ki jih doživljajo posamezniki.</p>
 <h5 id="razlage-za-oblikovanje-predsodkov">
 <a class="header-anchor" href="#razlage-za-oblikovanje-predsodkov"></a>
@@ -2147,7 +3907,7 @@ Kognitivni procesi v razvoju predsodkov
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Kampanja Fair@Work (<em>&ldquo;I don&rsquo;t need to be ambitious. Only boys get to become bosses.&rdquo;</em>) opozarja na predsodke pri zaposlovanju in napredovanju žensk.</p>
-<p>image74</p>
+<p><img src="/images/pvk/pvk_image_74.webp" alt="Fair@Work – &ldquo;I don&rsquo;t need to be ambitious. Only boys get to become bosses.&rdquo;"></p>
 </blockquote>
 <h3 id="5-stopenj-izražanja-predsodkov-allport-1954">
 <a class="header-anchor" href="#5-stopenj-izra%c5%beanja-predsodkov-allport-1954"></a>
@@ -2174,7 +3934,7 @@ Predsodki in diskriminacija
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Kampanja Age Concern (<em>&ldquo;Fight ageism. You are not getting any younger.&rdquo;</em>) opozarja na diskriminacijo starejših.</p>
-<p>image75</p>
+<p><img src="/images/pvk/pvk_image_75.webp" alt="Age Concern – &ldquo;Fight ageism. You are not getting any younger.&rdquo;"></p>
 </blockquote>
 <blockquote class="alert-blockquote info">
   <p class="alert-heading">
@@ -2252,7 +4012,7 @@ Pozitivna (zdrava) samopodoba
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Lutki <strong>Barbie in Ken</strong> ponazarjata vpliv samopodobe na otroke - Barbie živi v popolnem svetu, ima popolne avtomobile, obleke, izgled in hišo ter ob sebi popolnega moškega, Ken pa je popoln, bogat moški z izklesanim telesom. Podoba lutk je precej nerealna, saj sta po obliki in svetu, v katerem živita, nerealni - s tem se samopodoba deklic lahko izpostavljenosti tem idealom niža.</p>
-<p>image76</p>
+<p><img src="/images/pvk/pvk_image_76.webp" alt="Lutki Barbie in Ken"></p>
 </blockquote>
 <p><strong>Vpliv samopodobe na mladostnike:</strong> mladi so obdani z oglasi iz vseh smeri, ki jim lahko nižajo samopodobo (npr. izpostavljanje izklesanega telesa, kilogramov), kar lahko povzroča depresijo in bolezni, kot sta anoreksija in bulimija. Velik problem so tudi računalniško obdelane fotografije.</p>
 <p>Za osebo z ustrezno (zdravo) samopodobo je značilno, da se zna zelo dobro spopasti s stresom in duševnimi obremenitvami - nekdo se s tem sicer spopade tudi tako, da ga boli glava ali da dobi herpes. Človek z dobro samopodobo lažje razvija in ohranja medoseben odnos z drugimi, saj je sočuten in ima razvito empatijo. Pomembno je tudi, da smo do neke mere neodvisni in da ne potrebujemo odobravanja drugih. Za svoja dejanja smo odgovorni in odgovornosti ne prelagamo na nekoga drugega - ko pridejo novi izzivi, jih sprejmemo in se od njih ne odstranimo. Pomembno je tudi, da si znamo postaviti visoke, a ne previsoke cilje, saj lahko v nasprotnem primeru pride do frustracij.</p>
@@ -2281,12 +4041,12 @@ Izbira blagovne znamke glede na samopodobo
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Garnier</strong> prodaja kozmetiko za nego las ženskam, ki želijo zgledati, kot da bodo imele sijoče, močne lase.</p>
-<p>image77</p>
+<p><img src="/images/pvk/pvk_image_77.webp" alt="Garnier Fructis – nega las"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Lancôme</strong> je imel v Veliki Britaniji prepovedan oglas, ker je pretiraval s fotografskimi spremembami - oglas je zavajal, saj je prikrival vse madeže in gube.</p>
-<p>image78</p>
+<p><img src="/images/pvk/pvk_image_78.webp" alt="Lancôme – oglas z Julio Roberts, prepovedan zaradi pretirane fotografske obdelave"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
@@ -2307,14 +4067,14 @@ Samopodoba v oglasnih sporočilih
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Calvin Klein</strong> - Kate Moss, <em>&ldquo;Nothing tastes as good as skinny feels.&rdquo;</em> - oseba, ki je reprezentirala znamko, je kazala, kako je lepo biti suh in kako se lahko ob tem dobro počutiš, kar je zelo močno slabo vplivalo na mlada dekleta.</p>
-<p>image79</p>
+<p><img src="/images/pvk/pvk_image_79.webp" alt="Calvin Klein – Kate Moss, &ldquo;Nothing tastes as good as skinny feels.&rdquo;"></p>
 </blockquote>
 <p>Narejena je bila raziskava (<em>&ldquo;Perceptions of Perfection: What the &lsquo;Ideal&rsquo; Female Body Looks Like Across 18 Countries&rdquo;</em>), v kateri so v 18 državah pokazali, kako naj bi zgledala popolna ženska - opazile so se razlike v idealih med državami.</p>
-<p>image80</p>
+<p><img src="/images/pvk/pvk_image_80.webp" alt="&ldquo;Perceptions of Perfection&rdquo; – idealna ženska postava v različnih državah"></p>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Dove</strong> je naredil paradoks na oglas Victoria&rsquo;s Secret, kjer so vsa dekleta suha in visoka - v svoj oglas (<em>&ldquo;We see beauty all around us.&rdquo;</em>) je vključil ženske različnih videzov, s čimer je predstavil, da lepota izvira iz njihove notranjosti in ne iz zunanjosti.</p>
-<p>image81</p>
+<p><img src="/images/pvk/pvk_image_81.webp" alt="Dove – &ldquo;We see beauty all around us.&rdquo;"></p>
 <p>Dove je naredil tudi kampanjo, v kateri je opozoril, da pretirana obdelava fotografij žensk na družbenih omrežjih predstavlja veliko nevarnost, saj je veliko deklet nezadovoljnih s svojo podobo.</p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/z2T-Rh838GA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
@@ -2384,7 +4144,7 @@ Samopodoba v oglasnih sporočilih
 <ul>
 <li><strong>Dove</strong> je v okviru kampanje <em>&ldquo;Keep Her Confident&rdquo;</em> skupaj s teniško igralko Venus Williams na družbenih omrežjih spodbujal telesno samozavest deklet v športu.</li>
 </ul>
-<p>image82</p>
+<p><img src="/images/pvk/pvk_image_82.webp" alt="Dove x Venus Williams – &ldquo;Let&rsquo;s #KeepHerConfident.&rdquo;"></p>
 <hr>
 <h2 id="življenjski-slog">
 <a class="header-anchor" href="#%c5%beivljenjski-slog"></a>
@@ -2393,7 +4153,7 @@ Samopodoba v oglasnih sporočilih
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Blagovna znamka <strong>Michael Kors</strong> je namenjena premožnim posameznikom, ki dajo poudarek na blagovni znamki, imajo več denarja, so zaposleni na višjih položajih in posvečajo več pozornosti svojemu izgledu.</p>
-<p>image83</p>
+<p><img src="/images/pvk/pvk_image_83.webp" alt="Michael Kors – življenjski slog premožnih posameznikov"></p>
 </blockquote>
 <h3 id="življenjski-slog-in-vpliv-na-potrošnjo">
 <a class="header-anchor" href="#%c5%beivljenjski-slog-in-vpliv-na-potro%c5%a1njo"></a>
@@ -2425,7 +4185,7 @@ Samopodoba v oglasnih sporočilih
 <ul>
 <li><strong>Adidas</strong> nagovarja osebe, ki se želijo ukvarjati s športom.</li>
 </ul>
-<p>image84</p>
+<p><img src="/images/pvk/pvk_image_84.webp" alt="Adidas – &ldquo;This is fun taken seriously.&rdquo;"></p>
 <ul>
 <li><strong>Nike</strong> želi podobno nagovarjati potrošnike k športu - športnika so pokazali, kako je močen in aktiven tudi ponoči, in da če želijo potrošniki biti taki, naj kupujejo njihove loparje.</li>
 </ul>
@@ -2500,12 +4260,172 @@ Presoja življenjskega sloga
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Coca-Cola</strong> (<em>&ldquo;Stay cool.&rdquo;</em>) in <strong>Milk Life</strong> (<em>&ldquo;What 8 grams of protein looks like when you&rsquo;re playing above the rim.&rdquo;</em>) sta primera oglasov, ki nagovarjata dejavnosti in interese potrošnikov (druženje, šport).</p>
-<p>image85 and 86</p>
+<div class="gallery-wall" id="photoWall-6f47c10a3"></div>
+<script>
+  (function() {
+    const imageUrls = JSON.parse("[\"/images/pvk/pvk_image_85.webp\",\"/images/pvk/pvk_image_86.webp\"]");
+    let images = [];
+    const wallId = '#photoWall-6f47c10a3';
+    let resizeTimer;
+    let lastWidth = 0;
+    
+    function init() {
+      createInitialDOM();
+      loadImages();
+      const wall = _$(wallId);
+      if (wall && window.ResizeObserver) {
+        const observer = new ResizeObserver((entries) => {
+          const newWidth = entries[0].contentRect.width;
+          if (Math.abs(newWidth - lastWidth) > 1) {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(renderPhotoWall, 250);
+          }
+        });
+        observer.observe(wall);
+      } else {
+        window.addEventListener('resize', handleResize);
+      }
+    }
+    
+    function createInitialDOM() {
+      const wall = _$(wallId);
+      if (!wall || !imageUrls.length) return;
+      
+      wall.style.opacity = '0';
+      wall.style.pointerEvents = 'none';
+      
+      imageUrls.forEach((url) => {
+        images.push({
+          width: 800,
+          height: 600,
+          aspectRatio: 4/3,
+          url: url,
+          loaded: false
+        });
+      });
+      
+      renderPhotoWall();
+    }
+    
+    function loadImages() {
+      const loadPromises = imageUrls.map((url, index) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => {
+            if (images[index]) {
+              images[index].width = img.naturalWidth;
+              images[index].height = img.naturalHeight;
+              images[index].aspectRatio = img.naturalWidth / img.naturalHeight;
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.onerror = () => {
+            if (images[index]) {
+              images[index].loaded = true;
+            }
+            resolve();
+          };
+          img.src = url;
+        });
+      });
+      
+      Promise.all(loadPromises)
+        .then(() => {
+          const wall = _$(wallId);
+          if (wall) {
+            wall.style.opacity = '1';
+            wall.style.pointerEvents = 'auto';
+            wall.style.transition = 'opacity 0.3s ease';
+          }
+          renderPhotoWall();
+        })
+        .catch((error) => console.error("图片加载失败:", error));
+    }
+    
+    function renderPhotoWall() {
+      const wall = _$(wallId);
+      
+      if (!images.length || !wall) return;
+      
+      const screenWidth = wall.offsetWidth || window.innerWidth - 40;
+      lastWidth = screenWidth;
+      
+      wall.innerHTML = "";
+      const rowHeight = 200;
+      const gap = 10;
+      const maxPerRow = 4;
+      
+      let row = [];
+      let rowWidth = 0;
+      const rows = [];
+      
+      images.forEach((img) => {
+        const scaledWidth = rowHeight * img.aspectRatio;
+        
+        if (rowWidth + scaledWidth <= screenWidth && row.length < maxPerRow) {
+          row.push(img);
+          rowWidth += scaledWidth + gap;
+        } else {
+          if (row.length) rows.push(row);
+          row = [img];
+          rowWidth = scaledWidth + gap;
+        }
+      });
+      
+      if (row.length) rows.push(row);
+      
+      rows.forEach((row) => {
+        const rowDiv = document.createElement("div");
+        rowDiv.style.cssText = `display: flex; gap: ${gap}px; width: 100%`;
+        
+        row.forEach((img) => {
+          const item = document.createElement("div");
+          item.className = "photo-item";
+          const flex = row.length === 1 ? '1' : img.aspectRatio;
+          item.style.cssText = `flex: ${flex}; height: ${rowHeight}px`;
+          
+          const imgEl = document.createElement("img");
+          imgEl.alt = "Gallery Image";
+          imgEl.style.cssText = "width: 100%; height: 100%; object-fit: cover";
+          imgEl.className = "lazyload";
+          imgEl.dataset.src = img.url;
+          imgEl.dataset.sizes = "auto";
+
+          const link = document.createElement("a");
+          link.href = img.url;
+          link.dataset.pswpWidth = img.width;
+          link.dataset.pswpHeight = img.height;
+          link.target = "_blank";
+          link.className = "article-gallery-item";
+          link.style.cssText = "width: 100%; height: 100%";
+          link.appendChild(imgEl);
+          
+          item.appendChild(link);
+          rowDiv.appendChild(item);
+        });
+        
+        wall.appendChild(rowDiv);
+      });
+    }
+    
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(renderPhotoWall, 250);
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script><link rel="preload" as="style" href="/css/gallery.min.94cd3998ffbf0abe50a0f8a9251c39f9df60899a02db59add20026d894f2d44f.css" onload="this.onload=null;this.rel='stylesheet'" />
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka <strong>Marlboro</strong> je prvotno ciljala na žensko publiko. Ker se ni dobro prodajala, so začeli ciljati na kavboje, in cela Amerika se je poistovetila s kavbojem - izdelki so se začeli dobro prodajati. Najprej so zagrabili mlade, nato pa vse starostne skupine.</p>
-<p>image87</p>
+<p><img src="/images/pvk/pvk_image_87.webp" alt="Marlboro – vintage oglasa (ženska publika in kavboj)"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
@@ -2574,9 +4494,9 @@ Vedenjski dejavniki segmentiranja
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglas, ki vabi v telovadnico (<em>&ldquo;Long time. No see?&rdquo;</em>), s prikazom trebuha namiguje na spremembo telesa zaradi neaktivnosti.</p>
-<p>image88</p>
+<p><img src="/images/pvk/pvk_image_88.webp" alt="&ldquo;Long time. No see?&rdquo; – oglas za telovadnico"></p>
 <p>Podoben primer je tudi oglas za MyBody Gym, kjer moški debelega trebuha hrani ribe piranje v akvariju.</p>
-<p>image89</p>
+<p><img src="/images/pvk/pvk_image_89.webp" alt="MyBody Gym – moški s trebuhom hrani ribe piranje v akvariju"></p>
 </blockquote>
 <blockquote class="alert-blockquote info">
   <p class="alert-heading">
@@ -2610,13 +4530,13 @@ Uporaba telesa, spolnosti in nasilja v promocijske namene
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Blagovna znamka <strong>American Apparel</strong> je z oglasom namigovala na spolnost in posilstvo, zaradi česar je bil oglas umaknjen.</p>
-<p>image90</p>
+<p><img src="/images/pvk/pvk_image_90.webp" alt="American Apparel – oglas, ki namiguje na spolnost in posilstvo"></p>
 <p>Oglasna sporočila s spolnostjo želijo povečati priklic sporočila in vzbuditi čustvene reakcije.</p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Calvin Klein</strong> je pripravil veliko oglasnih sporočil s spolnostjo, da bi se osebe počutile bolj privlačne z njihovimi oblačili.</p>
-<p>image91</p>
+<p><img src="/images/pvk/pvk_image_91.webp" alt="Calvin Klein – oglas s spolnostjo"></p>
 </blockquote>
 <h3 id="uporaba-spolnosti-v-oglaševanju">
 <a class="header-anchor" href="#uporaba-spolnosti-v-ogla%c5%a1evanju"></a>
@@ -2632,17 +4552,17 @@ Uporaba spolnosti v oglaševanju
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka <strong>Stuart Weitzman</strong> je v oglasu z manekenko Gigi Hadid uporabila golo telo.</p>
-<p>image92</p>
+<p><img src="/images/pvk/pvk_image_92.webp" alt="Stuart Weitzman – Gigi Hadid"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Victoria&rsquo;s Secret</strong> je s panojem, ki je uporabljal goloto, dodatno pozornost pritegnil še s tem, da je zakriti del telesa (izpostavljen na mobilnem telefonu) pokazal šele preko QR kode.</p>
-<p>image93</p>
+<p><img src="/images/pvk/pvk_image_93.webp" alt="Victoria&rsquo;s Secret – billboard z odkritjem preko QR kode"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglas za <strong>Absolut vodko</strong> (<em>&ldquo;The vodka with nothing to hide.&rdquo;</em>) je pritegnil pozornost z golimi kmeti na polju, a ne zaradi samih modelov, temveč zaradi humorja.</p>
-<p>image94</p>
+<p><img src="/images/pvk/pvk_image_94.webp" alt="Absolut Vodka – &ldquo;The vodka with nothing to hide.&rdquo;"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
@@ -2670,7 +4590,7 @@ Uporaba fizične privlačnosti
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka spodnjega perila <strong>Intimissimi</strong> je za oglas izbrala fizično privlačno manekenko Irino Shayk.</p>
-<p>image95</p>
+<p><img src="/images/pvk/pvk_image_95.webp" alt="Intimissimi – Irina Shayk"></p>
 </blockquote>
 <h3 id="spolno-namigovanje">
 <a class="header-anchor" href="#spolno-namigovanje"></a>
@@ -2678,24 +4598,24 @@ Spolno namigovanje
 </h3><blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Dolce &amp; Gabbana</strong> je z oglasom nakazoval na neko spolno vedenje, a ni dosegel tega, da bi se potrošniki zaradi njega vznemirili.</p>
-<p>image96</p>
-<p>image97</p>
+<p><img src="/images/pvk/pvk_image_96.webp" alt="Dolce &amp; Gabbana – oglas, ki namiguje na spolno vedenje"></p>
+<p><img src="/images/pvk/pvk_image_97.webp" alt="Dolce &amp; Gabbana – oglas, ki namiguje na možnost nasilja"></p>
 <p>Drug oglas znamke <strong>Dolce &amp; Gabbana</strong> pa je pri potrošnikih vzbudil slabo percepcijo in vtis, da namiguje na možnost nasilja, zaradi česar je bil oglas umaknjen.</p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka <strong>Nama</strong> je s spolnim namigovanjem oglaševala tudi povsem vsakdanje popuste v trgovini.</p>
-<p>image98</p>
+<p><img src="/images/pvk/pvk_image_98.webp" alt="Nama – &ldquo;20% popust&rdquo; (spolno namigovanje pri vsakdanjih popustih)"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Burger King Brazilija</strong> je ob svoji 70. obletnici pripravil kampanjo, v kateri je s spolnim namigovanjem prikazal razne fotografije starejših parov.</p>
-<p>image99</p>
+<p><img src="/images/pvk/pvk_image_99.webp" alt="Burger King Brazilija – kampanja ob 70. obletnici, starejši pari"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Vodka <strong>Belvedere</strong> (<em>&ldquo;Unlike some people, Belvedere always goes down smoothly.&rdquo;</em>) je z verbalnim namigovanjem na spolnost želela vzbuditi pozornost potrošnikov.</p>
-<p>image100</p>
+<p><img src="/images/pvk/pvk_image_100.webp" alt="Belvedere Vodka – &ldquo;Unlike some people, Belvedere always goes down smoothly.&rdquo;"></p>
 </blockquote>
 <h4 id="primer-vizualnega-in-verbalnega-namigovanja-na-spolnost">
 <a class="header-anchor" href="#primer-vizualnega-in-verbalnega-namigovanja-na-spolnost"></a>
@@ -2703,7 +4623,7 @@ Primer vizualnega in verbalnega namigovanja na spolnost
 </h4><blockquote>
 <p><strong>Primer</strong></p>
 <p>Oglas organizacije za doniranje organov (<em>&ldquo;Becoming a donor is probably your only chance to get inside her.&rdquo;</em>) je z bizarnim in absurdnim stavkom namignil, da je doniranje organov edini način, kako priti v telo ženske na sliki. Gre za etično sporen in neprimeren oglas, je pa viden in potrošniki se o njem pogovarjajo, kar je bil tudi namen oglaševalca.</p>
-<p>image101</p>
+<p><img src="/images/pvk/pvk_image_101.webp" alt="Oglas za doniranje organov – &ldquo;Becoming a donor is probably your only chance to get inside her.&rdquo;"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
@@ -2717,22 +4637,22 @@ Nezaveden spolni namig
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Burger King</strong> (<em>&ldquo;She&rsquo;ll tell you size doesn&rsquo;t matter. She&rsquo;s lying.&rdquo;</em>) je s Paris Hilton, ki drži burger, namignil na spolnost preko velikosti izdelka.</p>
-<p>image102</p>
+<p><img src="/images/pvk/pvk_image_102.webp" alt="Carl&rsquo;s Jr. – Paris Hilton, &ldquo;She&rsquo;ll tell you size doesn&rsquo;t matter. She&rsquo;s lying.&rdquo;"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Burger King</strong> je s sloganom <em>&ldquo;It&rsquo;ll blow your mind away&rdquo;</em> pri burgerju BK Super Seven Incher ponovno uporabil nezaveden spolni namig.</p>
-<p>image103</p>
+<p><img src="/images/pvk/pvk_image_103.webp" alt="Burger King – &ldquo;It&rsquo;ll blow your mind away.&rdquo; (BK Super Seven Incher)"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka <strong>Bags &amp; More</strong> je s podobo moškega, ki leze iz kovčka, oglaševala potovanje s trdim kovčkom - oglas je provokativen in je dobil polno kritik, so pa si ga potrošniki zapomnili.</p>
-<p>image104</p>
+<p><img src="/images/pvk/pvk_image_104.webp" alt="Bags &amp; More – moški, ki leze iz kovčka"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p><strong>Hailey Bieber</strong> je z ovitkom za telefon, ki je vključeval držalo za šminko oblike podobne hrani, dobila precej pozornosti zaradi namiga na spolnost.</p>
-<p>image105</p>
+<p><img src="/images/pvk/pvk_image_105.webp" alt="Hailey Bieber – ovitek za telefon z držalom za šminko"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
@@ -2788,7 +4708,7 @@ Nezaveden spolni namig
 </h3><blockquote>
 <p><strong>Primer</strong></p>
 <p>Parfum <strong>Calvin Klein Obsession</strong> je oglaševan izključno preko golega ženskega telesa.</p>
-<p>image106</p>
+<p><img src="/images/pvk/pvk_image_106.webp" alt="Calvin Klein Obsessed – Kate Moss"></p>
 </blockquote>
 <h3 id="moška-podoba-v-oglasnih-sporočilih">
 <a class="header-anchor" href="#mo%c5%a1ka-podoba-v-oglasnih-sporo%c4%8dilih"></a>
@@ -2797,12 +4717,12 @@ Moška podoba v oglasnih sporočilih
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka solatnih prelivov <strong>Knorr</strong> je moškega prikazala v spodnjem perilu, poležečega ob solati (<em>&ldquo;The only thing better than dressing is undressing.&rdquo;</em>).</p>
-<p>image107</p>
+<p><img src="/images/pvk/pvk_image_107.webp" alt="Kraft – &ldquo;The only thing better than dressing is undressing.&rdquo;"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Grški jogurt <strong>Voskos</strong> je z mišičastim moškim, ki je gol prekrit z jogurtom (<em>&ldquo;I&rsquo;d rather go naked than get fat.&rdquo;</em>), oglaševal svoj izdelek.</p>
-<p>image108</p>
+<p><img src="/images/pvk/pvk_image_108.webp" alt="Voskos – &ldquo;I&rsquo;d rather go naked than get fat.&rdquo;"></p>
 </blockquote>
 <p>Kot stranski primer je bil na predavanju omenjen tudi glasbeni videospot <em>&ldquo;Poison&rdquo;</em> (iz serije Hazbin Hotel, 1. sezona, 4. epizoda).</p>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -2821,7 +4741,7 @@ Moška podoba v oglasnih sporočilih
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Parfum <strong>Viktor &amp; Rolf Spicebomb</strong> je oglaševan preko golega, mišičastega moškega telesa.</p>
-<p>image109</p>
+<p><img src="/images/pvk/pvk_image_109.webp" alt="Viktor &amp; Rolf Spicebomb"></p>
 </blockquote>
 <hr>
 <h2 id="dojemanje-telesa-v-potrošniški-družbi-in-oglaševanju">
@@ -2836,24 +4756,24 @@ Dojemanje telesa v potrošniški družbi in oglaševanju
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka <strong>Victoria&rsquo;s Secret</strong> je s kampanjo <em>&ldquo;I Love My Body&rdquo;</em> oglaševala svoje perilo preko vitkih manekenk, prav tako pa tudi s kampanjo <em>&ldquo;The Perfect Body&rdquo;</em>.</p>
-<p>image110</p>
+<p><img src="/images/pvk/pvk_image_110.webp" alt="Victoria&rsquo;s Secret – &ldquo;I Love My Body&rdquo; / &ldquo;The Perfect Body&rdquo; v primerjavi z Dove &ldquo;Real Beauty&rdquo;"></p>
 <p>Na kampanjo Victoria&rsquo;s Secret je prišlo precej odzivov, saj so nekatera podjetja (npr. Dear Kate) v odgovor na kampanjo predstavila oglas z več različnimi rasami, ženskimi telesi in postavami, ki so dosti bolj naravne in realne.</p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Slovenska znamka <strong>Lisca</strong> je s kampanjo <em>&quot;#proudtobeme&quot;</em> predstavila žensko telo v vseh njegovih raznolikih oblikah.</p>
-<p>image111</p>
+<p><img src="/images/pvk/pvk_image_111.webp" alt="Lisca – &ldquo;#proudtobeme&rdquo;"></p>
 </blockquote>
 <p>Ne smemo pozabiti na dejstvo, da je veliko oglasov, ki vsebujejo ženske ali moške subjekte, zelo seksističnih in poniževalnih do žensk. Po navadi so ženske postavljene v neke podrejene ali ranljive položaje. Takšni oglasi prav gotovo zelo kršijo meje dobrega okusa, a so ljudem kljub temu všeč. Oglaševalci so ravno zaradi dobička, ki ga dobijo, pripravljeni tvegati, da kršijo meje dobrega okusa in na tak način pritegnejo, ali pa tudi odvrnejo občinstvo. V zadnjih letih je tudi veliko ozaveščanja na tem področju - obstaja veliko forumov in oblik, kjer lahko ljudje podajo svoja mnenja in nestrinjanje.</p>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Energijska pijača <strong>Devil</strong> je s poljskim sloganom (<em>&ldquo;Devil otworzy każdą ci puszkę&rdquo;</em>) in cenzurirano golo prsjo pripravila oglas, ki krši meje dobrega okusa.</p>
-<p>image112</p>
+<p><img src="/images/pvk/pvk_image_112.webp" alt="Devil – &ldquo;Devil otworzy każdą ci puszkę&rdquo;"></p>
 </blockquote>
 <blockquote>
 <p><strong>Primer</strong></p>
 <p>Znamka <strong>EIS.de</strong> je z oglasom (<em>&ldquo;Make love for less!&rdquo;</em>), ki namiguje na žensko spolovilo, prav tako prestopila meje dobrega okusa v oglaševanju.</p>
-<p>image113</p>
+<p><img src="/images/pvk/pvk_image_113.webp" alt="EIS.de – &ldquo;Make love for less!&rdquo;"></p>
 </blockquote>
 <hr>
 <h2 id="agresija-ali-nasilje">
@@ -2939,10 +4859,10 @@ Agresija ali nasilje
         >
       </div><div>
         <span class="icon-brush"
-          >&nbsp;141.5k</span
+          >&nbsp;141.4k</span
         >
         &nbsp;|&nbsp;
-        <span class="icon-coffee">&nbsp;11:10</span>
+        <span class="icon-coffee">&nbsp;11:09</span>
       </div><div>
         <span class="icon-eye"></span>
         <span id="busuanzi_container_site_pv"

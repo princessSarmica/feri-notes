@@ -96,13 +96,22 @@ Psihološki dejavniki so povezani s posameznikovimi notranjimi procesi - torej s
 - **Potrebe** so razlog za začetek nakupnega procesa. Poznamo primarne biološke potrebe (hrana, voda, spanje, spolnost), primarne socialne potrebe (varnost, druženje, estetske potrebe, priznanje) ter sekundarne socialne potrebe (naši interesi, hobiji, navade in razvade, kot so priboljški ali cigareti).
 - **Motivi** - motivacija je želja oz. razlog, da nekaj naredimo. Je glavni dejavnik postavljanja in doseganja ciljev - cilje si zastavimo, če imamo motivacijo. Glavni sprožilci motivacije so potreba po moči, potreba po dosežkih ter potreba po pripadnosti. Motivacija je lahko notranja ali zunanja: zunanji motivi izvirajo iz zunanjega sveta (npr. nagrade, kot sta diploma ali plača), notranji motivi pa iz naše notranjosti, iz notranjega zadovoljstva, če nekaj dosežemo. V psihologiji govorimo tudi o povezanosti motivacije z vpletenostjo - pri potrošnikih je vpletenost velika npr. pri nakupu daril ali kozmetičnih in modnih izdelkov, kjer se pri nakupu prepleta več motivov (recimo pri nakupu kozmetičnega izdelka, kot je krema).
 
-image1 and image2
+{{< gallery >}}
+![Asics – "Sound mind sound body."](/images/pvk/pvk_image_1.webp)
+![Parodija kozmetičnega oglasa – "You'll never look like her, but you might as well try." (airbrushen lepotni ideal)](/images/pvk/pvk_image_2.webp)
+{{</gallery>}}
 
 - **Samopodoba** je stališče oz. odnos do samega sebe. Tu ločimo dva jaza - dejanski jaz (kar dejansko smo) in idealni jaz (kar bi želeli biti). Samopodoba je za tržnike ključna, saj želijo ustvariti blagovne znamke, s katerimi bi se potrošniki poistovetili (npr. ure Longines, ki naj bi žensko naredile elegantno).
 
-image3 and image4
+{{< gallery >}}
+![Longines – Simon Baker, "Elegance is an attitude."](/images/pvk/pvk_image_3.webp)
+![Longines – Kate Winslet, "Elegance is an attitude."](/images/pvk/pvk_image_4.webp)
+{{</gallery>}}
 
-image5 and image6
+{{< gallery >}}
+![Naslovnica revije Men's Health](/images/pvk/pvk_image_5.webp)
+![Naslovnica revije Cosmopolitan](/images/pvk/pvk_image_6.webp)
+{{</gallery>}}
 
 - **Osebnost** opredeljujejo telesna zgradba, temperament, interesi, stališča, sposobnosti, vrednote in značaj. Karizmatična oseba je npr. Tadej Toš.
 - **Duševni procesi** so vsi notranji procesi, ki potekajo v določenem časovnem zaporedju in vodijo k določenemu izidu - pri človeku se kažejo navzven, čeprav jih pogosto ni mogoče neposredno opaziti. V psihologiji jih delimo na čustvene, motivacijske in kognitivne. Kognitivni procesi se nadalje delijo na zaznavanje, učenje in mišljenje - mišljenje je najvišji duševni proces.
@@ -150,7 +159,10 @@ Sem sodijo kultura, tradicija, družina, referenčne skupine in mnenjski vodje.
 
 **Mnenjski vodje** so posamezniki, ki vplivajo na nakupne odločitve - to je lahko kakšen strokovni prodajalec, partner, prijatelj ipd.
 
-image7 and image8
+{{< gallery >}}
+![Bijan – "...I'm in love with Bijan." (oglas za zahodni trg)](/images/pvk/pvk_image_7.webp)
+![Bijan – "Women should be quiet, composed, obedient..." (oglas za arabski trg)](/images/pvk/pvk_image_8.webp)
+{{</gallery>}}
 
 {{< alertBlockquote type="info" >}}
 **Aktivno delo:** Preberi članek *"Ramadan je najboljša marketinška priložnost leta v muslimanskem svetu"* in komentiraj.
@@ -224,7 +236,10 @@ Situacijski dejavniki so lahko povezani z izdelkom (kakšna je embalaža ali ogl
 
 - Velika napihljiva **pločevinka Coca-Cole** in **Sprite-ov "tuš"** na plaži v Riu de Janeiru - primera, kako lahko situacija oz. okolje, v katerem je izdelek postavljen, vpliva na nakupno odločitev posameznika.
 
-image9 and image10
+{{< gallery >}}
+![Velika napihljiva pločevinka Coca-Cole na plaži v Riu de Janeiru](/images/pvk/pvk_image_9.webp)
+![Sprite "tuš" na plaži v Riu de Janeiru](/images/pvk/pvk_image_10.webp)
+{{</gallery>}}
 
 - **Lenny Kravitz** v kampanji za Yves Saint Laurent razkrije svoje "zatočišče" - primer, kako je izdelek (dišava) umeščen v specifično, sanjsko okolje in situacijo.
 
@@ -383,11 +398,15 @@ Pozornost je proces, s katerim aktivno spremljamo omejeno količino vseh dražlj
 
 - **McDonald's** - *"Eyes on the fries."* - kampanja za varnost v prometu (Don't eat and drive. Take a break.).
 
-image12
+![McDonald's – "Eyes on the fries. Don't eat and drive. Take a break."](/images/pvk/pvk_image_12.webp)
 
 - **Colgate** - oglasi za zobno nitko, kjer so hoteli dokazati, da bo hrana, ki bo ostala med zobmi, pritegnila dosti več pozornosti kot katera koli druga napaka (serija oglasov s pari, kjer eden od njiju v zobeh drži kos zobne nitke).
 
-image13 14 15
+{{< gallery >}}
+![Colgate – oglas za zobno nitko (par 1)](/images/pvk/pvk_image_13.webp)
+![Colgate – oglas za zobno nitko (par 2)](/images/pvk/pvk_image_14.webp)
+![Colgate – oglas za zobno nitko (par 3)](/images/pvk/pvk_image_15.webp)
+{{</gallery>}}
 
 ### Primeri (ne)navadne pozornosti
 
@@ -419,7 +438,7 @@ image13 14 15
 >
 > Oscar Mayer - *"This summer, all legs are #HotDogsForLegs."* - billboard, kjer so noge kopalcev ob bazenu oblikovane tako, da iz daleč spominjajo na hrenovke.
 >
-> image11
+> ![Oscar Mayer – "This summer, your legs are #HotDogsForLegs."](/images/pvk/pvk_image_11.webp)
 
 ### Oblike pozornosti
 
@@ -456,15 +475,15 @@ Poznamo dve vrsti pozornosti glede na to, kako je sprožena: aktivno in pasivno 
 
 - Oglaševalska akcija *"Všeč mi je, da lahko grem zvečer sama po mestu"* - teaser kampanja, ki bo imela finalno razkritje. Želijo, da se stvar začne širiti, na koncu pa se bo razkrilo, kdo je naročnik oglasa.
 
-image16
+!["Všeč mi je, da lahko grem zvečer sama po mestu" – teaser kampanja](/images/pvk/pvk_image_16.webp)
 
 - Kampanja *"Should you have to hide the real you to be accepted?"* (discriminatie.nl) - ozavešča o diskriminaciji.
 
-image17
+![discriminatie.nl – "Should you have to hide the real you to be accepted?"](/images/pvk/pvk_image_17.webp)
 
 - Oglas za kruh *"Bread is life."*
 
-image18
+!["Bread is life."](/images/pvk/pvk_image_18.webp)
 
 ### Dražljaji
 
@@ -481,9 +500,9 @@ Dražljaji so energetski procesi, ki prenašajo sporočila. Naši čutni organi 
 >
 > Udarna rdeča barva in postavitev dlani pritegneta pozornost v Calvin Kleinovem oglasu, kjer avtor ni izpisal polnega imena znamke - podobno je bil zasnovan tudi oglas za Durex, kjer ne veš takoj, kdo je naročnik, zato smo nanj dosti bolj pozorni.
 >
-> image19
+> ![Calvin Klein – oglas z udarno rdečo barvo in postavitvijo dlani](/images/pvk/pvk_image_19.webp)
 >
-> image20
+> ![Durex – "chocolate flavoured condoms"](/images/pvk/pvk_image_20.webp)
 
 ### Zunanji dejavniki pozornosti
 
@@ -504,7 +523,7 @@ Zunanji dejavniki pozornosti so intenzivnost, prostornost, trajanje in pogostost
 
 - **Kraš** je s prenovljenimi izložbenimi okni v Ljubljani (*"Leti, leti ... Bajadera velikanka?"*) poskušal pritegniti pozornost tako, da je izgledalo, kot da je okno zlomljeno.
 
-image21
+![Kraš – prenovljena izložba ("razbito" okno) v Ljubljani](/images/pvk/pvk_image_21.webp)
 
 - **Hyundai Veloster** - oglas so prepovedali, ker je znamka želela oglaševati, da ima avto vrata samo na eni strani.
 
@@ -514,7 +533,7 @@ image21
 
 - Maybelline - v oglasu je edina barvna stvar šminka, kar pritegne pozornost.
 
-image22
+![Maybelline – edina barvna stvar v oglasu je šminka](/images/pvk/pvk_image_22.webp)
 
 - Coca-Cola - v črno-belem oglasu z Drakulo je edina barvna stvar rdeča pločevinka Coca-Cole, kar pritegne pozornost.
 
@@ -534,7 +553,7 @@ Pozornost pritegnejo tudi oglasna sporočila, v katerih sodelujejo znane osebnos
 
 - **Nika Križnar** (slovenska smučarska skakalka) je obraz kampanje Zlatarne Celje 2024.
 
-image23
+![Nika Križnar – obraz kampanje Zlatarne Celje 2024](/images/pvk/pvk_image_23.webp)
 
 ### Notranji dejavniki pozornosti
 
@@ -546,13 +565,13 @@ Notranji dejavniki pozornosti so čustva, potrebe in motivi, izkušnje in znanje
 >
 > Organizacija Innocence in Danger z oglasom ozavešča o problematiki pedofilije - o tej temi se v medijih pogosto malo govori, med drugim tudi zato, ker se želi zaščititi identiteto žrtev.
 >
-> image24
+> ![Innocence in Danger – ozaveščanje o pedofiliji](/images/pvk/pvk_image_24.webp)
 
 > **Primer**
 >
 > Kampanja BabyCanWait.com ozavešča o problematiki prezgodnje nosečnosti pri mladostnikih - organizacija je s tem želela izpostaviti tematiko, o kateri se v medijih dosti ne poroča. Pomembna so tu stališča.
 >
-> image25
+> ![BabyCanWait.com – "Have a baby too young and it'll control your life."](/images/pvk/pvk_image_25.webp)
 
 Poleg čustev na pozornost vplivajo tudi **potrebe in motivi**, naše **izkušnje** ter **znanje**.
 
@@ -592,15 +611,15 @@ Percepcija je eden izmed glavnih kognitivnih procesov, ki oblikujejo neko subjek
 
 - **Crocs x Coca-Cola** - na natikače Crocs so natisnili logotip Coca-Cole, da bi gledalca "postali žejni".
 
-image26
+![Crocs x Coca-Cola natikači z logotipom Coca-Cole](/images/pvk/pvk_image_26.webp)
 
 - **Paloma** - v sodelovanju s programom Svit (presejalni program za raka na debelem črevesu in danki) je ob 10. obletnici programa izdelala omejeno serijo WC papirja z natisnjenim logotipom in sloganom programa - toaletni papir kot nenavaden oglaševalski medij.
 
-image27
+![Paloma x Svit – toaletni papir z logotipom in sloganom programa Svit](/images/pvk/pvk_image_27.webp)
 
 - **Društvo Onkoman** - nad pisoarji so postavili table, ki pozivajo moške k samopregledu za preprečevanje raka na prostati (*"Ko boste doma slekli hlače, opravite samopregled mod. 30 sekund vam lahko reši življenje."*) - primer kontekstualno relevantne umestitve oglasnega sporočila.
 
-image28
+![Društvo Onkoman – "Medtem ko berete to stran, opravite samopregled mod."](/images/pvk/pvk_image_28.webp)
 
 #### Motnje zaznavanja
 
@@ -616,7 +635,7 @@ Poznamo dve vrsti motenj zaznavanja: iluzije in halucinacije.
 >
 > Oglas za pivo, ki je zasnovan tako, da spominja na žensko telo.
 > 
-> image29
+> ![Oglas za pivo Ursus, zasnovan tako, da spominja na žensko telo](/images/pvk/pvk_image_29.webp)
 
 **Halucinacije:**
 
@@ -632,7 +651,7 @@ Poznamo dve vrsti motenj zaznavanja: iluzije in halucinacije.
 4. **Močna čustva** ali afekti - sem sodijo tudi pričakovanja, ki sprožijo vsakdanje halucinacije (npr. vidimo, da so se odprla vrata, čeprav se sploh niso, ker nekoga pričakujemo).
 5. **Predsodki** - nekoga podcenjujemo ali precenjujemo (npr. na podlagi etnične pripadnosti nekomu pripišemo, da je storil tatvino, čeprav za to ni nobenih dokazov - klasičen primer, kako predsodki izkrivijo zaznavo).
 
-image30
+![Jim Beam – "Guys think about sex every sex seconds. Guys never change, neither do we."](/images/pvk/pvk_image_30.webp)
 
 ## Motivacija in vpletenost potrošnikov
 
@@ -657,7 +676,7 @@ Pri **zavedni motivaciji** se motivacije zavedamo. Točno vemo, kateri cilj žel
 >
 > Simbolika v izdelkih za kompromis samopodobe in superega - športni avtomobil kot zadovoljstvo moških (športni avtomobil za moške predstavlja cilj za uresničevanje superega).
 >
-> image31
+> ![Hot Wheels – športni avtomobil kot simbol moške samopodobe](/images/pvk/pvk_image_31.webp)
 
 **Motivacija na podlagi glasbenega učinka:**
 
@@ -710,7 +729,7 @@ Hierarhija od najnižje do najvišje: fiziološke potrebe, potreba po varnosti, 
 
 - Kozarec za vino - *"I don't need inspirational quotes. I just need a damn glass of wine!"*
 
-image32
+![Kozarec za vino – "I don't need inspirational quotes. I just need a damn glass of wine!"](/images/pvk/pvk_image_32.webp)
 
 - **Elena's** - *"Adiós Amor Adiós"* - mehiška znamka sladoleda, ki se oglašuje kot dodatna psihološka pomoč v primeru razhoda s partnerjem - sladoled ima toliko okusov, kolikor je faz v procesu žalovanja.
 
@@ -718,15 +737,15 @@ image32
 
 - Čokolada - *"All you need is love. But a little chocolate now and then doesn't hurt."* (Charles M. Schulz)
 
-image33
+!["All you need is love. But a little chocolate now and then doesn't hurt." (Charles M. Schulz)](/images/pvk/pvk_image_33.webp)
 
 - **Oculto** (optika, Ljubljana) - vsak človek ima načeloma le en par očal, znamka pa spodbuja, da bi očala postala modni dodatek in da bi jih ljudje imeli več, vsak par s svojim "karakterjem".
 
-image34
+![Oculto (optika, Ljubljana) – kolaž oglasov za sončna očala z različnimi "karakterji"](/images/pvk/pvk_image_34.webp)
 
 - **Ghetaldus** (optika) - *"Nespretna? Morda samo potrebuješ nova očala. Da zadaneš ključavnico."* - cilj kampanje je, da bi v optiki več ljudi opravilo pregled vida.
 
-image35
+![Ghetaldus (optika) – "Nespretna? Morda samo potrebuješ nova očala. Da zadaneš ključavnico."](/images/pvk/pvk_image_35.webp)
 
 {{< alertBlockquote type="info" >}}
 **Aktivno delo:** Navedite nekaj oglasov, ki močno vzpodbujajo potrebe!
@@ -753,7 +772,7 @@ Frustracije delimo na:
 > 
 > Primer provokativnega oglasa za britansko vojsko, ki igra na frustracijo, gre za ustanovo, ki ne podpira kreativnosti ali odstopanj, govori pa o tem, če si v vojski lahko gej ali čustven
 >
-> image36
+> ![Oglas za britansko vojsko – "Can I be gay in the army? What if I get emotional in the army?"](/images/pvk/pvk_image_36.webp)
 
 **Konflikt**
 
@@ -813,7 +832,7 @@ Za **visoko vpletenost** je značilna močna intenzivnost, ki ima za posameznika
 >
 > Oglasno sporočilo za luksuzne britanske avtomobile Aston Martin (rabljena vozila) - *"You know you're not the first, but do you really care?"* - močno so vpleteni potencialni kupci, ki se odločajo za nakup dražjih avtomobilov.
 >
-> image37
+> ![Aston Martin (rabljena vozila) – "You know you're not the first, but do you really care?"](/images/pvk/pvk_image_37.webp)
 
 **Od česa je odvisna vpletenost potrošnika:**
 
@@ -829,7 +848,7 @@ Za **visoko vpletenost** je značilna močna intenzivnost, ki ima za posameznika
     >
     > Renault *"Plug Inn"* aplikacija, ki omogoča polnjenje električnih avtomobilov, deluje kot AirBnB za električne avtomobile, saj obstaja premalo polnilnih postaj - zdaj si lahko avto polniš tudi pri nekomu doma in mu plačaš preko aplikacije, oglas spodbuja k nakupu električnih avtomobilov.
     >
-    > image38
+    > ![Renault "Plug Inn" – aplikacija za polnjenje električnih avtomobilov](/images/pvk/pvk_image_38.webp)
 
 2. **Vpletenost z odgovorom** - potrošnika pripravi do tega, da o blagovni znamki ali oglasu razmišlja. Če primerjamo različne medije, na potrošnika najbolj vplivajo osebne prodaje (nekdo pride do tebe, se s tabo pogovarja, tam ne moreš pasivno stati in ne odgovarjati, moraš sodelovati), najmanj pa televizija (zahteva le pasivnega gledalca - o oglasu ne razmišljamo preveč, kontrole nad vsebino nimamo).
 3. **Ego vpletenost** - navezuje se na pomembnost izdelka za potrošnikovo samopodobo. Določeni izdelki v družbi delujejo le kot statusni simboli, zato so potrošniki pripravljeni plačati višjo ceno, mislijo, da jih bodo ljudje v družbi zaradi njih bolje sprejeli.
@@ -838,7 +857,7 @@ Za **visoko vpletenost** je značilna močna intenzivnost, ki ima za posameznika
     >
     > Tiffany's nakit, ki velja kot bolj luksuzen izdelek.
     >
-    > image39
+    > ![Tiffany & Co. – diamantni zaročni prstan](/images/pvk/pvk_image_39.webp)
 
 4. **Čustvena vpletenost** - podjetja igrajo na čustva.
 
@@ -846,7 +865,7 @@ Za **visoko vpletenost** je značilna močna intenzivnost, ki ima za posameznika
     >
     > Unicefova reklama - *"He's starving. We're not. It's time to share."* - poziv k donacijam za lačne otroke.
     >
-    > image40
+    > ![UNICEF – "He's starving. We're not. It's time to share."](/images/pvk/pvk_image_40.webp)
 
 Stopnja vpletenosti potrošnika vpliva na proces obdelave podatkov - torej na to, kako se bomo odločili o svojih stališčih, ali jih bomo oblikovali ali jih spreminjali. Pri tem ima velik vpliv tudi sporočanje od ust do ust.
 
@@ -866,13 +885,24 @@ Z naraščanjem vpletenosti so potrošniki pripravljeni nameniti informacijam ve
 >
 > Znamka **Absolut Vodka** je v Ameriki skozi več let izvajala kampanjo frekvenčne iluzije s serijo podobno zasnovanih oglasov (vedno z isto obliko steklenice), s čimer je pritegnila pozornost in vplivala na čustva potrošnikov. Med drugim so opozarjali na varnost v prometu (*Absolut Security*), naredili smučarsko progo v obliki steklenice vodke (*Absolut Aspen*), bazen v obliki steklenice (*Absolut L.A.*), spreminjali okus in embalažo, oblikovano kot antično steklenico (*Absolut Original*, *Absolut Citron*), ter ob podelitvi filmske nagrade steklenico, sestavljeno iz filmskih trakov (*Absolut Achievement*). Eden od oglasov (*Absolut Impotence*) je oglaševalno serijo obrnil tudi v opozorilo - izpostavil je negativen učinek alkohola na moško potenco.
 >
-> gallery images 41-47
+> {{< gallery >}}
+> ![Absolut Vodka – "Absolut L.A." (bazen v obliki steklenice)](/images/pvk/pvk_image_41.webp)
+> ![Absolut Vodka – "Absolut Perfection."](/images/pvk/pvk_image_42.webp)
+> ![Absolut Vodka – "Absolut Book." (reklamna knjiga)](/images/pvk/pvk_image_43.webp)
+> ![Absolut Vodka – "Absolut Impotence."](/images/pvk/pvk_image_44.webp)
+> ![Absolut Vodka – "Absolut Citron."](/images/pvk/pvk_image_45.webp)
+> ![Absolut Vodka – "Absolut Achievement." (steklenica iz filmskih trakov)](/images/pvk/pvk_image_46.webp)
+> ![Absolut Vodka – "Absolut Aspen." (smučarska proga v obliki steklenice)](/images/pvk/pvk_image_47.webp)
+> {{</gallery>}}
 
 > **Primer**
 >
 > Oglas znamke **Protein World** (*"Are you beach body ready?"*) so zaradi vpliva na samopodobo žensk umaknili, potem ko je sprožil val protestov. Na plakatih so se kasneje začeli pojavljati tudi pripisi ljudi, ki so oglasu nasprotovali (npr. z vprašanji *"Are you a human?"*, *"Are you going to the beach?"*).
 >
-> image48 image49
+> {{< gallery >}}
+> ![Protein World – "Are you beach body ready?"](/images/pvk/pvk_image_48.webp)
+> ![Protein World – plakat s pripisi nasprotnikov kampanje ("Your body is fine just as it is")](/images/pvk/pvk_image_49.webp)
+> {{</gallery>}}
 
 Bolj vpleteni potrošniki so pripravljeni pogledati oglas tudi do konca, zato oglaševalci dostikrat oblikujejo sporočila, pri katerih naročnik ni takoj razviden.
 
@@ -906,7 +936,7 @@ Ponavljanje se v oglaševanju uporablja kot način, da si potrošnik oglas oz. b
 >
 > Aplikacija za zmenke **OkCupid** je s serijo plakatov *"DTF"* pritegnila pozornost z večkratnim ponavljanjem iste kratice, pri čemer je vsak plakat kratico razložil na svoj (nepričakovan) način.
 >
-> image50
+> ![OkCupid – serija plakatov "DTF"](/images/pvk/pvk_image_50.webp)
 
 ---
 
@@ -1026,7 +1056,7 @@ Učenje je proces spreminjanja znanja ali vedenja zaradi izkušenj, ki ima trajn
 >
 > **Bodyform** je razbil tabu o rdeči krvi, saj je večina drugih oglasov (za higienske vložke) predstavljenih z modro barvo krvi.
 >
-> image51
+> ![Bodyform – "Periods are normal. Showing them should be too."](/images/pvk/pvk_image_51.webp)
 
 > **Primer**
 >
@@ -1053,7 +1083,12 @@ Velike informacije ne izgubimo, pa kljub temu se zna zgoditi, da je te informaci
 >
 > Pri **Applu** takoj vemo, da gre za iPhone, Steve Jobs itd. Seveda so asociacije odvisne od posameznika. Pri **Oplu** se spomnimo na kolo, avto, volan, pri **Adidasu** se spomnimo na šport, pri **Good Yearu** pa se spomnimo na gume.
 
-image52, 53, 54, 55
+{{< gallery >}}
+![Logotip znamke Apple](/images/pvk/pvk_image_52.webp)
+![Logotip znamke Opel](/images/pvk/pvk_image_55.webp)
+![Logotip znamke Adidas](/images/pvk/pvk_image_53.webp)
+![Logotip znamke Goodyear](/images/pvk/pvk_image_54.webp)
+{{</gallery>}}
 
 #### Priklic informacij za nakupno odločanje
 
@@ -1061,7 +1096,7 @@ image52, 53, 54, 55
 >
 > Znamka **Peugeot** je imela oglas s plakatom (*"Novo mesto v garaži prihrani za osupljivo."*), da bi povečala priklic.
 >
-> image56
+> ![Peugeot – "Novo mesto v garaži prihrani za osupljivo."](/images/pvk/pvk_image_56.webp)
 
 Pomembno je tudi, da uporabnik sprejme novo spremembo logotipa znamke ali oglasa - dostikrat firme zato naredijo množične raziskave, da vidijo, ali so ljudje sprejeli njihove spremembe oz. ali so s tem pridobili več potrošnikov.
 
@@ -1069,7 +1104,7 @@ Pomembno je tudi, da uporabnik sprejme novo spremembo logotipa znamke ali oglasa
 >
 > **Pepsi** je predstavil nov slogan - *"That's what I like."*
 >
-> image57
+> ![Pepsi – "That's what I like."](/images/pvk/pvk_image_57.webp)
 
 #### Vpliv slavnih oseb na priklic
 
@@ -1097,7 +1132,7 @@ Včasih se zgodi, da blagovna znamka želi sodelovanje z neko slavno osebo, ampa
 >
 > **Ilka Štuhec** je ambasadorka znamke Huawei.
 >
-> image59
+> ![Huawei – Ilka Štuhec, ambasadorka znamke](/images/pvk/pvk_image_59.webp)
 
 Izdelki, ki podpirajo vrhunski šport, pogosto sodelujejo s športniki:
 
@@ -1143,7 +1178,7 @@ V oglasu za Bahame (*"Fly Away 2021"*) so uporabili avtorja glasbe, **Lennyja Kr
 
 Tudi **James Bond** pije brezalkoholno pivo - Heineken je sklenil pogodbo z igralcem Jamesa Bonda, da so gledalcem omogočili, da lahko pijejo brezalkoholno pivo brez zadržkov.
 
-image60
+![Heineken x James Bond – "No Time To Die"](/images/pvk/pvk_image_60.webp)
 
 **Mc Hammer** je nastopil v oglasu za Cheetos, s čimer so uvedli dinamiko, znano osebnost in glasbo, ki bi priklicala oglas v spomin.
 
@@ -1191,7 +1226,7 @@ Na priklic vplivajo tudi sporni oglasi.
 >
 > Oglas za podjetje **Tom Ford** je izkazal moško in žensko telo za oglaševanje svojih parfumov, npr. žensko telo za moški parfum.
 >
-> image61
+> ![Tom Ford – prvi moški parfum, oglaševan preko ženskega telesa](/images/pvk/pvk_image_61.webp)
 
 Tudi če je oglas sporen, se zna zgoditi, da se o oglasu in firmi začne več govoriti in firma doživi prepoznavnost - firmi se zato bolj splača plačati kazen za sporen oglas, kot če ga ne bi bilo.
 
@@ -1241,7 +1276,7 @@ Afekte in razpoloženja ločimo glede na trajnost in intenzivnost.
 >
 > Oglas znamke Mormonad (*"Feeling sour?"*) prikazuje limono z obrazom - vpliv razpoloženja na zaznavanje, pozornost in pomnjenje je zelo pomemben pri vplivanju na potrošnike.
 >
-> image62
+> ![Mormonad – "Feeling sour?"](/images/pvk/pvk_image_62.webp)
 
 ### Čustva in motivacija
 
@@ -1257,7 +1292,7 @@ Vloga čustev je, da motivirajo, usmerjajo in aktivirajo vedenje - usmerjajo ga 
 
 Podobno tudi oglasi proti uporabi pirotehnike opozarjajo, da zaradi petard in raket trpijo živali (*"Si množični morilec?"*, *"Bi ubil prijatelja?"*, *"Zakaj povzročaš bolečino?"* - zaradi petard in raket letno umre na stotine ptic, psi izgubljajo življenja, mačke pa hudo trpijo).
 
-slika63
+![Kampanja proti pirotehniki – "Bi ubil prijatelja?", "Zakaj povzročaš bolečino?", "Si množični morilec?"](/images/pvk/pvk_image_63.webp)
 
 > **Primer**
 >
@@ -1319,7 +1354,7 @@ Stališča se oblikujejo s prevzemanjem od skupine in od družbe, kateri oseba p
 >
 > Oglas znamke Heinz - *"No one grows Ketchup like Heinz."* - skuša zgraditi pozitivno stališče do samega oglasa.
 >
-> image64
+> ![Heinz – "No one grows Ketchup like Heinz."](/images/pvk/pvk_image_64.webp)
 
 ##### Pomembni dejavniki za oblikovanje stališč
 
@@ -1366,7 +1401,7 @@ Pri pralnih praških vsaka znamka pogosto poskuša dokazati, da je njihov izdele
 >
 > Negativno stališče do ubijanja živali - nemška organizacija Deutscher Tierschutzbund je z oglasom *"Fühl dich wie ein Schwein."* / *"Fühl dich wie ein Nerz."* / *"Fühl dich wie ein Pferd"* opozorila na trpljenje živali pri kastraciji prašičev brez anestezije in pri pridobivanju krzna.
 >
-> image65
+> ![Deutscher Tierschutzbund – "Fühl dich wie ein Pferd."](/images/pvk/pvk_image_65.webp)
 
 > **Primer**
 >
@@ -1378,13 +1413,16 @@ Pri pralnih praških vsaka znamka pogosto poskuša dokazati, da je njihov izdele
 
 - Modna znamka **Sisley** je v oglasu *"Fashion Junkie"* uporabila podobo, ki spominja na uživanje drog. Znamka je s tem sicer želela dati družbeno odgovornost, da bi ljudi odvrnila od drog, po drugi strani pa lahko takšen oglas pri nekaterih vzbudi tudi ravno nasproten učinek.
 
-image66
+![Sisley – "Fashion Junkie."](/images/pvk/pvk_image_66.webp)
 
 > **Primer**
 >
 > Negativno stališče do kajenja - oglas (*"Women who smoke feed more than just milk to their children."*) opozarja na posledice kajenja za doječe matere, kampanja NHS (*"The average smoker needs over five thousand cigarettes a year."*) pa na to, koliko cigaret povprečen kadilec pokadi na leto.
 >
-> image67 and image 68
+> {{< gallery >}}
+> !["Women who smoke feed more than just milk to their children."](/images/pvk/pvk_image_67.webp)
+> ![NHS – "The average smoker needs over five thousand cigarettes a year."](/images/pvk/pvk_image_68.webp)
+> {{</gallery>}}
 
 > **Primer**
 >
@@ -1418,7 +1456,10 @@ Stereotipi so predstopnja predsodkov, podobno kot so mnenja predstopnja pri stal
 >
 > Znamka French Connection je z oglasoma (*"Man should be brave."*, *"Eat meat. Dress well."*) prikazala spolne stereotipe.
 >
-> image69 and image70
+> {{< gallery >}}
+> ![French Connection – "Eat meat. Dress well."](/images/pvk/pvk_image_69.webp)
+> ![French Connection – "Man should be brave."](/images/pvk/pvk_image_70.webp)
+> {{</gallery>}}
 
 #### Osnovni tipi občutkov pri predsodkih
 
@@ -1451,7 +1492,7 @@ Dominantna skupina je skupina, ki ima predsodke do manjšine:
 >
 > **Dolce & Gabbana** je z oglasom, v katerem je Madonna prikazana med pospravljanjem tal, izpostavil predsodek o spolih.
 >
-> image71
+> ![Dolce & Gabbana – Madonna med pospravljanjem tal](/images/pvk/pvk_image_71.webp)
 
 #### Pogoji za nastanek predsodkov
 
@@ -1462,11 +1503,11 @@ Dominantna skupina je skupina, ki ima predsodke do manjšine:
 >
 > Ameriški oglas Human Rights Commission (*"I should have the right to rent an available apartment, without being told it's not available to me. You DO have the right."*) se sooča z rasizmom.
 >
-> image72
+> ![NYC Commission on Human Rights – "I should have the right to rent an available apartment..."](/images/pvk/pvk_image_72.webp)
 
 **Vzroki za nastanek predsodkov:** znamka **Benetton** je naredila oglas, ki bi poudaril problem rasnih predsodkov, kjer so pokazali s črncem, da naj ne bi mogel nič narediti in bo samo za čiščenje, bel otrok pa bo lahko zdravnik in bo uspešen.
 
-image73
+![LICRA – "Your skin color shouldn't dictate your future."](/images/pvk/pvk_image_73.webp)
 
 Predsodki nastanejo z vzgojo in socializacijo - večina predsodkov ima svoje temelje že v otroštvu. Glavni dejavniki so družina, šola, sovrstniki, družba in mediji. Predsodki nastanejo največkrat zaradi frustracij, ki jih doživljajo posamezniki.
 
@@ -1501,7 +1542,7 @@ Predsodki nastanejo z vzgojo in socializacijo - večina predsodkov ima svoje tem
 >
 > Kampanja Fair@Work (*"I don't need to be ambitious. Only boys get to become bosses."*) opozarja na predsodke pri zaposlovanju in napredovanju žensk.
 >
-> image74
+> ![Fair@Work – "I don't need to be ambitious. Only boys get to become bosses."](/images/pvk/pvk_image_74.webp)
 
 ### 5 stopenj izražanja predsodkov (Allport, 1954)
 
@@ -1529,7 +1570,7 @@ Objekt diskriminacije doživlja:
 >
 > Kampanja Age Concern (*"Fight ageism. You are not getting any younger."*) opozarja na diskriminacijo starejših.
 >
-> image75
+> ![Age Concern – "Fight ageism. You are not getting any younger."](/images/pvk/pvk_image_75.webp)
 
 {{< alertBlockquote type="info" >}}
 **Aktivno delo:** Preberi članek *"Prepovedani oglasi"*, ki govori med drugim tudi o stereotipih, in podaj svoj komentar.
@@ -1608,7 +1649,7 @@ Kaj menimo o svoji lastni samopodobi je, če nas nihče ne opozori, precej nezav
 >
 > Lutki **Barbie in Ken** ponazarjata vpliv samopodobe na otroke - Barbie živi v popolnem svetu, ima popolne avtomobile, obleke, izgled in hišo ter ob sebi popolnega moškega, Ken pa je popoln, bogat moški z izklesanim telesom. Podoba lutk je precej nerealna, saj sta po obliki in svetu, v katerem živita, nerealni - s tem se samopodoba deklic lahko izpostavljenosti tem idealom niža.
 >
-> image76
+> ![Lutki Barbie in Ken](/images/pvk/pvk_image_76.webp)
 
 **Vpliv samopodobe na mladostnike:** mladi so obdani z oglasi iz vseh smeri, ki jim lahko nižajo samopodobo (npr. izpostavljanje izklesanega telesa, kilogramov), kar lahko povzroča depresijo in bolezni, kot sta anoreksija in bulimija. Velik problem so tudi računalniško obdelane fotografije.
 
@@ -1642,13 +1683,13 @@ Z blagovno znamko izražamo svojo filozofijo do samega sebe in okolja. Največkr
 >
 > **Garnier** prodaja kozmetiko za nego las ženskam, ki želijo zgledati, kot da bodo imele sijoče, močne lase.
 >
-> image77
+> ![Garnier Fructis – nega las](/images/pvk/pvk_image_77.webp)
 
 > **Primer**
 >
 > **Lancôme** je imel v Veliki Britaniji prepovedan oglas, ker je pretiraval s fotografskimi spremembami - oglas je zavajal, saj je prikrival vse madeže in gube.
 >
-> image78
+> ![Lancôme – oglas z Julio Roberts, prepovedan zaradi pretirane fotografske obdelave](/images/pvk/pvk_image_78.webp)
 
 > **Primer**
 >
@@ -1668,17 +1709,17 @@ Z blagovno znamko izražamo svojo filozofijo do samega sebe in okolja. Največkr
 >
 > **Calvin Klein** - Kate Moss, *"Nothing tastes as good as skinny feels."* - oseba, ki je reprezentirala znamko, je kazala, kako je lepo biti suh in kako se lahko ob tem dobro počutiš, kar je zelo močno slabo vplivalo na mlada dekleta.
 >
-> image79
+> ![Calvin Klein – Kate Moss, "Nothing tastes as good as skinny feels."](/images/pvk/pvk_image_79.webp)
 
 Narejena je bila raziskava (*"Perceptions of Perfection: What the 'Ideal' Female Body Looks Like Across 18 Countries"*), v kateri so v 18 državah pokazali, kako naj bi zgledala popolna ženska - opazile so se razlike v idealih med državami.
 
-image80
+!["Perceptions of Perfection" – idealna ženska postava v različnih državah](/images/pvk/pvk_image_80.webp)
 
 > **Primer**
 >
 > **Dove** je naredil paradoks na oglas Victoria's Secret, kjer so vsa dekleta suha in visoka - v svoj oglas (*"We see beauty all around us."*) je vključil ženske različnih videzov, s čimer je predstavil, da lepota izvira iz njihove notranjosti in ne iz zunanjosti.
 >
-> image81
+> ![Dove – "We see beauty all around us."](/images/pvk/pvk_image_81.webp)
 >
 > Dove je naredil tudi kampanjo, v kateri je opozoril, da pretirana obdelava fotografij žensk na družbenih omrežjih predstavlja veliko nevarnost, saj je veliko deklet nezadovoljnih s svojo podobo.
 >
@@ -1730,7 +1771,7 @@ Boj proti lepotnim idealom je predstavljen tudi v obliki pesmi, ki prikazuje raz
 
 - **Dove** je v okviru kampanje *"Keep Her Confident"* skupaj s teniško igralko Venus Williams na družbenih omrežjih spodbujal telesno samozavest deklet v športu.
 
-image82
+![Dove x Venus Williams – "Let's #KeepHerConfident."](/images/pvk/pvk_image_82.webp)
 
 ---
 
@@ -1742,7 +1783,7 @@ image82
 >
 > Blagovna znamka **Michael Kors** je namenjena premožnim posameznikom, ki dajo poudarek na blagovni znamki, imajo več denarja, so zaposleni na višjih položajih in posvečajo več pozornosti svojemu izgledu.
 >
-> image83
+> ![Michael Kors – življenjski slog premožnih posameznikov](/images/pvk/pvk_image_83.webp)
 
 ### Življenjski slog in vpliv na potrošnjo
 
@@ -1766,7 +1807,7 @@ Mi kot potrošniki se zelo redko svojih nakupov zavedamo - velikokrat delamo stv
 
 - **Adidas** nagovarja osebe, ki se želijo ukvarjati s športom.
 
-image84
+![Adidas – "This is fun taken seriously."](/images/pvk/pvk_image_84.webp)
 
 - **Nike** želi podobno nagovarjati potrošnike k športu - športnika so pokazali, kako je močen in aktiven tudi ponoči, in da če želijo potrošniki biti taki, naj kupujejo njihove loparje.
 
@@ -1832,13 +1873,16 @@ Presoja življenjskega sloga temelji na treh sklopih:
 >
 > **Coca-Cola** (*"Stay cool."*) in **Milk Life** (*"What 8 grams of protein looks like when you're playing above the rim."*) sta primera oglasov, ki nagovarjata dejavnosti in interese potrošnikov (druženje, šport).
 >
-> image85 and 86
+> {{< gallery >}}
+> ![Coca-Cola – "Stay cool."](/images/pvk/pvk_image_85.webp)
+> ![Milk Life – "What 8 grams of protein looks like when you're playing above the rim."](/images/pvk/pvk_image_86.webp)
+> {{</gallery>}}
 
 > **Primer**
 >
 > Znamka **Marlboro** je prvotno ciljala na žensko publiko. Ker se ni dobro prodajala, so začeli ciljati na kavboje, in cela Amerika se je poistovetila s kavbojem - izdelki so se začeli dobro prodajati. Najprej so zagrabili mlade, nato pa vse starostne skupine.
 >
-> image87
+> ![Marlboro – vintage oglasa (ženska publika in kavboj)](/images/pvk/pvk_image_87.webp)
 
 > **Primer**
 >
@@ -1892,11 +1936,11 @@ Vedno bolj pogosto je segmentiranje ljudi glede na vedenje - npr. glede na stopn
 >
 > Oglas, ki vabi v telovadnico (*"Long time. No see?"*), s prikazom trebuha namiguje na spremembo telesa zaradi neaktivnosti.
 >
-> image88
+> !["Long time. No see?" – oglas za telovadnico](/images/pvk/pvk_image_88.webp)
 >
 > Podoben primer je tudi oglas za MyBody Gym, kjer moški debelega trebuha hrani ribe piranje v akvariju.
 >
-> image89
+> ![MyBody Gym – moški s trebuhom hrani ribe piranje v akvariju](/images/pvk/pvk_image_89.webp)
 
 {{< alertBlockquote type="info" >}}
 **Aktivno delo:** Kateri izmed naslednjih oglasov je najbolj vezan na življenjski slog potrošnika: 1) oglasno sporočilo za pohištvo, 2) oglasno sporočilo za ure Rolex, 3) oglasno sporočilo za MarketHub (Life + Style)?
@@ -1928,7 +1972,7 @@ Dosti oglasov, ki vključujejo spolnost in nasilje, so dostikrat tudi umaknjeni,
 >
 > Blagovna znamka **American Apparel** je z oglasom namigovala na spolnost in posilstvo, zaradi česar je bil oglas umaknjen.
 >
-> image90
+> ![American Apparel – oglas, ki namiguje na spolnost in posilstvo](/images/pvk/pvk_image_90.webp)
 >
 > Oglasna sporočila s spolnostjo želijo povečati priklic sporočila in vzbuditi čustvene reakcije.
 
@@ -1936,7 +1980,7 @@ Dosti oglasov, ki vključujejo spolnost in nasilje, so dostikrat tudi umaknjeni,
 >
 > **Calvin Klein** je pripravil veliko oglasnih sporočil s spolnostjo, da bi se osebe počutile bolj privlačne z njihovimi oblačili.
 >
-> image91
+> ![Calvin Klein – oglas s spolnostjo](/images/pvk/pvk_image_91.webp)
 
 ### Uporaba spolnosti v oglaševanju
 
@@ -1952,19 +1996,19 @@ Spolnost je lahko v oglaševanju prikazana na več načinov:
 >
 > Znamka **Stuart Weitzman** je v oglasu z manekenko Gigi Hadid uporabila golo telo.
 >
-> image92
+> ![Stuart Weitzman – Gigi Hadid](/images/pvk/pvk_image_92.webp)
 
 > **Primer**
 >
 > **Victoria's Secret** je s panojem, ki je uporabljal goloto, dodatno pozornost pritegnil še s tem, da je zakriti del telesa (izpostavljen na mobilnem telefonu) pokazal šele preko QR kode.
 >
-> image93
+> ![Victoria's Secret – billboard z odkritjem preko QR kode](/images/pvk/pvk_image_93.webp)
 
 > **Primer**
 >
 > Oglas za **Absolut vodko** (*"The vodka with nothing to hide."*) je pritegnil pozornost z golimi kmeti na polju, a ne zaradi samih modelov, temveč zaradi humorja.
 >
-> image94
+> ![Absolut Vodka – "The vodka with nothing to hide."](/images/pvk/pvk_image_94.webp)
 
 > **Primer**
 >
@@ -1988,7 +2032,7 @@ Največkrat so gledani ženski modeli, ki so fizično privlačni in vzbudijo poz
 >
 > Znamka spodnjega perila **Intimissimi** je za oglas izbrala fizično privlačno manekenko Irino Shayk.
 >
-> image95
+> ![Intimissimi – Irina Shayk](/images/pvk/pvk_image_95.webp)
 
 ### Spolno namigovanje
 
@@ -1996,9 +2040,9 @@ Največkrat so gledani ženski modeli, ki so fizično privlačni in vzbudijo poz
 >
 > **Dolce & Gabbana** je z oglasom nakazoval na neko spolno vedenje, a ni dosegel tega, da bi se potrošniki zaradi njega vznemirili.
 >
-> image96
+> ![Dolce & Gabbana – oglas, ki namiguje na spolno vedenje](/images/pvk/pvk_image_96.webp)
 >
-> image97
+> ![Dolce & Gabbana – oglas, ki namiguje na možnost nasilja](/images/pvk/pvk_image_97.webp)
 >
 > Drug oglas znamke **Dolce & Gabbana** pa je pri potrošnikih vzbudil slabo percepcijo in vtis, da namiguje na možnost nasilja, zaradi česar je bil oglas umaknjen. 
 
@@ -2007,19 +2051,19 @@ Največkrat so gledani ženski modeli, ki so fizično privlačni in vzbudijo poz
 >
 > Znamka **Nama** je s spolnim namigovanjem oglaševala tudi povsem vsakdanje popuste v trgovini.
 >
-> image98
+> ![Nama – "20% popust" (spolno namigovanje pri vsakdanjih popustih)](/images/pvk/pvk_image_98.webp)
 
 > **Primer**
 >
 > **Burger King Brazilija** je ob svoji 70. obletnici pripravil kampanjo, v kateri je s spolnim namigovanjem prikazal razne fotografije starejših parov.
 >
-> image99
+> ![Burger King Brazilija – kampanja ob 70. obletnici, starejši pari](/images/pvk/pvk_image_99.webp)
 
 > **Primer**
 >
 > Vodka **Belvedere** (*"Unlike some people, Belvedere always goes down smoothly."*) je z verbalnim namigovanjem na spolnost želela vzbuditi pozornost potrošnikov.
 >
-> image100
+> ![Belvedere Vodka – "Unlike some people, Belvedere always goes down smoothly."](/images/pvk/pvk_image_100.webp)
 
 #### Primer vizualnega in verbalnega namigovanja na spolnost
 
@@ -2027,7 +2071,7 @@ Največkrat so gledani ženski modeli, ki so fizično privlačni in vzbudijo poz
 >
 > Oglas organizacije za doniranje organov (*"Becoming a donor is probably your only chance to get inside her."*) je z bizarnim in absurdnim stavkom namignil, da je doniranje organov edini način, kako priti v telo ženske na sliki. Gre za etično sporen in neprimeren oglas, je pa viden in potrošniki se o njem pogovarjajo, kar je bil tudi namen oglaševalca.
 >
-> image101
+> ![Oglas za doniranje organov – "Becoming a donor is probably your only chance to get inside her."](/images/pvk/pvk_image_101.webp)
 
 > **Primer**
 >
@@ -2043,25 +2087,25 @@ Pri nezavednem spolnem namigu gre za subtilen način, kjer preko predmetov namig
 >
 > **Burger King** (*"She'll tell you size doesn't matter. She's lying."*) je s Paris Hilton, ki drži burger, namignil na spolnost preko velikosti izdelka.
 >
-> image102
+> ![Carl's Jr. – Paris Hilton, "She'll tell you size doesn't matter. She's lying."](/images/pvk/pvk_image_102.webp)
 
 > **Primer**
 >
 > **Burger King** je s sloganom *"It'll blow your mind away"* pri burgerju BK Super Seven Incher ponovno uporabil nezaveden spolni namig.
 >
-> image103
+> ![Burger King – "It'll blow your mind away." (BK Super Seven Incher)](/images/pvk/pvk_image_103.webp)
 
 > **Primer**
 >
 > Znamka **Bags & More** je s podobo moškega, ki leze iz kovčka, oglaševala potovanje s trdim kovčkom - oglas je provokativen in je dobil polno kritik, so pa si ga potrošniki zapomnili.
 >
-> image104
+> ![Bags & More – moški, ki leze iz kovčka](/images/pvk/pvk_image_104.webp)
 
 > **Primer**
 >
 > **Hailey Bieber** je z ovitkom za telefon, ki je vključeval držalo za šminko oblike podobne hrani, dobila precej pozornosti zaradi namiga na spolnost.
 >
-> image105
+> ![Hailey Bieber – ovitek za telefon z držalom za šminko](/images/pvk/pvk_image_105.webp)
 
 > **Primer**
 >
@@ -2111,7 +2155,7 @@ Oglaševalci vplivajo na otroke na njihovi kognitivni, afektivni in vedenjski ra
 >
 > Parfum **Calvin Klein Obsession** je oglaševan izključno preko golega ženskega telesa.
 >
-> image106
+> ![Calvin Klein Obsessed – Kate Moss](/images/pvk/pvk_image_106.webp)
 
 ### Moška podoba v oglasnih sporočilih
 
@@ -2121,13 +2165,13 @@ Moška podoba je v oglaševanju običajno manj predstavljena - moški niso preds
 >
 > Znamka solatnih prelivov **Knorr** je moškega prikazala v spodnjem perilu, poležečega ob solati (*"The only thing better than dressing is undressing."*).
 >
-> image107
+> ![Kraft – "The only thing better than dressing is undressing."](/images/pvk/pvk_image_107.webp)
 
 > **Primer**
 >
 > Grški jogurt **Voskos** je z mišičastim moškim, ki je gol prekrit z jogurtom (*"I'd rather go naked than get fat."*), oglaševal svoj izdelek.
 >
-> image108
+> ![Voskos – "I'd rather go naked than get fat."](/images/pvk/pvk_image_108.webp)
 
 Kot stranski primer je bil na predavanju omenjen tudi glasbeni videospot *"Poison"* (iz serije Hazbin Hotel, 1. sezona, 4. epizoda).
 
@@ -2145,7 +2189,7 @@ Oglasi z moškimi modeli so na splošno manj učinkoviti in se manj uporabljajo.
 >
 > Parfum **Viktor & Rolf Spicebomb** je oglaševan preko golega, mišičastega moškega telesa.
 >
-> image109
+> ![Viktor & Rolf Spicebomb](/images/pvk/pvk_image_109.webp)
 
 ---
 
@@ -2162,7 +2206,7 @@ Posamezniki preko podob v različnih medijih ponotranjijo njihovo idealno postav
 >
 > Znamka **Victoria's Secret** je s kampanjo *"I Love My Body"* oglaševala svoje perilo preko vitkih manekenk, prav tako pa tudi s kampanjo *"The Perfect Body"*.
 >
-> image110
+> ![Victoria's Secret – "I Love My Body" / "The Perfect Body" v primerjavi z Dove "Real Beauty"](/images/pvk/pvk_image_110.webp)
 >
 >Na kampanjo Victoria's Secret je prišlo precej odzivov, saj so nekatera podjetja (npr. Dear Kate) v odgovor na kampanjo predstavila oglas z več različnimi rasami, ženskimi telesi in postavami, ki so dosti bolj naravne in realne.
 
@@ -2170,7 +2214,7 @@ Posamezniki preko podob v različnih medijih ponotranjijo njihovo idealno postav
 >
 > Slovenska znamka **Lisca** je s kampanjo *"#proudtobeme"* predstavila žensko telo v vseh njegovih raznolikih oblikah.
 >
-> image111
+> ![Lisca – "#proudtobeme"](/images/pvk/pvk_image_111.webp)
 
 Ne smemo pozabiti na dejstvo, da je veliko oglasov, ki vsebujejo ženske ali moške subjekte, zelo seksističnih in poniževalnih do žensk. Po navadi so ženske postavljene v neke podrejene ali ranljive položaje. Takšni oglasi prav gotovo zelo kršijo meje dobrega okusa, a so ljudem kljub temu všeč. Oglaševalci so ravno zaradi dobička, ki ga dobijo, pripravljeni tvegati, da kršijo meje dobrega okusa in na tak način pritegnejo, ali pa tudi odvrnejo občinstvo. V zadnjih letih je tudi veliko ozaveščanja na tem področju - obstaja veliko forumov in oblik, kjer lahko ljudje podajo svoja mnenja in nestrinjanje.
 
@@ -2178,13 +2222,13 @@ Ne smemo pozabiti na dejstvo, da je veliko oglasov, ki vsebujejo ženske ali mo�
 >
 > Energijska pijača **Devil** je s poljskim sloganom (*"Devil otworzy każdą ci puszkę"*) in cenzurirano golo prsjo pripravila oglas, ki krši meje dobrega okusa.
 >
-> image112
+> ![Devil – "Devil otworzy każdą ci puszkę"](/images/pvk/pvk_image_112.webp)
 
 > **Primer**
 >
 > Znamka **EIS.de** je z oglasom (*"Make love for less!"*), ki namiguje na žensko spolovilo, prav tako prestopila meje dobrega okusa v oglaševanju.
 >
-> image113
+> ![EIS.de – "Make love for less!"](/images/pvk/pvk_image_113.webp)
 
 ---
 
