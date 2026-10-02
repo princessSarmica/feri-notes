@@ -66,8 +66,8 @@
     content="/"
   />
   <meta property="article:author" content="PrincessSarmica" />
-  <meta property="article:published_time" content="2026-02-03T07:07:07&#43;01:00" />
-  <meta property="article:modified_time" content="2026-02-03T07:07:07&#43;01:00" /><meta name="twitter:card" content="summary" />
+  <meta property="article:published_time" content="2022-10-04T07:07:07&#43;01:00" />
+  <meta property="article:modified_time" content="2022-10-04T07:07:07&#43;01:00" /><meta property="article:tag" content="3. letnikzimski semester" /><meta name="twitter:card" content="summary" />
   <meta name="twitter:image" content="/" />
 <link rel="shortcut icon" href="/favicon.ico"><link rel="stylesheet" href="/css/main.min.c16194dc8e87df1c172d8b45d139c53efaf532098493cb572e7b247ef5156fd6.css" /><link
     rel="preload"
@@ -326,7 +326,7 @@ This article does not have a corresponding language version
                     <li><a href="#vrednosti-uteži-koeficientov">Vrednosti uteži (koeficientov)</a></li>
                   </ul>
                 </li>
-                <li><a href="#2-izračun-konvolucije-med-masko--in-sliko">2. Izračun konvolucije med masko  in sliko </a></li>
+                <li><a href="#2-izračun-konvolucije-med-masko-h-in-sliko-o">2. Izračun konvolucije med masko $H$ in sliko $O$</a></li>
                 <li><a href="#problemi-pri-konvoluciji">Problemi pri konvoluciji</a>
                   <ul>
                     <li><a href="#problem-robnih-pikslov">Problem robnih pikslov</a></li>
@@ -442,7 +442,7 @@ This article does not have a corresponding language version
         </li>
         <li><a href="#optični-pretok">Optični pretok</a>
           <ul>
-            <li><a href="#oblikovanje-sistema-enačb---kako-določimo-vektor-premika--za-en-piksel">Oblikovanje sistema enačb - Kako določimo vektor premika  za en piksel?</a>
+            <li><a href="#oblikovanje-sistema-enačb---kako-določimo-vektor-premika-u-za-en-piksel">Oblikovanje sistema enačb - Kako določimo vektor premika $u$ za en piksel?</a>
               <ul>
                 <li><a href="#korak-1-izberemo-okolico">Korak 1: Izberemo okolico</a></li>
                 <li><a href="#korak-2-izračun-parcialnih-odvodov">Korak 2: Izračun parcialnih odvodov</a></li>
@@ -769,12 +769,12 @@ This article does not have a corresponding language version
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>Categories</div>
     <div class="sidebar-state-number">
-      0
+      2
     </div>
   </a>
   <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
     <div>Tags</div>
-    <div class="sidebar-state-number">0</div>
+    <div class="sidebar-state-number">5</div>
   </a>
 </div>
 <div class="sidebar-social" ><div class="icon-github sidebar-social-icon">
@@ -828,11 +828,11 @@ This article does not have a corresponding language version
     class="article-date-link icon-calendar"
     data-aos="zoom-in"
   >
-    <time datetime="2026-02-03 07:07:07 &#43;0100 CET" itemprop="datePublished"
-      >2026-02-03</time
+    <time datetime="2022-10-04 07:07:07 &#43;0100 &#43;0100" itemprop="datePublished"
+      >2022-10-04</time
     >
     <time style="display: none;" id="post-update-time"
-      >2026-02-03</time
+      >2022-10-04</time
     >
   </span></div>
 </div><div class="hr-line"></div><div class="e-content article-entry" itemprop="articleBody"><h2 id="uvod-v-računalniški-vid">
@@ -1329,16 +1329,16 @@ Koordinatni sistem kamere na luknjico
 <p>$O$ – izhodišče je v luknjici</p>
 </li>
 <li>
-<p>$\Pi'$ – slikovna ravnina</p>
+<p>$\Pi&rsquo;$ – slikovna ravnina</p>
 </li>
 <li>
 <p>$\mathbf{i}$ in $\mathbf{j}$ – bazna vektorja ravnine, ki je paralelna ravnini $\Pi'$</p>
 </li>
 <li>
-<p>$f'$ – oddaljenost ravnine $\Pi'$ od luknjice v smeri vektorja $\mathbf{k}$ (merjeno pozitivno)</p>
+<p>$f&rsquo;$ – oddaljenost ravnine $\Pi&rsquo;$ od luknjice v smeri vektorja $\mathbf{k}$ (merjeno pozitivno)</p>
 </li>
 <li>
-<p>$C'$ – slikovni center (središče)</p>
+<p>$C&rsquo;$ – slikovni center (središče)</p>
 <ul>
 <li>leži na presečišču optične osi in ravnine $\Pi'$</li>
 </ul>
@@ -1351,7 +1351,7 @@ Koordinatni sistem kamere na luknjico
 </ul>
 </li>
 <li>
-<p>Točko $C'$ lahko uporabimo kot izhodišče slikovne ravnine</p>
+<p>Točko $C&rsquo;$ lahko uporabimo kot izhodišče slikovne ravnine</p>
 <ul>
 <li>pomembno za kalibracijo kamere</li>
 </ul>
@@ -1360,30 +1360,30 @@ Koordinatni sistem kamere na luknjico
 <h5 id="kako-določimo-za-točko-v-sceni-njen-položaj-na-sliki">
 <a class="header-anchor" href="#kako-dolo%c4%8dimo-za-to%c4%8dko-v-sceni-njen-polo%c5%beaj-na-sliki"></a>
 Kako določimo za točko v sceni njen položaj na sliki?
-</h5><p>Glede na definiran koordinatni sistem imamo torej projekcijsko oz. slikovno ravnino, ki jo definiraza bazna vektorja $\mathbf{i}$ in $\mathbf{j}$. Imamo pa še točko $P$, ki se preko perspektivne projekcije preslika v točko $P'$.</p>
+</h5><p>Glede na definiran koordinatni sistem imamo torej projekcijsko oz. slikovno ravnino, ki jo definiraza bazna vektorja $\mathbf{i}$ in $\mathbf{j}$. Imamo pa še točko $P$, ki se preko perspektivne projekcije preslika v točko $P&rsquo;$.</p>
 <ul>
 <li>Točka $P$ – točka iz scene</li>
 </ul>
 $$
 P = [x, y, z]
 $$<ul>
-<li>Točka $P'$ – slika točke $P$ na slikovni ravnini</li>
+<li>Točka $P&rsquo;$ – slika točke $P$ na slikovni ravnini</li>
 </ul>
 $$
 P' = [x', y', z']
 $$<ul>
-<li>Točka $P'$ leži na slikovni ravnini, zato velja:</li>
+<li>Točka $P&rsquo;$ leži na slikovni ravnini, zato velja:</li>
 </ul>
 $$
 z' = f'
 $$<ul>
-<li>Koordinati $x'$ in $y'$ določimo iz opazovanja geometrije (perspektivna projekcija):</li>
+<li>Koordinati $x&rsquo;$ in $y&rsquo;$ določimo iz opazovanja geometrije (perspektivna projekcija):</li>
 </ul>
 $$
 x' = \frac{f' x}{z}
 $$$$
 y' = \frac{f' y}{z}
-$$<p>Zanima nas določitev koordinat točke $P'$.<br>
+$$<p>Zanima nas določitev koordinat točke $P&rsquo;$.<br>
 Poznamo koordinate točke $P$:</p>
 $$
 P(x, y, z)
@@ -1391,14 +1391,14 @@ $$<p>Te koordinate so podane v nekih merskih enotah, npr.:</p>
 $$
 P(100, 200, 450)
 $$<p>kjer vrednosti lahko predstavljajo centimetre (lahko pa tudi dm, m itd.).</p>
-<p>Točka $P$ se preko <strong>perspektivne projekcije</strong> preslika v točko $P'$.</p>
-<p>Točka $P'$ ima koordinate:</p>
+<p>Točka $P$ se preko <strong>perspektivne projekcije</strong> preslika v točko $P&rsquo;$.</p>
+<p>Točka $P&rsquo;$ ima koordinate:</p>
 $$
 P'(x', y', z')
-$$<p>Ker točka $P'$ leži na slikovni ravnini, velja:</p>
+$$<p>Ker točka $P&rsquo;$ leži na slikovni ravnini, velja:</p>
 $$
 z' = f'
-$$<p>Vprašanje pa je, kako določimo $x'$ in $y'$.<br>
+$$<p>Vprašanje pa je, kako določimo $x&rsquo;$ in $y&rsquo;$.<br>
 To določa matematični model perspektivne projekcije:</p>
 $$
 x' = f' \left(\frac{x}{z}\right)
@@ -1406,12 +1406,12 @@ $$$$
 y' = f' \left(\frac{y}{z}\right)
 $$<p>Ti dve formuli povesta, kako se točka preslika na slikovno ravnino.</p>
 <p>Pomembno:<br>
-$x'$, $y'$ in $z'$ so še vedno izraženi v isti merski enoti kot $x$, $y$, $z$. <strong>Tukaj še ne govorimo o pikslih.</strong><br>
-Če so $x, y, z$ podani v cm, so tudi $x', y', z'$ v cm.</p>
+$x&rsquo;$, $y&rsquo;$ in $z&rsquo;$ so še vedno izraženi v isti merski enoti kot $x$, $y$, $z$. <strong>Tukaj še ne govorimo o pikslih.</strong><br>
+Če so $x, y, z$ podani v cm, so tudi $x&rsquo;, y&rsquo;, z&rsquo;$ v cm.</p>
 <blockquote>
 <p><strong>Primer</strong></p>
-<p>Podano imamo točko $P$ s koordinatami ($x, y, z$), ter podatek za oddaljenost ravnine od luknjice ($f'$):</p>
-$$ P(100, 200, 450), \quad f' = 150 $$<p>Zanima nas določitev koordinat točke $P'$. Ker točka $P'$ leži na slikovni ravnini, velja $z' = f'$. V tem primeru to pomeni, da je $z' = 150$. Določiti moramo torej $x'$ in $y'$.</p>
+<p>Podano imamo točko $P$ s koordinatami ($x, y, z$), ter podatek za oddaljenost ravnine od luknjice ($f&rsquo;$):</p>
+$$ P(100, 200, 450), \quad f' = 150 $$<p>Zanima nas določitev koordinat točke $P&rsquo;$. Ker točka $P&rsquo;$ leži na slikovni ravnini, velja $z&rsquo; = f&rsquo;$. V tem primeru to pomeni, da je $z&rsquo; = 150$. Določiti moramo torej $x&rsquo;$ in $y&rsquo;$.</p>
 <p>Izračun:</p>
 $$ x' = f' \cdot \left(\frac{x}{z}\right) = 150 \cdot \left(\frac{100}{450}\right) = 33{,}3 $$$$ y' = f' \cdot \left(\frac{y}{z}\right) = 150 \cdot \left(\frac{200}{450}\right) = 66{,}6 $$</blockquote>
 <h5 id="omejitve-modela-kamere-na-luknjico">
@@ -1458,7 +1458,7 @@ $$<p>Podobno kot pri sistemu modela kamere na luknjico, nas tudi sedaj zanima ka
 $$\frac{1}{z'} - \frac{1}{z} = \frac{1}{f}$$<p>kjer:</p>
 <ul>
 <li>$z$ predstavlja razdaljo objekta,</li>
-<li>$z'$ predstavlja razdaljo slike,</li>
+<li>$z&rsquo;$ predstavlja razdaljo slike,</li>
 <li>$f$ predstavlja goriščno razdaljo leče.</li>
 </ul>
 <p>Če ta pogoj ni izpolnjen, se žarki ne zberejo v eni točki in slika ni ostra.</p></p>
@@ -1482,12 +1482,12 @@ Kamera z debelimi lečami
 </h4><p>Najbolj realističen model je <strong>model kamere z debelimi lečami</strong>. To je najboljši približek dejanskemu fizikalnemu dogajanju v kameri.</p>
 <p>Debela leča je poleg:</p>
 <ul>
-<li>dveh goriščnic $F$ in $F'$,</li>
+<li>dveh goriščnic $F$ in $F&rsquo;$,</li>
 <li>goriščne razdalje $f$,</li>
 </ul>
 <p>opisana še z:</p>
 <ul>
-<li><strong>glavnima točkama leče $H$ in $H'$</strong>,</li>
+<li><strong>glavnima točkama leče $H$ in $H&rsquo;$</strong>,</li>
 <li><strong>razdaljo med njima</strong>.</li>
 </ul>
 <p>S temi parametri lahko natančneje opišemo obnašanje debele leče.</p>
@@ -1580,7 +1580,7 @@ Glavna točka – parametra \( u_0 \) in \( v_0 \)
 <li>\( u_0 \) – premik v smeri vrstic</li>
 <li>\( v_0 \) – premik v smeri stolpcev</li>
 </ul>
-<p>Ta dva parametra določata, kje se nahaja <strong>koordinatno izhodišče</strong> glede na pikslovni koordinatni sistem. Določata premik izhodišča koordinatnega sistema kamere (točka $C$) v točko, kjer optična os prebada slikovno ravnino (točka $C'$)</p>
+<p>Ta dva parametra določata, kje se nahaja <strong>koordinatno izhodišče</strong> glede na pikslovni koordinatni sistem. Določata premik izhodišča koordinatnega sistema kamere (točka $C$) v točko, kjer optična os prebada slikovno ravnino (točka $C&rsquo;$)</p>
 <h5 id="parametra--in">
 <a class="header-anchor" href="#parametra--in"></a>
 Parametra \( \alpha \) in \( \beta \)
@@ -1998,9 +1998,9 @@ Podobno velja tudi za slike v naravi, kjer je veliko odvisno od vremena.</p>
 Spreminajnje kontrasta
 </h3><p>Točkovna operacija deluje tako, da imamo neko sliko in nad vsakim pixlom izvedemo isto transformacijo.</p>
 <p>Najpreprostejše spreminjanje kontrasta je oblike:</p>
-<p>$g' = F(g)$</p>
+<p>$g&rsquo; = F(g)$</p>
 <p>$g$ - stara sivina piksla $p$ oz. $g=I(p)$
-$g'$ - nova sivina piksla $p$
+$g&rsquo;$ - nova sivina piksla $p$
 $F$ - poljubna funkcija</p>
 <p>Funkcija $F$ imenujemo drugače tudi <strong>točkovna operacija</strong> oz. <strong>operacija piksel v piksel</strong>. V splošnem ne obstaja inverz funkcije $F$!</p>
 <h4 id="linearizacija-sivin">
@@ -2054,7 +2054,7 @@ zato tam lahko izgubimo nekaj podatkov.</li>
 \[
 g' = \frac{Q}{MN} \sum_{i=0}^{g} h_i
 \]<p>$M N$ predstavlja število pikslov v sliki
-$g'$ predstavlja novo sivino
+$g&rsquo;$ predstavlja novo sivino
 $h_i$ predstavlja $i$-ti element histograma</p>
 
   <blockquote class="alert-blockquote warning">
@@ -2071,8 +2071,8 @@ Prenosne funkcije
 <ul>
 <li>na abcisi so vhodne vrednosti oz. sivine $g$ pred spreminjanjem</li>
 <li>na ordinati so izhodne vrednosti na intervalu [0, 1]</li>
-<li>novo sivino $g'$ dobimo tako, da izhodno vrednost pomnožimo z $Q$</li>
-<li>prenosne funkcije so lahko analitične (npr. $g'=\frac{1}{16}\sqrt{g}$) ali pa numerične</li>
+<li>novo sivino $g&rsquo;$ dobimo tako, da izhodno vrednost pomnožimo z $Q$</li>
+<li>prenosne funkcije so lahko analitične (npr. $g&rsquo;=\frac{1}{16}\sqrt{g}$) ali pa numerične</li>
 </ul>
 <p><strong>Prenosne funkcije</strong> lahko vizualiziramo v grafu prenosnih funkcij.</p>
 <p><strong>Graf prenosne funkcije sivin</strong> uporabimo na naslednji način:</p>
@@ -2100,7 +2100,7 @@ Lokalne operacije oz. filtriranje slik
 <li>njegovo okolico</li>
 </ul>
 <p>Vzeli bomo ta piksel in njegove sosednje pixle, jih podali v funkcijo, in dobili nov rezultat. Pri tem poznamo točkovne operacije in filtriranje.</p>
-<p>Novo vrednost piksla $p$, tj. $I' (p)$, določimo kot funkcijo $F$, ki operira nad pikslom $p$ in njegovo okolico $O$:
+<p>Novo vrednost piksla $p$, tj. $I&rsquo; (p)$, določimo kot funkcijo $F$, ki operira nad pikslom $p$ in njegovo okolico $O$:
 </p>
 \[I'(p) = F(O_p)\]<p>
 Obnašanje (lastnosti) funkcije $F$ je opredeljeno z enotinim odzivom $H$.</p>
@@ -2184,8 +2184,8 @@ Vrednosti uteži (koeficientov)
   </blockquote>
 
 <hr>
-<h5 id="2-izračun-konvolucije-med-masko--in-sliko">
-<a class="header-anchor" href="#2-izra%c4%8dun-konvolucije-med-masko--in-sliko"></a>
+<h5 id="2-izračun-konvolucije-med-masko-h-in-sliko-o">
+<a class="header-anchor" href="#2-izra%c4%8dun-konvolucije-med-masko-h-in-sliko-o"></a>
 2. Izračun konvolucije med masko $H$ in sliko $O$
 </h5><p>Implementacijsko je najlažje definirati maske oziroma okolice pikslov kot kvadratno masko (npr. 3×3, 5×5), saj jo lahko preprosto implementiramo s for-zankami.</p>
 <p>Če imamo za okolico masko drugačne (ne kvadratne) oblike (npr. krožno ali nepravilno obliko), uporabimo kvadratno matriko, vrednosti, ki jih ne želimo upoštevati, pa nastavimo na 0.</p>
@@ -2194,7 +2194,7 @@ Vrednosti uteži (koeficientov)
 <ul>
 <li>masko $H$ položimo na sliko $I$ tako, da je sredina maske poravnana s pikslom $p$</li>
 <li>vsak piksel slike množimo z ustreznim elementom v zgoraj ležeči maski,</li>
-<li>vse zmnožke seštejemo in dobimo novo vrednost za piksel $I'(p)$ izhodne slike.</li>
+<li>vse zmnožke seštejemo in dobimo novo vrednost za piksel $I&rsquo;(p)$ izhodne slike.</li>
 </ul>
 <p>To je izračun za en piksel. Velotno sliko filtriramo tako, da opisani postopek ponovimo za vsak piksel v
 sliki. Običajno začnemo v levem zgornjem kotu slike in nadaljujemo od leve proti desni ter od zgoraj navzdol</p>
@@ -2966,7 +2966,7 @@ $$<p>Metoda je preprosta, vendar pogosto ni optimalna.</p>
 <hr>
 <p>Za naprednejše metode potrebujemo določiti nekaj pomožnih izrazov iz slike I:</p>
 <ol>
-<li>histogram sivin $h = [h_0, h_1, ... , h_Q]$</li>
+<li>histogram sivin $h = [h_0, h_1, &hellip; , h_Q]$</li>
 <li>dve pomožni polji (izraz $A_k$ in $B_k$)</li>
 </ol>
 <p>Naj ima histogram $L$ elementov (pri 8-bitni sliki je $L = 256$).</p>
@@ -3168,7 +3168,7 @@ $$$$
 p = \frac{1}{M N}h
 \qquad
 P_T = \sum_{i=0}^{T} p_i
-$$<p>$p= [p_0,p_1,...,p_Q]$ - normaliziran histogram sivin</p>
+$$<p>$p= [p_0,p_1,&hellip;,p_Q]$ - normaliziran histogram sivin</p>
 <p><strong>Skupna entropija</strong>:
 </p>
 $$
@@ -3588,8 +3588,8 @@ $$
 \mathbf{u} = (u_x, u_y)
 $$<p>Zaradi tega dobimo več enačb za isti dve neznanki.</p>
 <hr>
-<h4 id="oblikovanje-sistema-enačb---kako-določimo-vektor-premika--za-en-piksel">
-<a class="header-anchor" href="#oblikovanje-sistema-ena%c4%8db---kako-dolo%c4%8dimo-vektor-premika--za-en-piksel"></a>
+<h4 id="oblikovanje-sistema-enačb---kako-določimo-vektor-premika-u-za-en-piksel">
+<a class="header-anchor" href="#oblikovanje-sistema-ena%c4%8db---kako-dolo%c4%8dimo-vektor-premika-u-za-en-piksel"></a>
 Oblikovanje sistema enačb - Kako določimo vektor premika $u$ za en piksel?
 </h4><h5 id="korak-1-izberemo-okolico">
 <a class="header-anchor" href="#korak-1-izberemo-okolico"></a>
@@ -3863,13 +3863,13 @@ Geometrija dveh kamer
 <p>epipol $e$ (na levi sliki)</p>
 </li>
 <li>
-<p>epipol $e'$ (na desni sliki)</p>
+<p>epipol $e&rsquo;$ (na desni sliki)</p>
 </li>
 <li>
 <p><strong>Epipol $e$</strong>: projekcija optičnega centra desne kamere na levo sliko.</p>
 </li>
 <li>
-<p><strong>Epipol $e'$</strong>: projekcija optičnega centra leve kamere na desno sliko.</p>
+<p><strong>Epipol $e&rsquo;$</strong>: projekcija optičnega centra leve kamere na desno sliko.</p>
 </li>
 </ul>
 <hr>
@@ -3890,29 +3890,29 @@ Geometrija dveh kamer
 <p>Presek epipolarne ravnine s slikovno ravnino da:</p>
 <ul>
 <li><strong>epipolarno premico $l$</strong> na levi sliki</li>
-<li><strong>epipolarno premico $l'$</strong> na desni sliki</li>
+<li><strong>epipolarno premico $l&rsquo;$</strong> na desni sliki</li>
 </ul>
 <p>Velja:</p>
 <ul>
 <li>$l$ je daljica od $e$ do $p$</li>
-<li>$l'$ je daljica od $e'$ do $p'$</li>
+<li>$l&rsquo;$ je daljica od $e&rsquo;$ do $p'$</li>
 </ul>
 <hr>
 <p>Za rekonstrukcijo 3D točke moramo vedeti:</p>
 <blockquote>
-<p>Katera točka $p'$ na drugi sliki ustreza točki $p$ na prvi sliki?</p>
+<p>Katera točka $p&rsquo;$ na drugi sliki ustreza točki $p$ na prvi sliki?</p>
 </blockquote>
-<p>Če imamo piksel $p$ na sliki leve kamere, potrebujemo pripadajoči piksel $p'$ na sliki desne kamere. Preden lahko rekonstruiramo 3D točko $P$, moramo torej najti ustrezno točko $p'$.</p>
+<p>Če imamo piksel $p$ na sliki leve kamere, potrebujemo pripadajoči piksel $p&rsquo;$ na sliki desne kamere. Preden lahko rekonstruiramo 3D točko $P$, moramo torej najti ustrezno točko $p&rsquo;$.</p>
 <p>Če bi iskali pripadajoči piksel po celotni sliki bi morali pregledati vse piksle in časovna zahtevnost bi bila približno $O(n^2)$, kar bi pomenilo, da bi postopek bil zelo počasen. To je brute force pristop.</p>
 <hr>
-<p>Namesto pregledovanja celotne slike uporabimo <strong>epipolarno premico</strong>. Točka $p'$ mora ležati na epipolarni premici $l'$. Zato ne iščemo in pregledujemo celotne slike, ampak se sprehajamo samo po epipolarni premici in pregledujemo točke samo tam. S tem močno pohitrimo iskanje korespondenc in zmanjšamo časovno zahtevnost:</p>
+<p>Namesto pregledovanja celotne slike uporabimo <strong>epipolarno premico</strong>. Točka $p&rsquo;$ mora ležati na epipolarni premici $l&rsquo;$. Zato ne iščemo in pregledujemo celotne slike, ampak se sprehajamo samo po epipolarni premici in pregledujemo točke samo tam. S tem močno pohitrimo iskanje korespondenc in zmanjšamo časovno zahtevnost:</p>
 $$
 O(n^2) \rightarrow O(n)
-$$<p>Iz točke $p$ na levi sliki lahko izračunamo epipolarno premico $l'$ na desni sliki. Vedno računamo epipolarno premico za drugo sliko.
-Ko najdemo ustrezno točko $p'$, lahko rekonstruiramo 3D točko $P$.</p>
+$$<p>Iz točke $p$ na levi sliki lahko izračunamo epipolarno premico $l&rsquo;$ na desni sliki. Vedno računamo epipolarno premico za drugo sliko.
+Ko najdemo ustrezno točko $p&rsquo;$, lahko rekonstruiramo 3D točko $P$.</p>
 <hr>
-<p><strong>Kako pa določimo epipolarno premico $l'$?</strong></p>
-<p>Da lahko izračunamo <strong>epipolarno premico $l'$</strong>, moramo poznati transformacijo med obema pogledoma. Če poznamo transformacijo med kamerama znamo izračunati epipolarno premico, na njej pa lahko poiščemp ustrezno točko in nato izvedemo 3D rekonstrukcijo.</p>
+<p><strong>Kako pa določimo epipolarno premico $l&rsquo;$?</strong></p>
+<p>Da lahko izračunamo <strong>epipolarno premico $l&rsquo;$</strong>, moramo poznati transformacijo med obema pogledoma. Če poznamo transformacijo med kamerama znamo izračunati epipolarno premico, na njej pa lahko poiščemp ustrezno točko in nato izvedemo 3D rekonstrukcijo.</p>
 <h5 id="prva-varianta--kalibrirane-razmere">
 <a class="header-anchor" href="#prva-varianta--kalibrirane-razmere"></a>
 PRVA VARIANTA – Kalibrirane razmere
@@ -3923,7 +3923,7 @@ p^T E p' = 0
 $$<p>kjer:</p>
 <ul>
 <li>$p$ – piksel na levi sliki (v homogenih koordinatah)</li>
-<li>$p'$ – piksel na desni sliki (v homogenih koordinatah)</li>
+<li>$p&rsquo;$ – piksel na desni sliki (v homogenih koordinatah)</li>
 </ul>
 <hr>
 <p>Matrika $E$ je osnovna matrika v kalibriranih enotah.</p>
@@ -3959,7 +3959,7 @@ t_z & 0 & -t_x \\
 \end{bmatrix}
 $$<p>Translacijski vektor je torej zapisan v matrični obliki.</p>
 <hr>
-<p>Če imamo točko $p'$ na desni sliki (v homogenih koordinatah), dobimo epipolarno premico na levi sliki z:</p>
+<p>Če imamo točko $p&rsquo;$ na desni sliki (v homogenih koordinatah), dobimo epipolarno premico na levi sliki z:</p>
 $$
 l = E p'
 $$<p>Rezultat je stolpec treh vrednosti:</p>
@@ -3982,7 +3982,7 @@ $$<hr>
 DRUGA VARIANTA – Neurejene oz. nekalibrirane razmere
 </h5><p>V tem primeru transformacijo med obema pogledoma podaja <strong>temeljna matrika</strong> $F$.</p>
 <hr>
-<p>Povezava med pripadajočima piksloma $p$ in $p'$ je podana z enačbo:</p>
+<p>Povezava med pripadajočima piksloma $p$ in $p&rsquo;$ je podana z enačbo:</p>
 $$
 p^T F p' = 0
 $$<p>Enačba je po obliki zelo podobna tisti pri esencialni matriki. Če poznamo temeljno matriko $F$, lahko delamo po isti relaciji kot prej.</p>
@@ -4180,7 +4180,7 @@ $$<p>kjer je:</p>
 <p>Poznamo:</p>
 <ul>
 <li>$p$ (leva slika),</li>
-<li>$p'$ (desna slika).</li>
+<li>$p&rsquo;$ (desna slika).</li>
 </ul>
 <hr>
 <p>Enačbo preuredimo:</p>
@@ -6242,8 +6242,29 @@ Energija kvantizacijskega šuma
 </ul>
 <p>To nam pove, kako dobro je ohranjena topologija.</p>
 </div>
-    <footer class="article-footer"><ul class="article-category-list"></ul>
-<ul class="article-tag-list" itemprop="keywords"></ul>
+    <footer class="article-footer"><ul class="article-category-list"><li class="article-tag-list-item" data-aos="zoom-in">
+    <a
+      class="article-category-link"
+      href="/categories/rit-uni"
+      data-aos="zoom-in"
+      >RIT UNI</a
+    >
+    </li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/3.-letnik"
+        rel="tag"
+        >3. letnik</a
+      >
+    </li><li class="article-tag-list-item" data-aos="zoom-in">
+      <a
+        class="article-tag-list-link"
+        href="/tags/zimski-semester"
+        rel="tag"
+        >zimski semester</a
+      >
+    </li></ul>
 </footer>
   </div><nav
     id="article-nav"
@@ -6252,27 +6273,27 @@ Energija kvantizacijskega šuma
   ><div class="article-nav-link-wrap left"><img
               data-src="https://d-sketon.top/img/_backwebp/bg1.webp"
               data-sizes="auto"
-              alt="Marketing"
-              class="lazyload"
-            /><a
-          href="/post/marketing/"
-          aria-label="Prev:Marketing"
-          title="Prev:Marketing"
-        ></a>
-        <div class="article-nav-caption">Prev</div>
-        <h3 class="article-nav-title">Marketing</h3>
-      </div><div class="article-nav-link-wrap right"><img
-              data-src="https://d-sketon.top/img/_backwebp/bg1.webp"
-              data-sizes="auto"
               alt="Sistemska administracija"
               class="lazyload"
             /><a
           href="/post/sa/"
-          aria-label="Next:Sistemska administracija"
-          title="Next:Sistemska administracija"
+          aria-label="Prev:Sistemska administracija"
+          title="Prev:Sistemska administracija"
+        ></a>
+        <div class="article-nav-caption">Prev</div>
+        <h3 class="article-nav-title">Sistemska administracija</h3>
+      </div><div class="article-nav-link-wrap right"><img
+              data-src="https://d-sketon.top/img/_backwebp/bg1.webp"
+              data-sizes="auto"
+              alt="Paralelno in porazdeljeno računanje"
+              class="lazyload"
+            /><a
+          href="/post/pipr/"
+          aria-label="Next:Paralelno in porazdeljeno računanje"
+          title="Next:Paralelno in porazdeljeno računanje"
         ></a>
         <div class="article-nav-caption">Next</div>
-        <h3 class="article-nav-title">Sistemska administracija</h3>
+        <h3 class="article-nav-title">Paralelno in porazdeljeno računanje</h3>
       </div></nav></article></section>
         </div><footer id="footer" aria-label="Site footer">
   <div style="width: 100%; overflow: hidden">
@@ -6479,7 +6500,7 @@ Energija kvantizacijskega šuma
                     <li><a href="#vrednosti-uteži-koeficientov">Vrednosti uteži (koeficientov)</a></li>
                   </ul>
                 </li>
-                <li><a href="#2-izračun-konvolucije-med-masko--in-sliko">2. Izračun konvolucije med masko  in sliko </a></li>
+                <li><a href="#2-izračun-konvolucije-med-masko-h-in-sliko-o">2. Izračun konvolucije med masko $H$ in sliko $O$</a></li>
                 <li><a href="#problemi-pri-konvoluciji">Problemi pri konvoluciji</a>
                   <ul>
                     <li><a href="#problem-robnih-pikslov">Problem robnih pikslov</a></li>
@@ -6595,7 +6616,7 @@ Energija kvantizacijskega šuma
         </li>
         <li><a href="#optični-pretok">Optični pretok</a>
           <ul>
-            <li><a href="#oblikovanje-sistema-enačb---kako-določimo-vektor-premika--za-en-piksel">Oblikovanje sistema enačb - Kako določimo vektor premika  za en piksel?</a>
+            <li><a href="#oblikovanje-sistema-enačb---kako-določimo-vektor-premika-u-za-en-piksel">Oblikovanje sistema enačb - Kako določimo vektor premika $u$ za en piksel?</a>
               <ul>
                 <li><a href="#korak-1-izberemo-okolico">Korak 1: Izberemo okolico</a></li>
                 <li><a href="#korak-2-izračun-parcialnih-odvodov">Korak 2: Izračun parcialnih odvodov</a></li>
@@ -6922,12 +6943,12 @@ Energija kvantizacijskega šuma
   <a class="sidebar-state-category" href="/categories/" aria-label="sidebar-state-category-link">
     <div>Categories</div>
     <div class="sidebar-state-number">
-      0
+      2
     </div>
   </a>
   <a class="sidebar-state-tag" href="/tags/" aria-label="sidebar-state-tag-link">
     <div>Tags</div>
-    <div class="sidebar-state-number">0</div>
+    <div class="sidebar-state-number">5</div>
   </a>
 </div>
 <div class="sidebar-social" ><div class="icon-github sidebar-social-icon">

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2. Letnik on Feri Notes</title>
+    <link>https://example.org/tags/2.-letnik/</link>
+    <description>Recent content from Feri Notes</description>
+    <generator>Hugo</generator>
+    <language>sl-si</language>
+    
+    <managingEditor>xxx@example.com (PrincessSarmica)</managingEditor>
+    <webMaster>xxx@example.com (PrincessSarmica)</webMaster>
+    
+    <copyright>All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!</copyright>
+    
+    <lastBuildDate>Sun, 06 Oct 2024 07:07:07 +0100</lastBuildDate>
+    
+    
+    <atom:link href="https://example.org/tags/2.-letnik/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>Marketing</title>
+      <link>https://example.org/post/marketing/</link>
+      <pubDate>Sun, 06 Oct 2024 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>https://example.org/post/marketing/</guid>
+      <description>
+        <![CDATA[<h1>Marketing</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Marketing za zimski semester drugega letnika FERI MK MAGISTERIJ.
+        
+        <hr><p>Published on 2024-10-06 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2024-10-06</p>]]>
+      </description>
+      
+        <category>MK Magisterij</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>Komunikacijska kompetenca in medijska pismenost</title>
+      <link>https://example.org/post/kkmp/</link>
+      <pubDate>Tue, 01 Oct 2024 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>https://example.org/post/kkmp/</guid>
+      <description>
+        <![CDATA[<h1>Komunikacijska kompetenca in medijska pismenost</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Komunikacijska kompetenca in medijska pismenost za zimski semester drugega letnika FERI MK MAGISTERIJ.
+        
+        <hr><p>Published on 2024-10-01 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2024-10-01</p>]]>
+      </description>
+      
+        <category>MK Magisterij</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>Sistemska administracija</title>
+      <link>https://example.org/post/sa/</link>
+      <pubDate>Sun, 20 Feb 2022 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>https://example.org/post/sa/</guid>
+      <description>
+        <![CDATA[<h1>Sistemska administracija</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Sistemska administracija za poletni semester drugega letnika FERI RIT UNI.
+        
+        <hr><p>Published on 2022-02-20 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2022-02-20</p>]]>
+      </description>
+      
+        <category>RIT UNI</category>
+      
+    </item>
+    
+  </channel>
+</rss>

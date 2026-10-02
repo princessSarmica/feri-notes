@@ -4,6 +4,8 @@ date = 2024-10-01T07:07:07+01:00
 draft = false
 math = true
 mermaid = true
+tags = ["2. letnik", "zimski semester"]
+categories = ["MK Magisterij"]
 
 summary = "Zapiski za predmet Komunikacijska kompetenca in medijska pismenost za zimski semester drugega letnika FERI MK MAGISTERIJ."
 summary_enable = true

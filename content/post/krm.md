@@ -4,6 +4,8 @@ date = 2023-10-06T07:07:07+01:00
 draft = false
 math = true
 mermaid = true
+tags = ["1. letnik", "zimski semester"]
+categories = ["MK Magisterij"]
 
 summary = "Zapiski za predmet Komunikološke raziskovalne metode za zimski semester prvega letnika FERI MK MAGISTERIJ."
 summary_enable = true

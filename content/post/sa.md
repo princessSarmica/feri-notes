@@ -1,8 +1,10 @@
 +++
 title = "Sistemska administracija"
-date = 2026-02-03T07:07:07+01:00
+date = 2022-02-20T07:07:07+01:00
 draft = false
 math = true
+tags = ["2. letnik", "poletni semester"]
+categories = ["RIT UNI"]
 
 summary = "Zapiski za predmet Sistemska administracija za poletni semester drugega letnika FERI RIT UNI."
 summary_enable = true

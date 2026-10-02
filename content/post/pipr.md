@@ -4,6 +4,8 @@ date = 2022-10-07T07:07:07+01:00
 draft = false
 math = true
 mermaid = true
+tags = ["3. letnik", "zimski semester"]
+categories = ["RIT UNI"]
 
 summary = "Zapiski za predmet Paralelno in porazdeljeno računanje za zimski semester tretjega letnika FERI RIT UNI."
 summary_enable = true

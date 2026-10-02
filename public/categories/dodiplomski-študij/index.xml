@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dodiplomski Študij on Feri Notes</title>
+    <link>http://localhost:1313/categories/dodiplomski-%C5%A1tudij/</link>
+    <description>Recent content from Feri Notes</description>
+    <generator>Hugo</generator>
+    <language>sl-si</language>
+    
+    <managingEditor>xxx@example.com (PrincessSarmica)</managingEditor>
+    <webMaster>xxx@example.com (PrincessSarmica)</webMaster>
+    
+    <copyright>All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!</copyright>
+    
+    <lastBuildDate>Fri, 07 Oct 2022 07:07:07 +0100</lastBuildDate>
+    
+    
+    <atom:link href="http://localhost:1313/categories/dodiplomski-%C5%A1tudij/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>Paralelno in porazdeljeno računanje</title>
+      <link>http://localhost:1313/post/pipr/</link>
+      <pubDate>Fri, 07 Oct 2022 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>http://localhost:1313/post/pipr/</guid>
+      <description>
+        <![CDATA[<h1>Paralelno in porazdeljeno računanje</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Paralelno in porazdeljeno računanje za zimski semester tretjega letnika FERI RIT UNI.
+        
+        <hr><p>Published on 2022-10-07 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2022-10-07</p>]]>
+      </description>
+      
+        <category>RIT UNI</category><category>Dodiplomski študij</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>Uvod v računalniški vid in razpoznavanje vzorcev</title>
+      <link>http://localhost:1313/post/urvrv/</link>
+      <pubDate>Tue, 04 Oct 2022 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>http://localhost:1313/post/urvrv/</guid>
+      <description>
+        <![CDATA[<h1>Uvod v računalniški vid in razpoznavanje vzorcev</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Uvod v računalniški vid in razpoznavanje vzorcev za zimski semester tretjega letnika FERI RIT UNI.
+        
+        <hr><p>Published on 2022-10-04 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2022-10-04</p>]]>
+      </description>
+      
+        <category>RIT UNI</category><category>Dodiplomski študij</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>Sistemska administracija</title>
+      <link>http://localhost:1313/post/sa/</link>
+      <pubDate>Sun, 20 Feb 2022 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>http://localhost:1313/post/sa/</guid>
+      <description>
+        <![CDATA[<h1>Sistemska administracija</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Sistemska administracija za poletni semester drugega letnika FERI RIT UNI.
+        
+        <hr><p>Published on 2022-02-20 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2022-02-20</p>]]>
+      </description>
+      
+        <category>RIT UNI</category><category>Dodiplomski študij</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>Programiranje 2</title>
+      <link>http://localhost:1313/post/programiranje2/</link>
+      <pubDate>Sun, 07 Mar 2021 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>http://localhost:1313/post/programiranje2/</guid>
+      <description>
+        <![CDATA[<h1>Programiranje 2</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Programiranje 2 za poletni semester prvega letnika FERI RIT UNI.
+        
+        <hr><p>Published on 2021-03-07 at <a href='http://localhost:1313/'>Feri Notes</a>, last modified on 2021-03-07</p>]]>
+      </description>
+      
+        <category>RIT UNI</category><category>Dodiplomski študij</category>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -2,23 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://example.org/tags/2.-letnik/</loc>
+    <lastmod>2024-10-06T07:07:07+01:00</lastmod>
+  </url><url>
+    <loc>https://example.org/categories/</loc>
+    <lastmod>2024-10-06T07:07:07+01:00</lastmod>
+  </url><url>
     <loc>https://example.org/</loc>
     <lastmod>2026-09-24T08:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://example.org/post/programiranje2/</loc>
-    <lastmod>2026-02-03T07:07:07+01:00</lastmod>
-  </url><url>
-    <loc>https://example.org/post/sa/</loc>
-    <lastmod>2026-02-03T07:07:07+01:00</lastmod>
-  </url><url>
-    <loc>https://example.org/post/urvrv/</loc>
-    <lastmod>2026-02-03T07:07:07+01:00</lastmod>
   </url><url>
     <loc>https://example.org/post/marketing/</loc>
     <lastmod>2024-10-06T07:07:07+01:00</lastmod>
   </url><url>
+    <loc>https://example.org/categories/mk-magisterij/</loc>
+    <lastmod>2024-10-06T07:07:07+01:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/</loc>
+    <lastmod>2024-10-06T07:07:07+01:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/zimski-semester/</loc>
+    <lastmod>2024-10-06T07:07:07+01:00</lastmod>
+  </url><url>
     <loc>https://example.org/post/kkmp/</loc>
     <lastmod>2024-10-01T07:07:07+01:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/1.-letnik/</loc>
+    <lastmod>2024-03-06T07:07:07+01:00</lastmod>
+  </url><url>
+    <loc>https://example.org/tags/poletni-semester/</loc>
+    <lastmod>2024-03-06T07:07:07+01:00</lastmod>
   </url><url>
     <loc>https://example.org/post/pvk/</loc>
     <lastmod>2024-03-06T07:07:07+01:00</lastmod>
@@ -32,8 +44,17 @@
     <loc>https://example.org/post/md/</loc>
     <lastmod>2023-10-01T07:07:07+01:00</lastmod>
   </url><url>
+    <loc>https://example.org/tags/3.-letnik/</loc>
+    <lastmod>2022-10-07T07:07:07+01:00</lastmod>
+  </url><url>
     <loc>https://example.org/post/pipr/</loc>
     <lastmod>2022-10-07T07:07:07+01:00</lastmod>
+  </url><url>
+    <loc>https://example.org/categories/rit-uni/</loc>
+    <lastmod>2022-10-07T07:07:07+01:00</lastmod>
+  </url><url>
+    <loc>https://example.org/post/urvrv/</loc>
+    <lastmod>2022-10-04T07:07:07+01:00</lastmod>
   </url><url>
     <loc>https://example.org/archives/</loc>
     <lastmod>2022-07-26T21:46:25+08:00</lastmod>
@@ -44,8 +65,10 @@
     <loc>https://example.org/friend/</loc>
     <lastmod>2022-06-09T20:12:52+08:00</lastmod>
   </url><url>
-    <loc>https://example.org/categories/</loc>
+    <loc>https://example.org/post/sa/</loc>
+    <lastmod>2022-02-20T07:07:07+01:00</lastmod>
   </url><url>
-    <loc>https://example.org/tags/</loc>
+    <loc>https://example.org/post/programiranje2/</loc>
+    <lastmod>2021-03-07T07:07:07+01:00</lastmod>
   </url>
 </urlset>

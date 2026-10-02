@@ -4,6 +4,8 @@ date = 2024-03-06T07:07:07+01:00
 draft = false
 math = true
 mermaid = true
+tags = ["1. letnik", "poletni semester"]
+categories = ["MK Magisterij"]
 
 summary = "Zapiski za predmet Psihologija vizualnih komunikacij za poletni semester prvega letnika FERI MK MAGISTERIJ."
 summary_enable = true

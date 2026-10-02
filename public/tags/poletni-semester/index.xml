@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Poletni Semester on Feri Notes</title>
+    <link>https://example.org/tags/poletni-semester/</link>
+    <description>Recent content from Feri Notes</description>
+    <generator>Hugo</generator>
+    <language>sl-si</language>
+    
+    <managingEditor>xxx@example.com (PrincessSarmica)</managingEditor>
+    <webMaster>xxx@example.com (PrincessSarmica)</webMaster>
+    
+    <copyright>All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!</copyright>
+    
+    <lastBuildDate>Wed, 06 Mar 2024 07:07:07 +0100</lastBuildDate>
+    
+    
+    <atom:link href="https://example.org/tags/poletni-semester/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>Psihologija vizualnih komunikacij</title>
+      <link>https://example.org/post/pvk/</link>
+      <pubDate>Wed, 06 Mar 2024 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>https://example.org/post/pvk/</guid>
+      <description>
+        <![CDATA[<h1>Psihologija vizualnih komunikacij</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Psihologija vizualnih komunikacij za poletni semester prvega letnika FERI MK MAGISTERIJ.
+        
+        <hr><p>Published on 2024-03-06 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2024-03-06</p>]]>
+      </description>
+      
+        <category>MK Magisterij</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>Sistemska administracija</title>
+      <link>https://example.org/post/sa/</link>
+      <pubDate>Sun, 20 Feb 2022 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>https://example.org/post/sa/</guid>
+      <description>
+        <![CDATA[<h1>Sistemska administracija</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Sistemska administracija za poletni semester drugega letnika FERI RIT UNI.
+        
+        <hr><p>Published on 2022-02-20 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2022-02-20</p>]]>
+      </description>
+      
+        <category>RIT UNI</category>
+      
+    </item>
+    
+    
+
+    <item>
+      <title>Programiranje 2</title>
+      <link>https://example.org/post/programiranje2/</link>
+      <pubDate>Sun, 07 Mar 2021 07:07:07 &#43;0100</pubDate>
+      <author>xxx@example.com (PrincessSarmica)</author>
+      <guid>https://example.org/post/programiranje2/</guid>
+      <description>
+        <![CDATA[<h1>Programiranje 2</h1><p>Author: PrincessSarmica(xxx@example.com)</p>
+        
+          Zapiski za predmet Programiranje 2 za poletni semester prvega letnika FERI RIT UNI.
+        
+        <hr><p>Published on 2021-03-07 at <a href='https://example.org/'>Feri Notes</a>, last modified on 2021-03-07</p>]]>
+      </description>
+      
+        <category>RIT UNI</category>
+      
+    </item>
+    
+  </channel>
+</rss>

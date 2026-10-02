@@ -1,8 +1,10 @@
 +++
 title = "Uvod v računalniški vid in razpoznavanje vzorcev"
-date = 2026-02-03T07:07:07+01:00
+date = 2022-10-04T07:07:07+01:00
 draft = false
 math = true
+tags = ["3. letnik", "zimski semester"]
+categories = ["RIT UNI"]
 
 summary = "Zapiski za predmet Uvod v računalniški vid in razpoznavanje vzorcev za zimski semester tretjega letnika FERI RIT UNI."
 summary_enable = true

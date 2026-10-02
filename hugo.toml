@@ -6,7 +6,7 @@ theme = 'reimu'
 [markup.goldmark.extensions.passthrough]
 enable = true
 delimiters.block = [["\\[", "\\]"], ["$$", "$$"]]
-delimiters.inline = [["\\(", "\\)"], ["$", "$"]]
+delimiters.inline = [["\\(", "\\)"]]
 
 [markup.highlight]
 guessSyntax = true

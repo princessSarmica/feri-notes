@@ -1,9 +1,11 @@
 +++
 title = "Programiranje 2"
-date = 2026-02-03T07:07:07+01:00
+date = 2021-03-07T07:07:07+01:00
 draft = false
 math = true
 mermaid = true
+tags = ["1. letnik", "poletni semester"]
+categories = ["RIT UNI"]
 
 summary = "Zapiski za predmet Programiranje 2 za poletni semester prvega letnika FERI RIT UNI."
 summary_enable = true
