@@ -68,6 +68,9 @@
     <loc>https://example.org/post/sa/</loc>
     <lastmod>2022-02-20T07:07:07+01:00</lastmod>
   </url><url>
+    <loc>https://example.org/post/os/</loc>
+    <lastmod>2021-10-01T07:07:07+01:00</lastmod>
+  </url><url>
     <loc>https://example.org/post/programiranje2/</loc>
     <lastmod>2021-03-07T07:07:07+01:00</lastmod>
   </url>
