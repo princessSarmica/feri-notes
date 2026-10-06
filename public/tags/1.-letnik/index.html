@@ -144,6 +144,25 @@ This article does not have a corresponding language version
             <h1 data-aos="slide-up">Tag</h1>
           </span><h2 id="subtitle-wrap" data-aos="slide-down"><span id="subtitle">1. Letnik</span></h2></div>
   </div>
+  <script>
+    (function () {
+      function randomizeSubtitle() {
+        var el = document.getElementById("subtitle");
+        if (!el) return;
+        var raw = el.getAttribute("data-subtitles");
+        if (!raw) return;
+        try {
+          var list = JSON.parse(raw);
+        } catch (e) {
+          return;
+        }
+        if (!list || list.length < 2) return;
+        el.textContent = list[Math.floor(Math.random() * list.length)];
+      }
+      randomizeSubtitle();
+      window.addEventListener("pjax:success", randomizeSubtitle);
+    })();
+  </script>
   <div id="waves">
     <svg class="waves" viewBox="0 24 150 28" preserveAspectRatio="none">
       <defs>

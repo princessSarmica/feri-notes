@@ -207,8 +207,14 @@
         </h2>
       {{- else -}}
         {{- $subtitle := "" -}}
+        {{- $subtitleList := slice -}}
         {{- if .IsHome -}}
-          {{- $subtitle = .Site.Params.subtitle | default .Site.Params.subtitle -}}
+          {{- if .Site.Params.subtitles -}}
+            {{- $subtitleList = .Site.Params.subtitles -}}
+            {{- $subtitle = index $subtitleList 0 -}}
+          {{- else -}}
+            {{- $subtitle = .Site.Params.subtitle | default .Site.Params.subtitle -}}
+          {{- end -}}
         {{- else if and (eq .Type "categories") (not (eq .Title "Categories")) -}}
           {{- $subtitle = .Title -}}
         {{- else if and (eq .Type "tags") (not (eq .Title "Tags")) -}}
@@ -220,12 +226,31 @@
         {{- end -}}
         <h2 id="subtitle-wrap" data-aos="{{ .Site.Params.animation.options.header.subTitle }}">
           {{- if $subtitle -}}
-            <span id="subtitle">{{ $subtitle }}</span>
+            <span id="subtitle"{{ if gt (len $subtitleList) 1 }} data-subtitles='{{ $subtitleList | jsonify }}'{{ end }}>{{ $subtitle }}</span>
           {{- end -}}
         </h2>
       {{- end -}}
     </div>
   </div>
+  <script>
+    (function () {
+      function randomizeSubtitle() {
+        var el = document.getElementById("subtitle");
+        if (!el) return;
+        var raw = el.getAttribute("data-subtitles");
+        if (!raw) return;
+        try {
+          var list = JSON.parse(raw);
+        } catch (e) {
+          return;
+        }
+        if (!list || list.length < 2) return;
+        el.textContent = list[Math.floor(Math.random() * list.length)];
+      }
+      randomizeSubtitle();
+      window.addEventListener("pjax:success", randomizeSubtitle);
+    })();
+  </script>
   <div id="waves">
     <svg class="waves" viewBox="0 24 150 28" preserveAspectRatio="none">
       <defs>
